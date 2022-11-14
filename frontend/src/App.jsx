@@ -1,11 +1,8 @@
-import React from 'react';
-import InitalStack from './mainstack/InitialStack.jsx'
+import React from "react";
+import InitalStack from "./mainstack/InitialStack.jsx";
 
 function App() {
-
-  return (
-    <InitalStack/>
-  )
+  return <InitalStack />;
 }
 
-export default App
+export default App;

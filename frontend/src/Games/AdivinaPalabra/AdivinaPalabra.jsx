@@ -1,85 +1,128 @@
-import React, { useState, useEffect } from 'react';
-import Boton from '../../components/GamesComponents/AdivinaPalabraComponents/Botones/Boton';
-import BotonJugar from '../../components/GamesComponents/AdivinaPalabraComponents/BotonJugar/BotonJugar';
-import Imagen from '../../components/GamesComponents/AdivinaPalabraComponents/Imagen/Imagen';
+import React, { useState, useEffect } from "react";
+import Boton from "../../components/GamesComponents/AdivinaPalabraComponents/Botones/Boton";
+import BotonJugar from "../../components/GamesComponents/AdivinaPalabraComponents/BotonJugar/BotonJugar";
+import Imagen from "../../components/GamesComponents/AdivinaPalabraComponents/Imagen/Imagen";
 
-import '../AdivinaPalabra/adivinaPalabra.css';
+import "../AdivinaPalabra/adivinaPalabra.css";
 
 const AdivinaPalabra = () => {
+  let palabraAdivinar;
 
-    let palabraAdivinar;
+  const letras = [
+    "Q",
+    "W",
+    "E",
+    "R",
+    "T",
+    "Y",
+    "U",
+    "I",
+    "O",
+    "P",
+    "A",
+    "S",
+    "D",
+    "F",
+    "G",
+    "H",
+    "J",
+    "K",
+    "L",
+    "Ñ",
+    "Z",
+    "X",
+    "C",
+    "V",
+    "B",
+    "N",
+    "M"
+  ];
+  const palabrasArray = [
+    "manzana",
+    "trueno",
+    "etiqueta",
+    "zafiro",
+    "afuera",
+    "rodar",
+    "hueso",
+    "pulpo",
+    "arrestar",
+    "tortilla",
+    "semana",
+    "sofocar",
+    "horrible",
+    "sombrero",
+    "beisbol",
+    "europa",
+    "alrededor",
+    "cianuro",
+    "fiscal",
+    "circo",
+    "apresar",
+    "eludir",
+    "sonambulo",
+    "proyecto",
+    "diario",
+    "lubricante",
+    "examen",
+    "contagioso",
+    "alfajor",
+    "humor",
+    "abejas",
+    "pulsera",
+    "venda",
+    "ocupar",
+    "golosinas",
+    "roca",
+    "desperdiciar",
+    "robo",
+    "corta"
+  ];
 
-    const letras = ['Q','W','E','R','T','Y','U','I','O','P','A','S','D','F','G','H','J','K','L','Ñ','Z','X','C','V','B','N','M'];
-    const palabrasArray = ['manzana','trueno','etiqueta','zafiro','afuera','rodar','hueso','pulpo','arrestar','tortilla','semana','sofocar','horrible','sombrero','beisbol','europa','alrededor','cianuro','fiscal','circo','apresar','eludir','sonambulo','proyecto','diario','lubricante','examen','contagioso','alfajor','humor','abejas','pulsera','venda','ocupar','golosinas','roca','desperdiciar','robo','corta'];
+  const [src, setSrc] = useState(0);
+  const [palabra, setPalabra] = useState();
+  const [letra, setLetra] = useState(0);
 
-    const [src, setSrc] = useState(0);
-    const [palabra, setPalabra] = useState();
-    const [letra, setLetra] = useState(0);
+  function empezarJuego() {
+    const numRandom = random();
+    const palab = palabrasArray[numRandom];
+    palabraAdivinar = palab;
+    setPalabra(palabraAdivinar);
 
+    const contenedor = document.getElementById("contenedor-palabra");
 
-    function empezarJuego() {
-
-        const numRandom = random();
-        const palab = palabrasArray[numRandom];
-        palabraAdivinar = palab;
-        setPalabra(palabraAdivinar);
-
-        const contenedor = document.getElementById('contenedor-palabra');
-
-        for(let i=0; i < palabraAdivinar.length;i++){
-        const span = document.createElement('span');
-        contenedor.appendChild(span);
-        }
-
+    for (let i = 0; i < palabraAdivinar.length; i++) {
+      const span = document.createElement("span");
+      contenedor.appendChild(span);
     }
+  }
 
-    console.log(palabra)
+  console.log(palabra);
 
-    function random() {
-        const random = Math.floor(Math.random() * palabrasArray.length);
-        return random
-    }
+  function random() {
+    const random = Math.floor(Math.random() * palabrasArray.length);
+    return random;
+  }
 
-    function clickLetras(e){
-        const boton = e.target;
-        console.log(boton)
-    }
-    
-    return (
-        <div>
-            <Imagen
-                src={src}
-            />
+  function clickLetras(e) {
+    const boton = e.target;
+    console.log(boton);
+  }
 
-            {
-                palabra != undefined &&
-                letras.map((letra,index) => {
-                    return(
-                        <Boton
-                            letra = { letra } 
-                            key = { index }
-                            id = { index }
-                            clickLetras = { clickLetras }
-                        />
-                    )
-                })
+  return (
+    <div>
+      <Imagen src={src} />
 
-            }
-            
-            {
-                palabra == undefined &&
-                    <BotonJugar
-                        jugar= {'Jugar'}
-                        empezarJuego = { empezarJuego }
-                    />
-            }
+      {palabra != undefined &&
+        letras.map((letra, index) => {
+          return <Boton letra={letra} key={index} id={index} clickLetras={clickLetras} />;
+        })}
 
-            <div id='contenedor-palabra'>
+      {palabra == undefined && <BotonJugar jugar={"Jugar"} empezarJuego={empezarJuego} />}
 
-            </div>
-
-        </div>
-    );
-}
+      <div id="contenedor-palabra"></div>
+    </div>
+  );
+};
 
 export default AdivinaPalabra;

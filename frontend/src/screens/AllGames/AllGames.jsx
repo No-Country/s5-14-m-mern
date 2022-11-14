@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const Juegos = () => {
-    return (
-        <div>
-            Aca estan todos los juegos
-        </div>
-    );
-}
+  return <div>Aca estan todos los juegos</div>;
+};
 
 export default Juegos;
