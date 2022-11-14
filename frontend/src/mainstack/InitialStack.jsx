@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "../screens/Home/Home.jsx";
@@ -15,7 +14,6 @@ function InitalStack() {
         <Route path="/games" element={<Games />} />
         <Route path="/favourites" element={<Favorites />} />
         <Route path="/account" element={<Account />} />
-        {/*En element, ingresamos el componente que queremos probar*/}
         <Route path="/test" element={<AdivinaPalabra />} />
       </Routes>
     </BrowserRouter>

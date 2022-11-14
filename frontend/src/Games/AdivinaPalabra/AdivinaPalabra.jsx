@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Boton from "../../components/GamesComponents/AdivinaPalabraComponents/Botones/Boton";
 import BotonJugar from "../../components/GamesComponents/AdivinaPalabraComponents/BotonJugar/BotonJugar";
 import Imagen from "../../components/GamesComponents/AdivinaPalabraComponents/Imagen/Imagen";
 
-import "../AdivinaPalabra/adivinaPalabra.css";
+import "../AdivinaPalabra/adivinaPalabra.sass";
 
 const AdivinaPalabra = () => {
   let palabraAdivinar;
@@ -79,9 +79,9 @@ const AdivinaPalabra = () => {
     "corta"
   ];
 
+  // eslint-disable-next-line no-unused-vars
   const [src, setSrc] = useState(0);
   const [palabra, setPalabra] = useState();
-  const [letra, setLetra] = useState(0);
 
   function empezarJuego() {
     const numRandom = random();
@@ -113,12 +113,12 @@ const AdivinaPalabra = () => {
     <div>
       <Imagen src={src} />
 
-      {palabra != undefined &&
+      {palabra !== undefined &&
         letras.map((letra, index) => {
           return <Boton letra={letra} key={index} id={index} clickLetras={clickLetras} />;
         })}
 
-      {palabra == undefined && <BotonJugar jugar={"Jugar"} empezarJuego={empezarJuego} />}
+      {palabra === undefined && <BotonJugar jugar={"Jugar"} empezarJuego={empezarJuego} />}
 
       <div id="contenedor-palabra"></div>
     </div>
