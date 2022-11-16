@@ -6,6 +6,9 @@ import Favorites from "../screens/Favourites/Favourites.jsx";
 import Account from "../screens/Account/Account.jsx";
 import SingUp from "../screens/SingUp/SingUp.jsx";
 import Login from "../screens/LogIn/LogIn.jsx";
+import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
+import Notifications from "../screens/Notifications/Notifications.jsx";
+import Messages from "../screens/Messages/Messages.jsx";
 
 function InitalStack() {
   return (
@@ -15,9 +18,11 @@ function InitalStack() {
         <Route path="/games" element={<Games />} />
         <Route path="/favourites" element={<Favorites />} />
         <Route path="/account" element={<Account />} />
-        <Route path="/test" element={<SingUp />} />
+        <Route path="/test" element={<PPTApp />} />
         <Route path="/singup" element={<SingUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/messages" element={<Messages />} />
       </Routes>
     </BrowserRouter>
   );
