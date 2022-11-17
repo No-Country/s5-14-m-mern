@@ -6,6 +6,7 @@ import Favorites from "../screens/Favourites/Favourites.jsx";
 import Account from "../screens/Account/Account.jsx";
 import SingUp from "../screens/SingUp/SingUp.jsx";
 import Login from "../screens/LogIn/LogIn.jsx";
+import TriviaPage from "../Games/Trivia/Trivia.jsx";
 
 function InitalStack() {
   return (
@@ -13,6 +14,7 @@ function InitalStack() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/games" element={<Games />} />
+        <Route path="/games/trivia" element={<TriviaPage />} />
         <Route path="/favourites" element={<Favorites />} />
         <Route path="/account" element={<Account />} />
         <Route path="/test" element={<SingUp />} />
