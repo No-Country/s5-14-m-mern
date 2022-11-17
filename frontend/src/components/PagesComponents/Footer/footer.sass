@@ -1,10 +1,36 @@
+
+    
+    
+
 .footer-content
-    position: absolute
-    width: 70vw
-    height: 176px
-    text-align: center
-    background: #323232
-    border-radius: 20px 20px 0px 0px
-    bottom: 0
-    left: 50%
-    transform: translateX(-50%)
+    display: none
+    @media screen and (min-width:800px)
+        display: inline
+        position: absolute
+        width: 70vw
+        height: 176px
+        text-align: center
+        background: #323232
+        border-radius: 20px 20px 0px 0px
+        bottom: 0
+        left: 50%
+        transform: translateX(-50%)
+        padding: 25px
+
+.footer
+    display: flex
+    text-align: start
+    justify-content: space-around
+    p, li
+        font-size: 12px
+        margin-bottom: 7px
+    h3
+        font-size: 14px
+        margin-bottom: 5px
+
+.logoF
+    width: 80px
+
+.copyR
+    color: #F2CF8D
+    font-size: 12px
