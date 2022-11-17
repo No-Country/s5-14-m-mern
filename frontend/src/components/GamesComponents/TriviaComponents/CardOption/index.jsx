@@ -4,15 +4,16 @@ import PropTypes from "prop-types";
 // styles
 import styles from "./cardOption.module.sass";
 
-export default function CardOption({ value }) {
+export default function CardOption({ optionValue, ...props }) {
   return (
     <label className={styles.container}>
-      <Field className={styles.checkbox} type="checkbox" name="checkbox" />
-      {value}
+      <Field className={styles.checkbox} type="checkbox" name="checkbox" {...props} />
+      {optionValue}
     </label>
   );
 }
 
 CardOption.propTypes = {
-  value: PropTypes.string
+  optionValue: PropTypes.string,
+  props: PropTypes.object
 };

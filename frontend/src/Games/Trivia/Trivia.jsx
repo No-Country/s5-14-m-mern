@@ -20,10 +20,7 @@ export default function TriviaPage() {
         </nav>
         <Progress />
         <SuccessesAndFailures />
-        <OptionsContainer
-          question={"¿Cúal es la cuarta letra del abecedario?"}
-          questionsNumber={3}
-        />
+        <OptionsContainer questionsNumber={3} />
       </main>
     </div>
   );

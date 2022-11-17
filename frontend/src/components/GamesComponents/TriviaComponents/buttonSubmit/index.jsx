@@ -4,7 +4,7 @@ import styles from "./buttonSubmit.module.sass";
 export default function ButtonSubmit({ value }) {
   return (
     <button className={styles.button} type="submit">
-      Submit
+      Next
     </button>
   );
 }
