@@ -1,4 +1,6 @@
 import Card from '../../components/PagesComponents/Card/Card';
+import { useKeenSlider } from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
 import './home.sass'
 
 const data=[
@@ -25,10 +27,17 @@ const data=[
 ]
 
 const Home = () => {
+  const [sliderRef] = useKeenSlider({
+    slides: {
+      perView: 2,
+      spacing: 15,
+    },
+  })
+
   return (
       <div className="home">
         <h2>Recomendados</h2>
-        <div className='cards'>
+        <div ref={sliderRef} className='cards keen-slider'>
           {data.map(({imageUrl,name},i)=>
             (<Card 
               key={i}
