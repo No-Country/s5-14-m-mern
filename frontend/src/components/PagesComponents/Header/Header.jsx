@@ -6,6 +6,7 @@ import search from '../../../../assets/Icons/search.svg'
 import user from '../../../../assets/Icons/usersquare.svg'
 import menu from '../../../../assets/Icons/more.svg'
 import arrow from '../../../../assets/Icons/arrow.svg'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false)
@@ -24,8 +25,8 @@ const Header = () => {
         <img className='logoH' src={logo}/>
         <input className='inputD' type='text' placeholder='Ej Matemáticas, Memoria...'/>  
         {!searchM &&<img className='mob' src={search} onClick={inputM}/>}
-        <img className='mob' src={user}/>        
-        <button>Iniciar sesión</button>
+        <Link to='/login' className='mob'><img  src={user}/></Link>        
+        <Link to='/login' className='login1'>Iniciar sesión</Link>
     </div>
   )
 }

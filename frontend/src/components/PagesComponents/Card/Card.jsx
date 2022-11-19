@@ -12,7 +12,8 @@ const Card = ({imageUrl, name, stars}) => {
 
   return (
     <div className='keen-slider__slide'>
-      <div className='card'
+      <div 
+          className='card'
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
       >
