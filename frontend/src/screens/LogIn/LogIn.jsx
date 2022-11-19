@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import Axios from "axios";
 
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../LogIn/login.sass";
 
 const LoginSchema = Yup.object().shape({
@@ -26,6 +28,7 @@ async function pedirDatos(values) {
 
 const Login = () => {
   const navigate = useNavigate();
+  const [mostrarContraseña, setMostrarContraseña] = useState(false);
 
   const cuenta = {
     email: "admin123@gmail.com",
@@ -34,7 +37,11 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h1 className="login-container-title">Iniciar Sesión</h1>
+      <Link className="volver-home" to={"../"}>
+        <i className="bi bi-arrow-left volver-home"></i>
+      </Link>
+      <img src="../../../assets/logo/logo.png" />
+      <p className="login-container-description">Inicia sesión para ingresar a tu cuenta</p>
       <Formik
         initialValues={{
           email: "",
@@ -54,11 +61,17 @@ const Login = () => {
             {errors.email && touched.email ? (
               <div className="login-container-form-errors">{errors.email}</div>
             ) : null}
-            <Field
-              className="login-container-form-field"
-              name="password"
-              placeholder="Contraseña"
-            />
+            <div>
+              <Field
+                className="login-container-form-field"
+                name="password"
+                placeholder="Contraseña"
+                type={!mostrarContraseña ? "password" : "text"}
+              />
+              <i
+                onClick={() => setMostrarContraseña(!mostrarContraseña)}
+                className="bi bi-eye-fill mostrar-contraseña"></i>
+            </div>
             {errors.password && touched.password ? (
               <div className="login-container-form-errors">{errors.password}</div>
             ) : null}
@@ -69,7 +82,7 @@ const Login = () => {
           </Form>
         )}
       </Formik>
-      <Link className="login-boton-crear-cuenta" to={"../singup"}>
+      <Link className="login-boton-crear-cuenta" to={"../signup"}>
         No tienes Cuenta? Registrate
       </Link>
     </div>
