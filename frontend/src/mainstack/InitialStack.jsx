@@ -7,6 +7,7 @@ import Account from "../screens/Account/Account.jsx";
 import SignUp from "../screens/SignUp/SignUp.jsx";
 import Login from "../screens/LogIn/LogIn.jsx";
 import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
+import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
 
 function InitalStack() {
   return (
@@ -18,6 +19,7 @@ function InitalStack() {
         <Route path="/account" element={<Account />} />
         <Route path="/test" element={<AdivinaPalabra />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/puzzle" element={<Rompecabezas />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
