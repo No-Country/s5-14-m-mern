@@ -1,0 +1,53 @@
+
+    
+    
+
+.footer-content
+    position: absolute
+    bottom: 0
+    width: 100vw
+    background: #323232
+    text-align: center
+    border-radius: 20px 20px 0px 0px
+    padding-bottom: 70px
+    @media screen and (min-width:800px)
+        width: 70vw
+        height: 160px
+        left: 50%
+        transform: translateX(-50%)
+        padding: 15px
+        padding-bottom: 0
+
+.footer
+    margin: 15px 0 10px 20px
+    display: grid
+    text-align: start
+    grid-template-columns: repeat(2, 1fr)    
+    @media screen and (min-width:800px)
+        grid-template-columns: 2fr 3fr 2fr 2fr
+        margin: 5px
+    p
+        font-size: 12px
+        margin-bottom: 7px
+        margin-left: 5px
+    h3
+        margin-top: 5px
+        font-size: 14px
+        margin-bottom: 8px
+        @media screen and (min-width:800px)
+            margin-top: 0
+
+.logoF
+    width: 80px
+    margin: auto
+    @media screen and (min-width:800px)
+        grid-row-end: 2
+
+.copyR
+    color: #F2CF8D
+    font-size: 12px
+
+.term
+    @media screen and (min-width:800px)
+        grid-row-end: 2
+        grid-column-end: 3
