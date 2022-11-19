@@ -28,21 +28,23 @@ const data=[
 
 const Home = () => {
   const [sliderRef] = useKeenSlider({
-    slides: {
-      perView: 2,
-      spacing: 15,
+    breakpoints: {
+      "(min-width: 600px)": {slides: { perView: 3, spacing: 5 }},
+      "(min-width: 1300px)": {slides: { perView: 4, spacing: 5 }},
     },
+    slides: { perView: 2, spacing: 15 },
   })
 
   return (
       <div className="home">
         <h2>Recomendados</h2>
         <div ref={sliderRef} className='cards keen-slider'>
-          {data.map(({imageUrl,name},i)=>
+          {data.map(({imageUrl,name,stars},i)=>
             (<Card 
               key={i}
               imageUrl={imageUrl}
               name={name}
+              stars={stars}
               />)
               )}       
         </div>
