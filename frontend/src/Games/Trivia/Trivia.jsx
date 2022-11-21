@@ -1,6 +1,6 @@
+import { NavLink } from "react-router-dom";
+
 // components
-import SuccessesAndFailures from "../../components/GamesComponents/TriviaComponents/successesAndFailures";
-import Progress from "../../components/GamesComponents/TriviaComponents/ProgressBar/Progress";
 import OptionsContainer from "../../components/GamesComponents/TriviaComponents/OptionsContainer";
 
 // assets
@@ -15,11 +15,11 @@ export default function TriviaPage() {
     <div className={styles.containerPageOfTrivia}>
       <main className={styles.container}>
         <nav className={styles.nav}>
-          <img alt="toBack" src={ArrowBack} className={styles.arrowToBack} />
+          <NavLink to="/">
+            <img alt="toBack" src={ArrowBack} className={styles.arrowToBack} />
+          </NavLink>
           <p className={styles.title}>{title}</p>
         </nav>
-        <Progress />
-        <SuccessesAndFailures />
         <OptionsContainer questionsNumber={3} />
       </main>
     </div>

@@ -16,9 +16,9 @@ export default function ShowAnswer({ answer = "d" }) {
 
   return (
     <div className={styles.container}>
-      <label>
+      <label onClick={handledShow}>
         <p>Mostrar Respuesta</p>
-        <img src={arrow} alt="Show answer" onClick={handledShow} />
+        <img src={arrow} alt="Show answer" />
       </label>
       {show && <p>{answer}</p>}
     </div>
