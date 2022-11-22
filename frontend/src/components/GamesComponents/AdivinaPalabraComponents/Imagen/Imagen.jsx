@@ -5,7 +5,7 @@ const Imagen = ({ src }) => {
 };
 
 Imagen.propTypes = {
-  src: PropTypes.string
+  src: PropTypes.number
 };
 
 export default Imagen;

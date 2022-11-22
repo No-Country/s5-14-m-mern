@@ -43,16 +43,16 @@ export default function OptionsContainer({ questionsNumber }) {
       setToastText("perdistes");
       setWin(true);
     }
-    if (questionNumberCurrent === 2) {
-      console.log(questionNumberCurrent);
-      setShowModal(true);
-    }
   }, [time, questionNumberCurrent]);
 
   const handledGameReset = () => {
     setTime(0);
+    setWin(false);
     setQuestionNumberCurrent(0);
     setCronometro(true);
+    setSuccessNumber(0);
+    setFaildNumber(0);
+    setShowModal(false);
   };
 
   const handledAnwer = e => {
@@ -60,10 +60,14 @@ export default function OptionsContainer({ questionsNumber }) {
     setCronometro(false);
     if (e === answer) {
       setSuccessNumber(s => s + 1);
-      setToastText("ganastes");
+      setToastText("Ganastes");
     } else {
       setFaildNumber(f => f + 1);
-      setToastText("perdistes");
+      setToastText("Perdistes");
+    }
+    if (questionNumberCurrent === 2) {
+      console.log(questionNumberCurrent);
+      setShowModal(true);
     }
   };
   return (
@@ -83,9 +87,10 @@ export default function OptionsContainer({ questionsNumber }) {
         }}>
         <Form className={styles.form}>
           <div className={styles.containerOfQuestionAndOptions}>
-            <div className={styles.questionNumber}>{`Pregunta ${
-              questionNumberCurrent + 1
-            }/${questionsNumber}`}</div>
+            <div
+              className={
+                styles.questionNumber
+              }>{`Pregunta ${questionNumberCurrent}/${questionsNumber}`}</div>
             <div className={styles.question}>{questionCurrent}</div>
             <div className={styles.cardsOptionsContainer}>
               {optionsCurrent.map(opt => {
@@ -110,8 +115,17 @@ export default function OptionsContainer({ questionsNumber }) {
           </div>
         </Form>
       </Formik>
-      <Toast content={toasText} style={{ background: "#d2691e" }} show={win} />
-      <Modal showModal={showModal} title="Juego terminado" playAgain={handledGameReset} />
+      <Toast
+        content={toasText}
+        style={{ background: `${toasText === "Perdistes" ? faildColor : succesColor}` }}
+        showToast={win}
+      />
+      <Modal
+        content={toasText}
+        showModal={showModal}
+        title="Juego terminado"
+        playAgain={handledGameReset}
+      />
     </div>
   );
 }

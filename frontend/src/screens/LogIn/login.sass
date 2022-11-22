@@ -2,7 +2,7 @@
     margin: 0
     padding: 0
     box-sizing: border-box
-    font-family: sans-serif
+    font-family: Monserrat
     
 .login-container
     display: flex
@@ -11,11 +11,13 @@
     align-items: center
     width: 100%
     height: 100vh
-    background-color: #f7ba81
+    background: linear-gradient(180deg, #0C0E18 0%, #292759 100%)
     
-.login-container-title
-    font-size: 2.5em
-    color: #111
+
+.login-container-description
+    color: #fff
+    font-size: 14px
+    margin-top: 20px
 
 .login-container-form
     display: flex
@@ -23,13 +25,15 @@
     width: 80%
     
 .login-container-form-field
-    margin-top: 30px
-    padding: 5px 10px
+    margin-top: 10px
+    padding: 10px 20px
     border: 2px solid #111 
     background: #fff
     color: #111
-    border-radius: 5px
+    border-radius: 20px
     font-size: 14px
+    width: 100%
+    position: relative
     
 .login-container-form-field:active
     border: 3px solid #111 
@@ -45,16 +49,31 @@
     margin-top: 7px
 
 .login-container-form-button
-    width: 40%
+    width: 100%
     align-self: center
-    margin-top: 25px
-    border-radius: 5px
-    padding: 5px 10px
-    background-color:#111   
-    color: #fff
+    margin-top: 10px
+    border-radius: 20px
+    padding: 10px 10px
+    background-color: transparent
+    color: #F2CF8D
     cursor: pointer
+    border: 3px solid #F2CF8D
 
 
 .login-boton-crear-cuenta
     color: #fff
     margin-top: 15px
+
+.mostrar-contraseña
+    position: absolute
+    margin-top: 20px
+    right: 15%
+    font-size: 18px
+
+.volver-home
+    color: #fff
+    position: absolute
+    top: 5%
+    left: 10%
+    font-size: 25px
+    cursor: pointer
