@@ -4,7 +4,8 @@ const Boton = ({ letra, clickLetras }) => {
   return (
     <button
       style={{ width: "20px", backgroundColor: "#F2CF8D", color: "#fff", margin: "5px 5px" }}
-      onClick={e => clickLetras(e)}>
+      onClick={e => clickLetras(e)}
+    >
       {letra}
     </button>
   );

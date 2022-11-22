@@ -51,9 +51,8 @@ export const PPTApp = () => {
       <h1>¡Juega al piedra, papel o tijeras con Juancito!</h1>
       {selected === null && <h2>Elige una opción</h2>}
       <div>
-        {options.map((opt,i) => (
-          <span className={selected !== null ? "d-none" : undefined} 
-          key={i}>
+        {options.map((opt, i) => (
+          <span className={selected !== null ? "d-none" : undefined} key={i}>
             <img
               onClick={() => handlePPT(opt)}
               className="img-options"
