@@ -2,7 +2,7 @@
   margin: 0
   padding: 0
   box-sizing: border-box
-  font-family: Monserrat
+  font-family: Montserrat
   
 .container
   display: flex
@@ -12,26 +12,51 @@
   width: 100%
   height: 100vh
   background: linear-gradient(180deg, #0C0E18 0%, #292759 100%)
-
-.container-juego
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-  width: 80%
-  height: 80%
-  background-color: rgba(0, 0, 0, 0.5)
-  border-radius: 20px
+  padding-top: 40px
 
 .container-titulo
   color: #fff
+  font-size: 40px
   
+.container-botones 
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-start
+  margin: 10px 30px  
+
+#contenedor-palabra
+  color: #c4c2c2
+  margin-top: 10px
+
 #contenedor-palabra span 
   vertical-align: bottom
   border-bottom: 2px solid #fff
   color: #F2CF8D
   width: 10px
   text-align: center
-  margin-left: 10px
+  margin: 30px 10px 30px 10px
   display: inline-block
+
+.container-intentos
+  color: #fff
+  font-size: 25px
+
+.container-errores
+  color: #F2CF8D
+  font-size: 80px
+  text-align: center
+  margin-top: 20px
+
+.container-puntaje
+  position: absolute
+  margin: 40px
+  top: 0
+  right: 0
+  color: #fff
+  border: 3px solid #F2CF8D
+  padding: 10px
+
+.opaco
+  display: none
 
