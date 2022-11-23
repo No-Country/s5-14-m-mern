@@ -26,7 +26,8 @@ const data = [
   {
     imageUrl: "../../../assets/ImagesCards/rompecabezas.svg",
     name: "Rompecabezas",
-    stars: 2
+    stars: 2,
+    link: "/puzzle"
   }
 ];
 
