@@ -1,7 +1,7 @@
-import './favourites.sass'
+import "./favourites.sass";
 
 const Favoritos = () => {
-  return( 
+  return (
     <div className="fav">
       <h1>Estos son mis juegos favoritos</h1>
     </div>

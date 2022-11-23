@@ -1,7 +1,6 @@
-import { useState } from "react";
-import Boton from "../../components/GamesComponents/AdivinaPalabraComponents/Botones/Boton";
-import BotonJugar from "../../components/GamesComponents/AdivinaPalabraComponents/BotonJugar/BotonJugar";
-import Imagen from "../../components/GamesComponents/AdivinaPalabraComponents/Imagen/Imagen";
+import { useState, useEffect } from "react";
+import Boton from "./Botones/Boton";
+import BotonJugar from "./BotonJugar/BotonJugar";
 import "../AdivinaPalabra/adivinaPalabra.sass";
 
 const AdivinaPalabra = () => {
@@ -75,11 +74,11 @@ const AdivinaPalabra = () => {
     "robo",
     "corta"
   ];
-
-  const [src, setSrc] = useState(0);
   const [palabra, setPalabra] = useState(0);
   const [errores, setErrores] = useState(0);
   const [aciertos, setAciertos] = useState(0);
+  const [puntaje, setPuntaje] = useState(0);
+  const [cantidadErrores, setCantidadErrores] = useState(7);
   let cantAciertos = 0;
   let palabraAdivinar;
   let acerto;
@@ -87,6 +86,7 @@ const AdivinaPalabra = () => {
   let erro;
 
   function setearJuego() {
+    setCantidadErrores(7);
     setErrores(0);
     setAciertos(0);
     cantAciertos = 0;
@@ -103,6 +103,7 @@ const AdivinaPalabra = () => {
     setPalabra(palabraAdivinar);
 
     const contenedor = document.getElementById("contenedor-palabra");
+    contenedor.innerHTML = "";
 
     for (let i = 0; i < palabraAdivinar.length; i++) {
       const span = document.createElement("span");
@@ -119,6 +120,7 @@ const AdivinaPalabra = () => {
 
   function clickLetras(e) {
     const boton = e.target;
+    boton.className = "opaco";
     boton.disabled = true;
     const spans = document.querySelectorAll("span");
 
@@ -138,29 +140,42 @@ const AdivinaPalabra = () => {
 
     if (acerto === false) {
       setErrores(errores + 1);
-      setSrc(src + 1);
+      setCantidadErrores(cantidadErrores - 1);
     }
   }
 
+  useEffect(() => {
+    if (aciertos === palabra.length) {
+      const container = document.getElementById("contenedor-palabra");
+      container.innerHTML = `Haz ganado, la palabra era ${palabra}`;
+      setPuntaje(puntaje + 10);
+      setPalabra(0);
+    }
+    if (errores === 7) {
+      const container = document.getElementById("contenedor-palabra");
+      container.innerHTML = `La palabra era ${palabra}, intenta denuevo`;
+      setPalabra(0);
+    }
+  }, [aciertos, errores]);
+
   return (
     <div className="container">
-      <div className="container-juego">
-        <h1 className="container-titulo">Adivina Palabra</h1>
-        <div>Errores: {errores}</div>
-        {errores === 7 ? "Haz perdido" : errores}
-        <div>Aciertos: {aciertos}</div>
-        {aciertos === palabra.length && "Haz ganado"}
-        <Imagen src={src} />
+      <h1 className="container-titulo">Adivina Palabra</h1>
+      {palabra !== 0 && (
         <div>
-          {palabra !== 0 &&
-            letras.map((letra, index) => {
-              return <Boton letra={letra} key={index} id={index} clickLetras={clickLetras} />;
-            })}
+          <p className="container-errores">{cantidadErrores}</p>
+          <h2 className="container-intentos">Intentos</h2>
         </div>
-        {palabra === 0 && <BotonJugar jugar={"Jugar"} empezarJuego={empezarJuego} />}
-
-        <div id="contenedor-palabra"></div>
+      )}
+      <div id="contenedor-palabra"></div>
+      <div className="container-botones">
+        {palabra !== 0 &&
+          letras.map((letra, index) => {
+            return <Boton letra={letra} key={index} id={index} clickLetras={clickLetras} />;
+          })}
       </div>
+      {palabra === 0 && <BotonJugar jugar={"Jugar"} empezarJuego={empezarJuego} />}
+      <p className="container-puntaje">Puntaje: {puntaje}</p>
     </div>
   );
 };
