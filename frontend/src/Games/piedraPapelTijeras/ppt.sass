@@ -1,9 +1,16 @@
 .app
     text-align: center
+    color: #000
+    h1
+        font-size: 18px
+        margin-top: 15px
 
 img
-    width: 200px
-    margin: 20px
+    width: 70px
+    margin: 10px
+    @media screen and (min-width:800px)
+        width: 100px
+        margin: 20px
 
 .img-options
     cursor: pointer
@@ -22,17 +29,23 @@ img
 .img-selected
     animation: fadein 2s
 
-@keyframes (fadein)
-    from:  opacity(0) 
-    to:    opacity(1) 
+@keyframes fadein
+    0%
+        opacity: 0 
+    100%
+        opacity: 1 
 
 button
     height: 50px
-    width: 200px
+    width: 80px
     background-color: cornflowerblue
     color: aliceblue
-    font-size: 20px
-    font-weight: 700
+    font-size: 15px
     border-radius: 10px
     border: none
     cursor: pointer
+    @media screen and (min-width:800px)
+        height: 50px
+        width: 200px
+        font-size: 20px
+        font-weight: 700

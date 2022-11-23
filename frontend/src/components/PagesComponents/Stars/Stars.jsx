@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { FaStar } from "react-icons/fa";
 import "./stars.sass";
 
 const Rate = ({ count, rating, color, onRating }) => {
@@ -21,29 +20,29 @@ const Rate = ({ count, rating, color, onRating }) => {
       .fill(0)
       .map((_, i) => i + 1)
       .map(idx => (
-        <FaStar
+        <i
+          className="bi bi-star-fill star-icon"
           key={idx}
-          className="icon-star"
           onClick={() => onRating(idx)}
           style={{ color: getColor(idx) }}
           onMouseEnter={() => setHoverRating(idx)}
-          onMouseLeave={() => setHoverRating(0)}
-        />
+          onMouseLeave={() => setHoverRating(0)}></i>
       ));
   }, [count, rating, hoverRating]);
 
   return <div>{starRating}</div>;
 };
 
- Rate.propTypes = {
-   count: PropTypes.number.isRequired,
-   rating: PropTypes.number.isRequired,
-   onChange: PropTypes.func,
-   color: PropTypes.shape({
-     filled: PropTypes.string,
-     unfilled: PropTypes.string,
-   }),
- };
+Rate.propTypes = {
+  count: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
+  onChange: PropTypes.func,
+  color: PropTypes.shape({
+    filled: PropTypes.string,
+    unfilled: PropTypes.string
+  }),
+  onRating: PropTypes.func
+};
 
 Rate.defaultProps = {
   count: 5,

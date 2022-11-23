@@ -54,8 +54,7 @@ const Login = () => {
           } else {
             alert("Usuario no existe");
           }
-        }}
-      >
+        }}>
         {({ errors, touched }) => (
           <Form className="login-container-form">
             <Field className="login-container-form-field" name="email" placeholder="Email" />
@@ -71,8 +70,7 @@ const Login = () => {
               />
               <i
                 onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill mostrar-contraseña"
-              ></i>
+                className="bi bi-eye-fill mostrar-contraseña"></i>
             </div>
             {errors.password && touched.password ? (
               <div className="login-container-form-errors">{errors.password}</div>

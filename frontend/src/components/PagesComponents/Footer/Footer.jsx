@@ -1,4 +1,3 @@
-import React from "react";
 import "./footer.sass";
 import logo from "../../../../assets/Icons/logoFooter.svg";
 

@@ -53,8 +53,7 @@ const SignUp = () => {
         onSubmit={values => {
           enviarDatos(values);
           navigate("../");
-        }}
-      >
+        }}>
         {({ errors, touched }) => (
           <Form className="signup-container-form">
             <Field
@@ -78,8 +77,7 @@ const SignUp = () => {
               />
               <i
                 onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill mostrar-contraseña"
-              ></i>
+                className="bi bi-eye-fill mostrar-contraseña"></i>
             </div>
             {errors.password && touched.password ? (
               <div className="signup-container-form-errors">{errors.password}</div>
@@ -93,8 +91,7 @@ const SignUp = () => {
               />
               <i
                 onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill mostrar-contraseña"
-              ></i>
+                className="bi bi-eye-fill mostrar-contraseña"></i>
             </div>
 
             {errors.passwordConfirmacion && touched.passwordConfirmacion ? (

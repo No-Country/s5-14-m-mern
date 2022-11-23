@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import rock from "./images/piedra.png";
 import scissors from "./images/tijera.png";
 import paper from "./images/papel.png";
@@ -48,7 +48,7 @@ export const PPTApp = () => {
 
   return (
     <div className="app">
-      <h1>¡Juega al piedra, papel o tijeras con Juancito!</h1>
+      <h1>¡Juega al piedra, papel o tijeras con Carlitos!</h1>
       {selected === null && <h2>Elige una opción</h2>}
       <div>
         {options.map((opt, i) => (
@@ -66,7 +66,7 @@ export const PPTApp = () => {
             <div>
               <div className="d-flex">
                 <div className="txt">
-                  <h3>Elegiste: </h3>
+                  <h4>Elegiste: </h4>
                   <h2>
                     <strong>{selected.name}</strong>
                   </h2>
@@ -75,7 +75,7 @@ export const PPTApp = () => {
               </div>
               <div className="d-flex">
                 <div className="txt">
-                  <h3>Juancito eligió:</h3>
+                  <h4>Carlitos eligió:</h4>
                   <h2>
                     <strong>{option.name}</strong>
                   </h2>
@@ -84,11 +84,11 @@ export const PPTApp = () => {
               </div>
             </div>
             <div>
-              {final === "win" && <h1>GANASTE!!!</h1>}
-              {final === "tie" && <h1>Empate</h1>}
+              {final === "win" && <h3>GANASTE!!!</h3>}
+              {final === "tie" && <h3>Empate</h3>}
               {final === "lose" && (
                 <div>
-                  <h1>Ganó Juancito</h1> <h1>Ánimo!, a jugar de nuevo!!</h1>
+                  <h3>Ganó Carlitos</h3> <h4>Ánimo!, a jugar de nuevo!!</h4>
                 </div>
               )}
               {final !== null && <button onClick={reset}>Jugar de Nuevo</button>}
