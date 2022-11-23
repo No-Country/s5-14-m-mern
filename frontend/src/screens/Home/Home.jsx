@@ -9,25 +9,41 @@ const data = [
     name: "Piedra, Papel y Tijeras",
     description:
       "Clásico juego donde la piedra rompe la tijera, la tijera corta el papel y el papel envuelve la piedra",
-    stars: 3,
+    stars: 5,
     minAge: 5,
     path: "/games/ppt"
   },
   {
-    imageUrl: "../../../assets/ImagesCards/memoria.svg",
-    name: "Juego de memoria",
-    stars: 3
+    imageUrl:
+      "https://play-lh.googleusercontent.com/nbVqMdtZbnkIHZuxmdT73dDKYJ5FWQAFAty_OiRRxeMPmJp1WTCsTD7CwZCa2qhHCSA=w526-h296-rw",
+    name: "Adivina Palabra",
+    description:
+      "Tienes 7 intentos para adivinar la palabra misteriosa, al ir tocando las letras, iras resolviendo la palabra",
+    stars: 4,
+    minAge: 7,
+    path: "/games/adivinapalabra"
+  },
+  {
+    imageUrl: "http://www.coachingintegral.cl/images/Preguntas-Significativas.jpg",
+    name: "Trivia",
+    description: "Tienes tres preguntas, si aciertas a la mayoría de la preguntas ganas.",
+    stars: 4,
+    minAge: 7,
+    path: "/games/trivia"
+  },
+  {
+    imageUrl:
+      "https://media.istockphoto.com/id/486983378/es/vector/piezas-del-rompecabezas-sobre-fondo-blanco-en-colores-brillantes.jpg?s=612x612&w=0&k=20&c=0W6ZI6wStLFAArwaaehLZmFAyEoSpKnDNn1hzCOibq0=",
+    name: "Rompecabezas",
+    description: "Tienes que armar tu rompecabezas, tienes diferentes tamaños e imagenes",
+    minAge: 5,
+    stars: 5,
+    path: "/games/puzzle"
   },
   {
     imageUrl: "../../../assets/ImagesCards/bloques.svg",
     name: "bloques",
     stars: 4
-  },
-  {
-    imageUrl: "../../../assets/ImagesCards/rompecabezas.svg",
-    name: "Rompecabezas",
-    stars: 2,
-    link: "/puzzle"
   }
 ];
 

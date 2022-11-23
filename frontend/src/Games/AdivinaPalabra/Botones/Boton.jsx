@@ -4,8 +4,8 @@ const Boton = ({ letra, clickLetras }) => {
   return (
     <button
       style={{
-        width: "35px",
-        height: "35px",
+        width: "25px",
+        height: "25px",
         backgroundColor: "#F2CF8D",
         color: "#111",
         margin: "5px 5px",
