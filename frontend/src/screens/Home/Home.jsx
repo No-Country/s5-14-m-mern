@@ -5,8 +5,7 @@ import "./home.sass";
 
 const data = [
   {
-    imageUrl:
-      "https://media.istockphoto.com/id/1056840214/es/vector/piedra-papel-tijera-ilustraci%C3%B3n-vectorial.jpg?s=612x612&w=0&k=20&c=csejv5CWnlwVtrAlElVS4V5ZDxWYeh9_tP7clemraDY=",
+    imageUrl: "../../../assets/ImagesCards/ppt.png",
     name: "Piedra, Papel y Tijeras",
     description:
       "Clásico juego donde la piedra rompe la tijera, la tijera corta el papel y el papel envuelve la piedra",
