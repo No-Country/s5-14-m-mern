@@ -6,8 +6,12 @@ import "./home.sass";
 const data = [
   {
     imageUrl: "../../../assets/ImagesCards/colorea.svg",
-    name: "Pinta y colorea",
-    stars: 3
+    name: "Piedra, Papel y Tijeras",
+    description:
+      "Clásico juego donde la piedra rompe la tijera, la tijera corta el papel y el papel envuelve la piedra",
+    stars: 3,
+    minAge: 5,
+    path: "/games/ppt"
   },
   {
     imageUrl: "../../../assets/ImagesCards/memoria.svg",
@@ -40,8 +44,16 @@ const Home = () => {
     <div className="home">
       <h2>Recomendados</h2>
       <div ref={sliderRef} className="cards keen-slider">
-        {data.map(({ imageUrl, name, stars, link }, i) => (
-          <Card key={i} imageUrl={imageUrl} name={name} stars={stars} link={link} />
+        {data.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
+          <Card
+            key={i}
+            imageUrl={imageUrl}
+            name={name}
+            stars={stars}
+            path={path}
+            description={description}
+            minAge={minAge}
+          />
         ))}
       </div>
     </div>

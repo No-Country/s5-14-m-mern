@@ -1,11 +1,12 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import "keen-slider/keen-slider.min.css";
 import "./card.sass";
 import Rate from "../Stars/Stars";
 import hoverIm from "../../../../assets/Icons/hover.svg";
 import { Link } from "react-router-dom";
 
-const Card = ({ imageUrl, name, stars, link }) => {
+const Card = ({ imageUrl, name, stars, description, minAge, path }) => {
   const [rating, setRating] = useState(stars);
   const [hover, setHover] = useState(false);
 
@@ -15,13 +16,14 @@ const Card = ({ imageUrl, name, stars, link }) => {
         className="card"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}>
-        <img src={imageUrl} alt={name} />
-
+        <Link to={path} state={{ name, stars, description, minAge }}>
+          <img src={imageUrl} alt={name} />
+        </Link>
         <h5>{name}</h5>
         {hover && (
           <div className="is-hover">
             <Rate rating={rating} onRating={rate => setRating(rate)} />
-            <Link to={link}>
+            <Link to={path} state={{ name, stars, description, minAge }}>
               <img src={hoverIm} alt="" />
             </Link>
           </div>
@@ -32,6 +34,15 @@ const Card = ({ imageUrl, name, stars, link }) => {
       </span>
     </div>
   );
+};
+
+Card.propTypes = {
+  imageUrl: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  stars: PropTypes.number,
+  description: PropTypes.string,
+  minAge: PropTypes.number,
+  path: PropTypes.string
 };
 
 export default Card;
