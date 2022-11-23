@@ -11,7 +11,8 @@ const Boton = ({ letra, clickLetras }) => {
         margin: "5px 5px",
         border: "2px solid #fff"
       }}
-      onClick={e => clickLetras(e)}>
+      onClick={e => clickLetras(e)}
+    >
       {letra}
     </button>
   );

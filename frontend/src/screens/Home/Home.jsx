@@ -5,7 +5,7 @@ import "./home.sass";
 
 const data = [
   {
-    imageUrl: "../../../assets/ImagesCards/colorea.svg",
+    imageUrl: "../../../assets/ImagesCards/ppt.png",
     name: "Piedra, Papel y Tijeras",
     description:
       "Clásico juego donde la piedra rompe la tijera, la tijera corta el papel y el papel envuelve la piedra",

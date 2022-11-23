@@ -15,7 +15,8 @@ const Card = ({ imageUrl, name, stars, description, minAge, path }) => {
       <div
         className="card"
         onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}>
+        onMouseLeave={() => setHover(false)}
+      >
         <Link to={path} state={{ name, stars, description, minAge }}>
           <img src={imageUrl} alt={name} />
         </Link>
