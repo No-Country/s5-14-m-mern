@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   convertMillisecondsToMinutesAndSeconds,
   progressPercentage
-} from "../../../utils/triviaUtils/gameFunctions/mathfunctionsOfTrivia.jsx";
+} from "../triviaUtils/gameFunctions/mathfunctionsOfTrivia.jsx";
 
 export default function useChronometer({ fullTimer }) {
   const [time, setTime] = useState(0);

@@ -1,4 +1,3 @@
-import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 // components
 import CardOption from "../CardOption";
@@ -13,34 +12,39 @@ import Modal from "../Modal";
 import styles from "./optionContainer.module.sass";
 
 // utils
-import { questions } from "../../../../utils/triviaUtils/constants/triviaquestions";
+import { questions } from "../../triviaUtils/constants/triviaquestions";
 import { useEffect, useState } from "react";
 
 // hooks
-import useChronometer from "../../../../Games/Trivia/hooks/useChronometer";
+import useChronometer from "../../hooks/useChronometer";
 
 export default function OptionsContainer({ questionsNumber }) {
   const [questionNumberCurrent, setQuestionNumberCurrent] = useState(0);
   const [win, setWin] = useState(false);
-  const {
-    question: questionCurrent,
-    options: optionsCurrent,
-    answer
-  } = questions[questionNumberCurrent];
   const [successNumber, setSuccessNumber] = useState(0);
   const [faildNumber, setFaildNumber] = useState(0);
   const [toasText, setToastText] = useState("");
   const { minutes, seconds, percentaje, time, setTime, setCronometro } = useChronometer({
     fullTimer: 10000
   });
+  const {
+    question: questionCurrent,
+    options: optionsCurrent,
+    answer
+  } = questions[questionNumberCurrent];
   const [showModal, setShowModal] = useState(false);
 
-  const faildColor = "#FF1E1E";
-  const succesColor = "#4ECB71";
+  const FAILD_COLOR = "#FF1E1E";
+  const SUCCES_COLOR = "#4ECB71";
+
+  const YOU_LOST = "Perdistes";
+  const YOU_WIN = "Ganastes";
+
   useEffect(() => {
-    if (time === 10000) {
+    const endOfTime = time === 10000;
+    if (endOfTime) {
       setFaildNumber(f => f + 1);
-      setToastText("perdistes");
+      setToastText(YOU_LOST);
       setWin(true);
     }
   }, [time, questionNumberCurrent]);
@@ -56,68 +60,66 @@ export default function OptionsContainer({ questionsNumber }) {
   };
 
   const handledAnwer = e => {
+    const gameOver = questionNumberCurrent === 3;
+    const correctAnswer = e === answer;
     setWin(true);
     setCronometro(false);
-    if (e === answer) {
+    if (correctAnswer) {
       setSuccessNumber(s => s + 1);
-      setToastText("Ganastes");
+      setToastText(YOU_WIN);
     } else {
       setFaildNumber(f => f + 1);
-      setToastText("Perdistes");
+      setToastText(YOU_LOST);
     }
-    if (questionNumberCurrent === 2) {
+    if (gameOver) {
       console.log(questionNumberCurrent);
       setShowModal(true);
+      faildNumber > successNumber ? setToastText(YOU_LOST) : setToastText(YOU_WIN);
     }
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    setQuestionNumberCurrent(e => e + 1);
+    setWin(false);
+    setTime(0);
+    setCronometro(true);
   };
   return (
     <div className={styles.container}>
       <Progress minutes={minutes} seconds={seconds} percentaje={percentaje} />
       <SuccessesAndFailures success={successNumber} failures={faildNumber} />
-      <Formik
-        initialValues={{
-          checked: []
-        }}
-        onSubmit={values => {
-          console.log(values);
-          setQuestionNumberCurrent(e => e + 1);
-          setWin(false);
-          setTime(0);
-          setCronometro(true);
-        }}>
-        <Form className={styles.form}>
-          <div className={styles.containerOfQuestionAndOptions}>
-            <div
-              className={
-                styles.questionNumber
-              }>{`Pregunta ${questionNumberCurrent}/${questionsNumber}`}</div>
-            <div className={styles.question}>{questionCurrent}</div>
-            <div className={styles.cardsOptionsContainer}>
-              {optionsCurrent.map(opt => {
-                return (
-                  <CardOption
-                    key={opt}
-                    style={{
-                      border: `solid 1px ${win && (opt === answer ? succesColor : faildColor)}`
-                    }}
-                    optionValue={opt}
-                    value={opt}
-                    disabled={win}
-                    onClick={() => handledAnwer(opt)}
-                  />
-                );
-              })}
-            </div>
+      <form className={styles.form} onSubmit={onSubmit}>
+        <div className={styles.containerOfQuestionAndOptions}>
+          <div className={styles.questionNumber}>{`Pregunta ${
+            questionNumberCurrent + 1
+          }/${questionsNumber}`}</div>
+          <div className={styles.question}>{questionCurrent}</div>
+          <div className={styles.cardsOptionsContainer}>
+            {optionsCurrent.map(opt => {
+              return (
+                <CardOption
+                  key={opt}
+                  style={{
+                    border: `solid 1px ${win && (opt === answer ? SUCCES_COLOR : FAILD_COLOR)}`
+                  }}
+                  optionValue={opt}
+                  value={opt}
+                  disabled={win}
+                  onClick={() => handledAnwer(opt)}
+                />
+              );
+            })}
           </div>
-          <div className={styles.containerOfButtonAndAnswer}>
-            {win && <ShowAnswer answer={answer} />}
-            <ButtonSubmit show={!win} />
-          </div>
-        </Form>
-      </Formik>
+        </div>
+        <div className={styles.containerOfButtonAndAnswer}>
+          {win && <ShowAnswer answer={answer} />}
+          <ButtonSubmit show={!win} />
+        </div>
+      </form>
       <Toast
         content={toasText}
-        style={{ background: `${toasText === "Perdistes" ? faildColor : succesColor}` }}
+        style={{ background: `${toasText === YOU_LOST ? FAILD_COLOR : SUCCES_COLOR}` }}
         showToast={win}
       />
       <Modal

@@ -6,7 +6,7 @@ import Favorites from "../screens/Favourites/Favourites.jsx";
 import Account from "../screens/Account/Account.jsx";
 import SignUp from "../screens/SignUp/SignUp.jsx";
 import Login from "../screens/LogIn/LogIn.jsx";
-import TriviaPage from "../Games/Trivia/Trivia.jsx";
+import TriviaPage from "../Games/Trivia/index.jsx";
 import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
 import Notifications from "../screens/Notifications/Notifications.jsx";
 import Messages from "../screens/Messages/Messages.jsx";

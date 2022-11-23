@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
-import styles from "./Trivia.module.sass";
+// assets
 import alarm from "../../../../Games/Trivia/assets/alarm.svg";
+// styles
+import styles from "./Trivia.module.sass";
 
 export default function Progress({ minutes, seconds, percentaje }) {
   return (
@@ -10,7 +12,7 @@ export default function Progress({ minutes, seconds, percentaje }) {
           <span className={styles.timer}>{`${minutes}:${seconds}`}</span>
         </div>
         <div className={styles.alarmContainer}>
-          <img src={alarm} alt="alarm" className={styles.alarmIcon} />
+          <img src={alarm} alt="Progress alarm" className={styles.alarmIcon} />
         </div>
       </div>
     </div>

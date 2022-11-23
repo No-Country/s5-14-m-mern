@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "./modal.module.sass";
 
 export default function Modal({ showModal = false, title, playAgain, content }) {
+  const EXIT_BUTTON = "Salir";
+  const PLAY_AGAIN_BUTTON = "Jugar de nuevo";
   return (
     <div>
       {showModal && (
@@ -16,10 +18,10 @@ export default function Modal({ showModal = false, title, playAgain, content }) 
             </div>
             <div className={styles.footer}>
               <Link to="/" className={styles.button}>
-                Salir
+                {EXIT_BUTTON}
               </Link>
               <button className={styles.button} onClick={playAgain}>
-                Jugar de nuevo
+                {PLAY_AGAIN_BUTTON}
               </button>
             </div>
           </div>
