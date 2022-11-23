@@ -60,7 +60,7 @@ export default function OptionsContainer({ questionsNumber }) {
   };
 
   const handledAnwer = e => {
-    const gameOver = questionNumberCurrent === 3;
+    const gameOver = questionNumberCurrent === 2;
     const correctAnswer = e === answer;
     setWin(true);
     setCronometro(false);

@@ -24,6 +24,15 @@ const data = [
     path: "/games/adivinapalabra"
   },
   {
+    imageUrl:
+      "https://play-lh.googleusercontent.com/4uRnBeu8_VZc3Nen21rCcrbKe877ytDPK1h2Go1u8xsEbWqHn1yizTGknyq1SiLWWNsS",
+    name: "Trivia",
+    description: "Tienes tres preguntas, si aciertas a la mayoría de la preguntas ganas.",
+    stars: 4,
+    minAge: 7,
+    path: "/games/trivia"
+  },
+  {
     imageUrl: "../../../assets/ImagesCards/bloques.svg",
     name: "bloques",
     stars: 4

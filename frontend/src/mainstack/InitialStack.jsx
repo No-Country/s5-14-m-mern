@@ -27,11 +27,11 @@ function InitalStack() {
           <Route path="/games/*" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
+            <Route path="trivia" element={<TriviaPage />} />
             {/* cargar juegos */}
           </Route>
         </Route>
         <Route path="/games" element={<Games />} />
-        <Route path="/games/trivia" element={<TriviaPage />} />
         <Route path="/favourites" element={<Favorites />} />
         <Route path="/account" element={<Account />} />
         <Route path="/test" element={<AdivinaPalabra />} />

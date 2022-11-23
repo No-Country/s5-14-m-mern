@@ -11,7 +11,7 @@ export default function TriviaPage() {
     <div className={styles.containerPageOfTrivia}>
       <main className={styles.container}>
         <NavBar title={title} />
-        <OptionsContainer questionsNumber={4} />
+        <OptionsContainer questionsNumber={3} />
       </main>
     </div>
   );
