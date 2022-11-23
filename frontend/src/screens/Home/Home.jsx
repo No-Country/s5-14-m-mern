@@ -25,7 +25,7 @@ const data = [
   },
   {
     imageUrl:
-      "https://play-lh.googleusercontent.com/4uRnBeu8_VZc3Nen21rCcrbKe877ytDPK1h2Go1u8xsEbWqHn1yizTGknyq1SiLWWNsS",
+      "https://st2.depositphotos.com/4071863/7314/v/450/depositphotos_73149227-stock-illustration-trivia-isolated-word-decorative-lettering.jpg",
     name: "Trivia",
     description: "Tienes tres preguntas, si aciertas a la mayoría de la preguntas ganas.",
     stars: 4,
