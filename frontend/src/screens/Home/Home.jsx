@@ -33,15 +33,17 @@ const data = [
     path: "/games/trivia"
   },
   {
+    imageUrl: "../../../assets/ImagesCards/rompecabezas.svg",
+    name: "Rompecabezas",
+    description: "Tienes que armar tu rompecabezas, tienes diferentes tamaños e imagenes",
+    minAge: 5,
+    stars: 2,
+    path: "/games/puzzle"
+  },
+  {
     imageUrl: "../../../assets/ImagesCards/bloques.svg",
     name: "bloques",
     stars: 4
-  },
-  {
-    imageUrl: "../../../assets/ImagesCards/rompecabezas.svg",
-    name: "Rompecabezas",
-    stars: 2,
-    link: "/puzzle"
   }
 ];
 

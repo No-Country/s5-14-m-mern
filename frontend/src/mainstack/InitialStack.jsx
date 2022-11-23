@@ -28,6 +28,7 @@ function InitalStack() {
             <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
             <Route path="trivia" element={<TriviaPage />} />
+            <Route path="puzzle" element={<Rompecabezas />} />
             {/* cargar juegos */}
           </Route>
         </Route>
@@ -36,7 +37,6 @@ function InitalStack() {
         <Route path="/account" element={<Account />} />
         <Route path="/test" element={<AdivinaPalabra />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/puzzle" element={<Rompecabezas />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
