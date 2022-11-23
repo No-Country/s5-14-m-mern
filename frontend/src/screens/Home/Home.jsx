@@ -35,6 +35,8 @@ const data = [
   {
     imageUrl: "../../../assets/ImagesCards/rompecabezas.svg",
     name: "Rompecabezas",
+    description: "Tienes que armar tu rompecabezas, tienes diferentes tamaños e imagenes",
+    minAge: 5,
     stars: 2,
     path: "/games/puzzle"
   },
