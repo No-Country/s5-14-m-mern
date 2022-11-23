@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import Rate from "../../components/PagesComponents/Stars/Stars";
-// import { Route, Routes } from "react-router-dom";
 import fav from "../../../assets/Icons/favM.svg";
 import "./allGames.sass";
 import { Outlet, useLocation } from "react-router-dom";
