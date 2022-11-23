@@ -147,20 +147,19 @@ const AdivinaPalabra = () => {
   useEffect(() => {
     if (aciertos === palabra.length) {
       const container = document.getElementById("contenedor-palabra");
-      container.innerHTML = `Haz ganado, la palabra era ${palabra}`;
+      container.innerHTML = `Haz ganado,<br> la palabra era ${palabra}`;
       setPuntaje(puntaje + 10);
       setPalabra(0);
     }
     if (errores === 7) {
       const container = document.getElementById("contenedor-palabra");
-      container.innerHTML = `La palabra era ${palabra}, intenta denuevo`;
+      container.innerHTML = `La palabra era ${palabra},<br> intenta denuevo`;
       setPalabra(0);
     }
   }, [aciertos, errores]);
 
   return (
     <div className="container">
-      <h1 className="container-titulo">Adivina Palabra</h1>
       {palabra !== 0 && (
         <div>
           <p className="container-errores">{cantidadErrores}</p>

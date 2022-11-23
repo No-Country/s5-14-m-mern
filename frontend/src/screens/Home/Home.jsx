@@ -14,9 +14,14 @@ const data = [
     path: "/games/ppt"
   },
   {
-    imageUrl: "../../../assets/ImagesCards/memoria.svg",
-    name: "Juego de memoria",
-    stars: 3
+    imageUrl:
+      "https://play-lh.googleusercontent.com/4uRnBeu8_VZc3Nen21rCcrbKe877ytDPK1h2Go1u8xsEbWqHn1yizTGknyq1SiLWWNsS",
+    name: "Adivina Palabra",
+    description:
+      "Tienes 7 intentos para adivinar la palabra misteriosa, al ir tocando las letras, iras resolviendo la palabra",
+    stars: 4,
+    minAge: 7,
+    path: "/games/adivinapalabra"
   },
   {
     imageUrl: "../../../assets/ImagesCards/bloques.svg",
