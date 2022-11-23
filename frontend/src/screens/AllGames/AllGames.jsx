@@ -13,7 +13,6 @@ const AllGames = () => {
   return (
     <div className="games-content">
       <h2>{name}</h2>
-      <Rate rating={rating} onRating={rate => setRating(rate)} />
       <div className="screen-games">
         <Outlet />
       </div>
