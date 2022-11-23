@@ -6,12 +6,14 @@ import Favorites from "../screens/Favourites/Favourites.jsx";
 import Account from "../screens/Account/Account.jsx";
 import SignUp from "../screens/SignUp/SignUp.jsx";
 import Login from "../screens/LogIn/LogIn.jsx";
+import TriviaPage from "../Games/Trivia/index.jsx";
+import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
 import Notifications from "../screens/Notifications/Notifications.jsx";
 import Messages from "../screens/Messages/Messages.jsx";
 import Layout from "../screens/Layout/Layout.jsx";
 import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
 import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
-import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
+// import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
 
 function InitalStack() {
   return (
@@ -27,6 +29,9 @@ function InitalStack() {
             {/* cargar juegos */}
           </Route>
         </Route>
+        <Route path="/games" element={<Games />} />
+        <Route path="/games/trivia" element={<TriviaPage />} />
+        <Route path="/favourites" element={<Favorites />} />
         <Route path="/account" element={<Account />} />
         <Route path="/test" element={<AdivinaPalabra />} />
         <Route path="/signup" element={<SignUp />} />
