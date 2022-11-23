@@ -26,7 +26,6 @@ export default function Rompecabezas() {
   };
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Rompecabezas</h1>
       <JigsawPuzzle
         imageSrc={image}
         rows={size}

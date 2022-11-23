@@ -33,15 +33,15 @@ const data = [
     path: "/games/trivia"
   },
   {
-    imageUrl: "../../../assets/ImagesCards/bloques.svg",
-    name: "bloques",
-    stars: 4
-  },
-  {
     imageUrl: "../../../assets/ImagesCards/rompecabezas.svg",
     name: "Rompecabezas",
     stars: 2,
-    link: "/puzzle"
+    path: "/games/puzzle"
+  },
+  {
+    imageUrl: "../../../assets/ImagesCards/bloques.svg",
+    name: "bloques",
+    stars: 4
   }
 ];
 
