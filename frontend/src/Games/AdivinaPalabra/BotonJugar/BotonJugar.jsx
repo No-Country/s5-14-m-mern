@@ -4,8 +4,7 @@ const BotonJugar = ({ jugar, empezarJuego }) => {
   return (
     <button
       onClick={() => empezarJuego()}
-      style={{ color: "#111", backgroundColor: "#F2CF8D", border: "2px solid #fff" }}
-    >
+      style={{ color: "#111", backgroundColor: "#F2CF8D", border: "2px solid #fff" }}>
       {jugar}
     </button>
   );

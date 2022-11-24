@@ -1,18 +1,9 @@
 import PropTypes from "prop-types";
+import "../Botones/boton.sass";
 
 const Boton = ({ letra, clickLetras }) => {
   return (
-    <button
-      style={{
-        width: "25px",
-        height: "25px",
-        backgroundColor: "#F2CF8D",
-        color: "#111",
-        margin: "5px 5px",
-        border: "2px solid #fff"
-      }}
-      onClick={e => clickLetras(e)}
-    >
+    <button className="boton-letra" onClick={e => clickLetras(e)}>
       {letra}
     </button>
   );
