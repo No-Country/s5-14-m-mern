@@ -3,6 +3,10 @@
     text-align: center
     width: 90%
     margin: 0 auto
+    @media screen and (min-width:1000px)
+        width: 820px
+    @media screen and (min-width:1400px)
+        width: 1200px
     h2
         margin: 5px auto
 
@@ -13,6 +17,11 @@
     margin: 10px auto
     background-color: #D9D9D9
     overflow: hidden
+    @media screen and (min-width:800px)
+        height: 85vh
+        max-height: 600px
+    @media screen and (min-width:1000px)
+        width: 820px
 
 .circle
     width: 34px
@@ -27,6 +36,8 @@
 .text-start
     margin: 10px
     text-align: start
+    @media screen and (min-width:1400px)
+        width: 340px
 
 .d-flex
     justify-content: left
@@ -40,6 +51,8 @@
     height: 211px  
     background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%)
     border-radius: 20px
+    @media screen and (min-width:1400px)
+        width: 340px
     h4, p
         width: 50%
         font-weight: bold
@@ -61,3 +74,8 @@
     justify-content: center
     h4
         margin-right: 20px
+
+.desktop
+    @media screen and (min-width:1400px)
+        width: 1200px
+        display: flex

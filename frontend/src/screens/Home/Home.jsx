@@ -94,15 +94,17 @@ const data1 = [
 const Home = () => {
   const [sliderRef] = useKeenSlider({
     breakpoints: {
-      "(min-width: 600px)": { slides: { perView: 3, spacing: 5 } },
-      "(min-width: 1300px)": { slides: { perView: 4, spacing: 5 } }
+      "(min-width: 550px)": { slides: { perView: 3, spacing: 5 } },
+      "(min-width: 1410px)": { slides: { perView: 4, spacing: 5 } }
     },
     slides: { perView: 2, spacing: 15 }
   });
 
   return (
     <div className="home">
-      <h2>Recomendados</h2>
+      <h2>
+        Recomendados <i className="bi bi-award"></i>
+      </h2>
       <div ref={sliderRef} className="cards keen-slider">
         {data.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
           <Card
