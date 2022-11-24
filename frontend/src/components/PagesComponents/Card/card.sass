@@ -62,22 +62,36 @@
 .card-small
     height: 120px
     width: 150px
-    margin: 20px auto 0
+    margin: 20px 5px 0
+    @media screen and (min-width:800px)
+        width: 210px
+        height: 140px
+        margin: 20px 5px 0
+    @media screen and (min-width:1050px)
+        height: 180px
+        width: 260px
+        margin: 30px 10px
     img
         height: 130px
         width: 150px
+        @media screen and (min-width:800px)
+            width: 210px
+            height: 140px
+        @media screen and (min-width:1050px)
+            height: 180px
+            width: 260px
     .is-hover
         display: none
         @media screen and (min-width:1050px)
             display: block
             position: absolute
             top: 0
-            height: 120px
-            width: 150px
+            height: 180px
+            width: 260px
             border-radius: 20px 
             background-color: #00000030
             padding: 10px
             cursor: pointer
             img
-                width: 60px
-                height: 60px    
+                width: 80px
+                height: 100px   
