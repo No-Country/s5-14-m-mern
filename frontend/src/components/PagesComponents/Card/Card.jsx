@@ -6,17 +6,16 @@ import Rate from "../Stars/Stars";
 import hoverIm from "../../../../assets/Icons/hover.svg";
 import { Link } from "react-router-dom";
 
-const Card = ({ imageUrl, name, stars, description, minAge, path }) => {
+const Card = ({ imageUrl, name, stars, description, minAge, path, size }) => {
   const [rating, setRating] = useState(stars);
   const [hover, setHover] = useState(false);
 
   return (
-    <div className="keen-slider__slide">
+    <div className={size !== "small" ? "keen-slider__slide" : undefined}>
       <div
-        className="card"
+        className={size === "small" ? "card card-small" : "card"}
         onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
+        onMouseLeave={() => setHover(false)}>
         <Link to={path} state={{ name, stars, description, minAge }}>
           <img src={imageUrl} alt={name} />
         </Link>
@@ -43,7 +42,8 @@ Card.propTypes = {
   stars: PropTypes.number,
   description: PropTypes.string,
   minAge: PropTypes.number,
-  path: PropTypes.string
+  path: PropTypes.string,
+  size: PropTypes.string
 };
 
 export default Card;
