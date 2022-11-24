@@ -93,8 +93,8 @@ const data1 = [
 const Home = () => {
   const [sliderRef] = useKeenSlider({
     breakpoints: {
-      "(min-width: 600px)": { slides: { perView: 3, spacing: 5 } },
-      "(min-width: 1300px)": { slides: { perView: 4, spacing: 5 } }
+      "(min-width: 550px)": { slides: { perView: 3, spacing: 5 } },
+      "(min-width: 1410px)": { slides: { perView: 4, spacing: 5 } }
     },
     slides: { perView: 2, spacing: 15 }
   });
