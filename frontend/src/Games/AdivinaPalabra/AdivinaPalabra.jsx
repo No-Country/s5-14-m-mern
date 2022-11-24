@@ -120,7 +120,7 @@ const AdivinaPalabra = () => {
 
   function clickLetras(e) {
     const boton = e.target;
-    boton.className = "opaco";
+    boton.className = "boton-letra opaco";
     boton.disabled = true;
     const spans = document.querySelectorAll("span");
 
