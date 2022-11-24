@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 // components
 import CardOption from "../CardOption";
@@ -12,76 +13,72 @@ import Modal from "../Modal";
 import styles from "./optionContainer.module.sass";
 
 // utils
-import { questions } from "../../triviaUtils/constants/triviaquestions";
-import { useEffect, useState } from "react";
+import { ACTIONS } from "../../triviaUtils/constants/actionsReducer";
+import { QUESTIONS } from "../../triviaUtils/constants/triviaquestions";
 
 // hooks
 import useChronometer from "../../hooks/useChronometer";
+import useGameState from "../../hooks/useGameState";
+
+const FAILD_COLOR = "#FF1E1E";
+const SUCCES_COLOR = "#4ECB71";
+
+const YOU_LOST = "Perdistes";
+const YOU_WIN = "Ganastes";
 
 export default function OptionsContainer({ questionsNumber }) {
-  const [questionNumberCurrent, setQuestionNumberCurrent] = useState(0);
-  const [win, setWin] = useState(false);
-  const [successNumber, setSuccessNumber] = useState(0);
-  const [faildNumber, setFaildNumber] = useState(0);
-  const [toasText, setToastText] = useState("");
+  const {
+    questionNumberCurrent,
+    isSelectAnswer,
+    successNumber,
+    faildNumber,
+    toasText,
+    showModal,
+    dispatch
+  } = useGameState();
+
   const { minutes, seconds, percentaje, time, setTime, setCronometro } = useChronometer({
     fullTimer: 10000
   });
+
   const {
     question: questionCurrent,
     options: optionsCurrent,
     answer
-  } = questions[questionNumberCurrent];
-  const [showModal, setShowModal] = useState(false);
-
-  const FAILD_COLOR = "#FF1E1E";
-  const SUCCES_COLOR = "#4ECB71";
-
-  const YOU_LOST = "Perdistes";
-  const YOU_WIN = "Ganastes";
+  } = QUESTIONS[questionNumberCurrent];
 
   useEffect(() => {
     const endOfTime = time === 10000;
     if (endOfTime) {
-      setFaildNumber(f => f + 1);
-      setToastText(YOU_LOST);
-      setWin(true);
+      dispatch({ type: ACTIONS.YOU_LOST });
     }
   }, [time, questionNumberCurrent]);
 
   const handledGameReset = () => {
-    setTime(0);
-    setWin(false);
-    setQuestionNumberCurrent(0);
     setCronometro(true);
-    setSuccessNumber(0);
-    setFaildNumber(0);
-    setShowModal(false);
+    setTime(0);
+    dispatch({ type: ACTIONS.RESET_GAME });
   };
 
   const handledAnwer = e => {
     const gameOver = questionNumberCurrent === 2;
     const correctAnswer = e === answer;
-    setWin(true);
+    dispatch({ type: ACTIONS.SELECT_ANSWER });
     setCronometro(false);
     if (correctAnswer) {
-      setSuccessNumber(s => s + 1);
-      setToastText(YOU_WIN);
+      dispatch({ type: ACTIONS.YOU_WIND });
     } else {
-      setFaildNumber(f => f + 1);
-      setToastText(YOU_LOST);
+      dispatch({ type: ACTIONS.YOU_LOST });
     }
     if (gameOver) {
-      console.log(questionNumberCurrent);
-      setShowModal(true);
-      faildNumber > successNumber ? setToastText(YOU_LOST) : setToastText(YOU_WIN);
+      const toastMessage = faildNumber > successNumber ? YOU_LOST : YOU_WIN;
+      dispatch({ type: ACTIONS.GAME_OVER, payload: toastMessage });
     }
   };
 
   const onSubmit = event => {
     event.preventDefault();
-    setQuestionNumberCurrent(e => e + 1);
-    setWin(false);
+    dispatch({ type: ACTIONS.NEXT_QUESTION });
     setTime(0);
     setCronometro(true);
   };
@@ -101,11 +98,13 @@ export default function OptionsContainer({ questionsNumber }) {
                 <CardOption
                   key={opt}
                   style={{
-                    border: `solid 1px ${win && (opt === answer ? SUCCES_COLOR : FAILD_COLOR)}`
+                    border: `solid 1px ${
+                      isSelectAnswer && (opt === answer ? SUCCES_COLOR : FAILD_COLOR)
+                    }`
                   }}
                   optionValue={opt}
                   value={opt}
-                  disabled={win}
+                  disabled={isSelectAnswer}
                   onClick={() => handledAnwer(opt)}
                 />
               );
@@ -113,14 +112,14 @@ export default function OptionsContainer({ questionsNumber }) {
           </div>
         </div>
         <div className={styles.containerOfButtonAndAnswer}>
-          {win && <ShowAnswer answer={answer} />}
-          <ButtonSubmit show={!win} />
+          {isSelectAnswer && <ShowAnswer answer={answer} />}
+          <ButtonSubmit show={!isSelectAnswer} />
         </div>
       </form>
       <Toast
         content={toasText}
         style={{ background: `${toasText === YOU_LOST ? FAILD_COLOR : SUCCES_COLOR}` }}
-        showToast={win}
+        showToast={isSelectAnswer}
       />
       <Modal
         content={toasText}
