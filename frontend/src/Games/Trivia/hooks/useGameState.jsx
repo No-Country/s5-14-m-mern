@@ -38,7 +38,7 @@ export default function useGameState() {
       case ACTIONS.YOU_WIND:
         return {
           ...state,
-          faildNumber: state.successNumber + 1,
+          successNumber: state.successNumber + 1,
           toasText: YOU_WIN
         };
       case ACTIONS.SELECT_ANSWER:
