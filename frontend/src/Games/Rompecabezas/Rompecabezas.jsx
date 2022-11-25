@@ -33,16 +33,16 @@ export default function Rompecabezas() {
         onSolved={() =>
           Swal.fire({
             title: "Lo terminaste!",
-            text: "Felicidades!",
+            text: "Felicidades! Prueba otro nivel",
             icon: "success",
-            confirmButtonText: "Cool"
+            confirmButtonText: "Excelente!"
           })
         }
       />
       <div>
-        <button onClick={handleClick} className={styles.button}>
+        <p onClick={handleClick} className={styles.button}>
           Volver a empezar
-        </button>
+        </p>
         <select onChange={handleChange} className={styles.select}>
           <option value="2">Pequeño</option>
           <option value="4">Mediano</option>
