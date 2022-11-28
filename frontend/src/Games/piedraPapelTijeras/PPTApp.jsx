@@ -5,7 +5,7 @@ import paper from "./images/papel.png";
 import player1 from "./images/comp1.svg";
 import player2 from "./images/comp2.svg";
 import player3 from "./images/comp3.svg";
-import "./ppt.sass";
+import style from "./ppt.module.sass";
 
 export const PPTApp = () => {
   const options = [
@@ -65,18 +65,20 @@ export const PPTApp = () => {
   };
 
   return (
-    <div className="app">
+    <div className={style.app}>
       {player === null && <h2>Elige con quien jugar</h2>}
       {player === null &&
-        players.map(opt => <img key={opt} src={opt} onClick={() => handlePlayer(opt)} />)}
+        players.map(opt => (
+          <img className={style.img} key={opt} src={opt} onClick={() => handlePlayer(opt)} />
+        ))}
       {player !== null && selected === null && <h2>Elige una opción</h2>}
       {player !== null && (
         <div>
           {options.map((opt, i) => (
-            <span className={selected !== null ? "d-none" : undefined} key={i}>
+            <span className={selected !== null ? style.d_none : undefined} key={i}>
               <img
                 onClick={() => handlePPT(opt)}
-                className="img-options"
+                className={`${style.img} ${style.img_options}`}
                 alt={opt.name}
                 src={opt.src}
               />
@@ -84,49 +86,74 @@ export const PPTApp = () => {
           ))}
           {selected !== null && (
             <>
-              <div className="d-flex">
+              <div className={style.d_flex}>
                 <div>
-                  <div className="d-flex">
-                    <div className="txt">
+                  <div className={style.d_flex}>
+                    <div className={style.txt}>
                       <h3>
-                        Elegiste: <span className="bold img-selected">{selected.name}</span>
+                        Elegiste:{" "}
+                        <span className={`${style.bold} ${style.img_selected}`}>
+                          {selected.name}
+                        </span>
                       </h3>
                     </div>
-                    <img className="img-selected" src={selected.src} alt={selected.name} />
+                    <img
+                      className={`${style.img} ${style.img_selected}`}
+                      src={selected.src}
+                      alt={selected.name}
+                    />
                   </div>
-                  <div className="d-flex">
-                    <img src={player} />
-                    <div className="txt">
+                  <div className={style.d_flex}>
+                    <img className={style.img} src={player} />
+                    <div className={style.txt}>
                       <h3>Eligió:</h3>
-                      <h3 className="bold img-selected">
+                      <h3 className={`${style.bold} ${style.img_selected}`}>
                         <strong>{option.name}</strong>
                       </h3>
                     </div>
-                    <img className="img-selected" src={option.src} alt={option.name} />
+                    <img
+                      className={`${style.img} ${style.img_selected}`}
+                      src={option.src}
+                      alt={option.name}
+                    />
                   </div>
                 </div>
               </div>
               <div>
                 {final === "win" && (
-                  <div className="d-flex">
-                    <img src={player} />
-                    <div className="box sb2 img-selected">Me ganaste.. Juguemos de nuevo</div>
+                  <div className={style.d_flex}>
+                    <img className={style.img} src={player} />
+                    <div className={`${style.box} ${style.sb2} ${style.img_selected}`}>
+                      Me ganaste.. Juguemos de nuevo
+                    </div>
                   </div>
                 )}
                 {final === "tie" && (
-                  <div className="d-flex">
-                    <img src={player} />
-                    <div className="box sb2 img-selected">Empatamos :)</div>
+                  <div className={style.d_flex}>
+                    <img className={style.img} src={player} />
+                    <div className={`${style.box} ${style.sb2} ${style.img_selected}`}>
+                      Empatamos :)
+                    </div>
                   </div>
                 )}
                 {final === "lose" && (
-                  <div className="d-flex">
-                    <img src={player} />
-                    <div className="box sb2 img-selected">Gané! Juguemos otra vez</div>
+                  <div className={style.d_flex}>
+                    <img className={style.img} src={player} />
+                    <div className={`${style.box} ${style.sb2} ${style.img_selected}`}>
+                      Gané! Juguemos otra vez
+                    </div>
                   </div>
                 )}
-                {final !== null && <button onClick={reset}>Jugar de Nuevo</button>}
-                {final !== null && <button onClick={resetP}>Elegir rival</button>}
+                {final !== null && (
+                  <button className={style.btn} onClick={reset}>
+                    Jugar de Nuevo
+                  </button>
+                )}
+                {final !== null && (
+                  <button className={style.btn} onClick={resetP}>
+                    Elegir rival
+                  </button>
+                )}
               </div>
             </>
           )}

@@ -13,7 +13,6 @@ import Messages from "../screens/Messages/Messages.jsx";
 import Layout from "../screens/Layout/Layout.jsx";
 import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
 import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
-// import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
 
 function InitalStack() {
   return (

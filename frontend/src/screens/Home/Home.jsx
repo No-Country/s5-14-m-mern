@@ -1,7 +1,7 @@
 import Card from "../../components/PagesComponents/Card/Card";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import "./home.sass";
+import style from "./home.module.sass";
 import { useState } from "react";
 import Arrow from "../../components/PagesComponents/Slider/Arrow";
 
@@ -93,14 +93,6 @@ const data1 = [
 ];
 
 const Home = () => {
-  // const [sliderRef] = useKeenSlider({
-  //   breakpoints: {
-  //     "(min-width: 550px)": { slides: { perView: 3, spacing: 5 } },
-  //     "(min-width: 1410px)": { slides: { perView: 4, spacing: 5 } }
-  //   },
-  //   slides: { perView: 2, spacing: 15 }
-  // });
-
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -118,10 +110,12 @@ const Home = () => {
   });
 
   return (
-    <div className="home">
-      <h2>Recomendados</h2>
-      <div className="cards navigation-wrapper">
-        <div ref={sliderRef} className=" keen-slider">
+    <div className={style.home}>
+      <h2>
+        Recomendados <i className="bi bi-award"></i>
+      </h2>
+      <div className={`${style.cards} "navigation-wrapper"`}>
+        <div ref={sliderRef} className="keen-slider">
           {data.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
             <Card
               key={i}
@@ -149,7 +143,7 @@ const Home = () => {
         )}
       </div>
       <h2>Educativos</h2>
-      <div className="cards-small">
+      <div className={style.cards_small}>
         {data1.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
           <Card
             key={i}
