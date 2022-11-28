@@ -2,87 +2,85 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import Axios from "axios";
+import { setLogin } from "../../redux/slices/login/loginSlice";
+import { useDispatch } from "react-redux";
+import { postLogin } from "../../redux/slices/login/loginAPI";
 
+import styles from "../LogIn/login.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "../LogIn/login.sass";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Email invalido").required("Email requerido"),
   password: Yup.string().min(6, "Contraseña minimo 6 caracteres").required("Contraseña requerida")
 });
 
-// eslint-disable-next-line no-unused-vars
-async function pedirDatos(values) {
-  await Axios.post("https://http://127.0.0.1:5173/api/auth/singup", {
-    email: values.email,
-    password: values.password
-  })
-    .then(res => {
-      console.log(res.status);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
-
 const Login = () => {
-  const navigate = useNavigate();
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
-
-  const cuenta = {
-    email: "admin123@gmail.com",
-    password: "123456"
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
-    <div className="login-container">
-      <Link className="volver-home" to={"../"}>
-        <i className="bi bi-arrow-left volver-home"></i>
+    <div className={styles.container}>
+      <Link to={"../"}>
+        <i
+          className="bi bi-arrow-left"
+          style={{
+            color: "#fff",
+            position: "absolute",
+            top: "5%",
+            left: "10%",
+            fontSize: "25px",
+            cursor: "pointer"
+          }}></i>
       </Link>
-      <img src="../../../assets/logo/logo.png" />
-      <p className="login-container-description">Inicia sesión para ingresar a tu cuenta</p>
+      <img className={styles.imagen} src="../../../assets/logo/logo.png" />
+      <p className={styles.description}>Inicia sesión para ingresar a tu cuenta</p>
       <Formik
         initialValues={{
           email: "",
           password: ""
         }}
         validationSchema={LoginSchema}
-        onSubmit={values => {
-          if (values.email === cuenta.email && values.password === cuenta.password) {
-            navigate("../");
-          } else {
-            alert("Usuario no existe");
-          }
+        onSubmit={async values => {
+          await postLogin(values, navigate);
+          dispatch(setLogin(values));
+          values.email = "";
+          values.password = "";
         }}>
         {({ errors, touched }) => (
-          <Form className="login-container-form">
-            <Field className="login-container-form-field" name="email" placeholder="Email" />
+          <Form className={styles.form}>
+            <Field className={styles.formfield} name="email" placeholder="Email" />
             {errors.email && touched.email ? (
-              <div className="login-container-form-errors">{errors.email}</div>
+              <div className={styles.formerrors}>{errors.email}</div>
             ) : null}
-            <div>
+            <div className={styles.containercontraseña}>
               <Field
-                className="login-container-form-field"
+                className={styles.formfieldcontraseña}
                 name="password"
                 placeholder="Contraseña"
                 type={!mostrarContraseña ? "password" : "text"}
               />
               <i
                 onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill mostrar-contraseña"></i>
+                className="bi bi-eye-fill"
+                style={{
+                  position: "absolute",
+                  marginTop: "12px",
+                  right: "10%",
+                  fontSize: "18px"
+                }}></i>
             </div>
             {errors.password && touched.password ? (
-              <div className="login-container-form-errors">{errors.password}</div>
+              <div className={styles.formerrors}>{errors.password}</div>
             ) : null}
-            <button className="login-container-form-button" type="submit">
+            <button className={styles.formbutton} type="submit">
               Enviar
             </button>
             <div id="noexiste"></div>
           </Form>
         )}
       </Formik>
-      <Link className="login-boton-crear-cuenta" to={"../signup"}>
+      <Link className={styles.crearcuenta} to={"../signup"}>
         No tienes Cuenta? Registrate
       </Link>
     </div>

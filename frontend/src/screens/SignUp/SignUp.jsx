@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import Axios from "axios";
+import { useDispatch } from "react-redux";
+import { postUser } from "../../redux/slices/signup/signUpAPI";
+import { setUser } from "../../redux/slices/signup/signUpSlice";
 
+import styles from "./signup.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./signup.sass";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -19,30 +21,27 @@ const SignupSchema = Yup.object().shape({
     .required("Confirmación requerida")
 });
 
-async function enviarDatos(values) {
-  await Axios.post("https://s5-14-mern-back-delta.vercel.app/api/auth/signup", {
-    username: values.username,
-    email: values.email,
-    password: values.password
-  })
-    .then(res => {
-      console.log(res.status);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-}
-
 const SignUp = () => {
   const navigate = useNavigate();
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
+  const dispatch = useDispatch();
+
   return (
-    <div className="signup-container">
-      <Link className="volver-home" to={"../"}>
-        <i className="bi bi-arrow-left volver-home"></i>
+    <div className={styles.container}>
+      <Link to={"../"}>
+        <i
+          className="bi bi-arrow-left"
+          style={{
+            color: "#fff",
+            position: "absolute",
+            top: "5%",
+            left: "10%",
+            fontSize: "25px",
+            cursor: "pointer"
+          }}></i>
       </Link>
-      <img src="../../../assets/logo/logo.png" />
-      <p className="signup-container-description">¡Crea tu cuenta y desafia a tus amigos!</p>
+      <img className={styles.img} src="../../../assets/logo/logo.png" />
+      <p className={styles.description}>¡Crea tu cuenta y desafia a tus amigos!</p>
       <Formik
         initialValues={{
           username: "",
@@ -50,60 +49,72 @@ const SignUp = () => {
           password: ""
         }}
         validationSchema={SignupSchema}
-        onSubmit={values => {
-          enviarDatos(values);
-          navigate("../");
+        onSubmit={async values => {
+          await postUser(values, navigate);
+          dispatch(setUser(values));
+          values.username = "";
+          values.email = "";
+          values.password = "";
+          values.passwordConfirmacion = "";
         }}>
         {({ errors, touched }) => (
-          <Form className="signup-container-form">
-            <Field
-              className="signup-container-form-field"
-              name="username"
-              placeholder="Nombre de usuario"
-            />
+          <Form className={styles.form}>
+            <Field className={styles.formfield} name="username" placeholder="Nombre de usuario" />
             {errors.username && touched.username ? (
-              <div className="signup-container-form-errors">{errors.username}</div>
+              <div className={styles.formerrors}>{errors.username}</div>
             ) : null}
-            <Field className="signup-container-form-field" name="email" placeholder="E-mail" />
+            <Field className={styles.formfield} name="email" placeholder="E-mail" />
             {errors.email && touched.email ? (
-              <div className="signup-container-form-errors">{errors.email}</div>
+              <div className={styles.formerrors}>{errors.email}</div>
             ) : null}
-            <div>
+            <div className={styles.containerfield}>
               <Field
-                className="signup-container-form-field"
+                className={styles.formfieldcontraseña}
                 name="password"
                 placeholder="Contraseña"
                 type={!mostrarContraseña ? "password" : "text"}
               />
               <i
                 onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill mostrar-contraseña"></i>
+                className="bi bi-eye-fill"
+                style={{
+                  position: "absolute",
+                  marginTop: "12px",
+                  right: "10%",
+                  fontSize: "18px"
+                }}></i>
             </div>
             {errors.password && touched.password ? (
-              <div className="signup-container-form-errors">{errors.password}</div>
+              <div className={styles.formerrors}>{errors.password}</div>
             ) : null}
-            <div>
+            <div className={styles.containerfield}>
               <Field
-                className="signup-container-form-field"
+                className={styles.formfieldcontraseña}
                 name="passwordConfirmacion"
                 placeholder="Confirmar Contraseña"
                 type={!mostrarContraseña ? "password" : "text"}
               />
               <i
                 onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill mostrar-contraseña"></i>
+                className="bi bi-eye-fill"
+                style={{
+                  position: "absolute",
+                  marginTop: "12px",
+                  right: "10%",
+                  fontSize: "18px"
+                }}></i>
             </div>
 
             {errors.passwordConfirmacion && touched.passwordConfirmacion ? (
-              <div className="signup-container-form-errors">{errors.passwordConfirmacion}</div>
+              <div className={styles.formerrors}>{errors.passwordConfirmacion}</div>
             ) : null}
-            <button className="signup-container-form-button" type="submit">
+            <button className={styles.formbutton} type="submit">
               Crear Cuenta
             </button>
           </Form>
         )}
       </Formik>
-      <Link className="signup-boton-iniciar-sesion" to={"../login"}>
+      <Link className={styles.iniciarsesion} to={"../login"}>
         Tienes Cuenta? Inicia sesión
       </Link>
     </div>
