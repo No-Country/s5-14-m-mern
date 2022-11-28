@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import "./stars.sass";
+import style from "./stars.module.sass";
 
 const Rate = ({ count, rating, color, onRating }) => {
   const [hoverRating, setHoverRating] = useState(0);
@@ -21,7 +21,7 @@ const Rate = ({ count, rating, color, onRating }) => {
       .map((_, i) => i + 1)
       .map(idx => (
         <i
-          className="bi bi-star-fill star-icon"
+          className={`bi bi-star-fill ${style.star_icon}`}
           key={idx}
           onClick={() => onRating(idx)}
           style={{ color: getColor(idx) }}
