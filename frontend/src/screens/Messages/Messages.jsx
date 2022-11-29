@@ -1,9 +1,9 @@
-import "./messages.sass";
+import classes from "./messages.module.sass";
 import SearchWraper from "../../components/MessageComponents/SearchWraper";
 
 const Messages = () => {
   return (
-    <div className="messages-content">
+    <div className={classes.messages_content}>
       <SearchWraper />
     </div>
   );
