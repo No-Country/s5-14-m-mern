@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import LayoutMobile from "../LayoutMobile";
 
 // constants
 import { FRIENDS } from "../utils/friendsList";
@@ -14,22 +15,24 @@ export default function MessageUser() {
   });
 
   return (
-    <div className={styles.container}>
-      <div className={styles.messageUserWraper}>
-        <div className={styles.title}>
-          <p>{friend.name}</p>
-        </div>
-        <div className={styles.optionsWraper}>
-          <div className={styles.friendImage}>
-            <img src={friend.image} alt={friend.name} />
+    <LayoutMobile showNavbar={false} title={friend.name}>
+      <div className={styles.container}>
+        <div className={styles.messageUserWraper}>
+          <div className={styles.title}>
+            <p>{friend.name}</p>
           </div>
-          <div className={styles.friendsOptions}>
-            <button>Enviar mensaje</button>
-            <button>Desafiar</button>
-            <button>Dejar de ser amigos</button>
+          <div className={styles.optionsWraper}>
+            <div className={styles.friendImage}>
+              <img src={friend.image} alt={friend.name} />
+            </div>
+            <div className={styles.friendsOptions}>
+              <button>Enviar mensaje</button>
+              <button>Desafiar</button>
+              <button>Dejar de ser amigos</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </LayoutMobile>
   );
 }

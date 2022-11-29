@@ -24,8 +24,6 @@ function InitalStack() {
           <Route exact path="/" element={<Home />} />
           <Route path="/favourites" element={<Favorites />} />
           <Route path="/notifications" element={<Notifications />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/messages/:userId" element={<MessageUser />} />
 
           <Route path="/games/*" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
@@ -41,6 +39,8 @@ function InitalStack() {
         <Route path="/test" element={<AdivinaPalabra />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/messages/:userId" element={<MessageUser />} />
       </Routes>
     </BrowserRouter>
   );

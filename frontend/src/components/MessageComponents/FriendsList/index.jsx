@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function FriendsList({ friendsList }) {
   const [sliderRef, _] = useKeenSlider({
-    slides: { perView: 3, spacing: 0 }
+    slides: { perView: 5, spacing: 3 }
   });
   return (
     <div className={styles.container}>
