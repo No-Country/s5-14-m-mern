@@ -20,7 +20,7 @@ export default function Progress({ minutes, seconds, percentaje }) {
 }
 
 Progress.propTypes = {
-  minutes: PropTypes.number,
-  seconds: PropTypes.number,
+  minutes: PropTypes.string,
+  seconds: PropTypes.string,
   percentaje: PropTypes.number
 };

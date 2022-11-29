@@ -1,5 +1,9 @@
 const Cuenta = () => {
-  return <div>Esta es mi cuenta</div>;
+  return (
+    <div>
+      <h1>Soy el account</h1>
+    </div>
+  );
 };
 
 export default Cuenta;

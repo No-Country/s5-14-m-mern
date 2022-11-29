@@ -1,4 +1,4 @@
-export const questions = [
+export const QUESTIONS = [
   {
     question: "¿Cuál es la cuarta letra del abecedario?",
     options: ["F", "G", "D", "I"],

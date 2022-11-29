@@ -13,6 +13,7 @@ import Layout from "../screens/Layout/Layout.jsx";
 import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
 import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
 import Favourites from "../screens/Favourites/Favourites.jsx";
+import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx";
 
 function InitalStack() {
   return (
@@ -23,6 +24,8 @@ function InitalStack() {
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/messages/:userId" element={<MessageUser />} />
+
           <Route path="/games/*" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />

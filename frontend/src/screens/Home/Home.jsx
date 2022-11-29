@@ -26,7 +26,8 @@ const data = [
     path: "/games/adivinapalabra"
   },
   {
-    imageUrl: "http://www.coachingintegral.cl/images/Preguntas-Significativas.jpg",
+    imageUrl:
+      "https://st2.depositphotos.com/4071863/7314/v/450/depositphotos_73149227-stock-illustration-trivia-isolated-word-decorative-lettering.jpg",
     name: "Trivia",
     description: "Tienes tres preguntas, si aciertas a la mayoría de la preguntas ganas.",
     stars: 4,
