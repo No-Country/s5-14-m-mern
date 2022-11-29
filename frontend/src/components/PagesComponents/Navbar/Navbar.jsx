@@ -1,29 +1,37 @@
-import "./navbar.sass";
+import style from "./navbar.module.sass";
 import { NavLink } from "react-router-dom";
 import logo from "../../../../assets/Icons/logo1.svg";
 
 export const Navbar = () => {
   return (
-    <div className="nav-content">
-      <img className="logo" src={logo} />
-      <div className="nav">
+    <div className={style.nav_content}>
+      <img className={style.logo} src={logo} />
+      <div className={style.nav}>
         <NavLink to="/">
-          {({ isActive }) => <img className={isActive ? "gamesAc img" : "games img"} />}
+          {({ isActive }) => (
+            <img className={`${style.img} ${isActive ? style.gamesAc : style.games}`} />
+          )}
         </NavLink>
       </div>
-      <div className="nav">
+      <div className={style.nav}>
         <NavLink to="/favourites">
-          {({ isActive }) => <img className={isActive ? "favsAc img" : "favs img"} />}
+          {({ isActive }) => (
+            <img className={`${style.img} ${isActive ? style.favsAc : style.favs}`} />
+          )}
         </NavLink>
       </div>
-      <div className="nav">
+      <div className={style.nav}>
         <NavLink to="/notifications">
-          {({ isActive }) => <img className={isActive ? "notifAc img" : "notif img"} />}
+          {({ isActive }) => (
+            <img className={`${style.img} ${isActive ? style.notifAc : style.notif}`} />
+          )}
         </NavLink>
       </div>
-      <div className="nav">
+      <div className={style.nav}>
         <NavLink to="/messages">
-          {({ isActive }) => <img className={isActive ? "messagesAc img" : "messages img"} />}
+          {({ isActive }) => (
+            <img className={`${style.img} ${isActive ? style.messagesAc : style.messages}`} />
+          )}
         </NavLink>
       </div>
     </div>

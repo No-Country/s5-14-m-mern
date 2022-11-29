@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Boton from "./Botones/Boton";
 import BotonJugar from "./BotonJugar/BotonJugar";
-import "../AdivinaPalabra/adivinaPalabra.sass";
+import classes from "../AdivinaPalabra/adivinaPalabra.module.sass";
 
 const AdivinaPalabra = () => {
   const letras = [
@@ -120,7 +120,6 @@ const AdivinaPalabra = () => {
 
   function clickLetras(e) {
     const boton = e.target;
-    boton.className = "boton-letra opaco";
     boton.disabled = true;
     const spans = document.querySelectorAll("span");
 
@@ -128,7 +127,6 @@ const AdivinaPalabra = () => {
     erro = false;
     for (let i = 0; i < palabra.length; i++) {
       const letra = boton.innerHTML.toLowerCase();
-      console.log(letra);
       if (letra === palabra[i]) {
         spans[i].innerHTML = letra;
         acerto = true;
@@ -159,22 +157,22 @@ const AdivinaPalabra = () => {
   }, [aciertos, errores]);
 
   return (
-    <div className="container">
+    <div className={classes.container}>
       {palabra !== 0 && (
         <div>
-          <p className="container-errores">{cantidadErrores}</p>
-          <h2 className="container-intentos">Intentos</h2>
+          <p className={classes.container_errores}>{cantidadErrores}</p>
+          <h2 className={classes.container_intentos}>Intentos</h2>
         </div>
       )}
-      <div id="contenedor-palabra"></div>
-      <div className="container-botones">
+      <div id="contenedor-palabra" className={classes.contenedor_palabra}></div>
+      <div className={classes.container_botones}>
         {palabra !== 0 &&
           letras.map((letra, index) => {
             return <Boton letra={letra} key={index} id={index} clickLetras={clickLetras} />;
           })}
       </div>
       {palabra === 0 && <BotonJugar jugar={"Jugar"} empezarJuego={empezarJuego} />}
-      <p className="container-puntaje">Puntaje: {puntaje}</p>
+      <p className={classes.container_puntaje}>Puntaje: {puntaje}</p>
     </div>
   );
 };

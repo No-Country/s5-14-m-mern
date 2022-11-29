@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "keen-slider/keen-slider.min.css";
-import "./card.sass";
+import style from "./card.module.sass";
 import Rate from "../Stars/Stars";
 import hoverIm from "../../../../assets/Icons/hover.svg";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ const Card = ({ imageUrl, name, stars, description, minAge, path, size }) => {
   return (
     <div className={size !== "small" ? "keen-slider__slide" : undefined}>
       <div
-        className={size === "small" ? "card card-small" : "card"}
+        className={`${style.card} ${size === "small" ? style.card_small : undefined}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}>
         <Link to={path} state={{ name, stars, description, minAge }}>
@@ -21,7 +21,7 @@ const Card = ({ imageUrl, name, stars, description, minAge, path, size }) => {
         </Link>
         <h5>{name}</h5>
         {hover && (
-          <div className="is-hover">
+          <div className={style.is_hover}>
             <Rate rating={rating} onRating={rate => setRating(rate)} />
             <Link to={path} state={{ name, stars, description, minAge }}>
               <img src={hoverIm} alt="" />
@@ -29,7 +29,7 @@ const Card = ({ imageUrl, name, stars, description, minAge, path, size }) => {
           </div>
         )}
       </div>
-      <span className="display-mob">
+      <span className={style.display_mob}>
         <Rate rating={rating} onRating={rate => setRating(rate)} />
       </span>
     </div>
