@@ -4,7 +4,7 @@
     box-sizing: border-box
     font-family: Montserrat
     
-.signup-container
+.container
     display: flex
     flex-direction: column
     justify-content: center
@@ -14,17 +14,17 @@
     background: linear-gradient(180deg, #0C0E18 0%, #292759 100%)
     
 
-.signup-container-description
+.description
     color: #fff
     font-size: 14px
     margin-top: 20px
 
-.signup-container-form
+.form
     display: flex
     flex-direction: column
     width: 80%
     
-.signup-container-form-field
+.formfield
     margin-top: 10px
     padding: 10px 20px
     border: 2px solid #111 
@@ -34,21 +34,24 @@
     font-size: 14px
     width: 100%
     position: relative
-    
-.signup-container-form-field:active
-    border: 3px solid #111 
-    box-shadow: none
 
-.signup-container-form-field:focus
-    border: 3px solid #111 
-    box-shadow: none
+.formfieldcontraseña
+    margin-top: 10px
+    padding: 10px 20px
+    border: 2px solid #111 
+    background: #fff
+    color: #111
+    border-radius: 20px
+    font-size: 14px
+    width: 100%
+    position: relative
 
-.signup-container-form-errors
+.formerrors
     color: red
     font-size: 13px
     margin-top: 7px
 
-.signup-container-form-button
+.formbutton
     width: 100%
     align-self: center
     margin-top: 10px
@@ -61,22 +64,37 @@
     font-size: 18px
 
 
-.signup-boton-iniciar-sesion
+.iniciarsesion
     color: #fff
     margin-top: 15px
 
-.mostrar-contraseña
-    position: absolute
-    margin-top: 20px
-    right: 15%
-    font-size: 18px
+.containerfield
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    position: relative
 
-.volver-home
-    color: #fff
-    position: absolute
-    top: 5%
-    left: 10%
-    font-size: 25px
-    cursor: pointer
+.img
+    width: 100px
+
+@media screen and (min-width: 800px) 
+    .form
+        justify-content: center
+        align-items: center
+    .img
+        width: 140px
+    .containerfield, .formfield, .formbutton
+        width: 60%
+
+@media screen and (min-width: 1055px) 
+    .containerfield, .formfield, .formbutton
+        width: 50%
+
+@media screen and (min-width: 1400px) 
+    .containerfield, .formfield, .formbutton
+        width: 40%
+
+
 
 
