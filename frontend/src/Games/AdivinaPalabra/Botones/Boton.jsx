@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import "../Botones/boton.sass";
+import classes from "../Botones/boton.module.sass";
 
 const Boton = ({ letra, clickLetras }) => {
   return (
-    <button className="boton-letra" onClick={e => clickLetras(e)}>
+    <button className={classes.boton_letra} onClick={e => clickLetras(e)}>
       {letra}
     </button>
   );
