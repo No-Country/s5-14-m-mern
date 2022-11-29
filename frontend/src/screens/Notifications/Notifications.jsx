@@ -1,8 +1,8 @@
-import "./notifications.sass";
+import style from "./notifications.module.sass";
 
 const Notifications = () => {
   return (
-    <div className="notif-content">
+    <div className={style.notif_content}>
       <h1>Notificaciones</h1>
     </div>
   );
