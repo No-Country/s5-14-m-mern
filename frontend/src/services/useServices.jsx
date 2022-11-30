@@ -1,8 +1,6 @@
 import axios from "axios";
 import { getToken } from "./localStorage.jsx";
 
-console.log("USE SERVICES TOOKEN", getToken());
-
 const useServices = () => {
   const BASE_URL = "http://localhost:8000";
   // const BASE_URL = "s5-14-mern-back-delta.vercel.app";

@@ -27,7 +27,6 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/"; // Get where user came from
 
   useEffect(() => {
-    console.log("dime como esta successAuth en login", successAuth);
     if (userToken) {
       if (!userInfo) {
         dispatch(getUserLogged(userLogged.id));

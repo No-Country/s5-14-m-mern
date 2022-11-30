@@ -7,14 +7,28 @@ import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
 import { Link, useLocation } from "react-router-dom";
 import avatar from "../../../../assets/AccountAvatars/avatar2.png";
+// Como obtener datos de redux
+import { useSelector, useDispatch } from "react-redux"; // Importar use Selector
+import { logout } from "../../../redux/slices/auth";
+import { resetUser } from "../../../redux/slices/user";
+import { getUserLogged } from "../../../redux/slices/user/userAction";
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false);
-  const [isLogged, setIsLogged] = useState(true);
   const [userMenu, setUserMenu] = useState(false);
+  const { userInfo } = useSelector(state => state.user); // Obtenemos lo que contiene userinfo desde el slice user. (hay user y auth)
+  const { userLogged } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  // User tiene userInfo con todos los datos del usuario completos.
+  // Auth solo tiene si esta logueado o no: en userLogged tiene el id, el rol, y en userToken tiene el token.
 
   const inputM = () => {
     setSearchM(!searchM);
+  };
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    dispatch(resetUser());
   };
 
   const handleMenu = () => setUserMenu(!userMenu);
@@ -22,8 +36,10 @@ const Header = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log(pathname);
-  }, [location]);
+    if (!userInfo && userLogged) {
+      dispatch(getUserLogged(userLogged.id));
+    }
+  }, [userInfo]);
 
   return (
     <div className={style.header_content}>
@@ -50,35 +66,41 @@ const Header = () => {
       {pathname === "/account" && <h2 className={style.title}>Perfíl</h2>}
       {pathname.substring(0, 6) === "/games" && <h2 className={style.title}>Juegos</h2>}
       {pathname === "/" && !searchM && <img className={style.mob} src={search} onClick={inputM} />}
-      {!isLogged && (
+      {!userLogged && (
         <Link to="/login" className={style.mob}>
           <img src={user} />
         </Link>
       )}
-      {!isLogged && (
+      {!userLogged && (
         <Link to="/login" className={style.login1}>
           Iniciar sesión
         </Link>
       )}
-      {isLogged && (
+      {userLogged && (
         <div className={style.user_container} onClick={handleMenu}>
           <div className={style.user}>
             {!userMenu && <i className="bi bi-caret-down-fill"></i>}
             {userMenu && <i className="bi bi-caret-up-fill"></i>}
-            <img src={avatar} />
+            <img src={userInfo.avatar?.path || avatar} />
           </div>
           {userMenu && (
-            <div className={style.menu}>
-              <Link to="/account">
-                <p>Perfil</p>
-              </Link>
-              <Link>
-                <p>Ayuda</p>
-              </Link>
-              <Link>
+            <ul className={style.menu}>
+              <li>
+                <Link to="/account">
+                  <p>Perfil</p>
+                </Link>
+              </li>
+              {userLogged?.role === "Admin" && (
+                <li>
+                  <Link>
+                    <p>Panel Admin</p>
+                  </Link>
+                </li>
+              )}
+              <li onClick={logoutHandler}>
                 <p>Cerrar sesión</p>
-              </Link>
-            </div>
+              </li>
+            </ul>
           )}
         </div>
       )}

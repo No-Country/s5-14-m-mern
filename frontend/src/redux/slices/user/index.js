@@ -11,7 +11,14 @@ const initialState = {
 const userSlice = createSlice({
   name: "userSlice", // nombre del slice
   initialState, // como cuando hacemos const [name, setname] = useState(initialState)
-  reducers: {}, // dentro de reducers creamos las funciones para actualizar el estado.
+  reducers: {
+    resetUser: state => {
+      state.loading = false;
+      state.userInfo = false;
+      state.error = null;
+      success: false;
+    }
+  }, // dentro de reducers creamos las funciones para actualizar el estado.
   extraReducers: {
     // get user logged info
     [getUserLogged.pending]: state => {
@@ -83,4 +90,5 @@ const userSlice = createSlice({
   }
 });
 
+export const { resetUser } = userSlice.actions;
 export default userSlice.reducer;
