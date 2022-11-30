@@ -16,14 +16,17 @@ import LightGame from "../Games/juegoLuces/LightGame.jsx";
 import Favourites from "../screens/Favourites/Favourites.jsx";
 import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx";
 import RequireAuth from "../Routing/RequireAuth.jsx";
+import GameForm from "../components/PagesComponents/AdminPannel/GameForm/GameForm.jsx";
+import GameList from "../components/PagesComponents/AdminPannel/GameList.jsx";
 
 function InitalStack() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
+        <Routes element={<Layout />}>
           <Route exact path="/" element={<Home />} />
-          <Route element={<RequireAuth allowedRole="user" />}>
+
+          <Route element={<RequireAuth allowedRole="user"/>}>
             <Route exact path="/account" element={<Account />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/notifications" element={<Notifications />} />
@@ -31,6 +34,15 @@ function InitalStack() {
             <Route path="/messages/:userId" element={<MessageUser />} />
             <Route path="/account" element={<Account />} />
           </Route>
+
+          <Route element={<RequireAuth allowedRole="user"/>}>
+            <Route path="/admin">
+              <Route index="/" element={<AdminPannel/>}/>
+              <Route path="/manage-game" element={<GameList />} />
+              <Route path="/manage-game/:gameId" element={<GameForm />} />
+            </Route>
+          <Route/> 
+          
           <Route path="/games/*" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
@@ -45,7 +57,7 @@ function InitalStack() {
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
-  );
+    );
 }
 
 export default InitalStack;
