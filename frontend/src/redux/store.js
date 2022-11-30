@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import accountReducer from "../redux/slices/account/accountSlice.js";
-import signUpReducer from "./slices/signup/signUpSlice.js";
-import loginReducer from "./slices/login/loginSlice.js";
+import authSlice from "./slices/auth";
+import userSlice from "./slices/user";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    account: accountReducer,
-    signUp: signUpReducer,
-    login: loginReducer
+    auth: authSlice,
+    user: userSlice
   }
 });
+
+export default store;

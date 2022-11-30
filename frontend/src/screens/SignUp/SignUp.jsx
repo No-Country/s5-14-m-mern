@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { postUser } from "../../redux/slices/signup/signUpAPI";
-import { setUser } from "../../redux/slices/signup/signUpSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { registerUser } from "../../redux/slices/auth/authAction";
 
 import styles from "./signup.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -23,8 +22,20 @@ const SignupSchema = Yup.object().shape({
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [mostrarContraseña, setMostrarContraseña] = useState(false);
+  const { userLogged, successAuth } = useSelector(state => state.auth);
   const dispatch = useDispatch();
+  const [mostrarContraseña, setMostrarContraseña] = useState(false);
+
+  useEffect(() => {
+    // redirect user to login page if registration was successful
+    if (successAuth) {
+      navigate("/Login");
+    }
+    // redirect authenticated user to profile screen
+    if (userLogged) {
+      navigate("/home");
+    }
+  }, [userLogged, successAuth]);
 
   return (
     <div className={styles.container}>
@@ -50,8 +61,13 @@ const SignUp = () => {
         }}
         validationSchema={SignupSchema}
         onSubmit={async values => {
-          await postUser(values, navigate);
-          dispatch(setUser(values));
+          dispatch(
+            registerUser({
+              username: values.username,
+              email: values.email,
+              password: values.password
+            })
+          );
           values.username = "";
           values.email = "";
           values.password = "";
