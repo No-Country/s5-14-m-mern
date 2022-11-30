@@ -32,36 +32,19 @@ const Login = () => {
 
   useEffect(() => {
     if (userToken) {
-      // Está logueado ?
-      console.log("Está logueado");
-      // Se cargó la información del usuario?
-      if (userInfo) {
-        console.log("Se cargó la información del usuario");
-      } else {
-        console.log("No se cargó la información del usuario");
+      if (!userInfo) {
         dispatch(getUserLogged(userLogged.id));
       }
-    } else {
-      console.log("No está logueado");
+      navigate("/");
+    }
+    if (successAuth) {
+      dispatch(getUserLogged(userLogged.id));
+      navigate(from, { replace: true });
     }
 
-    // if (successAuth && userToken) {
-    //   console.log("obteniendo info de usuario", userLogged);
-    //   dispatch(getUserLogged(userLogged.id));
-    //   navigate("/");
-    // } else if (userToken) {
-    //   console.log("info de usuario existe", userInfo);
-    //   if (!userInfo) {
-    //     console.log("obteniendo info de usuario", userLogged);
-    //     dispatch(getUserLogged(userLogged.id));
-    //     console.log("origin", from);
-    //     navigate(from, { replace: true });
-    //   } else {
-    //     console.log("tienes la info de usuario y esta cargada");
-    //   }
-    // } else if (errorAuth) {
-    //   alert(`No se ha podido loguear. Error: ${errorAuth}`);
-    // }
+    if (errorAuth) {
+      console.log("No se ha podido loguear : ", errorAuth);
+    }
   }, [successAuth, userToken, errorAuth]);
 
   const submitHandler = values => {
