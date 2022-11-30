@@ -14,6 +14,7 @@ import Layout from "../screens/Layout/Layout.jsx";
 import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
 import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
 import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx";
+import ChatWraper from "../components/MessageComponents/ChatWraper/index.jsx";
 // import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
 
 function InitalStack() {
@@ -40,7 +41,8 @@ function InitalStack() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/messages" element={<Messages />} />
-        <Route path="/messages/:userId" element={<MessageUser />} />
+        <Route path="/messages/chat" element={<ChatWraper />} />
+        <Route path="/messages/options" element={<MessageUser />} />
       </Routes>
     </BrowserRouter>
   );

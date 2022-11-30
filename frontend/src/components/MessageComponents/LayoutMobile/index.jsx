@@ -1,20 +1,48 @@
+// libraries
 import PropTypes from "prop-types";
-import { Navbar } from "../../PagesComponents/Navbar/Navbar";
-import styles from "./layout.module.sass";
-import HeaderMobile from "../HeaderMobile";
 
-export default function LayoutMobile({ children, title, showNavbar = true }) {
+// components
+import HeaderMobile from "../HeaderMobile";
+import { Navbar } from "../../PagesComponents/Navbar/Navbar";
+
+// styles
+import styles from "./layout.module.sass";
+
+export default function LayoutMobile({
+  children,
+  title = "nameExample",
+  showNavbar = true,
+  showArrow = false,
+  showUserImage = false,
+  isTitleCenter = true,
+  showHeader = true
+}) {
   return (
     <div className={styles.layout_content}>
-      <HeaderMobile title={title} />
+      {showHeader && (
+        <HeaderMobile
+          title={title}
+          showArrow={showArrow}
+          showUserImage={showUserImage}
+          isTitleCenter={isTitleCenter}
+        />
+      )}
       {children}
-      {showNavbar && <Navbar />}
+      {showNavbar && (
+        <div className={styles.remove}>
+          <Navbar />
+        </div>
+      )}
     </div>
   );
 }
 
 LayoutMobile.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.array,
   title: PropTypes.string,
-  showNavbar: PropTypes.bool
+  showNavbar: PropTypes.bool,
+  showArrow: PropTypes.bool,
+  showUserImage: PropTypes.bool,
+  isTitleCenter: PropTypes.bool,
+  showHeader: PropTypes.bool
 };

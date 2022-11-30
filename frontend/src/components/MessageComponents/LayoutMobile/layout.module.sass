@@ -1,5 +1,8 @@
-$background-Message: #262553
+@use "../../../styles/variables.sass" as *
 
 .layout_content
-    background-color: $background-Message
+    background-color: $messages-Background
     min-height: 100vh
+    .remove
+        @include mq(medium)
+            display: none
