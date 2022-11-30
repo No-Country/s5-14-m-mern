@@ -11,14 +11,15 @@ export const getUserLogged = createAsyncThunk(
     try {
       console.log("id content userLogged Redux", id);
       const response = await users.privateData(id);
+      console.log(response);
       const userData = {
-        id: response.data.user._id,
-        username: response.data.user.username,
-        email: response.data.user.email,
-        avatar: response.data.user.avatar,
-        admin: response.data.user.admin,
-        favorites: response.data.user.favorites,
-        friends: response.data.user.friends
+        id: response.data._id,
+        username: response.data.username,
+        email: response.data.email,
+        avatar: response.data.avatar,
+        admin: response.data.admin,
+        favorites: response.data.favorites,
+        friends: response.data.friends
       };
       return userData;
     } catch (error) {
