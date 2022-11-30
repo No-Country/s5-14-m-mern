@@ -5,20 +5,17 @@ import PropTypes from "prop-types";
 const RequireAuth = ({ allowedRole }) => {
   const { userLogged } = useSelector(state => state.auth);
   const location = useLocation();
-  if (!userLogged) {
-  }
 
-  if (userLogged) {
-    if (userLogged.role === "admin" || (userLogged.role === "user" && allowedRole === "user")) {
-      return <Outlet />;
-    } else {
-      console.log("logueado pero no autorizado");
-      return <Navigate to="/unauthorized" state={{ from: location }} replace />;
-    }
-  } else {
-    console.log("no esta logueado va al loguin");
+  if (!userLogged) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
+  if ((userLogged && userLogged.role === "admin") || (userLogged && allowedRole !== "admin")) {
+    return <Outlet />;
+  }
+  if (userLogged && userLogged.role === "user" && allowedRole === "admin") {
+    return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+  }
+  console.log("Role not allowed");
 };
 export default RequireAuth;
 

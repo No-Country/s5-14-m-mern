@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect } from "react";
 import { getToken } from "./localStorage.jsx";
+
+console.log("USE SERVICES TOOKEN", getToken());
 
 const useServices = () => {
   const BASE_URL = "http://localhost:8000";
@@ -17,25 +18,32 @@ const useServices = () => {
     favourites: BASE_URL + "/api/favourites"
   };
 
-  const api = axios.create({
-    baseURL: BASE_URL,
-    headers: { "Content-Type": "application/json" },
-    withCredentials: true
-  });
-  console.log("obtengo token de localstorage", getToken());
+  function api() {
+    return axios.create({
+      baseURL: BASE_URL,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      withCredentials: true
+    });
+  }
 
-  const apiProtected = axios.create({
-    baseURL: BASE_URL,
-    headers: { "Content-Type": "application/json" },
-    authorization: `Bearer ${getToken()}`,
-    withCredentials: true
-  });
+  function apiProtected() {
+    return axios.create({
+      baseURL: BASE_URL,
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${getToken()}`
+      },
+      withCredentials: true
+    });
+  }
 
   // AUTH
   const auth = {
-    signup: data => api.post(`${routeUrl.auth}/signup`, data),
-    login: data => api.post(`${routeUrl.auth}/login`, data),
-    changePassword: (id, data) => apiProtected.post(`${routeUrl.auth}/changePassword/${id}`, data)
+    signup: data => api().post(`${routeUrl.auth}/signup`, data),
+    login: data => api().post(`${routeUrl.auth}/login`, data),
+    changePassword: (id, data) => apiProtected().post(`${routeUrl.auth}/changePassword/${id}`, data)
   };
 
   // USERS
@@ -61,7 +69,7 @@ const useServices = () => {
     remove: userId => apiProtected.delete(`${routeUrl.users}/${userId}`),
 
     privateData: (userId, abortController) =>
-      apiProtected.get(
+      apiProtected().get(
         `${routeUrl.users}/${userId}/private`,
         abortController ? { signal: abortController.signal } : null
       )

@@ -31,24 +31,37 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/"; // Get where user came from
 
   useEffect(() => {
-    console.log("login");
-    if (successAuth && userToken) {
-      console.log("obteniendo info de usuario");
-      console.log(userLogged.id);
-      dispatch(getUserLogged(userLogged.id));
-      navigate("/");
-    } else if (userToken) {
-      if (!userInfo) {
-        console.log("obteniendo info de usuario");
-        dispatch(getUserLogged(userLogged.id));
-        console.log("origin", from);
-        navigate(from, { replace: true });
+    if (userToken) {
+      // Está logueado ?
+      console.log("Está logueado");
+      // Se cargó la información del usuario?
+      if (userInfo) {
+        console.log("Se cargó la información del usuario");
       } else {
-        console.log("tienes la info de usuario y esta cargada");
+        console.log("No se cargó la información del usuario");
+        dispatch(getUserLogged(userLogged.id));
       }
-    } else if (errorAuth) {
-      alert(`No se ha podido loguear. Error: ${errorAuth}`);
+    } else {
+      console.log("No está logueado");
     }
+
+    // if (successAuth && userToken) {
+    //   console.log("obteniendo info de usuario", userLogged);
+    //   dispatch(getUserLogged(userLogged.id));
+    //   navigate("/");
+    // } else if (userToken) {
+    //   console.log("info de usuario existe", userInfo);
+    //   if (!userInfo) {
+    //     console.log("obteniendo info de usuario", userLogged);
+    //     dispatch(getUserLogged(userLogged.id));
+    //     console.log("origin", from);
+    //     navigate(from, { replace: true });
+    //   } else {
+    //     console.log("tienes la info de usuario y esta cargada");
+    //   }
+    // } else if (errorAuth) {
+    //   alert(`No se ha podido loguear. Error: ${errorAuth}`);
+    // }
   }, [successAuth, userToken, errorAuth]);
 
   const submitHandler = values => {

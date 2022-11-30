@@ -4,8 +4,11 @@ export const getToken = () => {
   return userToken;
 };
 export const getUserLogged = () => {
-  const local = JSON.parse(localStorage.getItem("userLogged"));
-  const userLogged = local && local.id && local.role ? { id: local.id, role: local.role } : false;
+  const local = JSON.parse(localStorage.getItem("userToken"));
+  const userLogged =
+    local && local.user?.id && local.user?.role
+      ? { id: local.user.id, role: local.user.role }
+      : false;
   return userLogged;
 };
 export const addLocal = data => {
