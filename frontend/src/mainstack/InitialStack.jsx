@@ -36,14 +36,14 @@ function InitalStack() {
           </Route>
 
           <Route element={<RequireAuth allowedRole="user"/>}>
-            <Route path="/admin">
-              <Route index="/" element={<AdminPannel/>}/>
-              <Route path="/manage-game" element={<GameList />} />
-              <Route path="/manage-game/:gameId" element={<GameForm />} />
+            <Route path="/admin" element={<AdminPannel />}>
+              <Route index element={<GameList />} />
+              <Route path="game-manage" element={<GameForm />} />
+              <Route path="game-manage/:id" element={<GameForm />} />
             </Route>
           <Route/> 
           
-          <Route path="/games/*" element={<Games />}>
+          <Route path="/games" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
             <Route path="trivia" element={<TriviaPage />} />
