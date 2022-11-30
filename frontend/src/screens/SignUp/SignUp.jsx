@@ -22,18 +22,22 @@ const SignupSchema = Yup.object().shape({
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { userLogged, successAuth } = useSelector(state => state.auth);
+  const { userLogged, successAuth, errorAuth } = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
 
   useEffect(() => {
     // redirect user to login page if registration was successful
     if (successAuth) {
+      console.log("Registrado ");
       navigate("/Login");
     }
     // redirect authenticated user to profile screen
-    if (userLogged) {
-      navigate("/home");
+    // if (userLogged) {
+    //   navigate("/home");
+    // }
+    if (errorAuth) {
+      console.log(errorAuth);
     }
   }, [userLogged, successAuth]);
 
@@ -60,7 +64,7 @@ const SignUp = () => {
           password: ""
         }}
         validationSchema={SignupSchema}
-        onSubmit={async values => {
+        onSubmit={values => {
           dispatch(
             registerUser({
               username: values.username,
@@ -68,10 +72,6 @@ const SignUp = () => {
               password: values.password
             })
           );
-          values.username = "";
-          values.email = "";
-          values.password = "";
-          values.passwordConfirmacion = "";
         }}>
         {({ errors, touched }) => (
           <Form className={styles.form}>

@@ -23,8 +23,8 @@ const useServices = () => {
       baseURL: BASE_URL,
       headers: {
         "Content-Type": "application/json"
-      },
-      withCredentials: true
+      }
+      // withCredentials: true
     });
   }
 
@@ -47,7 +47,6 @@ const useServices = () => {
   };
 
   // USERS
-
   const users = {
     getAll: abortController =>
       api.get(`${routeUrl.users}/`, abortController ? { signal: abortController.signal } : null),
