@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import * as Yup from "yup";
-// import { setLogin } from "../../redux/slices/login/loginSlice";
-// import { useDispatch} from "react-redux";
-// import { postLogin } from "../../redux/slices/login/loginAPI";
-
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../Redux/slices/auth/authAction";
 import { getUserLogged } from "../../redux/slices/user/userAction";
@@ -31,13 +27,14 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/"; // Get where user came from
 
   useEffect(() => {
+    console.log("dime como esta successAuth en login", successAuth);
     if (userToken) {
       if (!userInfo) {
         dispatch(getUserLogged(userLogged.id));
       }
       navigate("/");
     }
-    if (successAuth) {
+    if (userToken && userInfo) {
       dispatch(getUserLogged(userLogged.id));
       navigate(from, { replace: true });
     }

@@ -23,19 +23,18 @@ const SignupSchema = Yup.object().shape({
 const SignUp = () => {
   const navigate = useNavigate();
   const { userLogged, successAuth, errorAuth } = useSelector(state => state.auth);
+  const { userInfo } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
 
   useEffect(() => {
-    // redirect user to login page if registration was successful
     if (successAuth) {
       console.log("Registrado ");
-      navigate("/Login");
+      navigate("/login");
     }
-    // redirect authenticated user to profile screen
-    // if (userLogged) {
-    //   navigate("/home");
-    // }
+    if (userLogged && userInfo) {
+      navigate("/");
+    }
     if (errorAuth) {
       console.log(errorAuth);
     }

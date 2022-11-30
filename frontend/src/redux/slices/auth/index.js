@@ -18,6 +18,12 @@ const authSlice = createSlice({
       state.userLogged = false;
       state.userToken = false;
       removeLocal();
+    },
+    resetTemporaryStatesAuth: state => {
+      console.log("action reset auth");
+      state.successAuth = false;
+      state.errorAuth = null;
+      stateLoadinAuth = false;
     }
   },
   extraReducers: {
@@ -60,6 +66,7 @@ const authSlice = createSlice({
   }
 });
 
+export const { resetTemporaryStatesAuth, logout } = authSlice.actions;
 export default authSlice.reducer;
 
 // deprecated object  notation, cambiar
