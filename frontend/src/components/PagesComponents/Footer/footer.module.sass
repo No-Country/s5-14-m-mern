@@ -1,10 +1,12 @@
+@use "../../../styles/variables" as *
+    
 .footer_content
-    width: 100vw
-    background: #323232
+    width: 100%
+    background: $dark-gray
     text-align: center
     border-radius: 20px 20px 0px 0px
     padding: 10px 0
-    @media screen and (min-width:800px)
+    @include mq (medium)
         width: 70vw
         height: 160px
         margin: 20px auto 0
@@ -16,7 +18,7 @@
     display: grid
     text-align: start
     grid-template-columns: 3fr 2fr   
-    @media screen and (min-width:800px)
+    @include mq (medium)
         grid-template-columns: 2fr 3fr 2fr 2fr
         margin: 5px
     p
@@ -27,20 +29,20 @@
         margin-top: 5px
         font-size: 14px
         margin-bottom: 8px
-        @media screen and (min-width:800px)
+        @include mq (medium)
             margin-top: 0
 
 .logoF
     width: 80px
     margin: auto
-    @media screen and (min-width:800px)
+    @include mq (medium)
         grid-row-end: 2
 
 .copyR
-    color: #F2CF8D
+    color: $accent-color
     font-size: 12px
 
 .term
-    @media screen and (min-width:800px)
+    @include mq (medium)
         grid-row-end: 2
         grid-column-end: 3

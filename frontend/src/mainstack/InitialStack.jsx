@@ -25,7 +25,7 @@ function InitalStack() {
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/messages/:userId" element={<MessageUser />} />
-
+          <Route path="/account" element={<Account />} />
           <Route path="/games/*" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
@@ -34,7 +34,6 @@ function InitalStack() {
             {/* cargar juegos */}
           </Route>
         </Route>
-        <Route path="/account" element={<Account />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>

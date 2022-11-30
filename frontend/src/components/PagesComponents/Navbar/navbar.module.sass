@@ -1,12 +1,15 @@
+@use "../../../styles/variables" as *
+    
 .nav_content
     display: flex
     justify-content: space-around
     position: sticky
-    background-color: #323232
+    background-color: $dark-gray
     bottom: 0
-    width: 100vw
+    left: 0
+    right: 0
     height: 60px
-    @media screen and (min-width:800px)
+    @include mq (medium)
         background-color: #000
         display: inline
         position: static
@@ -15,12 +18,12 @@
         text-align: right    
 
 .nav
-    @media screen and (min-width:800px)
+    @include mq (medium)
         padding-top: 70px
 
 .logo
     display: none
-    @media screen and (min-width:800px)
+    @include mq (medium)
         display: inline
         height: 65px
         width: 65px
@@ -29,28 +32,28 @@
     width: 25px
     height: 25px
     margin: 15px
-    @media screen and (min-width:800px) 
+    @include mq (medium) 
         width: 73px
         height: 70px  
         margin: 0
 
 .games    
     content: url('../../../../assets/Icons/gameM.svg')
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/games.svg')
 
 .gamesAc    
     content: url('../../../../assets/Icons/gameMAc.svg')
     height: 30px
     width: 30px
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/gamesAc.svg')
         width: 73px
         height: 70px 
 
 .favs 
     content: url('../../../../assets/Icons/favM.svg')
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/fav.svg')
         width: 80px
 
@@ -58,14 +61,14 @@
     content: url('../../../../assets/Icons/favMAc.svg')
     height: 30px
     width: 30px
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/favAc.svg')
         width: 80px
         height: 70px
 
 .notif    
     content: url('../../../../assets/Icons/notificationM.svg')
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/notifications.svg')
         width: 90px
 
@@ -73,14 +76,14 @@
     content: url('../../../../assets/Icons/notificationMAc.svg')
     height: 30px
     width: 30px
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/notificationsAc.svg')
         width: 90px
         height: 70px
 
 .messages    
     content: url('../../../../assets/Icons/messagesM.svg')
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/messages.svg')
         width: 80px
 
@@ -88,7 +91,7 @@
     content: url('../../../../assets/Icons/messagesMAc.svg')
     height: 30px
     width: 30px
-    @media screen and (min-width:800px)
+    @include mq (medium)
         content: url('../../../../assets/Icons/messagesAc.svg')
         width: 80px
         height: 70px

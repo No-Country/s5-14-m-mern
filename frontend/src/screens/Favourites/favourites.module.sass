@@ -1,4 +1,8 @@
+@use "../../styles/variables" as *
+@use "../../styles/stylecomponents" as *
+    
 .fav_content
+    
 
 .d_flex
     margin: 10px
@@ -7,6 +11,22 @@
     p 
         line-height: 25px
         margin-left: 15px
+    img 
+        cursor: pointer
+
+.card
+    justify-content: center
+    text-align: center
+
+.btn
+    @include buttonTransparent()
+    @include lightYellowGradient()
+    width: 240px
+    color: #000
+    border: none
+    cursor: pointer
+    &:hover
+        @include darkYellowGradient()
     
 .d_flex_button
     display: flex
@@ -14,3 +34,5 @@
     p 
         line-height: 25px
         margin-left: 15px
+    
+

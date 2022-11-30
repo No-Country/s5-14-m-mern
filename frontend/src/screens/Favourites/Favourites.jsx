@@ -31,7 +31,7 @@ const Favourites = () => {
             <img src={like} />
             <p>Presiona para dejar de seguir</p>
           </div>
-          <button>
+          <button className={style.btn}>
             <div className={style.d_flex_button}>
               <img src={friend} />
               <p>¡Desafiar a un amigo!</p>
