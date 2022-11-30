@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import * as Yup from "yup";
-import { setLogin } from "../../redux/slices/login/loginSlice";
-import { useDispatch } from "react-redux";
-import { postLogin } from "../../redux/slices/login/loginAPI";
+// import { setLogin } from "../../redux/slices/login/loginSlice";
+// import { useDispatch} from "react-redux";
+// import { postLogin } from "../../redux/slices/login/loginAPI";
+
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../Redux/slices/auth/authAction";
+import { getUserLogged } from "../../redux/slices/user/userAction";
 
 import styles from "../LogIn/login.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -16,8 +20,38 @@ const LoginSchema = Yup.object().shape({
 
 const Login = () => {
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
-  const dispatch = useDispatch();
+  // User from context
+  const { userToken, userLogged, successAuth, errorAuth } = useSelector(state => state.auth); // leer los datos de la store
+  const { userInfo } = useSelector(state => state.user); // leer los datos de la store
+
+  const dispatch = useDispatch(); // llamar funcion para actualizar estado
+  // Navigate handler
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/"; // Get where user came from
+
+  useEffect(() => {
+    if (userToken) {
+      if (!userInfo) {
+        dispatch(getUserLogged(userLogged.id));
+      }
+      navigate("/");
+    }
+    if (successAuth) {
+      dispatch(getUserLogged(userLogged.id));
+      navigate(from, { replace: true });
+    }
+
+    if (errorAuth) {
+      console.log("No se ha podido loguear : ", errorAuth);
+    }
+  }, [successAuth, userToken, errorAuth]);
+
+  const submitHandler = values => {
+    dispatch(userLogin({ email: values.email, password: values.password }));
+    values.email = "";
+    values.password = "";
+  };
 
   return (
     <div className={styles.container}>
@@ -41,12 +75,7 @@ const Login = () => {
           password: ""
         }}
         validationSchema={LoginSchema}
-        onSubmit={async values => {
-          await postLogin(values, navigate);
-          dispatch(setLogin(values));
-          values.email = "";
-          values.password = "";
-        }}>
+        onSubmit={submitHandler}>
         {({ errors, touched }) => (
           <Form className={styles.form}>
             <Field className={styles.formfield} name="email" placeholder="Email" />

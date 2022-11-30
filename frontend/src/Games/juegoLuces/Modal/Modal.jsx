@@ -11,11 +11,10 @@ const Modal = ({ play, startGame, score }) => {
             <p className={style.score}>Score: {score}</p>
           </div>
         )}
-        <div className={style.button}>
-          <button className={style.play} onClick={startGame}>
-            {score === "0" ? "a" : "b"}
-          </button>
-        </div>
+
+        <button className={style.play} onClick={startGame}>
+          {score === "0" ? "Jugar" : "Reiniciar"}
+        </button>
       </div>
     )
   );

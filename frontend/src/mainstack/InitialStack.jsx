@@ -15,6 +15,7 @@ import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
 import LightGame from "../Games/juegoLuces/LightGame.jsx";
 import Favourites from "../screens/Favourites/Favourites.jsx";
 import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx";
+import RequireAuth from "../Routing/RequireAuth.jsx";
 
 function InitalStack() {
   return (
@@ -22,11 +23,14 @@ function InitalStack() {
       <Routes>
         <Route element={<Layout />}>
           <Route exact path="/" element={<Home />} />
-          <Route path="/favourites" element={<Favourites />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/messages/:userId" element={<MessageUser />} />
-          <Route path="/account" element={<Account />} />
+          <Route element={<RequireAuth allowedRole="user" />}>
+            <Route exact path="/account" element={<Account />} />
+            <Route path="/favourites" element={<Favourites />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/messages/:userId" element={<MessageUser />} />
+            <Route path="/account" element={<Account />} />
+          </Route>
           <Route path="/games/*" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
@@ -36,6 +40,7 @@ function InitalStack() {
             {/* cargar juegos */}
           </Route>
         </Route>
+        <Route path="/test" element={<AdivinaPalabra />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
