@@ -1,7 +1,9 @@
+@use "../../styles/variables.sass" as *
+    
 .home
     width: 90vw
     margin: 0 auto
-    @media screen and (min-width:700px)
+    @include mq (medium)
         width: 80vw
     @media screen and (min-width:1600px)
         width: 70vw

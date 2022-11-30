@@ -15,7 +15,9 @@ const Layout = () => {
         <div className={style.outlet}>
           <Outlet />
         </div>
-        <Footer />
+        <div className={style.foot}>
+          <Footer />
+        </div>
         <div className={style.navM}>
           <Navbar />
         </div>
