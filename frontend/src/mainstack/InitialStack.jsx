@@ -13,7 +13,7 @@ import Messages from "../screens/Messages/Messages.jsx";
 import Layout from "../screens/Layout/Layout.jsx";
 import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
 import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
-// import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
+import LightGame from "../Games/juegoLuces/LightGame.jsx";
 
 function InitalStack() {
   return (
@@ -29,6 +29,7 @@ function InitalStack() {
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
             <Route path="trivia" element={<TriviaPage />} />
             <Route path="puzzle" element={<Rompecabezas />} />
+            <Route path="juegoLuces" element={<LightGame />} />
             {/* cargar juegos */}
           </Route>
         </Route>

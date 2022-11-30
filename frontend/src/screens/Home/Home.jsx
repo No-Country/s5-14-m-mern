@@ -47,6 +47,15 @@ const data = [
     imageUrl: "../../../assets/ImagesCards/bloques.svg",
     name: "bloques",
     stars: 4
+  },
+  {
+    imageUrl:
+      "https://cdn.dribbble.com/users/369159/screenshots/2305404/media/db4c76bf5d77d596e53fbb85b8b44b63.png?compress=1&resize=400x300&vertical=top",
+    name: "Encender Luces",
+    description: "El juego consiste en lograr encender todas las luces del tablero",
+    minAge: 7,
+    stars: 5,
+    path: "/games/juegoLuces"
   }
 ];
 
