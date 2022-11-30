@@ -1,0 +1,83 @@
+@use "../../styles/variables.sass" as *
+    
+.games_content
+    justify-content: center
+    text-align: center
+    width: 90%
+    margin: 0 auto
+    @media screen and (min-width:1000px)
+        width: 820px
+    @media screen and (min-width:1400px)
+        width: 1200px
+    h2
+        margin: 5px auto
+
+.screen_games
+    height: 72vh
+    border: 5px solid white
+    border-radius: 30px
+    margin: 10px auto
+    background-color: #D9D9D9
+    overflow: hidden
+    @include mq (medium)
+        height: 85vh
+        max-height: 600px
+    @media screen and (min-width:1000px)
+        width: 820px
+
+.circle
+    width: 34px
+    height: 34px
+    background: linear-gradient(255.54deg, #F9A811 31.32%, #B97900 91.81%)
+    border-radius: 28px
+    margin: 10px
+    text-align: center
+    line-height: 34px
+    font-size: 20px
+
+.text_start
+    margin: 10px
+    text-align: start
+    @media screen and (min-width:1400px)
+        width: 340px
+
+.d_flex
+    justify-content: left
+
+.ranking
+    display: flex
+    flex-wrap: wrap
+    color: #000
+    padding: 11px 0px
+    margin: 0 auto
+    height: 211px  
+    background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%)
+    border-radius: 20px
+    @media screen and (min-width:1400px)
+        width: 340px
+    h4, p
+        width: 50%
+        font-weight: bold
+
+.favorites
+    display: flex
+    justify-content: left
+    margin: 10px
+    img
+        height: 25px
+        margin: 0
+        cursor: pointer
+    p
+        line-height: 25px
+        
+.qualify
+    display: flex
+    justify-content: left
+    justify-content: center
+    h4
+        margin-right: 20px
+
+.desktop
+    @media screen and (min-width:1400px)
+        width: 1200px
+        display: flex
