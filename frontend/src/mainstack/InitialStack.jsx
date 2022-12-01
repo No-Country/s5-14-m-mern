@@ -12,11 +12,11 @@ import Messages from "../screens/Messages/Messages.jsx";
 import Layout from "../screens/Layout/Layout.jsx";
 import Favourites from "../screens/Favourites/Favourites.jsx";
 
-import TriviaPage from "../Games/Trivia/index.jsx";
-import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
-import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
-import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
-import LightGame from "../Games/juegoLuces/LightGame.jsx";
+// import TriviaPage from "../Games/Trivia/index.jsx";
+// import { PPTApp } from "../Games/piedraPapelTijeras/index.jsx";
+// import AdivinaPalabra from "../Games/AdivinaPalabra/index.jsx";
+// import Rompecabezas from "../Games/Rompecabezas/index.jsx";
+// import LightGame from "../Games/juegoLuces/index.jsx";
 
 import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx";
 import GameForm from "../components/PagesComponents/AdminPannel/GameForm/GameForm.jsx";
@@ -46,17 +46,17 @@ function InitalStack() {
             </Route>
           </Route>
 
-          <Route path="/games" element={<Games />}>
-            <Route path="ppt" element={<PPTApp />} />
+          <Route path="/games/:id" element={<Games />}>
+            {/* <Route path="ppt" element={<PPTApp />} />
             <Route path="adivinapalabra" element={<AdivinaPalabra />} />
             <Route path="trivia" element={<TriviaPage />} />
             <Route path="puzzle" element={<Rompecabezas />} />
             <Route path="juegoLuces" element={<LightGame />} />
-            {/* cargar juegos */}
+            cargar juegos */}
           </Route>
         </Route>
 
-        <Route path="/test" element={<AdivinaPalabra />} />
+        {/* <Route path="/test" element={<AdivinaPalabra />} /> */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>

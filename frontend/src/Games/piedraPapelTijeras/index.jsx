@@ -7,7 +7,7 @@ import player2 from "./images/comp2.svg";
 import player3 from "./images/comp3.svg";
 import style from "./ppt.module.sass";
 
-export const PPTApp = () => {
+const PPTApp = () => {
   const options = [
     { src: rock, name: "piedra" },
     { src: scissors, name: "tijera" },
@@ -162,3 +162,5 @@ export const PPTApp = () => {
     </div>
   );
 };
+
+export default PPTApp;

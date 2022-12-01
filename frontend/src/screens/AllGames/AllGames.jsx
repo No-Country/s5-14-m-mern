@@ -1,21 +1,29 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Rate from "../../components/PagesComponents/Stars/Stars";
 import fav from "../../../assets/Icons/favM.svg";
 import style from "./allGames.module.sass";
-import { Outlet, useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const AllGames = () => {
   const location = useLocation();
   const { name, description, minAge, stars } = location.state;
   const [rating, setRating] = useState(stars);
+  const { id } = useParams();
+
+  // que id corresponde a que modulo para cargar
+  // como importamos los modulos para cargar ?
+  console.log("folder ", id);
+  const MyGame = lazy(() => import(`../../Games/${id}`));
 
   return (
     <div className={style.games_content}>
       <h2>{name}</h2>
       <div className={style.desktop}>
         <div className={style.screen_games}>
-          <Outlet />
+          <Suspense fallback={<p>Cargando...</p>}>
+            <MyGame />
+          </Suspense>
         </div>
         <div>
           <div className={style.text_start}>
@@ -63,7 +71,8 @@ AllGames.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
   minAge: PropTypes.number,
-  stars: PropTypes.number
+  stars: PropTypes.number,
+  folder: PropTypes.string
 };
 
 export default AllGames;
