@@ -10,10 +10,11 @@ import styles from "./searchWraper.module.sass";
 import { FRIENDS } from "../utils/friendsList";
 
 export default function SearchWraper() {
+  const title = "Amigos";
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <p>Amigos</p>
+        <p>{title}</p>
       </div>
       <FriendsList friendsList={FRIENDS} />
       <SearchFriends />

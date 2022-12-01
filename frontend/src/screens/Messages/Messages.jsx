@@ -1,10 +1,20 @@
+// libraries
+import { useMediaQuery } from "react-responsive";
+
+// components
+import MessagesMobile from "../../components/MessageComponents/MessagesMobile";
+import MessagesDesktop from "../../components/MessageComponents/MessagesDesktop";
+
+// styles
 import classes from "./messages.module.sass";
-import SearchWraper from "../../components/MessageComponents/SearchWraper";
 
 const Messages = () => {
+  const isTablet = useMediaQuery({
+    query: "(min-width: 778px)"
+  });
   return (
     <div className={classes.messages_content}>
-      <SearchWraper />
+      {isTablet ? <MessagesDesktop /> : <MessagesMobile />}
     </div>
   );
 };

@@ -1,10 +1,11 @@
+@use '../../../styles/variables.sass' as *
+
 $backgroundInput: #000000
-$colorText: #7A7A7A
 
 .containerSearchFriends
     width: 100%
     display: flex
-    margin: 10px 0px
+    margin: 4px 0px 10px 0px
     justify-content: center
     .containerInput
         width: 329px
@@ -13,10 +14,10 @@ $colorText: #7A7A7A
         align-items: center
         border-radius: 20px
         background: $backgroundInput
-        color: $colorText
-        font-size: 14px
         .containerSearchIcon
             width: 20%
+            display: flex
+            justify-content: center
             .magnifyingGlassIcon
                 width: 20px
                 height: 20px
@@ -24,7 +25,7 @@ $colorText: #7A7A7A
             width: 80%
             font-size: 14px
             font-weight: 600
-            color: #7A7A7A
+            color: $light-gray
             padding: 0 14px
             border: none
             outline: none

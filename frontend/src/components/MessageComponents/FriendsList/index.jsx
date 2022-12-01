@@ -1,24 +1,49 @@
-import PropTypes from "prop-types";
+// styles
 import styles from "./friendsList.module.sass";
 import "keen-slider/keen-slider.min.css";
+
+// libraries
+import PropTypes from "prop-types";
 import { useKeenSlider } from "keen-slider/react";
-import { Link } from "react-router-dom";
+
+// hooks
+import { useDispatch } from "react-redux";
+import { setPage, setCurrentUser } from "../../../redux/slices/messages/messagesSlice";
+import { useMediaQuery } from "react-responsive";
+
+// utils
+import { CHAT_SETIONS } from "../utils/chatSetions";
+import { useNavigate } from "react-router-dom";
 
 export default function FriendsList({ friendsList }) {
+  const dispatch = useDispatch();
   const [sliderRef] = useKeenSlider({
-    slides: { perView: 3, spacing: 0 }
+    slides: { perView: 3, spacing: 8 }
   });
+  const isTablet = useMediaQuery({
+    query: "(min-width: 778px)"
+  });
+  const navigate = useNavigate();
+
+  const handledPage = id => {
+    if (!isTablet) {
+      navigate("/messages/options");
+    }
+    dispatch(setCurrentUser(id));
+    dispatch(setPage(CHAT_SETIONS.userOptions));
+  };
   return (
     <div className={styles.container}>
       <div ref={sliderRef} className="keen-slider">
         {friendsList.map(({ image, name, userId }) => {
           return (
-            <Link to={`/messages/${userId}`} key={image} className={styles.link}>
-              <div className="keen-slider__slide" key={image}>
-                <img src={image} alt="friends" />
-                <p>{name}</p>
-              </div>
-            </Link>
+            <div
+              className={`keen-slider__slide ${styles.slide}`}
+              key={userId}
+              onClick={() => handledPage(userId)}>
+              <img src={image} alt="friends" />
+              <p>{name}</p>
+            </div>
           );
         })}
       </div>
