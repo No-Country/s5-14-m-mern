@@ -45,10 +45,11 @@ function GameForm() {
           setForm({
             name: result.data.game.name,
             description: result.data.game.description,
-            imageUrl: result.data.game.imagePath,
+            imageUrl: result.data.game.cover.path,
             devices: result.data.game.devices || [],
             audiencies: result.data.game.audiencies || "",
-            comingSoon: result.data.game.comingSoong || true
+            comingSoon: result.data.game.comingSoong || true,
+            folder: result.data.game.folder || ""
           });
           setIsLoading(false);
         }
@@ -124,7 +125,8 @@ function GameForm() {
       imageUrl: false,
       devices: [],
       audiencies: "",
-      comingSoon: true
+      comingSoon: true,
+      folder: ""
     });
     navigate("/admin");
   };
@@ -137,6 +139,7 @@ function GameForm() {
     formData.append("description", form.description);
     formData.append("audiencies", form.audiencies);
     formData.append("devices", form.devices);
+    formData.append("folder", form.folder);
     if (file) {
       formData.append("image", file);
     } else {
@@ -327,6 +330,18 @@ function GameForm() {
                 <label htmlFor="comingSoon" className={classes.checkbox_label}>
                   Este juego saldrá próximamente
                 </label>
+              </div>
+            </div>
+            <div className={classes.group_form_name}>
+              <p className={classes.group_form_section}>Datos de carga</p>
+              <div className={classes.group_form}>
+                <input
+                  type="text"
+                  name="folder"
+                  placeholder="Ubicación del juego (carpeta)"
+                  value={form.folder}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
