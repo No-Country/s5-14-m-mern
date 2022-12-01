@@ -2,14 +2,6 @@ import { useEffect, useState } from "react";
 import Modal from "./Modal/Modal";
 import style from "./tablero.module.sass";
 
-const initialState = [
-  [false, false, false],
-  [true, false, true],
-  [true, true, true],
-  [true, true, true],
-  [true, true, true]
-];
-
 const setBoard = () => {
   const board = [
     [false, false, false],
@@ -27,7 +19,7 @@ const setBoard = () => {
 };
 
 const LightGame = () => {
-  const [lights, setLights] = useState(initialState);
+  const [lights, setLights] = useState(setBoard());
   const [play, setPlay] = useState(false);
   const [score, setScore] = useState("0");
   const [isActive, setIsActive] = useState(false);

@@ -75,7 +75,7 @@ const useServices = () => {
   // GAMES
   const games = {
     getAll: abortController =>
-      api.get(`${routeUrl.games}/`, abortController ? { signal: abortController.signal } : null),
+      api().get(`${routeUrl.games}/`, abortController ? { signal: abortController.signal } : null),
 
     create: data => apiProtected.post(`${routeUrl.games}/`, data),
 

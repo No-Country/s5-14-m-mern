@@ -2,10 +2,12 @@ import Card from "../../components/PagesComponents/Card/Card";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import style from "./home.module.sass";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Arrow from "../../components/PagesComponents/Slider/Arrow";
+import { useSelector } from "react-redux";
+import useServices from "../../services/useServices";
 
-const data = [
+const recomendados = [
   {
     imageUrl: "../../../assets/ImagesCards/ppt.png",
     name: "Piedra, Papel y Tijeras",
@@ -59,7 +61,7 @@ const data = [
   }
 ];
 
-const data1 = [
+const todos = [
   {
     imageUrl: "../../../assets/ImagesCards/chess.svg",
     name: "Aprende ajedrez",
@@ -103,8 +105,20 @@ const data1 = [
 ];
 
 const Home = () => {
+  const { games } = useServices();
+
+  const getBDGames = async () => {
+    const { data } = await games.getAll();
+    const allGames = data.games.map(game => {
+      return { imageUrl: game.cover.path, stars: game.stars, name: game.name };
+    });
+    return [...todos, ...allGames];
+  };
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [allGames, setAllGames] = useState(todos);
+  const [filteredGames, setFilteredGames] = useState([]);
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
       "(min-width: 550px)": { slides: { perView: 3, spacing: 5 } },
@@ -119,14 +133,25 @@ const Home = () => {
     }
   });
 
+  const { filter } = useSelector(state => state.filter);
+
+  useEffect(() => {
+    if (filter)
+      setFilteredGames(
+        allGames.filter(game => game.name.toLowerCase().includes(filter.toLowerCase()))
+      );
+    else setFilteredGames(allGames);
+  }, [filter]);
+
   return (
     <div className={style.home}>
       <h2>
         Recomendados <i className="bi bi-award"></i>
       </h2>
+
       <div className={`${style.cards} "navigation-wrapper"`}>
         <div ref={sliderRef} className="keen-slider">
-          {data.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
+          {recomendados.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
             <Card
               key={i}
               imageUrl={imageUrl}
@@ -138,6 +163,7 @@ const Home = () => {
             />
           ))}
         </div>
+
         {loaded && instanceRef.current && (
           <>
             <Arrow
@@ -152,9 +178,9 @@ const Home = () => {
           </>
         )}
       </div>
-      <h2>Educativos</h2>
+      <h2>Juegos</h2>
       <div className={style.cards_small}>
-        {data1.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
+        {filteredGames.map(({ imageUrl, name, stars, description, minAge, path }, i) => (
           <Card
             key={i}
             imageUrl={imageUrl}

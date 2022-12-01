@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux"; // Importar use Selector
 import { logout } from "../../../redux/slices/auth";
 import { resetUser } from "../../../redux/slices/user";
 import { getUserLogged } from "../../../redux/slices/user/userAction";
+import { changeFilter } from "../../../redux/slices/filter";
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false);
@@ -21,6 +22,8 @@ const Header = () => {
   const dispatch = useDispatch();
   // User tiene userInfo con todos los datos del usuario completos.
   // Auth solo tiene si esta logueado o no: en userLogged tiene el id, el rol, y en userToken tiene el token.
+
+  const { filter } = useSelector(state => state.filter);
 
   const inputM = () => {
     setSearchM(!searchM);
@@ -41,15 +44,27 @@ const Header = () => {
     }
   }, [userInfo]);
 
+  const handleChange = e => {
+    dispatch(changeFilter(e.target.value));
+  };
+
   return (
     <div className={style.header_content}>
       {pathname === "/" && !searchM && <img className={style.logoHM} src={logo} />}
       {pathname === "/" && searchM && <img className={style.mob} src={arrow} onClick={inputM} />}
       {pathname === "/" && searchM && <img className={style.logoHM} src={logoM} />}
-      {pathname === "/" && searchM && <input className={style.inputM} type="text" />}
+      {pathname === "/" && searchM && (
+        <input className={style.inputM} type="text" value={filter} onChange={handleChange} />
+      )}
       <img className={style.logoH} src={logo} />
       {pathname === "/" && (
-        <input className={style.inputD} type="text" placeholder="Ej Matemáticas, Memoria..." />
+        <input
+          className={style.inputD}
+          type="text"
+          placeholder="Ej Matemáticas, Memoria..."
+          value={filter}
+          onChange={handleChange}
+        />
       )}
       {(pathname === "/favourites" ||
         pathname === "/notifications" ||
@@ -90,7 +105,7 @@ const Header = () => {
                   <p>Perfil</p>
                 </Link>
               </li>
-              {userLogged?.role === "Admin" && (
+              {userLogged?.role === "admin" && (
                 <li>
                   <Link>
                     <p>Panel Admin</p>
