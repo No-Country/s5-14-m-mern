@@ -5,12 +5,13 @@ import Cross from "../../../../../assets/Icons/cross.svg";
 import { Link } from "react-router-dom";
 
 function GameList() {
-  const [games, setGames] = useOutletContext();
+  const [games, setLoadingGames] = useOutletContext();
 
   const onDelete = id => {
     const newGames = [...games];
     newGames.splice(id, 1);
-    setGames(newGames);
+    // eliminar game en la base de datos
+    setLoadingGames(true);
   };
 
   return (
@@ -32,15 +33,15 @@ function GameList() {
           <div>Apto para</div>
           <div>Editar</div>
         </div>
-        {games.map(({ id, cover, name, description, audiencies, devices }, index) => {
+        {games.map(({ _id, cover, name, description, audiencies, devices }, index) => {
           return (
             <GameItem
               key={index}
-              id={id}
+              id={_id}
               path={cover.path}
               name={name}
               description={description}
-              tags={[...devices, audiencies]}
+              tags={[audiencies, ...devices]}
               onDelete={onDelete}
             />
           );

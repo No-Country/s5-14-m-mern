@@ -77,7 +77,8 @@ const useServices = () => {
     getAll: abortController =>
       api().get(`${routeUrl.games}/`, abortController ? { signal: abortController.signal } : null),
 
-    create: data => apiProtected().post(`${routeUrl.games}/`, data),
+    create: (data, headerConfig) =>
+      apiProtected().post(`${routeUrl.games}/`, data, headerConfig || null),
 
     getById: (gameId, abortController) =>
       api().get(
@@ -85,7 +86,8 @@ const useServices = () => {
         abortController ? { signal: abortController.signal } : null
       ),
 
-    modify: (gameId, data) => apiProtected().put(`${routeUrl.games}/${gameId}`, data),
+    modify: (gameId, data, headerConfig) =>
+      apiProtected().put(`${routeUrl.games}/${gameId}`, data, headerConfig || null),
 
     remove: gameId => apiProtected().delete(`${routeUrl.games}/${gameId}`)
   };
