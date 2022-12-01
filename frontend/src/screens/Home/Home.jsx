@@ -5,6 +5,7 @@ import style from "./home.module.sass";
 import { useState, useEffect } from "react";
 import Arrow from "../../components/PagesComponents/Slider/Arrow";
 import useServices from "../../services/useServices";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -35,8 +36,6 @@ const Home = () => {
         const sorted = data.games.sort((a, b) => b.stars - a.stars).splice(0, 4);
         setRecommended(sorted);
         setGamelist(data.games);
-        console.log(data);
-        console.log(sorted);
         setIsGameListLoading(false);
       } catch (err) {
         console.log(err);
@@ -52,11 +51,43 @@ const Home = () => {
         Recomendados <i className="bi bi-award"></i>
       </h2>
       {isGameListLoading ? (
-        <p>Cargando...</p>
+        <SpinnerLoad className={style.spinner} />
       ) : (
-        <div className={`${style.cards} "navigation-wrapper"`}>
-          <div ref={sliderRef} className="keen-slider">
-            {recommended.map(
+        <>
+          <div className={`${style.cards} "navigation-wrapper"`}>
+            <div ref={sliderRef} className="keen-slider">
+              {recommended.map(
+                ({ cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
+                  <Card
+                    key={i}
+                    name={name}
+                    cover={cover.path}
+                    stars={stars}
+                    description={description}
+                    minAge={audiencies}
+                    path={`/games/${folder}`}
+                    comingSoon={comingSoon}
+                  />
+                )
+              )}
+            </div>
+            {loaded && instanceRef.current && (
+              <>
+                <Arrow
+                  left
+                  onClick={e => e.stopPropagation() || instanceRef.current?.prev()}
+                  disabled={currentSlide === 0}
+                />
+                <Arrow
+                  onClick={e => e.stopPropagation() || instanceRef.current?.next()}
+                  disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
+                />
+              </>
+            )}
+          </div>
+          <h2>Juegos</h2>
+          <div className={style.cards_small}>
+            {gamelist.map(
               ({ cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
                 <Card
                   key={i}
@@ -65,49 +96,14 @@ const Home = () => {
                   stars={stars}
                   description={description}
                   minAge={audiencies}
-                  path={`/games/${folder}`}
+                  path={folder}
                   comingSoon={comingSoon}
+                  size="small"
                 />
               )
             )}
           </div>
-          {loaded && instanceRef.current && (
-            <>
-              <Arrow
-                left
-                onClick={e => e.stopPropagation() || instanceRef.current?.prev()}
-                disabled={currentSlide === 0}
-              />
-              <Arrow
-                onClick={e => e.stopPropagation() || instanceRef.current?.next()}
-                disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
-              />
-            </>
-          )}
-        </div>
-      )}
-
-      <h2>Juegos</h2>
-      {isGameListLoading ? (
-        <p>Cargando...</p>
-      ) : (
-        <div className={style.cards_small}>
-          {gamelist.map(
-            ({ cover, name, stars, description, audiencies, _id, comingSoon, folder }, i) => (
-              <Card
-                key={i}
-                name={name}
-                cover={cover.path}
-                stars={stars}
-                description={description}
-                minAge={audiencies}
-                path={folder}
-                comingSoon={comingSoon}
-                size="small"
-              />
-            )
-          )}
-        </div>
+        </>
       )}
     </div>
   );

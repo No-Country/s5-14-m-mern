@@ -3,7 +3,8 @@ import { useState, lazy, Suspense } from "react";
 import Rate from "../../components/PagesComponents/Stars/Stars";
 import fav from "../../../assets/Icons/favM.svg";
 import style from "./allGames.module.sass";
-import { useLocation, useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 
 const AllGames = () => {
   const location = useLocation();
@@ -11,9 +12,6 @@ const AllGames = () => {
   const [rating, setRating] = useState(stars);
   const { id } = useParams();
 
-  // que id corresponde a que modulo para cargar
-  // como importamos los modulos para cargar ?
-  console.log("folder ", id);
   const MyGame = lazy(() => import(`../../Games/${id}`));
 
   return (
@@ -21,7 +19,7 @@ const AllGames = () => {
       <h2>{name}</h2>
       <div className={style.desktop}>
         <div className={style.screen_games}>
-          <Suspense fallback={<p>Cargando...</p>}>
+          <Suspense fallback={<SpinnerLoad />}>
             <MyGame />
           </Suspense>
         </div>
