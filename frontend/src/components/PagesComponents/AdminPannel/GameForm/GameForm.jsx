@@ -1,7 +1,7 @@
 import classes from "./gameForm.module.sass";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { default as useServices } from "../../../../services/useServices.jsx";
+import useServices from "../../../../services/useServices.jsx";
 import { useNavigate, useOutletContext } from "react-router-dom";
 // icon import
 import tp from "../../../../../assets/Icons/tp.svg";
