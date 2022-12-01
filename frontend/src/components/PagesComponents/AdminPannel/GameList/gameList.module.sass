@@ -1,0 +1,70 @@
+@use "../../../../styles/stylecomponents" as *
+@use "../../../../styles/variables" as *
+
+.listgames
+
+  &_list
+    display: table
+    background: $dark-gray
+    border-radius: 20px
+    font-size: 18px
+    margin-top: 1em
+    border-spacing: 0
+    border-collapse: separate
+    padding-bottom: 4em
+
+  &_header
+    display: table-row
+    text-align: center
+    border: 1px solid #fff
+    -moz-border-radius:20px
+    -webkit-border-radius:20px
+
+    div
+      display: table-cell
+      vertical-align: middle
+      padding: 4px 3em
+      border: 1px solid #fff
+    
+      &:first-child
+        border-top-left-radius: 20px
+        border-bottom-left-radius: 20px
+
+      &:last-child
+        border-top-right-radius: 20px
+        border-bottom-right-radius: 20px
+
+
+.addGameButton 
+  display: flex
+  align-items: center
+  justify-content: space-evenly
+  padding: 4px 2em
+  flex-wrap: nowrap
+  flex-direction: row
+  border-radius: 40px
+  text-decoration: none
+  width: 255px
+
+
+.border_gradient_radius
+  border: solid 2px transparent
+  @include lightYellowGradient()
+  background-image: linear-gradient(50deg, #D3A856 25%, #D3A856 25%, #F2CF8D 58.33%, #F2CF8D 91.15%), linear-gradient(90deg, #D3A856 13.02%, #D3A856 38.02%, #F2CF8D 58.33%, #F2CF8D 91.15%)
+  -webkit-background-image: linear-gradient(50deg, #D3A856 25%, #D3A856 25%, #F2CF8D 58.33%, #F2CF8D 91.15%), linear-gradient(90deg, #D3A856 13.02%, #D3A856 38.02%, #F2CF8D 58.33%, #F2CF8D 91.15%)
+  background-origin: border-box
+  background-clip: content-box, border-box
+  box-shadow: -10000px 2px 1px #121426 inset
+  color: #fff
+  cursor: pointer
+  transition: all 0.5s ease-in
+  
+  span
+    @include lightYellowGradient()
+    background-clip: text
+    -webkit-background-clip: text
+    background-clip: text
+    color: transparent
+    line-height: 1em
+    padding: 4px
+  

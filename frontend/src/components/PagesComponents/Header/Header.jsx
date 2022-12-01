@@ -107,7 +107,7 @@ const Header = () => {
               </li>
               {userLogged?.role === "admin" && (
                 <li>
-                  <Link>
+                  <Link to="/admin">
                     <p>Panel Admin</p>
                   </Link>
                 </li>
