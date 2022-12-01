@@ -5,7 +5,9 @@ import logo from "../../../../assets/Icons/logo1.svg";
 export const Navbar = () => {
   return (
     <div className={style.nav_content}>
-      <img className={style.logo} src={logo} />
+      <NavLink to="/">
+        <img className={style.logo} src={logo} />
+      </NavLink>
       <div className={style.nav}>
         <NavLink to="/">
           {({ isActive }) => (
