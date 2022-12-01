@@ -75,46 +75,46 @@ const useServices = () => {
   // GAMES
   const games = {
     getAll: abortController =>
-      api.get(`${routeUrl.games}/`, abortController ? { signal: abortController.signal } : null),
+      api().get(`${routeUrl.games}/`, abortController ? { signal: abortController.signal } : null),
 
-    create: data => apiProtected.post(`${routeUrl.games}/`, data),
+    create: data => apiProtected().post(`${routeUrl.games}/`, data),
 
     getById: (gameId, abortController) =>
-      api.get(
+      api().get(
         `${routeUrl.games}/${gameId}`,
         abortController ? { signal: abortController.signal } : null
       ),
 
-    modify: (gameId, data) => apiProtected.put(`${routeUrl.games}/${gameId}`, data),
+    modify: (gameId, data) => apiProtected().put(`${routeUrl.games}/${gameId}`, data),
 
-    remove: gameId => apiProtected.delete(`${routeUrl.games}/${gameId}`)
+    remove: gameId => apiProtected().delete(`${routeUrl.games}/${gameId}`)
   };
 
   // SCORES
   const scores = {
     getByGame: (gameId, abortController) =>
-      api.get(
+      api().get(
         `${routeUrl.scores}/${gameId}`,
         abortController ? { signal: abortController.signal } : null
       ),
 
-    createInGame: (gameId, data) => api.post(`${routeUrl.scores}/${gameId}`, data)
+    createInGame: (gameId, data) => api().post(`${routeUrl.scores}/${gameId}`, data)
   };
 
   // IMAGES
   const images = {
     getAllByGame: (gameId, abortController) =>
-      api.get(
+      api().get(
         `${routeUrl.images}/${gameId}`,
         abortController ? { signal: abortController.signal } : null
       ),
     getById: (imageId, abortController) =>
-      api.get(
+      api().get(
         `${routeUrl.images}/${imageId}`,
         abortController ? { signal: abortController.signal } : null
       ),
-    add: (gameId, data) => apiProtected.post(`${routeUrl.images}/${gameId}`, data),
-    remove: id => apiProtected.delete(`${routeUrl.images}/${id}`)
+    add: (gameId, data) => apiProtected().post(`${routeUrl.images}/${gameId}`, data),
+    remove: id => apiProtected().delete(`${routeUrl.images}/${id}`)
   };
 
   // REVIEWS

@@ -32,12 +32,12 @@ function GameList() {
           <div>Apto para</div>
           <div>Editar</div>
         </div>
-        {games.map(({ id, imageUrl, name, description, audiencies, devices }, index) => {
+        {games.map(({ id, cover, name, description, audiencies, devices }, index) => {
           return (
             <GameItem
               key={index}
               id={id}
-              path={imageUrl}
+              path={cover.path}
               name={name}
               description={description}
               tags={[...devices, audiencies]}

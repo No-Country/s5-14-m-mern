@@ -26,25 +26,25 @@ function InitalStack() {
   return (
     <BrowserRouter>
       <Routes>
-        <Routes element={<Layout />}>
+        <Route element={<Layout />}>
           <Route exact path="/" element={<Home />} />
 
-          <Routes element={<RequireAuth allowedRole="user" />}>
+          <Route element={<RequireAuth allowedRole="user" />}>
             <Route exact path="/account" element={<Account />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/messages/:userId" element={<MessageUser />} />
             <Route path="/account" element={<Account />} />
-          </Routes>
+          </Route>
 
-          <Routes element={<RequireAuth allowedRole="user" />}>
+          <Route element={<RequireAuth allowedRole="admin" />}>
             <Route path="/admin" element={<AdminPannel />}>
               <Route index element={<GameList />} />
               <Route path="game-manage" element={<GameForm />} />
               <Route path="game-manage/:id" element={<GameForm />} />
             </Route>
-          </Routes>
+          </Route>
 
           <Route path="/games" element={<Games />}>
             <Route path="ppt" element={<PPTApp />} />
@@ -54,7 +54,7 @@ function InitalStack() {
             <Route path="juegoLuces" element={<LightGame />} />
             {/* cargar juegos */}
           </Route>
-        </Routes>
+        </Route>
 
         <Route path="/test" element={<AdivinaPalabra />} />
         <Route path="/signup" element={<SignUp />} />

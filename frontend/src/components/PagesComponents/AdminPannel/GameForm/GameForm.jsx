@@ -174,9 +174,9 @@ function GameForm() {
                       type="radio"
                       name="audiencies"
                       id="tp"
-                      value="TP"
+                      value="tp"
                       onChange={handleChange}
-                      checked={form.audiencies === "TP" ? true : false}
+                      checked={form.audiencies === "tp" ? true : false}
                     />
                     <label htmlFor="tp" className={classes.radio_label}>
                       <img src={tp} alt="imágen de ícono TP" />

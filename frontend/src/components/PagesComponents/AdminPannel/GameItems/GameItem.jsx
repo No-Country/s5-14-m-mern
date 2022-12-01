@@ -13,6 +13,7 @@ import edit from "../../../../../assets/Icons/edit.svg";
 import PropTypes from "prop-types";
 
 function GameItem({ id, path, name, description, tags, onDelete }) {
+  console.log(tags);
   const tagIcon = icon => {
     switch (icon) {
       case "tp":

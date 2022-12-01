@@ -90,9 +90,9 @@ const Header = () => {
                   <p>Perfil</p>
                 </Link>
               </li>
-              {userLogged?.role === "Admin" && (
+              {userLogged?.role === "admin" && (
                 <li>
-                  <Link>
+                  <Link to="/admin">
                     <p>Panel Admin</p>
                   </Link>
                 </li>
