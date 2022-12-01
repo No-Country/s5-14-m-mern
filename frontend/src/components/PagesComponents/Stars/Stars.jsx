@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import style from "./stars.module.sass";
 
-const Rate = ({ count, rating, color, onRating }) => {
+const Rate = ({ count, rating, color, onRating, type }) => {
   const [hoverRating, setHoverRating] = useState(0);
 
   const getColor = index => {
@@ -11,7 +11,6 @@ const Rate = ({ count, rating, color, onRating }) => {
     } else if (!hoverRating && rating >= index) {
       return color.filled;
     }
-
     return color.unfilled;
   };
 
@@ -23,10 +22,10 @@ const Rate = ({ count, rating, color, onRating }) => {
         <i
           className={`bi bi-star-fill ${style.star_icon}`}
           key={idx}
-          onClick={() => onRating(idx)}
           style={{ color: getColor(idx) }}
-          onMouseEnter={() => setHoverRating(idx)}
-          onMouseLeave={() => setHoverRating(0)}></i>
+          onClick={type !== "card" ? () => onRating(idx) : undefined}
+          onMouseEnter={type !== "card" ? () => setHoverRating(idx) : undefined}
+          onMouseLeave={type !== "card" ? () => setHoverRating(0) : undefined}></i>
       ));
   }, [count, rating, hoverRating]);
 
@@ -41,7 +40,8 @@ Rate.propTypes = {
     filled: PropTypes.string,
     unfilled: PropTypes.string
   }),
-  onRating: PropTypes.func
+  onRating: PropTypes.func,
+  type: PropTypes.string
 };
 
 Rate.defaultProps = {

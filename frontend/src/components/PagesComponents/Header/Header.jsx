@@ -6,24 +6,26 @@ import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
 import { Link, useLocation } from "react-router-dom";
-import avatar from "../../../../assets/AccountAvatars/avatar2.png";
+import avatar from "../../../../assets/AccountAvatars/avatar2.svg";
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false);
   const [isLogged, setIsLogged] = useState(true);
   const [userMenu, setUserMenu] = useState(false);
+  const [isAdmin] = useState(true);
 
   const inputM = () => {
     setSearchM(!searchM);
   };
 
   const handleMenu = () => setUserMenu(!userMenu);
+  const handleSign = () => setIsLogged(!isLogged);
 
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log(pathname);
-  }, [location]);
+    setUserMenu(false);
+  }, [pathname]);
 
   return (
     <div className={style.header_content}>
@@ -72,12 +74,12 @@ const Header = () => {
               <Link to="/account">
                 <p>Perfil</p>
               </Link>
-              <Link>
-                <p>Ayuda</p>
-              </Link>
-              <Link>
-                <p>Cerrar sesión</p>
-              </Link>
+              {isAdmin && (
+                <Link>
+                  <p>Panel Administrador</p>
+                </Link>
+              )}
+              <p onClick={handleSign}>Cerrar sesión</p>
             </div>
           )}
         </div>

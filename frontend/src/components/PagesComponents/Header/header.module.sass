@@ -80,11 +80,14 @@
         display: flex
         line-height: 30px
         cursor: pointer
+        @include mq (medium)
+            height: 50px
+            line-height: 50px
         i
             margin-right: 5px
     .menu
         width: 200px
-        height: 140px
+        height: auto
         position: absolute
         top: 45px
         right: 0
@@ -97,5 +100,6 @@
         p
             color: #fff
             margin: 20px auto
+            cursor: pointer
         @include mq (medium)
             top: 60px
