@@ -13,7 +13,7 @@ export default function MessagesDesktop() {
 
   const isChatPage = currentPage === CHAT_SETIONS.chat;
   const isUserOptions = currentPage === CHAT_SETIONS.userOptions;
-  const isOtherPage = !isChatPage & !isUserOptions;
+  const isOtherPage = !isChatPage && !isUserOptions;
   const isDefaultMessage = currentPage === CHAT_SETIONS.predefinedMessages;
   const isChallenge = currentPage === CHAT_SETIONS.predefinedMessagesWithChallenge;
 

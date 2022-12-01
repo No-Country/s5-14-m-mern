@@ -5,7 +5,7 @@ import logoM from "../../../../assets/Icons/logoHeaderM.svg";
 import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import avatar from "../../../../assets/AccountAvatars/avatar2.svg";
 
 const Header = () => {
@@ -13,6 +13,7 @@ const Header = () => {
   const [isLogged, setIsLogged] = useState(true);
   const [userMenu, setUserMenu] = useState(false);
   const [isAdmin] = useState(true);
+  const navigate = useNavigate();
 
   const inputM = () => {
     setSearchM(!searchM);
@@ -25,6 +26,7 @@ const Header = () => {
 
   useEffect(() => {
     setUserMenu(false);
+    console.log(state);
   }, [pathname]);
 
   return (
@@ -37,16 +39,12 @@ const Header = () => {
       {pathname === "/" && (
         <input className={style.inputD} type="text" placeholder="Ej Matemáticas, Memoria..." />
       )}
-      {(pathname === "/favourites" ||
-        pathname === "/notifications" ||
-        pathname === "/messages" ||
-        pathname === "/account" ||
-        pathname.substring(0, 6) === "/games") && (
-        <Link to="/" className={style.mob}>
-          <img src={arrow} />
+      {pathname !== "/" && (
+        <Link className={style.mob}>
+          <img src={arrow} onClick={() => navigate(-1)} />
         </Link>
       )}
-      {pathname !== "/" && <h2 className={style.title}>{state.headerTitle}</h2>}
+      {pathname !== "/" && <h2 className={style.title}>{state?.headerTitle}</h2>}
       {/* {pathname === "/favourites" && <h2 className={style.title}>Favoritos</h2>} */}
       {/* {pathname === "/notifications" && <h2 className={style.title}>Notificaciones</h2>} */}
       {/* {pathname === "/messages" && <h2 className={style.title}>Mensajes</h2>} */}

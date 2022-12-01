@@ -16,14 +16,14 @@ const Card = ({ imageUrl, name, stars, description, minAge, path, size }) => {
         className={`${style.card} ${size === "small" ? style.card_small : undefined}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}>
-        <Link to={path} state={{ name, stars, description, minAge, headerTitle: "Juegos" }}>
+        <Link to={path} state={{ headerTitle: "Juegos", name, stars, description, minAge }}>
           <img src={!imageUrl ? imgDefault : imageUrl} alt={name} />
         </Link>
         <h5>{name}</h5>
         {hover && (
           <div className={style.is_hover}>
             <Rate type="card" rating={stars} />
-            <Link to={path} state={{ name, stars, description, minAge, headerTitle: "Juegos" }}>
+            <Link to={path} state={{ headerTitle: "Juegos", name, stars, description, minAge }}>
               <img src={hoverIm} alt="" />
             </Link>
           </div>
