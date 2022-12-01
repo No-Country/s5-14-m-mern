@@ -6,24 +6,24 @@ import Rate from "../Stars/Stars";
 import hoverIm from "../../../../assets/Icons/hover.svg";
 import { Link } from "react-router-dom";
 
-const Card = ({ imageUrl, name, stars, description, minAge, path, size }) => {
+const Card = ({ cover, name, stars, description, minAge, path, folder, size, comingSoon }) => {
   const [rating, setRating] = useState(stars);
   const [hover, setHover] = useState(false);
 
   return (
-    <div className={size !== "small" ? "keen-slider__slide" : undefined}>
+    <div className={size !== "small" ? "keen-slider__slide" : null}>
       <div
-        className={`${style.card} ${size === "small" ? style.card_small : undefined}`}
+        className={`${style.card} ${size === "small" ? style.card_small : null}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}>
-        <Link to={path} state={{ name, stars, description, minAge }}>
-          <img src={imageUrl} alt={name} />
+        <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
+          <img src={cover} alt={name} />
         </Link>
         <h5>{name}</h5>
         {hover && (
           <div className={style.is_hover}>
             <Rate rating={rating} onRating={rate => setRating(rate)} />
-            <Link to={path} state={{ name, stars, description, minAge }}>
+            <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
               <img src={hoverIm} alt="" />
             </Link>
           </div>
@@ -37,13 +37,15 @@ const Card = ({ imageUrl, name, stars, description, minAge, path, size }) => {
 };
 
 Card.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
+  cover: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   stars: PropTypes.number,
   description: PropTypes.string,
-  minAge: PropTypes.number,
+  minAge: PropTypes.string,
   path: PropTypes.string,
-  size: PropTypes.string
+  folder: PropTypes.string,
+  size: PropTypes.string,
+  comingSoon: PropTypes.bool
 };
 
 export default Card;

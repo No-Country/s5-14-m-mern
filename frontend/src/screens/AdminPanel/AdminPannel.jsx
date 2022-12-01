@@ -5,6 +5,7 @@ import useServices from "../../services/useServices";
 
 function AdminPannel() {
   const [games, setGames] = useState([]);
+  const [loadingGames, setLoadingGames] = useState(true);
   const [loading, setLoading] = useState(true);
   const gameList = useServices().games;
 
@@ -14,18 +15,24 @@ function AdminPannel() {
         const result = await gameList.getAll();
         setGames(result.data.games);
         setLoading(false);
+        setLoadingGames(false);
       } catch (err) {
         console.log(err);
         setLoading(false);
+        setLoadingGames(false);
       }
     }
 
     gamesLoad();
-  }, []);
+  }, [loadingGames]);
 
   return (
     <div className={classes.container}>
-      {loading ? <p>Cargando...</p> : <Outlet context={[games, setGames]}></Outlet>}
+      {loading ? (
+        <p>Cargando...</p>
+      ) : (
+        <Outlet context={[games, setGames, setLoadingGames]}></Outlet>
+      )}
     </div>
   );
 }

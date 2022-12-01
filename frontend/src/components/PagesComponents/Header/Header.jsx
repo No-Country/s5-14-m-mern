@@ -113,7 +113,9 @@ const Header = () => {
                 </li>
               )}
               <li onClick={logoutHandler}>
-                <p>Cerrar sesión</p>
+                <Link to="/">
+                  <p>Cerrar sesión</p>
+                </Link>
               </li>
             </ul>
           )}

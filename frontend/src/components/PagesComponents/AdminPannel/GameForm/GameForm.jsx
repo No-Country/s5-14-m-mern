@@ -1,7 +1,8 @@
 import classes from "./gameForm.module.sass";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { default as useServices } from "../../../../services/useServices.jsx";
+import useServices from "../../../../services/useServices.jsx";
+import { useNavigate, useOutletContext } from "react-router-dom";
 // icon import
 import tp from "../../../../../assets/Icons/tp.svg";
 import plus3 from "../../../../../assets/Icons/3more.svg";
@@ -13,11 +14,12 @@ import defaultImage from "../../../../../assets/Icons/defaultImage.svg";
 
 function GameForm() {
   const { games } = useServices();
-
+  const navigate = useNavigate();
   const { id } = useParams();
   const [form, setForm] = useState();
   const [file, setFile] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [setLoadingGames] = useOutletContext();
 
   useEffect(() => {
     if (isLoading) {
@@ -35,18 +37,19 @@ function GameForm() {
 
   useEffect(() => {
     const controller = new AbortController();
-    const getGame = async id => {
+    const getGame = async gameId => {
       try {
-        const result = await games.getById(controller, id);
+        const result = await games.getById(gameId, controller);
         console.log(result);
         if (result) {
           setForm({
             name: result.data.game.name,
             description: result.data.game.description,
-            imageUrl: result.data.game.imagePath,
+            imageUrl: result.data.game.cover.path,
             devices: result.data.game.devices || [],
             audiencies: result.data.game.audiencies || "",
-            comingSoon: result.data.game.comingSoong || true
+            comingSoon: result.data.game.comingSoong || true,
+            folder: result.data.game.folder || ""
           });
           setIsLoading(false);
         }
@@ -92,9 +95,9 @@ function GameForm() {
   const handleChange = e => {
     const name = e.target.name;
     let value = e.target.value;
-    // if (name === "comingSoon") {
-    //   value = !e.target.value;
-    // }
+    if (name === "comingSoon") {
+      value = !e.target.value;
+    }
     if (name === "devices") {
       if (!e.target.checked) {
         value = form.devices.filter(el => el !== value);
@@ -112,31 +115,55 @@ function GameForm() {
     });
   };
 
+  // Cancel Event Handler
+  const cancelHandler = e => {
+    e.preventDefault();
+    setFile(false);
+    setForm({
+      name: "",
+      description: "",
+      imageUrl: false,
+      devices: [],
+      audiencies: "",
+      comingSoon: true,
+      folder: ""
+    });
+    navigate("/admin");
+  };
   // Event Handler for submit form
   const submitHandler = async e => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("name", form.name);
-    formData.append("imagePath", form.imageUrl);
     formData.append("description", form.description);
     formData.append("audiencies", form.audiencies);
     formData.append("devices", form.devices);
+    formData.append("folder", form.folder);
     if (file) {
       formData.append("image", file);
+    } else {
+      console.log("no Files");
     }
     formData.append("comingSoon", comingSoon);
 
     try {
       console.log("intentando cargar");
+      let result;
       if (id) {
-        const result = await games.modify(formData, id);
+        result = await games.modify(id, formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        });
       } else {
-        const result = await games.create(formData);
+        result = await games.create(formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        });
       }
       if (result) {
         alert("agregado");
-        // navigate to admin pannel
+        setLoadingGames(true);
+        console.log("navegando a admin");
+        navigate("/admin");
       }
     } catch (err) {
       console.log(err);
@@ -305,9 +332,23 @@ function GameForm() {
                 </label>
               </div>
             </div>
+            <div className={classes.group_form_name}>
+              <p className={classes.group_form_section}>Datos de carga</p>
+              <div className={classes.group_form}>
+                <input
+                  type="text"
+                  name="folder"
+                  placeholder="Ubicación del juego (carpeta)"
+                  value={form.folder}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
 
             <div className={classes.footer}>
-              <button className={classes.cancel}>Cancelar</button>
+              <button className={classes.cancel} type="reset" onClick={cancelHandler}>
+                Cancelar
+              </button>
               <button className={classes.submit} type="submit">
                 Publicar
               </button>

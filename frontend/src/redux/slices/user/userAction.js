@@ -9,9 +9,7 @@ export const getUserLogged = createAsyncThunk(
   "userSlice.getUserById",
   async (id, { rejectWithValue }) => {
     try {
-      console.log("id content userLogged Redux", id);
       const response = await users.privateData(id);
-      console.log(response);
       const userData = {
         id: response.data._id,
         username: response.data.username,

@@ -26,7 +26,7 @@ const Favourites = () => {
     <div className={style.fav_content}>
       {favs.map(({ imageUrl, name, stars }, i) => (
         <>
-          <Card key={i} imageUrl={imageUrl} name={name} stars={stars} size="small" />
+          <Card key={i} cover={imageUrl} name={name} stars={stars} size="small" />
           <div className={style.d_flex}>
             <img src={like} />
             <p>Presiona para dejar de seguir</p>

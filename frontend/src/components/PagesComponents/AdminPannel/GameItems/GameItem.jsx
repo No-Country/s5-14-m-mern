@@ -13,7 +13,6 @@ import edit from "../../../../../assets/Icons/edit.svg";
 import PropTypes from "prop-types";
 
 function GameItem({ id, path, name, description, tags, onDelete }) {
-  console.log(tags);
   const tagIcon = icon => {
     switch (icon) {
       case "tp":
@@ -44,7 +43,7 @@ function GameItem({ id, path, name, description, tags, onDelete }) {
         <img src={path} alt={name} />
       </div>
       <div>{name}</div>
-      <div>{description}</div>
+      <div className={classes.description}>{description}</div>
       <div>
         {tags.map((icon, index) => {
           const iconImage = tagIcon(icon);
