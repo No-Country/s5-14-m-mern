@@ -6,14 +6,18 @@ import { useState, useEffect } from "react";
 import Arrow from "../../components/PagesComponents/Slider/Arrow";
 import useServices from "../../services/useServices";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [recommended, setRecommended] = useState();
   const [gamelist, setGamelist] = useState();
+  const [filteredGames, setFilteredGames] = useState();
   const [isGameListLoading, setIsGameListLoading] = useState(true);
   const { games } = useServices();
+
+  const { filter } = useSelector(state => state.filter);
 
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
@@ -37,6 +41,7 @@ const Home = () => {
         setRecommended(sorted);
         setGamelist(data.games);
         setIsGameListLoading(false);
+        setFilteredGames(data.games);
       } catch (err) {
         console.log(err);
         setIsGameListLoading(false);
@@ -44,6 +49,16 @@ const Home = () => {
     }
     gamesLoad();
   }, []);
+
+  useEffect(() => {
+    if (filter) {
+      setFilteredGames(
+        gamelist.filter(game => game.name.toLowerCase().includes(filter.toLowerCase()))
+      );
+    } else {
+      setFilteredGames(gamelist);
+    }
+  }, [filter]);
 
   return (
     <div className={style.home}>
@@ -87,7 +102,7 @@ const Home = () => {
           </div>
           <h2>Juegos</h2>
           <div className={style.cards_small}>
-            {gamelist.map(
+            {filteredGames.map(
               ({ cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
                 <Card
                   key={i}
@@ -96,7 +111,7 @@ const Home = () => {
                   stars={stars}
                   description={description}
                   minAge={audiencies}
-                  path={folder}
+                  path={`/games/${folder}`}
                   comingSoon={comingSoon}
                   size="small"
                 />

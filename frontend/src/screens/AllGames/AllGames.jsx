@@ -1,22 +1,34 @@
 import PropTypes from "prop-types";
-import { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import Rate from "../../components/PagesComponents/Stars/Stars";
 import fav from "../../../assets/Icons/favM.svg";
 import style from "./allGames.module.sass";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 
 const AllGames = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const { name, description, minAge, stars } = location.state;
-  const [rating, setRating] = useState(stars);
+  // const { name, description, minAge, stars } = location.state;
+  const [state, setState] = useState({});
+  const [rating, setRating] = useState();
   const { id } = useParams();
 
-  const MyGame = lazy(() => import(`../../Games/${id}`));
+  useEffect(() => {
+    if (location.state) {
+      const { name, description, minAge, stars } = location.state;
+      setState({ name, description, minAge, stars });
+      setRating(stars);
+    } else {
+      navigate("/");
+    }
+  }, []);
+
+  const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`));
 
   return (
     <div className={style.games_content}>
-      <h2>{name}</h2>
+      <h2>{state.name}</h2>
       <div className={style.desktop}>
         <div className={style.screen_games}>
           <Suspense fallback={<SpinnerLoad />}>
@@ -26,9 +38,9 @@ const AllGames = () => {
         <div>
           <div className={style.text_start}>
             <h3>Descripción:</h3>
-            <p>{description}</p>
+            <p>{state.description}</p>
             <div className={style.d_flex}>
-              <span className={style.circle}>+{minAge}</span>
+              <span className={style.circle}>+{state.minAge}</span>
               <span className={style.circle}>
                 <i className="bi bi-mouse2"></i>
               </span>
