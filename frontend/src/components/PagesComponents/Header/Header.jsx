@@ -21,7 +21,7 @@ const Header = () => {
   const handleMenu = () => setUserMenu(!userMenu);
   const handleSign = () => setIsLogged(!isLogged);
 
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
 
   useEffect(() => {
     setUserMenu(false);
@@ -46,11 +46,12 @@ const Header = () => {
           <img src={arrow} />
         </Link>
       )}
-      {pathname === "/favourites" && <h2 className={style.title}>Favoritos</h2>}
-      {pathname === "/notifications" && <h2 className={style.title}>Notificaciones</h2>}
-      {pathname === "/messages" && <h2 className={style.title}>Mensajes</h2>}
-      {pathname === "/account" && <h2 className={style.title}>Perfíl</h2>}
-      {pathname.substring(0, 6) === "/games" && <h2 className={style.title}>Juegos</h2>}
+      {pathname !== "/" && <h2 className={style.title}>{state.headerTitle}</h2>}
+      {/* {pathname === "/favourites" && <h2 className={style.title}>Favoritos</h2>} */}
+      {/* {pathname === "/notifications" && <h2 className={style.title}>Notificaciones</h2>} */}
+      {/* {pathname === "/messages" && <h2 className={style.title}>Mensajes</h2>} */}
+      {/* {pathname === "/account" && <h2 className={style.title}>Perfíl</h2>} */}
+      {/* {pathname.substring(0, 6) === "/games" && <h2 className={style.title}>Juegos</h2>} */}
       {pathname === "/" && !searchM && <img className={style.mob} src={search} onClick={inputM} />}
       {!isLogged && (
         <Link to="/login" className={style.mob}>
