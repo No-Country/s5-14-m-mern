@@ -4,7 +4,9 @@ $text-message-gray: rgba(255, 255, 255, 0.5)
 
 .container
     width: 100%
-    height: 100%
+    height: 572px
+    overflow-y: scroll
+    scroll-behavior: smooth
     .link
         text-decoration: none
         color: #ffff
@@ -12,6 +14,7 @@ $text-message-gray: rgba(255, 255, 255, 0.5)
             display: flex
             align-items: center
             padding: 10px
+            cursor: pointer
             &:hover,
             &:focus,
             &:active
@@ -30,3 +33,5 @@ $text-message-gray: rgba(255, 255, 255, 0.5)
                 .name
                     text-decoration: none
                     color: #fff
+    &::-webkit-scrollbar
+        appearance: none

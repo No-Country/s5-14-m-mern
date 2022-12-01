@@ -1,15 +1,9 @@
-// components
-import LayoutMobile from "../LayoutMobile";
-
 // utils
 import { FRIENDS } from "../utils/friendsList";
 import { CHAT_SETIONS } from "../utils/chatSetions";
 
 // styles
 import styles from "./messagerUser.module.sass";
-
-// assets
-import arrow from "../../../../assets/Icons/arrow.svg";
 
 // hooks
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +16,6 @@ export default function MessageUser() {
   const [friend] = FRIENDS.filter(friend => {
     return friend.userId === currentUser;
   });
-  console.log(friend);
   const USER_OPTION = {
     SEND_MESSAGE: "Enviar mensaje",
     TO_CHALLENGE: "Desafiar",
@@ -41,19 +34,21 @@ export default function MessageUser() {
     dispatch(setPage(CHAT_SETIONS.chat));
   };
 
+  const title = "friend";
+
   return (
-    <LayoutMobile showArrow={true} showNavbar={false} title={friend.name} showHeader={true}>
-      <div className={styles.arrow}>
-        <img src={arrow} alt="to back" />
-      </div>
+    <div>
       <div className={styles.container}>
+        <div className={styles.title}>
+          <p>{title}</p>
+        </div>
         <div className={styles.messageUserWraper}>
           <div className={styles.title}>
-            <p>{friend.name}</p>
+            <p>{friend?.name}</p>
           </div>
           <div className={styles.optionsWraper}>
             <div className={styles.friendImage}>
-              <img src={friend.image} alt={friend.name} />
+              <img src={friend?.image} alt={friend?.name} />
             </div>
             <div className={styles.friendsOptions}>
               <button onClick={handledSendMessage}>{USER_OPTION.SEND_MESSAGE}</button>
@@ -63,6 +58,6 @@ export default function MessageUser() {
           </div>
         </div>
       </div>
-    </LayoutMobile>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ import { CHAT_SETIONS } from "../../../components/MessageComponents/utils/chatSe
 const messagesSlide = createSlice({
   name: "message",
   initialState: {
-    currentPage: CHAT_SETIONS.searchFriends,
+    currentPage: CHAT_SETIONS.chat,
     lastPage: "",
     currentUserId: "",
     currentMessage: []
