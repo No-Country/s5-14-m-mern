@@ -46,27 +46,25 @@ export default function MessageUser() {
   const title = "Amigo";
 
   return (
-    <div>
-      <div className={styles.container}>
-        <HeaderDesktop
-          showUserImage={false}
-          isTitleCenter={true}
-          title={title}
-          handledPage={toBack}
-        />
-        <div className={styles.messageUserWraper}>
-          <div className={styles.title}>
-            <p>{friend?.name}</p>
+    <div className={styles.container}>
+      <HeaderDesktop
+        showUserImage={false}
+        isTitleCenter={true}
+        title={title}
+        handledPage={toBack}
+      />
+      <div className={styles.messageUserWraper}>
+        <div className={styles.title}>
+          <p>{friend?.name}</p>
+        </div>
+        <div className={styles.optionsWraper}>
+          <div className={styles.friendImage}>
+            <img src={friend?.image} alt={friend?.name} />
           </div>
-          <div className={styles.optionsWraper}>
-            <div className={styles.friendImage}>
-              <img src={friend?.image} alt={friend?.name} />
-            </div>
-            <div className={styles.friendsOptions}>
-              <button onClick={handledSendMessage}>{USER_OPTION.SEND_MESSAGE}</button>
-              <button onClick={handledChallengePage}>{USER_OPTION.TO_CHALLENGE}</button>
-              <button>{USER_OPTION.DELETE_FRIEND}</button>
-            </div>
+          <div className={styles.friendsOptions}>
+            <button onClick={handledSendMessage}>{USER_OPTION.SEND_MESSAGE}</button>
+            <button onClick={handledChallengePage}>{USER_OPTION.TO_CHALLENGE}</button>
+            <button>{USER_OPTION.DELETE_FRIEND}</button>
           </div>
         </div>
       </div>
