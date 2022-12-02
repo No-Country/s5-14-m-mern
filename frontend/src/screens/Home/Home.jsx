@@ -12,8 +12,8 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [recommended, setRecommended] = useState();
-  const [gamelist, setGamelist] = useState();
-  const [filteredGames, setFilteredGames] = useState();
+  const [gamelist, setGamelist] = useState([]);
+  const [filteredGames, setFilteredGames] = useState([]);
   const [isGameListLoading, setIsGameListLoading] = useState(true);
   const { games } = useServices();
 
@@ -34,20 +34,26 @@ const Home = () => {
   });
 
   useEffect(() => {
+    const controller = new AbortController();
     async function gamesLoad() {
       try {
-        const { data } = await games.getAll();
+        const { data } = await games.getAll(controller);
         const sorted = data.games.sort((a, b) => b.stars - a.stars).splice(0, 4);
         setRecommended(sorted);
         setGamelist(data.games);
-        setIsGameListLoading(false);
         setFilteredGames(data.games);
+        setIsGameListLoading(false);
       } catch (err) {
         console.log(err);
         setIsGameListLoading(false);
       }
     }
     gamesLoad();
+
+    return () => {
+      console.log(controller);
+      controller.abort();
+    };
   }, []);
 
   useEffect(() => {

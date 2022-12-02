@@ -8,7 +8,7 @@ import Card from "../../components/PagesComponents/Card/Card";
 const Notifications = () => {
   return (
     <div className={style.notif_content}>
-      <div className={style.card1}>
+      {/* <div className={style.card1}>
         <h1>Desafío de amigo</h1>
         <div className={style.desk}>
           <img src={avatar} alt="" />
@@ -37,7 +37,7 @@ const Notifications = () => {
           <h4>Aprende inglés con nuestro nuevo juego</h4>
         </div>
         <button className={style.btn1}>Ir al juego</button>
-      </div>
+      </div> */}
     </div>
   );
 };

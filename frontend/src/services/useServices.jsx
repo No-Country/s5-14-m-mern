@@ -74,8 +74,12 @@ const useServices = () => {
 
   // GAMES
   const games = {
-    getAll: abortController =>
-      api().get(`${routeUrl.games}/`, abortController ? { signal: abortController.signal } : null),
+    getAll: abortController => {
+      return api().get(
+        `${routeUrl.games}/`,
+        abortController.signal.aborted ? { signal: abortController.signal } : null
+      );
+    },
 
     create: (data, headerConfig) =>
       apiProtected().post(`${routeUrl.games}/`, data, headerConfig || null),
@@ -108,7 +112,7 @@ const useServices = () => {
         abortController ? { signal: abortController.signal } : null
       ),
 
-    createInGame: (gameId, data) => api().post(`${routeUrl.scores}/${gameId}`, data)
+    createInGame: (gameId, data) => apiProtected().post(`${routeUrl.scores}/${gameId}`, data)
   };
 
   // IMAGES
