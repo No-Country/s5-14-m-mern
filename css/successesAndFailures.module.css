@@ -1,0 +1,23 @@
+.container .failuresContainer, .container .successContainer {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  justify-content: space-between;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+.container .successContainer img {
+  width: 24px;
+  margin: 0;
+}
+.container .failuresContainer img {
+  width: 24px;
+  margin: 0;
+}/*# sourceMappingURL=successesAndFailures.module.css.map */
