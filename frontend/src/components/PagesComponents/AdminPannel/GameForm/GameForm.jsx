@@ -4,13 +4,7 @@ import { useEffect, useState } from "react";
 import useServices from "../../../../services/useServices.jsx";
 import { useNavigate, useOutletContext } from "react-router-dom";
 // icon import
-import tp from "../../../../../assets/Icons/tp.svg";
-import plus3 from "../../../../../assets/Icons/3more.svg";
-import plus7 from "../../../../../assets/Icons/+7.svg";
-import mouse from "../../../../../assets/Icons/mouse.svg";
-import gamepad from "../../../../../assets/Icons/gamepad.svg";
-import keyboard from "../../../../../assets/Icons/keyboard.svg";
-import defaultImage from "../../../../../assets/Icons/defaultImage.svg";
+import { tp, plus3, plus7, mouse, gamepad, keyboard, defaultImage } from "../../../../../assets";
 
 function GameForm() {
   const { games } = useServices();
