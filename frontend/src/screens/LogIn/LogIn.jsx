@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../Redux/slices/auth/authAction";
 import { getUserLogged } from "../../redux/slices/user/userAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import styles from "../LogIn/login.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -19,7 +21,7 @@ const Login = () => {
   // User from context
   const { userToken, userLogged, successAuth, errorAuth } = useSelector(state => state.auth); // leer los datos de la store
   const { userInfo } = useSelector(state => state.user); // leer los datos de la store
-
+  const buttonRef = useRef();
   const dispatch = useDispatch(); // llamar funcion para actualizar estado
   // Navigate handler
   const navigate = useNavigate();
@@ -40,13 +42,29 @@ const Login = () => {
 
     if (errorAuth) {
       console.log("No se ha podido loguear : ", errorAuth);
+
+      buttonRef.current.disabled = true;
+      toast.error("Mail o contraseña incorrecta", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
+      });
+
+      setTimeout(() => {
+        buttonRef.current.disabled = false;
+      }, 3000);
     }
   }, [successAuth, userToken, errorAuth]);
 
   const submitHandler = values => {
     dispatch(userLogin({ email: values.email, password: values.password }));
-    values.email = "";
-    values.password = "";
+    // values.email = "";
+    // values.password = "";
   };
 
   return (
@@ -98,7 +116,7 @@ const Login = () => {
             {errors.password && touched.password ? (
               <div className={styles.formerrors}>{errors.password}</div>
             ) : null}
-            <button className={styles.formbutton} type="submit">
+            <button ref={buttonRef} className={styles.formbutton} type="submit">
               Enviar
             </button>
             <div id="noexiste"></div>
@@ -108,6 +126,18 @@ const Login = () => {
       <Link className={styles.crearcuenta} to={"../signup"}>
         No tienes Cuenta? Registrate
       </Link>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 };

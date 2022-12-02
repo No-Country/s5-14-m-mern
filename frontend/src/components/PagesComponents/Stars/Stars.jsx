@@ -1,18 +1,46 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import style from "./stars.module.sass";
+import useServices from "../../../services/useServices";
 
-const Rate = ({ count, rating, color, onRating }) => {
+const Rate = ({ count, color, change, stars, gameId }) => {
   const [hoverRating, setHoverRating] = useState(0);
+  const { games } = useServices();
+  const [userReview, setUserReview] = useState(0);
+
+  useEffect(() => {
+    if (change) {
+      if (gameId) {
+        (async () => {
+          const { data } = await games.getReview(gameId);
+          console.log(data.review.length);
+          if (data.review.length > 0) setUserReview(data.review[0].stars);
+        })();
+      }
+    }
+  }, [gameId]);
 
   const getColor = index => {
     if (hoverRating >= index) {
       return color.filled;
-    } else if (!hoverRating && rating >= index) {
-      return color.filled;
     }
+    if (change) {
+      if (!hoverRating && userReview >= index) return color.filled;
+    } else if (!hoverRating && stars >= index) return color.filled;
 
     return color.unfilled;
+  };
+
+  const handleChange = async amount => {
+    const formData = new FormData();
+
+    formData.append("review", amount);
+    try {
+      await games.setReview(gameId, formData);
+      setUserReview(amount);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const starRating = useMemo(() => {
@@ -23,30 +51,35 @@ const Rate = ({ count, rating, color, onRating }) => {
         <i
           className={`bi bi-star-fill ${style.star_icon}`}
           key={idx}
-          onClick={() => onRating(idx)}
           style={{ color: getColor(idx) }}
-          onMouseEnter={() => setHoverRating(idx)}
-          onMouseLeave={() => setHoverRating(0)}></i>
+          onClick={() => change && handleChange(idx)}
+          onMouseEnter={() => change && setHoverRating(idx)}
+          onMouseLeave={() => change && setHoverRating(0)}></i>
       ));
-  }, [count, rating, hoverRating]);
+  }, [count, stars, hoverRating, userReview]);
 
   return <div>{starRating}</div>;
 };
 
 Rate.propTypes = {
   count: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  onChange: PropTypes.func,
+  stars: PropTypes.number,
+  change: PropTypes.bool.isRequired,
+  gameId: PropTypes.string,
+  // rating: PropTypes.number.isRequired,
+  // onChange: PropTypes.func,
   color: PropTypes.shape({
     filled: PropTypes.string,
     unfilled: PropTypes.string
-  }),
-  onRating: PropTypes.func
+  })
+  // onRating: PropTypes.func
 };
 
 Rate.defaultProps = {
   count: 5,
-  rating: 0,
+  stars: 0,
+  change: false,
+  gameId: "",
   color: {
     filled: "#f5eb3b",
     unfilled: "#000"

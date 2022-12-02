@@ -13,7 +13,7 @@ const useServices = () => {
     images: BASE_URL + "/api/images",
     reviews: BASE_URL + "/api/reviews",
     friends: BASE_URL + "/api/friends",
-    favourites: BASE_URL + "/api/favourites"
+    favorites: BASE_URL + "/api/favorites"
   };
 
   function api() {
@@ -89,7 +89,15 @@ const useServices = () => {
     modify: (gameId, data, headerConfig) =>
       apiProtected().put(`${routeUrl.games}/${gameId}`, data, headerConfig || null),
 
-    remove: gameId => apiProtected().delete(`${routeUrl.games}/${gameId}`)
+    remove: gameId => apiProtected().delete(`${routeUrl.games}/${gameId}`),
+
+    getReview: (gameId, abortController) =>
+      apiProtected().get(
+        `${routeUrl.games}/review/${gameId}`,
+        abortController ? { signal: abortController.signal } : null
+      ),
+
+    setReview: (gameId, data) => apiProtected().post(`${routeUrl.games}/review/${gameId}`, data)
   };
 
   // SCORES
@@ -126,14 +134,22 @@ const useServices = () => {
   // TODO: add, remove
 
   // FAVOURITES
-  // TODO: add, remove
+  const favorites = {
+    getFavorites: abortController =>
+      apiProtected().get(
+        `${routeUrl.favorites}/`,
+        abortController ? { signal: abortController.signal } : null
+      ),
+    addRemoveFavorite: gameId => apiProtected().post(`${routeUrl.favorites}/${gameId}`)
+  };
 
   return {
     auth,
     users,
     games,
     scores,
-    images
+    images,
+    favorites
   };
 };
 export default useServices;

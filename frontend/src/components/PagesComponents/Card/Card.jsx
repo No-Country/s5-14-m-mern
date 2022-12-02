@@ -6,8 +6,18 @@ import Rate from "../Stars/Stars";
 import hoverIm from "../../../../assets/Icons/hover.svg";
 import { Link } from "react-router-dom";
 
-const Card = ({ cover, name, stars, description, minAge, path, folder, size, comingSoon }) => {
-  const [rating, setRating] = useState(stars);
+const Card = ({
+  gameId,
+  cover,
+  name,
+  stars,
+  description,
+  minAge,
+  path,
+  folder,
+  size,
+  comingSoon
+}) => {
   const [hover, setHover] = useState(false);
 
   return (
@@ -22,21 +32,22 @@ const Card = ({ cover, name, stars, description, minAge, path, folder, size, com
         <h5>{name}</h5>
         {hover && (
           <div className={style.is_hover}>
-            <Rate rating={rating} onRating={rate => setRating(rate)} />
-            <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
+            <Rate change={false} stars={stars} />
+            <Link to={path} state={{ gameId, name, stars, description, minAge, path, folder }}>
               <img src={hoverIm} alt="" />
             </Link>
           </div>
         )}
       </div>
       <span className={style.display_mob}>
-        <Rate rating={rating} onRating={rate => setRating(rate)} />
+        <Rate change={false} stars={stars} />
       </span>
     </div>
   );
 };
 
 Card.propTypes = {
+  gameId: PropTypes.string.isRequired,
   cover: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   stars: PropTypes.number,

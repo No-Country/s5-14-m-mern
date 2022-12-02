@@ -16,7 +16,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.userInfo = false;
       state.error = null;
-      success: false;
+      state.success = false;
     }
   }, // dentro de reducers creamos las funciones para actualizar el estado.
   extraReducers: {

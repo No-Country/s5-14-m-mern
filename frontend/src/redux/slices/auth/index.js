@@ -17,6 +17,8 @@ const authSlice = createSlice({
     logout: state => {
       state.userLogged = false;
       state.userToken = false;
+      state.successAuth = false;
+      state.errorAuth = false;
       removeLocal();
     }
   },

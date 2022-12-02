@@ -72,9 +72,10 @@ const Home = () => {
           <div className={`${style.cards} "navigation-wrapper"`}>
             <div ref={sliderRef} className="keen-slider">
               {recommended.map(
-                ({ cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
+                ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
                   <Card
                     key={i}
+                    gameId={_id}
                     name={name}
                     cover={cover.path}
                     stars={stars}
@@ -103,9 +104,10 @@ const Home = () => {
           <h2>Juegos</h2>
           <div className={style.cards_small}>
             {filteredGames.map(
-              ({ cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
+              ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
                 <Card
                   key={i}
+                  gameId={_id}
                   name={name}
                   cover={cover.path}
                   stars={stars}
