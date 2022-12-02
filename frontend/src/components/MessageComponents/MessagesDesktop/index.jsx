@@ -1,31 +1,42 @@
-import SearchWraper from "../SearchWraper/index";
-import ChatWraper from "../ChatWraper/index";
-import styles from "./messagesDesktop.module.sass";
+// hooks
 import { useSelector } from "react-redux";
+
+// utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
+
+// components
 import MessageUser from "../MessangerUser";
 import DefaultMessages from "../DefaultMessages";
 import ChallengeMessage from "../ChallengeMessage";
+import SearchWraper from "../SearchWraper/index";
+import ChatWraper from "../ChatWraper/index";
+
+// styles
+import styles from "./messagesDesktop.module.sass";
 
 export default function MessagesDesktop() {
-  const currentPage = useSelector(state => state.message.currentPage);
-  console.log(currentPage, "pagina actual");
+  const firstSectionOfPage = useSelector(state => state.message.firstSectionOfPage);
+  const secondSectionOfPage = useSelector(state => state.message.secondSectionOfPage);
+  const thirdSectionOfPage = useSelector(state => state.message.thirdSectionOfPage);
 
-  const isChatPage = currentPage === CHAT_SETIONS.chat;
-  const isUserOptions = currentPage === CHAT_SETIONS.userOptions;
-  const isOtherPage = !isChatPage & !isUserOptions;
-  const isDefaultMessage = currentPage === CHAT_SETIONS.predefinedMessages;
-  const isChallenge = currentPage === CHAT_SETIONS.predefinedMessagesWithChallenge;
+  const SECTIONS = {
+    [CHAT_SETIONS.chat]: ChatWraper,
+    [CHAT_SETIONS.predefinedMessages]: DefaultMessages,
+    [CHAT_SETIONS.predefinedMessagesWithChallenge]: ChallengeMessage,
+    [CHAT_SETIONS.searchFriends]: SearchWraper,
+    [CHAT_SETIONS.userOptions]: MessageUser
+  };
+
+  const FirstSection = SECTIONS[firstSectionOfPage];
+  const SecondSection = SECTIONS[secondSectionOfPage];
+  const ThirdSection = SECTIONS[thirdSectionOfPage];
 
   return (
     <div className={styles.container}>
       <div className={styles.chatSections}>
-        <SearchWraper />
-        {isChatPage && <ChatWraper />}
-        {isUserOptions && <MessageUser />}
-        {isOtherPage && <ChatWraper />}
-        {isDefaultMessage && <DefaultMessages />}
-        {isChallenge && <ChallengeMessage />}
+        <FirstSection />
+        <SecondSection />
+        {ThirdSection && <ThirdSection />}
       </div>
     </div>
   );

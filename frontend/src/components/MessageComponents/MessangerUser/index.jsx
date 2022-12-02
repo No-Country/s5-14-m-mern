@@ -9,7 +9,13 @@ import styles from "./messagerUser.module.sass";
 import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
-import { setPage } from "../../../redux/slices/messages/messagesSlice";
+import {
+  setFirstSectionOfPage,
+  setThirdSectionOfPage
+} from "../../../redux/slices/messages/messagesSlice";
+
+// components
+import HeaderDesktop from "../HeaderDesktop";
 
 export default function MessageUser() {
   const currentUser = useSelector(state => state.message.currentUserId);
@@ -28,20 +34,26 @@ export default function MessageUser() {
   const dispatch = useDispatch();
 
   const handledSendMessage = () => {
-    if (!isTablet) {
-      navigate("/messages/chat");
-    }
-    dispatch(setPage(CHAT_SETIONS.chat));
+    if (!isTablet) navigate("/messages/chat");
   };
 
-  const title = "friend";
+  const toBack = () => dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
+  const handledChallengePage = () => {
+    if (!isTablet) navigate("/messages/challenge");
+    dispatch(setThirdSectionOfPage(CHAT_SETIONS.predefinedMessagesWithChallenge));
+  };
+
+  const title = "Amigo";
 
   return (
     <div>
       <div className={styles.container}>
-        <div className={styles.title}>
-          <p>{title}</p>
-        </div>
+        <HeaderDesktop
+          showUserImage={false}
+          isTitleCenter={true}
+          title={title}
+          handledPage={toBack}
+        />
         <div className={styles.messageUserWraper}>
           <div className={styles.title}>
             <p>{friend?.name}</p>
@@ -52,7 +64,7 @@ export default function MessageUser() {
             </div>
             <div className={styles.friendsOptions}>
               <button onClick={handledSendMessage}>{USER_OPTION.SEND_MESSAGE}</button>
-              <button>{USER_OPTION.TO_CHALLENGE}</button>
+              <button onClick={handledChallengePage}>{USER_OPTION.TO_CHALLENGE}</button>
               <button>{USER_OPTION.DELETE_FRIEND}</button>
             </div>
           </div>

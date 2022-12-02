@@ -1,23 +1,37 @@
 import styles from "./challenge.module.sass";
 import SearchFriends from "../SearchFriends/index";
 import Ajedrez from "../../../../assets/Imagescards/chess.svg";
+import DefaultMessagesHeader from "../DefaultMessageHeader";
+import { useDispatch } from "react-redux";
+import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
+import { CHAT_SETIONS } from "../utils/chatSetions";
 
 export default function ChallengeMessage() {
+  const SELECT_CHALLENGE = "Elige el juego con cual quieres desafiar";
+  const RECOMMENDATIONS = "Recomendaciones:";
+  const CARD_TITLE = "Aprende ajedrez";
+  const ACTION_TITLE = "Desafiar";
+  const TITLE = "Desafía un juego";
+
+  const dispatch = useDispatch();
+
+  const toBack = () => dispatch(setThirdSectionOfPage(CHAT_SETIONS.predefinedMessages));
+
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <p>Desafía un juego</p>
-      </div>
-      <p className={styles.title}>Elige el juego con cual quieres desafiar</p>
-      <SearchFriends />
-      <p className={styles.title}>Recomendaciones:</p>
-      <div className={styles.card}>
-        <div className={styles.cardImageContainer}>
-          <img className={styles.cardImage} src={Ajedrez} alt="Ajedrez" />
-          <span className={styles.cardTitle}>Aprende Ajedrez</span>
-        </div>
-        <div className={styles.actionCard}>
-          <p>Desafiar</p>
+      <DefaultMessagesHeader title={TITLE} className={styles.header} handledPage={toBack} />
+      <div className={styles.message}>
+        <p className={styles.title}>{SELECT_CHALLENGE}</p>
+        <SearchFriends />
+        <p className={styles.title}>{RECOMMENDATIONS}</p>
+        <div className={styles.card}>
+          <div className={styles.cardImageContainer}>
+            <img className={styles.cardImage} src={Ajedrez} alt="Ajedrez" />
+            <span className={styles.cardTitle}>{CARD_TITLE}</span>
+          </div>
+          <div className={styles.actionCard}>
+            <p>{ACTION_TITLE}</p>
+          </div>
         </div>
       </div>
     </div>
