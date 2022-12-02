@@ -5,6 +5,9 @@ import { CHAT_SETIONS } from "../utils/chatSetions";
 // styles
 import styles from "./messagerUser.module.sass";
 
+// hocs
+import messagesResponsive from "../../../hocs/messageResponsive";
+
 // hooks
 import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
@@ -17,7 +20,7 @@ import {
 // components
 import HeaderDesktop from "../HeaderDesktop";
 
-export default function MessageUser() {
+function MessageUser() {
   const currentUser = useSelector(state => state.message.currentUserId);
   const [friend] = FRIENDS.filter(friend => {
     return friend.userId === currentUser;
@@ -71,3 +74,5 @@ export default function MessageUser() {
     </div>
   );
 }
+
+export default messagesResponsive(MessageUser);

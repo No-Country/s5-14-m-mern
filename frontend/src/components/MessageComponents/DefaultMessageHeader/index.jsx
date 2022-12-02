@@ -20,5 +20,5 @@ export default function DefaultMessagesHeader({ handledPage, title = "", classNa
 DefaultMessagesHeader.propTypes = {
   title: PropTypes.string,
   handledPage: PropTypes.func,
-  className: PropTypes.object
+  className: PropTypes.string
 };
