@@ -1,14 +1,7 @@
 import classes from "./gameItem.module.sass";
 import { Link } from "react-router-dom";
 // icon import
-import tp from "../../../../../assets/Icons/tp.svg";
-import plus3 from "../../../../../assets/Icons/3more.svg";
-import plus7 from "../../../../../assets/Icons/+7.svg";
-import mouse from "../../../../../assets/Icons/mouse.svg";
-import touch from "../../../../../assets/Icons/touch.svg";
-import keyboard from "../../../../../assets/Icons/keyboard.svg";
-import trash from "../../../../../assets/Icons/trash.svg";
-import edit from "../../../../../assets/Icons/edit.svg";
+import { plus3, plus7, mouse, keyboard, trash, edit } from "../../../../../assets";
 
 import PropTypes from "prop-types";
 
