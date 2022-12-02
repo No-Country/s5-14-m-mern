@@ -4,22 +4,24 @@ import { useEffect, useState } from "react";
 import useServices from "../../../../services/useServices.jsx";
 import { useNavigate, useOutletContext } from "react-router-dom";
 // icon import
-import tp from "../../../../../assets/Icons/tp.svg";
-import plus3 from "../../../../../assets/Icons/3more.svg";
-import plus7 from "../../../../../assets/Icons/+7.svg";
-import mouse from "../../../../../assets/Icons/mouse.svg";
-import gamepad from "../../../../../assets/Icons/gamepad.svg";
-import keyboard from "../../../../../assets/Icons/keyboard.svg";
-import defaultImage from "../../../../../assets/Icons/defaultImage.svg";
+import {
+  todopublico,
+  plus3,
+  plus7,
+  mouse,
+  gamepad,
+  keyboard,
+  defaultImage
+} from "../../../../../assets";
 
 function GameForm() {
   const { games } = useServices();
-  const navigate = useNavigate();
   const { id } = useParams();
   const [form, setForm] = useState();
   const [file, setFile] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [setLoadingGames] = useOutletContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoading) {
@@ -36,10 +38,9 @@ function GameForm() {
   }, []);
 
   useEffect(() => {
-    const controller = new AbortController();
     const getGame = async gameId => {
       try {
-        const result = await games.getById(gameId, controller);
+        const result = await games.getById(gameId);
         console.log(result);
         if (result) {
           setForm({
@@ -48,7 +49,7 @@ function GameForm() {
             imageUrl: result.data.game.cover.path,
             devices: result.data.game.devices || [],
             audiencies: result.data.game.audiencies || "",
-            comingSoon: result.data.game.comingSoong || true,
+            comingSoon: result.data.game.comingSoong || "true",
             folder: result.data.game.folder || ""
           });
           setIsLoading(false);
@@ -62,9 +63,6 @@ function GameForm() {
     } else {
       setIsLoading(false);
     }
-    return () => {
-      controller.abort();
-    };
   }, [id]);
 
   // Event Handler for Preview Image
@@ -96,12 +94,11 @@ function GameForm() {
     const name = e.target.name;
     let value = e.target.value;
     if (name === "comingSoon") {
-      value = !e.target.value;
+      value = e.target.value === "true" ? "false" : "true";
     }
     if (name === "devices") {
       if (!e.target.checked) {
         value = form.devices.filter(el => el !== value);
-        console.log(value);
       } else {
         form.devices.push(value);
         value = form.devices;
@@ -148,7 +145,6 @@ function GameForm() {
     formData.append("comingSoon", comingSoon);
 
     try {
-      console.log("intentando cargar");
       let result;
       if (id) {
         result = await games.modify(id, formData, {
@@ -162,7 +158,6 @@ function GameForm() {
       if (result) {
         alert("agregado");
         setLoadingGames(true);
-        console.log("navegando a admin");
         navigate("/admin");
       }
     } catch (err) {
@@ -206,7 +201,7 @@ function GameForm() {
                       checked={form.audiencies === "tp" ? true : false}
                     />
                     <label htmlFor="tp" className={classes.radio_label}>
-                      <img src={tp} alt="imágen de ícono TP" />
+                      <img src={todopublico} alt="imágen de ícono TP" />
                       <span>Apto para todo público</span>
                     </label>
                   </div>
@@ -325,7 +320,7 @@ function GameForm() {
                   id="comingSoon"
                   value={form.comingSoon}
                   onChange={handleChange}
-                  checked={form.comingSoon ? true : false}
+                  checked={form.comingSoon === "true" ? true : false}
                 />
                 <label htmlFor="comingSoon" className={classes.checkbox_label}>
                   Este juego saldrá próximamente

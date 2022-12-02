@@ -1,9 +1,9 @@
 import PropTypes, { string } from "prop-types";
 import { useState, lazy, Suspense, useEffect } from "react";
-import Rate from "../../components/PagesComponents/Stars/Stars";
-import fav from "../../../assets/Icons/favM.svg";
-import style from "./allGames.module.sass";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Rate from "../../components/PagesComponents/Stars/Stars";
+import style from "./allGames.module.sass";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
 import { useSelector } from "react-redux";
@@ -27,12 +27,22 @@ const AllGames = () => {
         console.log(data.scores);
         setState({ gameId, name, description, minAge, stars, score: data.scores });
       })();
+
+  const [state, setState] = useState({});
+  const [rating, setRating] = useState(); // Esto no se usa o está pendiente ?
+  const { id } = useParams();
+  const { userLogged } = useSelector(state => state.auth);
+  const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
+
+  useEffect(() => {
+    if (location.state) {
+      const { gameId, name, description, minAge, stars } = location.state;
+      setState({ gameId, name, description, minAge, stars });
+>>>>>>> c494576cc37c825a5ae30e4759d0d019f1672e41
     } else {
       navigate("/");
     }
   }, []);
-
-  const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`));
 
   return (
     <div className={style.games_content}>
@@ -73,10 +83,6 @@ const AllGames = () => {
                 <p>Carla</p>
                 <p>1234</p>
               </div>
-              {/* <div className={style.favorites}>
-            <img src={fav} alt="" />
-            <p>Agregar a tu lista de favoritos</p>
-          </div> */}
               {userLogged && (
                 <>
                   <FavoriteButton favoriteId={state.gameId} />

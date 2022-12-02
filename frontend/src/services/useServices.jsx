@@ -2,8 +2,8 @@ import axios from "axios";
 import { getToken } from "./localStorage.jsx";
 
 const useServices = () => {
-  const BASE_URL = "http://localhost:8000";
-  // const BASE_URL = "s5-14-mern-back-delta.vercel.app";
+  // const BASE_URL = import.meta.env.VITE_API_URL;
+  const BASE_URL = "https://ludensapi.vercel.app";
 
   const routeUrl = {
     auth: BASE_URL + "/api/auth",
@@ -16,16 +16,17 @@ const useServices = () => {
     favorites: BASE_URL + "/api/favorites"
   };
 
+  // For public  routes
   function api() {
     return axios.create({
       baseURL: BASE_URL,
       headers: {
         "Content-Type": "application/json"
       }
-      // withCredentials: true
     });
   }
 
+  // For protected routes
   function apiProtected() {
     return axios.create({
       baseURL: BASE_URL,
@@ -37,43 +38,26 @@ const useServices = () => {
     });
   }
 
-  // AUTH
+  // AUTH API CALLS
   const auth = {
     signup: data => api().post(`${routeUrl.auth}/signup`, data),
     login: data => api().post(`${routeUrl.auth}/login`, data),
     changePassword: (id, data) => apiProtected().post(`${routeUrl.auth}/changePassword/${id}`, data)
   };
 
-  // USERS
+  // USERS API CALLS
   const users = {
-    getAll: abortController =>
-      api.get(`${routeUrl.users}/`, abortController ? { signal: abortController.signal } : null),
-
-    getAdmins: abortController =>
-      api.get(
-        `${routeUrl.users}/admin`,
-        abortController ? { signal: abortController.signal } : null
-      ),
-
-    getById: (userId, abortController) =>
-      api.get(
-        `${routeUrl.users}/${userId}`,
-        abortController ? { signal: abortController.signal } : null
-      ),
-
+    getAll: () => api.get(`${routeUrl.users}/`),
+    getAdmins: () => api.get(`${routeUrl.users}/admin`),
+    getById: userId => api.get(`${routeUrl.users}/${userId}`),
     modify: (userId, data) => apiProtected.put(`${routeUrl.users}/${userId}`, data),
-
     remove: userId => apiProtected.delete(`${routeUrl.users}/${userId}`),
-
-    privateData: (userId, abortController) =>
-      apiProtected().get(
-        `${routeUrl.users}/${userId}/private`,
-        abortController ? { signal: abortController.signal } : null
-      )
+    privateData: userId => apiProtected().get(`${routeUrl.users}/${userId}/private`)
   };
 
-  // GAMES
+  // GAMES API CALLS
   const games = {
+<<<<<<< HEAD
     getAll: abortController => {
       return api().get(
         `${routeUrl.games}/`,
@@ -81,31 +65,22 @@ const useServices = () => {
       );
     },
 
+=======
+    getAll: () => api().get(`${routeUrl.games}/`),
+>>>>>>> c494576cc37c825a5ae30e4759d0d019f1672e41
     create: (data, headerConfig) =>
       apiProtected().post(`${routeUrl.games}/`, data, headerConfig || null),
-
-    getById: (gameId, abortController) =>
-      api().get(
-        `${routeUrl.games}/${gameId}`,
-        abortController ? { signal: abortController.signal } : null
-      ),
-
+    getById: gameId => api().get(`${routeUrl.games}/${gameId}`),
     modify: (gameId, data, headerConfig) =>
       apiProtected().put(`${routeUrl.games}/${gameId}`, data, headerConfig || null),
-
     remove: gameId => apiProtected().delete(`${routeUrl.games}/${gameId}`),
-
-    getReview: (gameId, abortController) =>
-      apiProtected().get(
-        `${routeUrl.games}/review/${gameId}`,
-        abortController ? { signal: abortController.signal } : null
-      ),
-
+    getReview: gameId => apiProtected().get(`${routeUrl.games}/review/${gameId}`),
     setReview: (gameId, data) => apiProtected().post(`${routeUrl.games}/review/${gameId}`, data)
   };
 
-  // SCORES
+  // SCORES API CALLS
   const scores = {
+<<<<<<< HEAD
     getByGame: (gameId, abortController) =>
       api().get(
         `${routeUrl.scores}/${gameId}`,
@@ -113,20 +88,16 @@ const useServices = () => {
       ),
 
     createInGame: (gameId, data) => apiProtected().post(`${routeUrl.scores}/${gameId}`, data)
+=======
+    getByGame: gameId => api().get(`${routeUrl.scores}/${gameId}`),
+    createInGame: (gameId, data) => api().post(`${routeUrl.scores}/${gameId}`, data)
+>>>>>>> c494576cc37c825a5ae30e4759d0d019f1672e41
   };
 
-  // IMAGES
+  // IMAGES API CALLS
   const images = {
-    getAllByGame: (gameId, abortController) =>
-      api().get(
-        `${routeUrl.images}/${gameId}`,
-        abortController ? { signal: abortController.signal } : null
-      ),
-    getById: (imageId, abortController) =>
-      api().get(
-        `${routeUrl.images}/${imageId}`,
-        abortController ? { signal: abortController.signal } : null
-      ),
+    getAllByGame: gameId => api().get(`${routeUrl.images}/${gameId}`),
+    getById: imageId => api().get(`${routeUrl.images}/${imageId}`),
     add: (gameId, data) => apiProtected().post(`${routeUrl.images}/${gameId}`, data),
     remove: id => apiProtected().delete(`${routeUrl.images}/${id}`)
   };
@@ -139,11 +110,7 @@ const useServices = () => {
 
   // FAVOURITES
   const favorites = {
-    getFavorites: abortController =>
-      apiProtected().get(
-        `${routeUrl.favorites}/`,
-        abortController ? { signal: abortController.signal } : null
-      ),
+    getFavorites: () => apiProtected().get(`${routeUrl.favorites}/`),
     addRemoveFavorite: gameId => apiProtected().post(`${routeUrl.favorites}/${gameId}`)
   };
 
