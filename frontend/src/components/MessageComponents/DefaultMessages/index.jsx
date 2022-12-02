@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
 
+// hocs
+import messagesResponsive from "../../../hocs/messageResponsive";
+
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
 
@@ -14,7 +17,7 @@ import { CHAT_SETIONS } from "../utils/chatSetions";
 import styles from "./defaultMessages.module.sass";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
 
-export default function DefaultMessages() {
+function DefaultMessages() {
   const GREETING = ["¡Hola!", "¿Cómo estás?", "¡Buenas tardes!", "¡Buend día!", "Buenas Noches"];
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
@@ -85,3 +88,5 @@ export default function DefaultMessages() {
     </div>
   );
 }
+
+export default messagesResponsive(DefaultMessages);

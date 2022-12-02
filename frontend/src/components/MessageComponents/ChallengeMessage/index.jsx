@@ -1,12 +1,22 @@
-import styles from "./challenge.module.sass";
+// hooks
+import { useDispatch } from "react-redux";
+import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
+
+// hocs
+import messagesResponsive from "../../../hocs/messageResponsive";
+
+// components
 import SearchFriends from "../SearchFriends/index";
 import Ajedrez from "../../../../assets/Imagescards/chess.svg";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
-import { useDispatch } from "react-redux";
-import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
+
+// utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
 
-export default function ChallengeMessage() {
+// styles
+import styles from "./challenge.module.sass";
+
+function ChallengeMessage() {
   const SELECT_CHALLENGE = "Elige el juego con cual quieres desafiar";
   const RECOMMENDATIONS = "Recomendaciones:";
   const CARD_TITLE = "Aprende ajedrez";
@@ -37,3 +47,5 @@ export default function ChallengeMessage() {
     </div>
   );
 }
+
+export default messagesResponsive(ChallengeMessage);

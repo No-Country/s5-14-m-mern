@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
 
+// hocs
+import messagesResponsive from "../../../hocs/messageResponsive";
+
 // components
 import message from "../../../../assets/Icons/Message.svg";
 import HeaderDesktop from "../HeaderDesktop";
@@ -14,7 +17,7 @@ import { CHAT_SETIONS } from "../utils/chatSetions";
 // style
 import styles from "./chat.module.sass";
 
-export default function ChatWraper() {
+function ChatWraper() {
   const currentUser = useSelector(state => state.message.currentUserId);
 
   const isTablet = useMediaQuery({
@@ -46,3 +49,5 @@ export default function ChatWraper() {
     </div>
   );
 }
+
+export default messagesResponsive(ChatWraper);
