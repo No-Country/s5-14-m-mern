@@ -8,7 +8,10 @@ import { useKeenSlider } from "keen-slider/react";
 
 // hooks
 import { useDispatch } from "react-redux";
-import { setPage, setCurrentUser } from "../../../redux/slices/messages/messagesSlice";
+import {
+  setFirstSectionOfPage,
+  setCurrentUser
+} from "../../../redux/slices/messages/messagesSlice";
 import { useMediaQuery } from "react-responsive";
 
 // utils
@@ -30,7 +33,7 @@ export default function FriendsList({ friendsList }) {
       navigate("/messages/options");
     }
     dispatch(setCurrentUser(id));
-    dispatch(setPage(CHAT_SETIONS.userOptions));
+    dispatch(setFirstSectionOfPage(CHAT_SETIONS.userOptions));
   };
   return (
     <div className={styles.container}>
