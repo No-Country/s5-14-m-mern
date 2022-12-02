@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import useServices from "../../../../services/useServices.jsx";
 import { useNavigate, useOutletContext } from "react-router-dom";
 // icon import
-import tp from "../../../../../assets/Icons/tp.svg";
+import tp from "../../../../../assets/Icons/TP.svg";
 import plus3 from "../../../../../assets/Icons/3more.svg";
 import plus7 from "../../../../../assets/Icons/+7.svg";
 import mouse from "../../../../../assets/Icons/mouse.svg";
