@@ -19,14 +19,14 @@ const LoginSchema = Yup.object().shape({
 const Login = () => {
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
   // User from context
-  const { userToken, userLogged, successAuth, errorAuth } = useSelector(state => state.auth); // leer los datos de la store
-  const { userInfo } = useSelector(state => state.user); // leer los datos de la store
+  const { userToken, userLogged, successAuth, errorAuth } = useSelector(state => state.auth);
+  const { userInfo } = useSelector(state => state.user);
   const buttonRef = useRef();
-  const dispatch = useDispatch(); // llamar funcion para actualizar estado
+  const dispatch = useDispatch();
   // Navigate handler
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/"; // Get where user came from
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     if (userToken) {
@@ -39,10 +39,7 @@ const Login = () => {
       dispatch(getUserLogged(userLogged.id));
       navigate(from, { replace: true });
     }
-
     if (errorAuth) {
-      console.log("No se ha podido loguear : ", errorAuth);
-
       buttonRef.current.disabled = true;
       toast.error("Mail o contraseña incorrecta", {
         position: "top-center",
@@ -63,8 +60,6 @@ const Login = () => {
 
   const submitHandler = values => {
     dispatch(userLogin({ email: values.email, password: values.password }));
-    // values.email = "";
-    // values.password = "";
   };
 
   return (

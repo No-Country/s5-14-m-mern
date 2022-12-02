@@ -2,6 +2,7 @@ import classes from "./adminPannel.module.sass";
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import useServices from "../../services/useServices";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 
 function AdminPannel() {
   const [games, setGames] = useState([]);
@@ -28,11 +29,7 @@ function AdminPannel() {
 
   return (
     <div className={classes.container}>
-      {loading ? (
-        <p>Cargando...</p>
-      ) : (
-        <Outlet context={[games, setGames, setLoadingGames]}></Outlet>
-      )}
+      {loading ? <SpinnerLoad /> : <Outlet context={[games, setGames, setLoadingGames]}></Outlet>}
     </div>
   );
 }

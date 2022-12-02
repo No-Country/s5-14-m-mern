@@ -1,12 +1,12 @@
-import Card from "../../components/PagesComponents/Card/Card";
-import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import style from "./home.module.sass";
+import { useKeenSlider } from "keen-slider/react";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Arrow from "../../components/PagesComponents/Slider/Arrow";
+import Card from "../../components/PagesComponents/Card/Card";
 import useServices from "../../services/useServices";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
-import { useSelector } from "react-redux";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -16,9 +16,7 @@ const Home = () => {
   const [filteredGames, setFilteredGames] = useState();
   const [isGameListLoading, setIsGameListLoading] = useState(true);
   const { games } = useServices();
-
   const { filter } = useSelector(state => state.filter);
-
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
       "(min-width: 550px)": { slides: { perView: 3, spacing: 5 } },
