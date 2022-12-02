@@ -17,6 +17,7 @@ import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx
 import ChatWraper from "../components/MessageComponents/ChatWraper/index.jsx";
 import DefaultMessages from "../components/MessageComponents/DefaultMessages/index.jsx";
 import ChallengeMessage from "../components/MessageComponents/ChallengeMessage/index.jsx";
+import PageNotFound from "../screens/NotFound/PageNotFound.jsx";
 
 function InitalStack() {
   return (
@@ -39,6 +40,7 @@ function InitalStack() {
             <Route path="puzzle" element={<Rompecabezas />} />
             {/* cargar juegos */}
           </Route>
+          <Route path="/*" element={<PageNotFound />} />
         </Route>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />

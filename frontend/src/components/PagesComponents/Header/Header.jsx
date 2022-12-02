@@ -5,7 +5,7 @@ import logoM from "../../../../assets/Icons/logoHeaderM.svg";
 import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import avatar from "../../../../assets/AccountAvatars/avatar2.svg";
 
 const Header = () => {
@@ -13,7 +13,6 @@ const Header = () => {
   const [isLogged, setIsLogged] = useState(true);
   const [userMenu, setUserMenu] = useState(false);
   const [isAdmin] = useState(true);
-  const navigate = useNavigate();
 
   const inputM = () => {
     setSearchM(!searchM);
@@ -40,11 +39,11 @@ const Header = () => {
         <input className={style.inputD} type="text" placeholder="Ej Matemáticas, Memoria..." />
       )}
       {pathname !== "/" && (
-        <Link className={style.mob}>
-          <img src={arrow} onClick={() => navigate(-1)} />
+        <Link to="/" className={style.mob}>
+          <img src={arrow} />
         </Link>
       )}
-      {pathname !== "/" && <h2 className={style.title}>{state?.headerTitle}</h2>}
+      {pathname !== "/" && <h2 className={style.title}>{state?.headerTitle || "LudenS"}</h2>}
       {/* {pathname === "/favourites" && <h2 className={style.title}>Favoritos</h2>} */}
       {/* {pathname === "/notifications" && <h2 className={style.title}>Notificaciones</h2>} */}
       {/* {pathname === "/messages" && <h2 className={style.title}>Mensajes</h2>} */}
@@ -70,7 +69,7 @@ const Header = () => {
           </div>
           {userMenu && (
             <div className={style.menu}>
-              <Link to="/account">
+              <Link to="/account" state={{ headerTitle: "Perfíl" }}>
                 <p>Perfil</p>
               </Link>
               {isAdmin && (

@@ -8,13 +8,30 @@ import MessagesDesktop from "../../components/MessageComponents/MessagesDesktop"
 // styles
 import classes from "./messages.module.sass";
 
+// no logueado
+import noSigned from "../../../assets/Icons/noSignMessages.svg";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 const Messages = () => {
+  const [isLogged] = useState(false);
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
   });
   return (
     <div className={classes.messages_content}>
-      {isTablet ? <MessagesDesktop /> : <MessagesMobile />}
+      {/* Logueado */}
+      {isLogged && (isTablet ? <MessagesDesktop /> : <MessagesMobile />)}
+      {/* No logueado */}
+      {!isLogged && (
+        <div className={classes.not_logged}>
+          <img src={noSigned} alt="" />
+          <h3>Inicia sesión para ver los mensajes</h3>
+          <Link to="/login">
+            <button>Iniciar sesión</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

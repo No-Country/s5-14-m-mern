@@ -43,22 +43,25 @@
     
 .is_hover
     display: none
-    @include mq (large)
+    @include mq (medium)
         display: block
         position: absolute
         top: 0
-        width: 260px
-        height: 360px
         border-radius: 20px 
         background-color: #00000030
-        padding: 10px
         cursor: pointer
+        width: 210px
+        height: 285px
         img
             width: 80px
             height: 270px
+    @include mq (large)
+        width: 260px
+        height: 360px
+        padding: 10px
 
 .display_mob
-    @include mq (large)
+    @include mq (medium)
         display: none
 
 .card_small
@@ -84,16 +87,19 @@
             width: 260px
     .is_hover
         display: none
-        @include mq (large)
+        @include mq (medium)
             display: block
             position: absolute
             top: 0
-            height: 180px
-            width: 260px
             border-radius: 20px 
             background-color: #00000030
-            padding: 10px
             cursor: pointer
+            width: 210px
+            height: 150px
             img
                 width: 80px
                 height: 100px   
+        @include mq (large)
+            height: 180px
+            width: 260px
+            padding: 10px

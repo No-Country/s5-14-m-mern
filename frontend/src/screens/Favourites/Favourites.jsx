@@ -1,7 +1,11 @@
 import Card from "../../components/PagesComponents/Card/Card";
 import style from "./favourites.module.sass";
-import like from "../../../assets/Icons/favFill.svg";
+import likes from "../../../assets/Icons/favFill.svg";
+import likent from "../../../assets/Icons/favM.svg";
 import friend from "../../../assets/Icons/profile2user.svg";
+import noSigned from "../../../assets/Icons/noSignFav.svg";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const favs = [
   {
@@ -22,23 +26,44 @@ const favs = [
 ];
 
 const Favourites = () => {
+  const [like, setLike] = useState(true);
+  const [isLogged] = useState(false);
+  const handleLike = () => setLike(!like);
+
   return (
     <div className={style.fav_content}>
-      {favs.map(({ imageUrl, name, stars }, i) => (
-        <>
-          <Card key={i} imageUrl={imageUrl} name={name} stars={stars} size="small" />
-          <div className={style.d_flex}>
-            <img src={like} />
-            <p>Presiona para dejar de seguir</p>
-          </div>
-          <button className={style.btn}>
-            <div className={style.d_flex_button}>
-              <img src={friend} />
-              <p>¡Desafiar a un amigo!</p>
+      {/* Logueado */}
+      <div>
+        {isLogged &&
+          favs.map(({ imageUrl, name, stars }, i) => (
+            <div key={i} className={style.fav_card}>
+              <Card imageUrl={imageUrl} name={name} stars={stars} size="small" />
+              <div className={style.side}>
+                <div className={style.d_flex}>
+                  {like && <img src={likes} onClick={handleLike} />}
+                  {!like && <img src={likent} onClick={handleLike} />}
+                  <p>Eliminar de favoritos</p>
+                </div>
+                <button className={style.btn}>
+                  <div className={style.d_flex_button}>
+                    <img src={friend} />
+                    <p>¡Desafiar a un amigo!</p>
+                  </div>
+                </button>
+              </div>
             </div>
-          </button>
-        </>
-      ))}
+          ))}
+      </div>
+      {/* No logueado */}
+      {!isLogged && (
+        <div className={style.not_logged}>
+          <img src={noSigned} alt="" />
+          <h3>Inicia sesión para ver tus favoritos</h3>
+          <Link to="/login">
+            <button>Iniciar sesión</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
