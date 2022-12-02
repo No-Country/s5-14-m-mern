@@ -1,8 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./slices/auth";
-import userSlice from "./slices/user";
-import filterSlice from "./slices/filter";
-// import gamesSlice from "./slices/user";
+import userSlice from "./slices/user/index.js";
+import authSlice from "./slices/auth/index";
+import filterSlice from "./slices/filter/index";
 import messageReducer from "./slices/messages/messagesSlice";
 
 const store = configureStore({

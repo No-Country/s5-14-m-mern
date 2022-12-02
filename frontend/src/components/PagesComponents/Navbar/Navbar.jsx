@@ -5,7 +5,9 @@ import logo from "../../../../assets/Icons/logo1.svg";
 export const Navbar = () => {
   return (
     <div className={style.nav_content}>
-      <img className={style.logo} src={logo} />
+      <NavLink to="/" className={style.logo}>
+        <img src={logo} />
+      </NavLink>
       <div className={style.nav}>
         <NavLink to="/">
           {({ isActive }) => (
@@ -14,23 +16,23 @@ export const Navbar = () => {
         </NavLink>
       </div>
       <div className={style.nav}>
-        <NavLink to="/favourites">
+        <NavLink to="/favourites" state={{ headerTitle: "Favoritos" }}>
           {({ isActive }) => (
             <img className={`${style.img} ${isActive ? style.favsAc : style.favs}`} />
           )}
         </NavLink>
       </div>
       <div className={style.nav}>
-        <NavLink to="/notifications">
+        <NavLink to="/messages" state={{ headerTitle: "Mensajes" }}>
           {({ isActive }) => (
-            <img className={`${style.img} ${isActive ? style.notifAc : style.notif}`} />
+            <img className={`${style.img} ${isActive ? style.messagesAc : style.messages}`} />
           )}
         </NavLink>
       </div>
       <div className={style.nav}>
-        <NavLink to="/messages">
+        <NavLink to="/notifications" state={{ headerTitle: "Notificaciones" }}>
           {({ isActive }) => (
-            <img className={`${style.img} ${isActive ? style.messagesAc : style.messages}`} />
+            <img className={`${style.img} ${isActive ? style.notifAc : style.notif}`} />
           )}
         </NavLink>
       </div>

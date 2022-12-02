@@ -1,16 +1,15 @@
+/* Breakpoints */
+/* Break Points */
 .container {
-  width: 100vw;
-  height: 100%;
-  border-radius: 20px;
-  background: #262553;
-}
-.container .title {
   width: 100%;
-  height: 76px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom: 0.5px solid #FFFFFF;
+  height: 100vh;
+  background: #262553;
+  border-right: 1px solid #fff;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 350px;
+    height: 820px;
+    background: #262553;
+  }
 }/*# sourceMappingURL=searchWraper.module.css.map */
