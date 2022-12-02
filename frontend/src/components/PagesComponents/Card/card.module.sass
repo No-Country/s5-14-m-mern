@@ -32,14 +32,17 @@
     img
         cursor: pointer
         margin: 0
-        width: 160px
-        height: 210px
-        @include mq (medium)
-            width: 210px
-            height: 285px
-        @include mq (large)
-            width: 260px
-            height: 360px  
+        height: 100%
+        width: 100%
+        object-fit: cover
+        // width: 160px
+        // height: 210px
+        // @include mq (medium)
+        //     width: 210px
+        //     height: 285px
+        // @include mq (large)
+        //     width: 260px
+        //     height: 360px  
     
 .is_hover
     display: none
@@ -50,11 +53,16 @@
         border-radius: 20px 
         background-color: #00000030
         cursor: pointer
-        width: 210px
-        height: 285px
+        // width: 210px
+        // height: 285px
+        width: inherit
+        height: inherit
         img
             width: 80px
             height: 270px
+            object-fit: contain
+
+.display_mob
     @include mq (large)
         width: 260px
         height: 360px
@@ -77,14 +85,17 @@
         width: 260px
         margin: 30px auto
     img
-        height: 135px
-        width: 150px
-        @include mq (medium)
-            width: 210px
-            height: 150px
-        @include mq (large)
-            height: 180px
-            width: 260px
+        height: 100%
+        width: 100%
+        object-fit: cover
+        // height: 135px
+        // width: 150px
+        // @include mq (medium)
+        //     width: 210px
+        //     height: 150px
+        // @include mq (large)
+        //     height: 180px
+        //     width: 260px
     .is_hover
         display: none
         @include mq (medium)
@@ -94,12 +105,9 @@
             border-radius: 20px 
             background-color: #00000030
             cursor: pointer
-            width: 210px
-            height: 150px
+            width: inherit
+            height: inherit
             img
                 width: 80px
                 height: 100px   
-        @include mq (large)
-            height: 180px
-            width: 260px
-            padding: 10px
+                object-fit: contain

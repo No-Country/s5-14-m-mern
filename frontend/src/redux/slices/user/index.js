@@ -9,16 +9,16 @@ const initialState = {
 };
 
 const userSlice = createSlice({
-  name: "userSlice", // nombre del slice
-  initialState, // como cuando hacemos const [name, setname] = useState(initialState)
+  name: "userSlice",
+  initialState,
   reducers: {
     resetUser: state => {
       state.loading = false;
       state.userInfo = false;
       state.error = null;
-      success: false;
+      state.success = false;
     }
-  }, // dentro de reducers creamos las funciones para actualizar el estado.
+  },
   extraReducers: {
     // get user logged info
     [getUserLogged.pending]: state => {

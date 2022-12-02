@@ -1,21 +1,21 @@
+// Local Storage for JWT tokens manage
+
+// Get Token from local storage
 export const getToken = () => {
   const local = JSON.parse(localStorage.getItem("userToken"));
-  const userToken = local && local.auth ? local.auth : null;
-  return userToken;
+  return local && local.auth ? local.auth : null;
 };
+
+// Get User Information from local storage (role and id)
 export const getUserLogged = () => {
   const local = JSON.parse(localStorage.getItem("userToken"));
-  const userLogged =
-    local && local.user?.id && local.user?.role
-      ? { id: local.user.id, role: local.user.role }
-      : false;
-  return userLogged;
+  return local && local.user?.id && local.user?.role
+    ? { id: local.user.id, role: local.user.role }
+    : false;
 };
-export const addLocal = data => {
-  const local = localStorage.setItem("userToken", JSON.stringify(data));
-  return local;
-};
-export const removeLocal = () => {
-  localStorage.removeItem("userToken");
-  return false;
-};
+
+// Add credentials to local storage
+export const addLocal = data => localStorage.setItem("userToken", JSON.stringify(data));
+
+// Remove credentials from local storage
+export const removeLocal = () => localStorage.removeItem("userToken");

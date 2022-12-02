@@ -14,7 +14,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Messages = () => {
-  const [isLogged] = useState(false);
+  const [isLogged] = useState(true);
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
   });

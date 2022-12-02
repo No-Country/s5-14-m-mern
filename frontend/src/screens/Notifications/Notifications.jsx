@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Notifications = () => {
-  const [isLogged] = useState(false);
+  const [isLogged] = useState(true);
 
   return (
     <div className={style.notif_content}>
@@ -41,7 +41,7 @@ const Notifications = () => {
             <h4>Hemos Agregado un nuevo juego.</h4>
             <h4>¡No dejes de aprender y divertirte!</h4>
             <div className={style.desk}>
-              <Card imageUrl={english} name="Aprende inglés" stars={4} size="small" />
+              <Card cover={english} name="Aprende inglés" stars={4} size="small" />
               <h4>Aprende inglés con nuestro nuevo juego</h4>
             </div>
             <button className={style.btn1}>Ir al juego</button>

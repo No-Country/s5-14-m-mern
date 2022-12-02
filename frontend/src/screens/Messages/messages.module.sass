@@ -2,11 +2,14 @@
 @use "../../styles/stylecomponents" as *
     
 .messages_content
-    min-height: 70vh
     display: flex
     align-items: center
-    text-align: center
     justify-content: center
+    flex-grow: 1
+    background: #262553
+    @include mq(medium)
+        background: transparent
+        padding: 20px
 
 .not_logged
     margin: auto

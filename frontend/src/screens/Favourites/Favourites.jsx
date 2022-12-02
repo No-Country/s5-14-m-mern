@@ -6,6 +6,7 @@ import friend from "../../../assets/Icons/profile2user.svg";
 import noSigned from "../../../assets/Icons/noSignFav.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const favs = [
   {
@@ -27,7 +28,8 @@ const favs = [
 
 const Favourites = () => {
   const [like, setLike] = useState(true);
-  const [isLogged] = useState(false);
+  const { userLogged } = useSelector(state => state.auth);
+  const [isLogged] = useState(userLogged);
   const handleLike = () => setLike(!like);
 
   return (
@@ -37,7 +39,7 @@ const Favourites = () => {
         {isLogged &&
           favs.map(({ imageUrl, name, stars }, i) => (
             <div key={i} className={style.fav_card}>
-              <Card imageUrl={imageUrl} name={name} stars={stars} size="small" />
+              <Card cover={imageUrl} name={name} stars={stars} size="small" />
               <div className={style.side}>
                 <div className={style.d_flex}>
                   {like && <img src={likes} onClick={handleLike} />}
