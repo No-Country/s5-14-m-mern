@@ -1,0 +1,61 @@
+@use "../../../styles/variables.sass" as *
+@use "../../../styles/stylecomponents.sass" as *
+.container
+    height: 100vh
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    background: $messages-Background
+    @include mq(medium)
+        width: 350px
+        height: 820px
+        overflow-y: scroll
+        scroll-behavior: smooth
+        border-left: 1px solid #fff
+        &::-webkit-scrollbar
+            &:vertical
+                width: 0px
+        &::-webkit-scrollbar
+            appearance: none
+    .header
+        height: 76px !important
+    .title
+        font-weight: 500
+        font-size: 16px
+        margin: 16px 0px
+    .card
+        width: 311px
+        height: 129px
+        display: grid
+        grid-template-columns: 1fr 1fr
+        border-radius: 20px
+        background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%)
+        overflow: hidden
+        .cardImageContainer
+            width: 100%
+            height: inherit
+            border-radius: 0 20px 20px 0
+            position: relative
+            .cardImage
+                width: 100%
+                height: inherit
+                border-radius: 20px
+                object-fit: cover
+            .cardTitle
+                background: rgba(0, 0, 0, 0.4)
+                position: absolute
+                bottom: 0
+                left: 0px
+                font-size: 14px
+                width: 100%
+                font-weight: 700
+                text-align: center
+                border-bottom-right-radius: 20px
+        .actionCard
+            display: grid
+            height: 100%
+            place-content: center
+            font-weight: 700
+            color: #000
+            font-size: 20px

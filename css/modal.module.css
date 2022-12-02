@@ -1,0 +1,67 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 12;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.container .modal {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 400px;
+  height: 400px;
+  background: white;
+  border-radius: 24px;
+  padding: 10px;
+}
+.container .modal .title {
+  color: #121212;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+.container .modal .closeButton {
+  width: 24px;
+  height: 24px;
+  align-self: end;
+  cursor: pointer;
+}
+.container .modal .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70%;
+  color: #121212;
+}
+.container .modal .content p {
+  font-size: 14px;
+  font-size: 20px;
+}
+.container .modal .footer {
+  display: flex;
+  justify-content: space-around;
+}
+.container .modal .footer .button {
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 34px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 24px;
+  background: #0A39B1;
+}/*# sourceMappingURL=modal.module.css.map */

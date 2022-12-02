@@ -1,10 +1,37 @@
+// libraries
+import { useMediaQuery } from "react-responsive";
+
+// components
+import MessagesMobile from "../../components/MessageComponents/MessagesMobile";
+import MessagesDesktop from "../../components/MessageComponents/MessagesDesktop";
+
+// styles
 import classes from "./messages.module.sass";
-import SearchWraper from "../../components/MessageComponents/SearchWraper";
+
+// no logueado
+import noSigned from "../../../assets/Icons/noSignMessages.svg";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Messages = () => {
+  const [isLogged] = useState(true);
+  const isTablet = useMediaQuery({
+    query: "(min-width: 778px)"
+  });
   return (
     <div className={classes.messages_content}>
-      <SearchWraper />
+      {/* Logueado */}
+      {isLogged && (isTablet ? <MessagesDesktop /> : <MessagesMobile />)}
+      {/* No logueado */}
+      {!isLogged && (
+        <div className={classes.not_logged}>
+          <img src={noSigned} alt="" />
+          <h3>Inicia sesión para ver los mensajes</h3>
+          <Link to="/login">
+            <button>Iniciar sesión</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

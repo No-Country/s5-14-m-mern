@@ -1,35 +1,78 @@
-import { useParams } from "react-router-dom";
-
-// constants
+// utils
 import { FRIENDS } from "../utils/friendsList";
+import { CHAT_SETIONS } from "../utils/chatSetions";
 
 // styles
 import styles from "./messagerUser.module.sass";
 
-export default function MessageUser() {
-  const { userId } = useParams();
+// hocs
+import messagesResponsive from "../../../hocs/messageResponsive";
 
+// hooks
+import { useSelector, useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
+import {
+  setFirstSectionOfPage,
+  setThirdSectionOfPage
+} from "../../../redux/slices/messages/messagesSlice";
+
+// components
+import HeaderDesktop from "../HeaderDesktop";
+
+function MessageUser() {
+  const currentUser = useSelector(state => state.message.currentUserId);
   const [friend] = FRIENDS.filter(friend => {
-    return friend.userId === userId;
+    return friend.userId === currentUser;
   });
+  const USER_OPTION = {
+    SEND_MESSAGE: "Enviar mensaje",
+    TO_CHALLENGE: "Desafiar",
+    DELETE_FRIEND: "Dejar de ser amigos"
+  };
+  const isTablet = useMediaQuery({
+    query: "(min-width: 778px)"
+  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handledSendMessage = () => {
+    if (!isTablet) navigate("/messages/chat");
+  };
+
+  const toBack = () => dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
+  const handledChallengePage = () => {
+    if (!isTablet) navigate("/messages/challenge");
+    dispatch(setThirdSectionOfPage(CHAT_SETIONS.predefinedMessagesWithChallenge));
+  };
+
+  const title = "Amigo";
 
   return (
     <div className={styles.container}>
+      <HeaderDesktop
+        showUserImage={false}
+        isTitleCenter={true}
+        title={title}
+        handledPage={toBack}
+      />
       <div className={styles.messageUserWraper}>
         <div className={styles.title}>
-          <p>{friend.name}</p>
+          <p>{friend?.name}</p>
         </div>
         <div className={styles.optionsWraper}>
           <div className={styles.friendImage}>
-            <img src={friend.image} alt={friend.name} />
+            <img src={friend?.image} alt={friend?.name} />
           </div>
           <div className={styles.friendsOptions}>
-            <button>Enviar mensaje</button>
-            <button>Desafiar</button>
-            <button>Dejar de ser amigos</button>
+            <button onClick={handledSendMessage}>{USER_OPTION.SEND_MESSAGE}</button>
+            <button onClick={handledChallengePage}>{USER_OPTION.TO_CHALLENGE}</button>
+            <button>{USER_OPTION.DELETE_FRIEND}</button>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+export default messagesResponsive(MessageUser);

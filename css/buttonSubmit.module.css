@@ -1,0 +1,14 @@
+.button {
+  width: 100px;
+  height: 34px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: end;
+  font-weight: 400;
+  border-radius: 24px;
+  position: absolute;
+  right: 0;
+  top: 3px;
+}/*# sourceMappingURL=buttonSubmit.module.css.map */

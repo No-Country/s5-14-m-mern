@@ -1,16 +1,39 @@
+// libraries
 import PropTypes from "prop-types";
 
-import { Link } from "react-router-dom";
+// hooks
+import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  setFirstSectionOfPage,
+  setCurrentUser
+} from "../../../redux/slices/messages/messagesSlice";
 
 // styles
 import styles from "./latestTextMessageList.module.sass";
 
+// utils
+import { CHAT_SETIONS } from "../utils/chatSetions";
+
 export default function LastestTextMessageList({ messageList }) {
+  const isTablet = useMediaQuery({ query: "(min-width: 778px)" });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handledPage = id => {
+    if (!isTablet) {
+      navigate(`/messages/options`);
+    }
+    dispatch(setFirstSectionOfPage(CHAT_SETIONS.userOptions));
+    dispatch(setCurrentUser(id));
+  };
+
   return (
     <div className={styles.container}>
       {messageList.map(({ image, name, message, showMessage, userId }) => {
         return (
-          <Link className={styles.link} to={`/messages/${userId}`} key={image}>
+          <div className={styles.link} key={image} onClick={() => handledPage(userId)}>
             <div className={styles.friend}>
               <img className={styles.FriendImage} src={image} alt="friends" />
               {showMessage && <div className={styles.showMessage} />}
@@ -20,7 +43,7 @@ export default function LastestTextMessageList({ messageList }) {
                 <p className={styles.message}>{message}</p>
               </div>
             </div>
-          </Link>
+          </div>
         );
       })}
     </div>

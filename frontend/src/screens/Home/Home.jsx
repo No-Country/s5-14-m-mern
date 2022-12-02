@@ -7,6 +7,7 @@ import Arrow from "../../components/PagesComponents/Slider/Arrow";
 import Card from "../../components/PagesComponents/Card/Card";
 import useServices from "../../services/useServices";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -17,18 +18,14 @@ const Home = () => {
   const [isGameListLoading, setIsGameListLoading] = useState(true);
   const { games } = useServices();
   const { filter } = useSelector(state => state.filter);
+  const navigate = useNavigate();
+
   const [sliderRef, instanceRef] = useKeenSlider({
     breakpoints: {
       "(min-width: 550px)": { slides: { perView: 3, spacing: 5 } },
       "(min-width: 1410px)": { slides: { perView: 4, spacing: 5 } }
     },
-    slides: { perView: 2, spacing: 15 },
-    slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);
-    },
-    created() {
-      setLoaded(true);
-    }
+    slides: { perView: 2, spacing: 15 }
   });
 
   useEffect(() => {
@@ -42,8 +39,8 @@ const Home = () => {
         setFilteredGames(data.games);
         setIsGameListLoading(false);
       } catch (err) {
-        console.log(err);
         setIsGameListLoading(false);
+        navigate("/404");
       }
     }
     gamesLoad();

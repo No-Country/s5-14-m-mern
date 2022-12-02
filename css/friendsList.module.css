@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  width: 100%;
+  margin: 10px 0;
+  gap: 0 8px;
+}
+.container .link {
+  text-decoration: none;
+  color: white;
+}
+.container img {
+  width: 60px;
+  height: 60px;
+}/*# sourceMappingURL=friendsList.module.css.map */
