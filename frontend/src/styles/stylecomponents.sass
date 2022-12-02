@@ -1,4 +1,5 @@
 @use "./variables" as *
+
 // make checkbox and radio buttons customizable
 // Example 
 //    input[type="checkbox]
@@ -24,6 +25,7 @@
 
 
 // Inputs with rounded corners
+
 @mixin inputBlackRounded ($background:#000, $color:#fff)
   padding: 8px 16px
   background: $background
@@ -33,6 +35,7 @@
   color: $color
 
 // gradients
+
 @mixin backgroundGradient()
   background: linear-gradient(180deg, #0C0E18 0%, #292759 100%)
 
@@ -54,16 +57,11 @@
 @mixin redGradient()
   background: linear-gradient(226.7deg, #FA0C0C -6.91%, #872323 74.26%)
   
-    
-    
-
-
 // Transparences 
 @mixin backgroundLayer()
   background: rgba(0, 0, 0, 0.5)
 
   
-
 @mixin buttonTransparent($width:166px, $fw:500, $fs:16px)
   text-decoration: none
   padding: 7px

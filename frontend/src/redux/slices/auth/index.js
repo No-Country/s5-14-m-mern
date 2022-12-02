@@ -17,6 +17,8 @@ const authSlice = createSlice({
     logout: state => {
       state.userLogged = false;
       state.userToken = false;
+      state.successAuth = false;
+      state.errorAuth = false;
       removeLocal();
     }
   },
@@ -62,20 +64,3 @@ const authSlice = createSlice({
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
-
-// deprecated object  notation, cambiar
-// extraReducers: (builder) => {
-//   builder
-//     .addCase(incrementBy, (state, action) => {
-//       // action is inferred correctly here if using TS
-//     })
-//     // You can chain calls, or have separate `builder.addCase()` lines each time
-//     .addCase(decrement, (state, action) => {})
-//     // You can match a range of action types
-//     .addMatcher(
-//       isRejectedAction,
-//       // `action` will be inferred as a RejectedAction due to isRejectedAction being defined as a type guard
-//       (state, action) => {}
-//     )
-//     // and provide a default case if no other handlers matched
-//     .addDefaultCase((state, action) => {})}
