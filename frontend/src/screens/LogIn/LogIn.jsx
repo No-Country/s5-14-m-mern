@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../Redux/slices/auth/authAction";
+import { userLogin } from "../../redux/slices/auth/authAction";
 import { getUserLogged } from "../../redux/slices/user/userAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
