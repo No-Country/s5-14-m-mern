@@ -1,0 +1,40 @@
+/* Breakpoints */
+/* Break Points */
+.card {
+  justify-content: center;
+  text-align: center;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 7px;
+  width: 166px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #F2CF8D;
+  border: 2px solid #F2CF8D;
+  font-weight: 500;
+  font-size: 16px;
+  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  width: 240px;
+  color: #000;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  border: none;
+  color: #000;
+}
+.btn:hover {
+  background: linear-gradient(255.54deg, #F9A811 31.32%, #B97900 91.81%);
+}
+
+.d_flex_button {
+  display: flex;
+  margin: 0 5px;
+}
+.d_flex_button p {
+  line-height: 25px;
+  margin-left: 15px;
+}/*# sourceMappingURL=favourites.module.css.map */

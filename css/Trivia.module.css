@@ -1,0 +1,47 @@
+.containerProgressBar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+}
+.containerProgressBar .progressBar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 24px;
+  border: 2px solid #D9D9D9;
+  overflow: hidden;
+}
+.containerProgressBar .progressBar .progress {
+  display: flex;
+  position: absolute;
+  align-self: start;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(58, 63, 151, 0.737207) 0%, #464AA6 47.86%, #B53BB8 88.09%);
+  border-top-right-radius: 24px;
+  border-end-end-radius: 24px;
+}
+.containerProgressBar .progressBar .progress .timer {
+  align-self: center;
+  margin: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+.containerProgressBar .progressBar .alarmContainer {
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.containerProgressBar .progressBar .alarmContainer .alarmIcon {
+  margin: 0 16px;
+  height: 24px;
+  width: 24px;
+}/*# sourceMappingURL=Trivia.module.css.map */

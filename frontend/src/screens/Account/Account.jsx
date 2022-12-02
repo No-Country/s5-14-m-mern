@@ -2,20 +2,20 @@ import { useState } from "react";
 import style from "./account.module.sass";
 
 const avatars = [
-  "../../../assets/AccountAvatars/avatar0.png",
-  "../../../assets/AccountAvatars/avatar1.png",
-  "../../../assets/AccountAvatars/avatar2.png",
-  "../../../assets/AccountAvatars/avatar3.png",
-  "../../../assets/AccountAvatars/avatar4.png",
-  "../../../assets/AccountAvatars/avatar5.png",
-  "../../../assets/AccountAvatars/avatar6.png",
-  "../../../assets/AccountAvatars/avatar7.png",
-  "../../../assets/AccountAvatars/avatar8.png"
+  "../../../assets/AccountAvatars/avatar0.svg",
+  "../../../assets/AccountAvatars/avatar1.svg",
+  "../../../assets/AccountAvatars/avatar2.svg",
+  "../../../assets/AccountAvatars/avatar3.svg",
+  "../../../assets/AccountAvatars/avatar4.svg",
+  "../../../assets/AccountAvatars/avatar5.svg",
+  "../../../assets/AccountAvatars/avatar6.svg",
+  "../../../assets/AccountAvatars/avatar7.svg",
+  "../../../assets/AccountAvatars/avatar8.svg"
 ];
 
 const user = {
   name: "Carlos",
-  avatarSrc: "../../../assets/AccountAvatars/avatarElegido.png",
+  avatarSrc: "../../../assets/AccountAvatars/avatar5.svg",
   state: "Disponible"
 };
 
