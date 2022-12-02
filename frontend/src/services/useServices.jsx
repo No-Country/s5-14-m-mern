@@ -2,7 +2,8 @@ import axios from "axios";
 import { getToken } from "./localStorage.jsx";
 
 const useServices = () => {
-  const BASE_URL = import.meta.env.VITE_API_URL;
+  // const BASE_URL = import.meta.env.VITE_API_URL;
+  const BASE_URL = "https://vercel.com/nocountry-ludens/ludensapi";
 
   const routeUrl = {
     auth: BASE_URL + "/api/auth",
