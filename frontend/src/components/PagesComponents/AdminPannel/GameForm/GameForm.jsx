@@ -4,7 +4,15 @@ import { useEffect, useState } from "react";
 import useServices from "../../../../services/useServices.jsx";
 import { useNavigate, useOutletContext } from "react-router-dom";
 // icon import
-import { tp, plus3, plus7, mouse, gamepad, keyboard, defaultImage } from "../../../../../assets";
+import {
+  todopublico,
+  plus3,
+  plus7,
+  mouse,
+  gamepad,
+  keyboard,
+  defaultImage
+} from "../../../../../assets";
 
 function GameForm() {
   const { games } = useServices();
@@ -193,7 +201,7 @@ function GameForm() {
                       checked={form.audiencies === "tp" ? true : false}
                     />
                     <label htmlFor="tp" className={classes.radio_label}>
-                      <img src={tp} alt="imágen de ícono TP" />
+                      <img src={todopublico} alt="imágen de ícono TP" />
                       <span>Apto para todo público</span>
                     </label>
                   </div>
