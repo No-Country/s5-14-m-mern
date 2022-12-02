@@ -6,39 +6,27 @@ import Rate from "../../components/PagesComponents/Stars/Stars";
 import style from "./allGames.module.sass";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
-import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 
 const AllGames = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  // const { name, description, minAge, stars } = location.state;
+
   const [state, setState] = useState();
   const { id } = useParams();
-  const [gameScores, setGameScores] = useState([]);
+
   const { userLogged } = useSelector(state => state.auth);
+  const { userInfo } = useSelector(state => state.auth);
   const { scores } = useServices();
+  const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
 
   useEffect(() => {
     if (location.state) {
       (async () => {
         const { gameId, name, description, minAge, stars } = location.state;
         const { data } = await scores.getByGame(gameId);
-        console.log(data.scores);
-        setState({ gameId, name, description, minAge, stars, score: data.scores });
+        setState({ gameId, name, description, minAge, stars, scores: data.scores });
       })();
-
-  const [state, setState] = useState({});
-  const [rating, setRating] = useState(); // Esto no se usa o está pendiente ?
-  const { id } = useParams();
-  const { userLogged } = useSelector(state => state.auth);
-  const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
-
-  useEffect(() => {
-    if (location.state) {
-      const { gameId, name, description, minAge, stars } = location.state;
-      setState({ gameId, name, description, minAge, stars });
->>>>>>> c494576cc37c825a5ae30e4759d0d019f1672e41
     } else {
       navigate("/");
     }
@@ -70,18 +58,16 @@ const AllGames = () => {
                 </div>
               </div>
               <div className={style.ranking}>
-                <h4>Nombre</h4>
-                <h4>Puntuación</h4>
-                <p>Pedro</p>
-                <p>1234</p>
-                <p>Juan</p>
-                <p>1234</p>
-                <p>Ana</p>
-                <p>1234</p>
-                <p>Marcelo</p>
-                <p>1234</p>
-                <p>Carla</p>
-                <p>1234</p>
+                <div>
+                  <h4>Nombre</h4>
+                  <h4>Puntuación</h4>
+                </div>
+                {state.scores.map((score, i) => (
+                  <div key={i}>
+                    <p>{score.username}</p>
+                    <p>{score.score}</p>
+                  </div>
+                ))}
               </div>
               {userLogged && (
                 <>

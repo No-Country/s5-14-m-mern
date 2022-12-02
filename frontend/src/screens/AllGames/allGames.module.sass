@@ -45,20 +45,34 @@
 .d_flex
     justify-content: left
 
+// .ranking
+//     display: flex
+//     flex-wrap: wrap
+//     color: #000
+//     padding: 11px 0px
+//     margin: 0 auto
+//     height: 211px  
+//     @include lightYellowGradient()
+//     border-radius: 20px
+//     @include mq(xlarge)
+//         width: 340px
+//     h4, p
+//         width: 50%
+//         font-weight: bold
+
 .ranking
     display: flex
-    flex-wrap: wrap
+    flex-direction: column
     color: #000
-    padding: 11px 0px
-    margin: 0 auto
-    height: 211px  
+ 
     @include lightYellowGradient()
     border-radius: 20px
     @include mq(xlarge)
         width: 340px
-    h4, p
-        width: 50%
-        font-weight: bold
+    div
+        display: flex
+        flex-direction: row
+        justify-content: space-around
 
 .qualify
     display: flex

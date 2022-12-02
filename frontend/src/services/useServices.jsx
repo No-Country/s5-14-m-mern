@@ -2,8 +2,8 @@ import axios from "axios";
 import { getToken } from "./localStorage.jsx";
 
 const useServices = () => {
-  // const BASE_URL = import.meta.env.VITE_API_URL;
-  const BASE_URL = "https://ludensapi.vercel.app";
+  const BASE_URL = "http://localhost:8000";
+  // const BASE_URL = "https://ludensapi.vercel.app";
 
   const routeUrl = {
     auth: BASE_URL + "/api/auth",
@@ -57,17 +57,8 @@ const useServices = () => {
 
   // GAMES API CALLS
   const games = {
-<<<<<<< HEAD
-    getAll: abortController => {
-      return api().get(
-        `${routeUrl.games}/`,
-        abortController.signal.aborted ? { signal: abortController.signal } : null
-      );
-    },
-
-=======
     getAll: () => api().get(`${routeUrl.games}/`),
->>>>>>> c494576cc37c825a5ae30e4759d0d019f1672e41
+
     create: (data, headerConfig) =>
       apiProtected().post(`${routeUrl.games}/`, data, headerConfig || null),
     getById: gameId => api().get(`${routeUrl.games}/${gameId}`),
@@ -80,18 +71,8 @@ const useServices = () => {
 
   // SCORES API CALLS
   const scores = {
-<<<<<<< HEAD
-    getByGame: (gameId, abortController) =>
-      api().get(
-        `${routeUrl.scores}/${gameId}`,
-        abortController ? { signal: abortController.signal } : null
-      ),
-
-    createInGame: (gameId, data) => apiProtected().post(`${routeUrl.scores}/${gameId}`, data)
-=======
     getByGame: gameId => api().get(`${routeUrl.scores}/${gameId}`),
-    createInGame: (gameId, data) => api().post(`${routeUrl.scores}/${gameId}`, data)
->>>>>>> c494576cc37c825a5ae30e4759d0d019f1672e41
+    createInGame: (gameId, data) => apiProtected().post(`${routeUrl.scores}/${gameId}`, data)
   };
 
   // IMAGES API CALLS
