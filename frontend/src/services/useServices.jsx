@@ -3,6 +3,7 @@ import { getToken } from "./localStorage.jsx";
 
 const useServices = () => {
   const BASE_URL = import.meta.env.VITE_API_URL;
+  console.log(BASE_URL);
 
   const routeUrl = {
     auth: BASE_URL + "/api/auth",
