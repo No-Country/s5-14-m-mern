@@ -1,5 +1,5 @@
-import PropTypes, { string } from "prop-types";
-import { useState, lazy, Suspense, useEffect, memo, useCallback, useMemo } from "react";
+import PropTypes from "prop-types";
+import { useState, lazy, Suspense, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Rate from "../../components/PagesComponents/Stars/Stars";
@@ -15,10 +15,8 @@ const AllGames = () => {
   const [state, setState] = useState();
   const { id } = useParams();
   const { userLogged } = useSelector(state => state.auth);
-  const { userInfo } = useSelector(state => state.user);
-
   const { scores } = useServices();
-
+  console.log("first");
   const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
 
   useEffect(() => {

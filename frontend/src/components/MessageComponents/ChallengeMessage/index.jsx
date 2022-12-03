@@ -1,48 +1,49 @@
 // hooks
 import { useDispatch } from "react-redux";
 import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
+import { useState } from "react";
 
 // hocs
 import messagesResponsive from "../../../hocs/messageResponsive";
 
 // components
 import SearchFriends from "../SearchFriends/index";
-import Ajedrez from "../../../../assets/Imagescards/chess.svg";
+import GameList from "../GameList";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
 
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
+import { GAME_LIST } from "../utils/gameList";
 
 // styles
 import styles from "./challenge.module.sass";
 
 function ChallengeMessage() {
+  const [game, setGame] = useState(GAME_LIST);
   const SELECT_CHALLENGE = "Elige el juego con cual quieres desafiar";
   const RECOMMENDATIONS = "Recomendaciones:";
-  const CARD_TITLE = "Aprende ajedrez";
-  const ACTION_TITLE = "Desafiar";
   const TITLE = "Desafía un juego";
 
   const dispatch = useDispatch();
 
   const toBack = () => dispatch(setThirdSectionOfPage(CHAT_SETIONS.predefinedMessages));
 
+  const handledSearchGame = key => {
+    const listOfFriend = GAME_LIST.filter(({ title }) => {
+      const letters = key.target.value;
+      return title.includes(letters);
+    });
+    setGame(listOfFriend);
+  };
+
   return (
     <div className={styles.container}>
-      <DefaultMessagesHeader title={TITLE} className={styles.header} handledPage={toBack} />
       <div className={styles.message}>
+        <DefaultMessagesHeader title={TITLE} className={styles.header} handledPage={toBack} />
         <p className={styles.title}>{SELECT_CHALLENGE}</p>
-        <SearchFriends />
+        <SearchFriends placeholder="Buscar juego" handledSearch={handledSearchGame} />
         <p className={styles.title}>{RECOMMENDATIONS}</p>
-        <div className={styles.card}>
-          <div className={styles.cardImageContainer}>
-            <img className={styles.cardImage} src={Ajedrez} alt="Ajedrez" />
-            <span className={styles.cardTitle}>{CARD_TITLE}</span>
-          </div>
-          <div className={styles.actionCard}>
-            <p>{ACTION_TITLE}</p>
-          </div>
-        </div>
+        <GameList gameList={game} />
       </div>
     </div>
   );

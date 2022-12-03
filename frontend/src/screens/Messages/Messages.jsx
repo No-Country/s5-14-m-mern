@@ -12,9 +12,11 @@ import classes from "./messages.module.sass";
 import noSigned from "../../../assets/Icons/noSignMessages.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Messages = () => {
-  const [isLogged] = useState(true);
+  const { userLogged } = useSelector(state => state.auth);
+  const [isLogged] = useState(userLogged);
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
   });

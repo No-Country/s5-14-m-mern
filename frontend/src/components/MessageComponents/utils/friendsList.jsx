@@ -10,13 +10,42 @@ export const FRIENDS = [
     name: "maria",
     image: friend1,
     message: "!Hola cómo estás?",
-    userId: "123rfgt"
+    userId: "123rfgt",
+    messages: [
+      {
+        sendId: "123rfgt",
+        createDate: Date.now(),
+        text: "¡Hola!,"
+      },
+      {
+        sendId: "123456",
+        createDate: Date.now(),
+        text: "¡Hola!,"
+      },
+      {
+        sendId: "123rfgt",
+        createDate: Date.now(),
+        text: "¿Cómo estás?,"
+      },
+      {
+        sendId: "123456",
+        createDate: Date.now(),
+        text: "¡Muy bien!, ¿y tú?,"
+      }
+    ]
   },
   {
     name: "jose",
     image: friend2,
     message: "Mi nombre es Jose",
-    userId: "123rfg43"
+    userId: "123rfg43",
+    messages: [
+      {
+        sendId: "123rfgt",
+        createDate: Date.now(),
+        text: "hola!,"
+      }
+    ]
   },
   {
     name: "freddy",

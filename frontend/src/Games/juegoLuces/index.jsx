@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 import Modal from "./Modal/Modal";
 import style from "./tablero.module.sass";
+import PropTypes from "prop-types";
 
 const initialState = [
   [false, false, false],
@@ -35,10 +36,6 @@ const LightGame = ({ gameId }) => {
   const [time, setTime] = useState(0);
   const { scores } = useServices();
   const { userLogged } = useSelector(state => state.auth);
-
-  useEffect(() => {
-    console.log("first");
-  }, []);
 
   useEffect(() => {
     if (play) {
@@ -126,6 +123,11 @@ const LightGame = ({ gameId }) => {
       </div>
     </div>
   );
+};
+
+LightGame.propTypes = {
+  gameId: PropTypes.string,
+  cambiarScore: PropTypes.func
 };
 
 export default LightGame;

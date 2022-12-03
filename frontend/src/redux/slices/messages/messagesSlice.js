@@ -4,18 +4,16 @@ import { CHAT_SETIONS } from "../../../components/MessageComponents/utils/chatSe
 const messagesSlide = createSlice({
   name: "message",
   initialState: {
-    currentPage: CHAT_SETIONS.chat,
+    selectUser: false,
     firstSectionOfPage: CHAT_SETIONS.searchFriends,
     secondSectionOfPage: CHAT_SETIONS.chat,
     thirdSectionOfPage: null,
-    lastPage: "",
-    currentUserId: "",
-    currentMessage: []
+    currentUser: {},
+    currentMessage: ""
   },
   reducers: {
-    setPage: (state, action) => {
-      state.lastPage = state.currentPage;
-      state.currentPage = action.payload;
+    setSelectUser: (state, action) => {
+      state.selectUser = action.payload;
     },
     setFirstSectionOfPage: (state, action) => {
       state.firstSectionOfPage = action.payload;
@@ -27,7 +25,7 @@ const messagesSlide = createSlice({
       state.thirdSectionOfPage = action.payload;
     },
     setCurrentUser: (state, action) => {
-      state.currentUserId = action.payload;
+      state.currentUser = action.payload;
     },
     setCurrentMessage: (state, action) => {
       state.currentMessage = action.payload;
@@ -36,7 +34,7 @@ const messagesSlide = createSlice({
 });
 
 export const {
-  setPage,
+  setSelectUser,
   setCurrenMessage,
   setFirstSectionOfPage,
   setSecondSectionOfPage,
