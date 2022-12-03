@@ -20,6 +20,8 @@ import {
   Layout,
   Favourites
 } from "../screens";
+import SuccesRegister from "../screens/SignUp/SuccessRegister/SuccesRegister.jsx";
+import FailedRegister from "../screens/SignUp/FailedRegister/FailedRegister.jsx";
 
 function InitalStack() {
   return (
@@ -36,6 +38,8 @@ function InitalStack() {
           {/* PROTECTED ROUTES */}
           <Route element={<RequireAuth allowedRole="user" />}>
             <Route exact path="/account" element={<Account />} />
+            <Route exact path="/signup/success" element={<SuccesRegister />} />
+            <Route exact path="/signup/failed" element={<FailedRegister />} />
             <Route path="/messages/:userId" element={<MessageUser />} />
             <Route path="/messages/chat" element={<ChatWraper />} />
             <Route path="/messages/defaultMessages" element={<DefaultMessages />} />
