@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 import Modal from "./Modal/Modal";
@@ -35,6 +35,10 @@ const LightGame = ({ gameId }) => {
   const [time, setTime] = useState(0);
   const { scores } = useServices();
   const { userLogged } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    console.log("first");
+  }, []);
 
   useEffect(() => {
     if (play) {

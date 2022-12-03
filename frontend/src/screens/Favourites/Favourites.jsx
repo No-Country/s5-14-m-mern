@@ -10,23 +10,23 @@ import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
 
-const favs = [
-  {
-    imageUrl: "../../../assets/ImagesCards/chess.svg",
-    name: "Aprende ajedrez",
-    stars: 4
-  },
-  {
-    imageUrl: "../../../assets/ImagesCards/color.svg",
-    name: "Colorea",
-    stars: 4
-  },
-  {
-    imageUrl: "../../../assets/ImagesCards/draw.svg",
-    name: "Dibuja",
-    stars: 4
-  }
-];
+// const favs = [
+//   {
+//     imageUrl: "../../../assets/ImagesCards/chess.svg",
+//     name: "Aprende ajedrez",
+//     stars: 4
+//   },
+//   {
+//     imageUrl: "../../../assets/ImagesCards/color.svg",
+//     name: "Colorea",
+//     stars: 4
+//   },
+//   {
+//     imageUrl: "../../../assets/ImagesCards/draw.svg",
+//     name: "Dibuja",
+//     stars: 4
+//   }
+// ];
 
 const Favourites = () => {
   const [like, setLike] = useState(true);
@@ -36,15 +36,17 @@ const Favourites = () => {
   // const handleLike = () => setLike(!like);
 
   const { favorites } = useServices();
+  const { userInfo } = useSelector(state => state.user);
 
   useEffect(() => {
+    console.log("first");
     if (userLogged) {
       (async () => {
         const { data } = await favorites.getFavorites();
         setMyFavorites(data);
       })();
     }
-  }, []);
+  }, [userInfo]);
 
   return (
     <div className={style.fav_content}>

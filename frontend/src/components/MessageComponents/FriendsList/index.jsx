@@ -38,17 +38,15 @@ export default function FriendsList({ friendsList }) {
   return (
     <div className={styles.container}>
       <div ref={sliderRef} className="keen-slider">
-        {friendsList.map(({ image, name, userId }) => {
-          return (
-            <div
-              className={`keen-slider__slide ${styles.slide}`}
-              key={userId}
-              onClick={() => handledPage(userId)}>
-              <img src={image} alt="friends" />
-              <p>{name}</p>
-            </div>
-          );
-        })}
+        {friendsList.map(({ image, name, userId }) => (
+          <div
+            className={`keen-slider__slide ${styles.slide}`}
+            key={userId}
+            onClick={() => handledPage(userId)}>
+            <img src={image} alt="friends" />
+            <p>{name}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

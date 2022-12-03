@@ -43,4 +43,5 @@ export const {
   setThirdSectionOfPage,
   setCurrentUser
 } = messagesSlide.actions;
+
 export default messagesSlide.reducer;
