@@ -21,19 +21,22 @@ export default function LastestTextMessageList({ messageList }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handledPage = id => {
+  const handledPage = data => {
     if (!isTablet) {
       navigate(`/messages/options`);
     }
     dispatch(setFirstSectionOfPage(CHAT_SETIONS.userOptions));
-    dispatch(setCurrentUser(id));
+    dispatch(setCurrentUser(data));
   };
 
   return (
     <div className={styles.container}>
-      {messageList.map(({ image, name, message, showMessage, userId }) => {
+      {messageList.map(({ image, name, message, showMessage, userId, ...props }) => {
         return (
-          <div className={styles.link} key={image} onClick={() => handledPage(userId)}>
+          <div
+            className={styles.link}
+            key={image}
+            onClick={() => handledPage({ image, name, message, showMessage, userId, ...props })}>
             <div className={styles.friend}>
               <img className={styles.FriendImage} src={image} alt="friends" />
               {showMessage && <div className={styles.showMessage} />}

@@ -10,6 +10,7 @@ import messagesResponsive from "../../../hocs/messageResponsive";
 // components
 import message from "../../../../assets/Icons/Message.svg";
 import HeaderDesktop from "../HeaderDesktop";
+import MessageList from "../MessageList";
 
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
@@ -18,7 +19,8 @@ import { CHAT_SETIONS } from "../utils/chatSetions";
 import styles from "./chat.module.sass";
 
 function ChatWraper() {
-  const currentUser = useSelector(state => state.message.currentUserId);
+  const currentUser = useSelector(state => state.message.currentUser);
+  const selectUser = useSelector(state => state.message.selectUser);
 
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
@@ -39,9 +41,13 @@ function ChatWraper() {
     <div className={styles.container}>
       <HeaderDesktop showUserImage={false} showArrow={false} isTitleCenter={true} title={title} />
       <div className={styles.messageContainer}>
-        {!currentUser && <img src={message} alt="Mensaje" />}
+        {selectUser ? (
+          <MessageList messajeList={currentUser?.messages} ownId={"123456"} />
+        ) : (
+          <img src={message} alt="Mensaje" />
+        )}
       </div>
-      {currentUser && (
+      {selectUser && (
         <button className={styles.selectMessage} onClick={handledPage}>
           {selectMessage}
         </button>

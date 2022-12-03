@@ -25,8 +25,6 @@ function DefaultMessages() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(isTablet, "media");
-
   const handledPage = () => {
     if (!isTablet) {
       navigate("/messages/challenge");
