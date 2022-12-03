@@ -7,7 +7,7 @@ import magnifyingGlass from "../../../../assets/Icons/search.svg";
 // styles
 import styles from "./search.module.sass";
 
-export default function SearchFriends({ handledSearch }) {
+export default function SearchFriends({ handledSearch, placeholder }) {
   return (
     <div className={styles.containerSearchFriends}>
       <div className={styles.containerInput}>
@@ -15,7 +15,7 @@ export default function SearchFriends({ handledSearch }) {
           className={styles.searchInput}
           type="text"
           name="search"
-          placeholder="Buscar jugadores"
+          placeholder={placeholder}
           onChange={handledSearch}
         />
         <div className={styles.containerSearchIcon}>

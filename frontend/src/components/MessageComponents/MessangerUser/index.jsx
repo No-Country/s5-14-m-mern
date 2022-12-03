@@ -14,17 +14,18 @@ import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import {
   setFirstSectionOfPage,
-  setThirdSectionOfPage
+  setThirdSectionOfPage,
+  setSelectUser
 } from "../../../redux/slices/messages/messagesSlice";
 
 // components
 import HeaderDesktop from "../HeaderDesktop";
 
 function MessageUser() {
-  const currentUser = useSelector(state => state.message.currentUserId);
-  const [friend] = FRIENDS.filter(friend => {
-    return friend.userId === currentUser;
-  });
+  const currentUser = useSelector(state => state.message.currentUser);
+
+  console.log(currentUser);
+
   const USER_OPTION = {
     SEND_MESSAGE: "Enviar mensaje",
     TO_CHALLENGE: "Desafiar",
@@ -38,6 +39,7 @@ function MessageUser() {
 
   const handledSendMessage = () => {
     if (!isTablet) navigate("/messages/chat");
+    dispatch(setSelectUser(true));
   };
 
   const toBack = () => dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
@@ -58,11 +60,11 @@ function MessageUser() {
       />
       <div className={styles.messageUserWraper}>
         <div className={styles.title}>
-          <p>{friend?.name}</p>
+          <p>{currentUser?.name}</p>
         </div>
         <div className={styles.optionsWraper}>
           <div className={styles.friendImage}>
-            <img src={friend?.image} alt={friend?.name} />
+            <img src={currentUser?.image} alt={currentUser?.name} />
           </div>
           <div className={styles.friendsOptions}>
             <button onClick={handledSendMessage}>{USER_OPTION.SEND_MESSAGE}</button>

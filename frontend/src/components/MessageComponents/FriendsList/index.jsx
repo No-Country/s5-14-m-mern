@@ -28,22 +28,22 @@ export default function FriendsList({ friendsList }) {
   });
   const navigate = useNavigate();
 
-  const handledPage = id => {
+  const handledPage = data => {
     if (!isTablet) {
       navigate("/messages/options");
     }
-    dispatch(setCurrentUser(id));
+    dispatch(setCurrentUser(data));
     dispatch(setFirstSectionOfPage(CHAT_SETIONS.userOptions));
   };
   return (
     <div className={styles.container}>
       <div ref={sliderRef} className="keen-slider">
-        {friendsList.map(({ image, name, userId }) => {
+        {friendsList.map(({ image, name, userId, ...props }) => {
           return (
             <div
               className={`keen-slider__slide ${styles.slide}`}
               key={userId}
-              onClick={() => handledPage(userId)}>
+              onClick={() => handledPage({ image, name, userId, ...props })}>
               <img src={image} alt="friends" />
               <p>{name}</p>
             </div>
