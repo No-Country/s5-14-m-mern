@@ -1,0 +1,36 @@
+/* Breakpoints */
+/* Break Points */
+.home {
+  width: 90vw;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .home {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .home {
+    width: 70vw;
+  }
+}
+@media screen and (min-width: 1900px) {
+  .home {
+    width: 60vw;
+  }
+}
+
+.cards {
+  margin: 20px 0;
+  position: relative;
+}
+
+.cards_small {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.spinner {
+  max-height: calc(100vh - 269px);
+}/*# sourceMappingURL=home.module.css.map */

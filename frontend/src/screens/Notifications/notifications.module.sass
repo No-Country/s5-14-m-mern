@@ -4,6 +4,11 @@
 .notif_content
     width: 90vw
     margin: 10px auto
+    min-height: 70vh
+    display: flex
+    align-items: center
+    text-align: center
+    justify-content: center
 
 .card1
     margin: 10px auto
@@ -95,3 +100,19 @@
             h4 
                 margin: auto
 
+.not_logged
+    margin: auto
+    img
+        height: 160px
+        margin-bottom: 20px
+        margin-left: 25px
+        @include mq(large)
+            height: 200px
+            margin-left: 30px
+    h3
+        font-size: 18px
+        font-weight: 600
+        margin-bottom: 30px
+    button
+        @include buttonTransparent()
+        width: 270px

@@ -1,0 +1,38 @@
+/* Breakpoints */
+/* Break Points */
+.row_table {
+  display: table-row;
+  font-family: "Monsterrat", sans-serif;
+  font-size: 14px;
+  height: 75.25px;
+  text-align: center;
+}
+.row_table div {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 2em;
+  border-bottom: 1px solid #fff;
+  white-space: nowrap;
+}
+.row_table div img {
+  max-height: 36px;
+  max-width: 36px;
+  width: 100%;
+  height: 100%;
+  -o-object-position: cover;
+     object-position: cover;
+  margin: 5px;
+}
+.row_table button, .row_table a {
+  background: transparent;
+  border: none;
+  height: 40px;
+  width: 40px;
+  text-decoration: none;
+}
+.row_table .description {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 300px;
+}/*# sourceMappingURL=gameItem.module.css.map */

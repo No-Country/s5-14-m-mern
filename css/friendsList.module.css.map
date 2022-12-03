@@ -1,0 +1,1 @@
+{"version":3,"sources":["../frontend/src/components/MessageComponents/FriendsList/friendsList.module.sass","friendsList.module.css"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,WAAA;EACA,cAAA;EACA,UAAA;ACCJ;ADAI;EACI,qBAAA;EACA,YAAA;ACER;ADDI;EACI,WAAA;EACA,YAAA;ACGR","file":"friendsList.module.css"}

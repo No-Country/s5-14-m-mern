@@ -1,16 +1,11 @@
-$background-Message: #262553
-
+@use '../../../styles/variables.sass' as *
 .container
-    width: 100vw
-    height: 100%
-    border-radius: 20px
-    background: $background-Message
-    .title
-        width: 100%
-        height: 76px
-        display: flex
-        justify-content: center
-        align-items: center
-        font-size: 16px
-        font-weight: 500
-        border-bottom: 0.5px solid #FFFFFF
+    width: 100%
+    height: 100vh
+    background: $messages-Background
+    border-right: 1px solid #fff
+    @include mq(medium)
+        width: 350px
+        height: 820px
+        background: #262553
+
