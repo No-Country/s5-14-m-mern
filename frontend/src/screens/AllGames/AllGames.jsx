@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState, lazy, Suspense, useEffect } from "react";
+import { useState, lazy, Suspense, useEffect, useCallback } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Rate from "../../components/PagesComponents/Stars/Stars";
@@ -11,7 +11,6 @@ import useServices from "../../services/useServices";
 const AllGames = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [state, setState] = useState();
   const { id } = useParams();
   const { userLogged } = useSelector(state => state.auth);
@@ -23,12 +22,19 @@ const AllGames = () => {
     if (location.state) {
       (async () => {
         const { gameId, name, description, minAge, stars } = location.state;
+        console.log("juego id", gameId);
+        // eslint-disable-next-line testing-library/no-await-sync-query
         const { data } = await scores.getByGame(gameId);
         setState({ gameId, name, description, minAge, stars, scores: data.scores });
       })();
     } else {
       navigate("/");
     }
+  }, []);
+
+  console.log("me renderizo");
+  const setScores = useCallback(scores => {
+    setState(prev => ({ ...prev, scores: [] }));
   }, []);
 
   return (
@@ -39,7 +45,7 @@ const AllGames = () => {
           <div className={style.desktop}>
             <div className={style.screen_games}>
               <Suspense fallback={<SpinnerLoad />}>
-                <MyGame gameId={state.gameId} />
+                <MyGame setScores={setScores} gameId={() => state.gameId} />
               </Suspense>
             </div>
             <div>

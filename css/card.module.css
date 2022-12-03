@@ -55,17 +55,16 @@
 .is_hover {
   display: none;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .is_hover {
     display: block;
     position: absolute;
     top: 0;
-    width: 260px;
-    height: 360px;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.1882352941);
-    padding: 10px;
     cursor: pointer;
+    width: inherit;
+    height: inherit;
   }
   .is_hover img {
     width: 80px;
@@ -76,6 +75,14 @@
 }
 
 @media screen and (min-width: 992px) {
+  .display_mob {
+    width: 260px;
+    height: 360px;
+    padding: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
   .display_mob {
     display: none;
   }
@@ -109,17 +116,16 @@
 .card_small .is_hover {
   display: none;
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .card_small .is_hover {
     display: block;
     position: absolute;
     top: 0;
-    height: 180px;
-    width: 260px;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.1882352941);
-    padding: 10px;
     cursor: pointer;
+    width: inherit;
+    height: inherit;
   }
   .card_small .is_hover img {
     width: 80px;

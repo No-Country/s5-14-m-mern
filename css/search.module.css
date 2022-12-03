@@ -1,7 +1,10 @@
+/* Breakpoints */
+/* Break Points */
 .containerSearchFriends {
   width: 100%;
   display: flex;
-  margin: 10px 0px;
+  margin: 4px 0px 10px 0px;
+  padding: 0 11px;
   justify-content: center;
 }
 .containerSearchFriends .containerInput {
@@ -11,11 +14,11 @@
   align-items: center;
   border-radius: 20px;
   background: #000000;
-  color: #7A7A7A;
-  font-size: 14px;
 }
 .containerSearchFriends .containerInput .containerSearchIcon {
   width: 20%;
+  display: flex;
+  justify-content: center;
 }
 .containerSearchFriends .containerInput .containerSearchIcon .magnifyingGlassIcon {
   width: 20px;

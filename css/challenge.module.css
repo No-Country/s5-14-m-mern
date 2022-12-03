@@ -1,0 +1,75 @@
+/* Breakpoints */
+/* Break Points */
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #262553;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 350px;
+    height: 820px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    border-left: 1px solid #fff;
+  }
+  .container::-webkit-scrollbar:vertical {
+    width: 0px;
+  }
+  .container::-webkit-scrollbar {
+    -webkit-appearance: none;
+            appearance: none;
+  }
+}
+.container .header {
+  height: 76px !important;
+}
+.container .title {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 16px 0px;
+}
+.container .card {
+  width: 311px;
+  height: 129px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 20px;
+  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  overflow: hidden;
+}
+.container .card .cardImageContainer {
+  width: 100%;
+  height: inherit;
+  border-radius: 0 20px 20px 0;
+  position: relative;
+}
+.container .card .cardImageContainer .cardImage {
+  width: 100%;
+  height: inherit;
+  border-radius: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.container .card .cardImageContainer .cardTitle {
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  font-size: 14px;
+  width: 100%;
+  font-weight: 700;
+  text-align: center;
+  border-bottom-right-radius: 20px;
+}
+.container .card .actionCard {
+  display: grid;
+  height: 100%;
+  place-content: center;
+  font-weight: 700;
+  color: #000;
+  font-size: 20px;
+}/*# sourceMappingURL=challenge.module.css.map */

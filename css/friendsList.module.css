@@ -1,14 +1,22 @@
 .container {
   display: flex;
   width: 100%;
-  margin: 10px 0;
+  padding: 15px 8px;
   gap: 0 8px;
 }
-.container .link {
-  text-decoration: none;
+.container .slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: -webkit-min-content !important;
+  min-width: -moz-min-content !important;
+  min-width: min-content !important;
+  gap: 10px 0;
+  font-size: 13px;
   color: white;
+  cursor: pointer;
 }
-.container img {
+.container .slide img {
   width: 60px;
   height: 60px;
 }/*# sourceMappingURL=friendsList.module.css.map */
