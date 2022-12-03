@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState, lazy, Suspense, useEffect } from "react";
+import { useState, lazy, Suspense, useEffect, useCallback } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Rate from "../../components/PagesComponents/Stars/Stars";
@@ -14,9 +14,10 @@ const AllGames = () => {
 
   const [state, setState] = useState();
   const { id } = useParams();
-  const { userLogged } = useSelector(state => state.auth);
   const { scores } = useServices();
-  console.log("first");
+  const { userLogged } = useSelector(state => state.auth);
+  const { userInfo } = useSelector(state => state.user);
+
   const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
 
   useEffect(() => {
@@ -31,6 +32,14 @@ const AllGames = () => {
     }
   }, []);
 
+  console.log("first");
+  const changeScore = useCallback(score => {
+    console.log(score);
+    console.log(userInfo.username);
+
+    setState({ ...state, scores: [] });
+  });
+
   return (
     <div className={style.games_content}>
       {state && (
@@ -39,7 +48,7 @@ const AllGames = () => {
           <div className={style.desktop}>
             <div className={style.screen_games}>
               <Suspense fallback={<SpinnerLoad />}>
-                <MyGame gameId={state.gameId} />
+                <MyGame gameId={() => state.gameId} changeScore={changeScore} />
               </Suspense>
             </div>
             <div>
