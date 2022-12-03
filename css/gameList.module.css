@@ -1,5 +1,8 @@
 /* Breakpoints */
 /* Break Points */
+.listgames {
+  width: 100%;
+}
 .listgames_list {
   display: table;
   background: #323232;
@@ -9,6 +12,7 @@
   border-spacing: 0;
   border-collapse: separate;
   padding-bottom: 4em;
+  width: 100%;
 }
 .listgames_header {
   display: table-row;

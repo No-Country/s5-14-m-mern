@@ -3,12 +3,8 @@ import { Footer } from "../../components/PagesComponents/Footer/Footer";
 import Header from "../../components/PagesComponents/Header/Header";
 import { Navbar } from "../../components/PagesComponents/Navbar/Navbar";
 import style from "./layout.module.sass";
-import { useLocation } from "react-router-dom";
 
 const Layout = () => {
-  const location = useLocation();
-  const path = location.pathname;
-  console.log(path);
   return (
     <div className={style.layout}>
       <div className={style.navD}>

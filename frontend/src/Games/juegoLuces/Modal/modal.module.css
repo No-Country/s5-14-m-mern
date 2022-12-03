@@ -7,15 +7,15 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   gap: 50px;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   position: absolute;
 }
 
@@ -35,7 +35,7 @@
   font-weight: 700;
   padding: 5px 10px;
   border: 2px solid white;
-  background: #1F2440;
+  background: #1f2440;
   border-radius: 10px;
 }
 

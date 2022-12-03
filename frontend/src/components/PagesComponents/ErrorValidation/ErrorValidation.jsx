@@ -14,5 +14,6 @@ function ErrorValidation({ className, message }) {
 export default ErrorValidation;
 
 ErrorValidation.propTypes = {
+  className: PropTypes.string,
   message: PropTypes.string
 };

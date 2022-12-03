@@ -20,12 +20,10 @@
 .not_logged img {
   height: 160px;
   margin-bottom: 20px;
-  margin-left: 25px;
 }
 @media screen and (min-width: 992px) {
   .not_logged img {
     height: 200px;
-    margin-left: 30px;
   }
 }
 .not_logged h3 {

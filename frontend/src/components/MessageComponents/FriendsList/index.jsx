@@ -43,7 +43,8 @@ export default function FriendsList({ friendsList }) {
             <div
               className={`keen-slider__slide ${styles.slide}`}
               key={userId}
-              onClick={() => handledPage({ image, name, userId, ...props })}>
+              onClick={() => handledPage({ image, name, userId, ...props })}
+            >
               <img src={image} alt="friends" />
               <p>{name}</p>
             </div>

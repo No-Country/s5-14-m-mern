@@ -18,7 +18,8 @@ function GameList() {
     <div className={classes.listgames}>
       <Link
         to="/admin/game-manage"
-        className={`${classes.addGameButton} ${classes.border_gradient_radius}`}>
+        className={`${classes.addGameButton} ${classes.border_gradient_radius}`}
+      >
         <span>Agregar Juego</span>
         <span>
           <img src={Cross} />

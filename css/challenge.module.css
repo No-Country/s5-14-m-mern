@@ -1,0 +1,34 @@
+/* Breakpoints */
+/* Break Points */
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #262553;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 350px;
+    height: 820px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    border-left: 1px solid #fff;
+  }
+  .container::-webkit-scrollbar:vertical {
+    width: 0px;
+  }
+  .container::-webkit-scrollbar {
+    -webkit-appearance: none;
+            appearance: none;
+  }
+}
+.container .header {
+  height: 76px !important;
+}
+.container .title {
+  font-weight: 500;
+  font-size: 16px;
+  margin: 16px 0px;
+}/*# sourceMappingURL=challenge.module.css.map */

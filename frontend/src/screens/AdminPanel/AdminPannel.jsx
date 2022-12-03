@@ -31,7 +31,11 @@ function AdminPannel() {
 
   return (
     <div className={classes.container}>
-      {loading ? <SpinnerLoad /> : <Outlet context={[games, setGames, setLoadingGames]}></Outlet>}
+      {loading ? (
+        <SpinnerLoad />
+      ) : (
+        <Outlet className={classes.outlet} context={[games, setGames, setLoadingGames]}></Outlet>
+      )}
     </div>
   );
 }

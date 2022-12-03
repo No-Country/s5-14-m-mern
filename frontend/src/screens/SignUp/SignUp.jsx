@@ -52,7 +52,8 @@ const SignUp = () => {
             left: "10%",
             fontSize: "25px",
             cursor: "pointer"
-          }}></i>
+          }}
+        ></i>
       </Link>
       <img className={styles.img} src="../../../assets/logo/logo.png" />
       <p className={styles.description}>¡Crea tu cuenta y desafia a tus amigos!</p>
@@ -71,7 +72,8 @@ const SignUp = () => {
               password: values.password
             })
           );
-        }}>
+        }}
+      >
         {({ errors, touched }) => (
           <Form className={styles.form}>
             <Field className={styles.formfield} name="username" placeholder="Nombre de usuario" />
@@ -97,7 +99,8 @@ const SignUp = () => {
                   marginTop: "12px",
                   right: "10%",
                   fontSize: "18px"
-                }}></i>
+                }}
+              ></i>
             </div>
             {errors.password && touched.password ? (
               <div className={styles.formerrors}>{errors.password}</div>
@@ -117,7 +120,8 @@ const SignUp = () => {
                   marginTop: "12px",
                   right: "10%",
                   fontSize: "18px"
-                }}></i>
+                }}
+              ></i>
             </div>
 
             {errors.passwordConfirmacion && touched.passwordConfirmacion ? (

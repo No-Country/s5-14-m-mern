@@ -13,7 +13,8 @@ export default function MessageList({ messajeList = [], ownId }) {
             key={index}
             className={`${styles.text} ${
               sendId === ownId ? styles.ownMessage : styles.defaultMessage
-            }`}>
+            }`}
+          >
             <p>{text}</p>
           </div>
         );

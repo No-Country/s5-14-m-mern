@@ -10,7 +10,8 @@ export default function ButtonSubmit({ show = true }) {
       className={styles.button}
       style={{ background: show ? "#7281A9" : "#0A39B1" }}
       type="submit"
-      disabled={show}>
+      disabled={show}
+    >
       {NEXT_BUTTON}
     </button>
   );

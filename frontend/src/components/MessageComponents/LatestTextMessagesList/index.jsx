@@ -36,7 +36,8 @@ export default function LastestTextMessageList({ messageList }) {
           <div
             className={styles.link}
             key={image}
-            onClick={() => handledPage({ image, name, message, showMessage, userId, ...props })}>
+            onClick={() => handledPage({ image, name, message, showMessage, userId, ...props })}
+          >
             <div className={styles.friend}>
               <img className={styles.FriendImage} src={image} alt="friends" />
               {showMessage && <div className={styles.showMessage} />}

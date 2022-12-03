@@ -1,0 +1,52 @@
+/* Breakpoints */
+/* Break Points */
+.failed_container {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.failed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3137254902);
+  border-radius: 20px;
+  height: 480px;
+  width: 90vw;
+  margin: auto;
+}
+@media screen and (min-width: 768px) {
+  .failed {
+    width: 60vw;
+    min-width: 600px;
+    max-width: 1000px;
+  }
+}
+.failed img {
+  height: 190px;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+.failed h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.failed button {
+  text-decoration: none;
+  padding: 7px;
+  width: 166px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #F2CF8D;
+  border: 2px solid #F2CF8D;
+  font-weight: 500;
+  font-size: 16px;
+  width: 270px;
+}
+.failed button:hover {
+  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  color: #000;
+}/*# sourceMappingURL=failedRegister.module.css.map */

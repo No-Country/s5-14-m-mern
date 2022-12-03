@@ -1,10 +1,10 @@
 import classes from "./gameForm.module.sass";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useServices from "../../../../services/useServices.jsx";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import MessageValidation from "../../ErrorValidation/ErrorValidation.jsx";
+import SuccessMessage from "../SuccessMessage/SuccessMessage.jsx";
 // icon import
 import {
   todopublico,
@@ -17,6 +17,7 @@ import {
 } from "../../../../../assets";
 
 function GameForm() {
+  // constants
   const { games } = useServices();
   const { id } = useParams();
   const [initValues, setInitValues] = useState();
@@ -24,26 +25,16 @@ function GameForm() {
   const [thumbnail, setThumbnail] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [setLoadingGames] = useOutletContext();
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoading) {
-      setInitValues({
-        name: "",
-        description: "",
-        imageUrl: false,
-        devices: [],
-        audiencies: "",
-        comingSoon: true
-      });
-      setIsLoading(false);
-    }
-  }, []);
+  // Functions
 
-  useEffect(() => {
-    const getGame = async gameId => {
+  // Get the games list
+  const getGame = gameId => {
+    if (id) {
       try {
-        const result = await games.getById(gameId);
+        const result = games.getById(gameId);
         console.log(result);
         if (result) {
           setInitValues({
@@ -60,13 +51,8 @@ function GameForm() {
       } catch (err) {
         console.log(err);
       }
-    };
-    if (id) {
-      getGame(id);
-    } else {
-      setIsLoading(false);
     }
-  }, [id]);
+  };
 
   // Event Handler for Preview Image
   const loadImagePreviewHandler = e => {
@@ -100,40 +86,39 @@ function GameForm() {
 
   // Validation handler
   const onValidate = values => {
-    let errors = {};
-
-    console.log(values.devices.length);
+    console.log("validar");
+    const errors = {};
     if (!values.name) {
       errors.name = "El nombre del juego es obligatorio";
-    } else if (/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
+    } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
       errors.name = "El nombre del juego debe ser de 1 a 40 caracteres";
     }
-
     if (!values.devices.length) {
       errors.devices = "Debes elegir al menos una opción";
     }
     if (!values.audiencies) {
-      errors.devices = "Debes elegir al una opción";
+      errors.devices = "Debes elegir una opción";
     }
-
-    if (!values.folder && !values.comingSoon) {
-      errors.folder = "La carpeta es obligatoria";
-    } else if (/^[a-zA-ZÀ-ÿ_]{1,40}$/.test(values.folder)) {
-      errors.folder =
-        "El nombre del juego no puede contener espacios ni signos salvo el guión bajo.";
+    if (!values.comingSoon) {
+      if (!values.folder) {
+        errors.folder = "La carpeta es obligatoria";
+      } else if (!/^[a-zA-ZÀ-ÿ_]{1,40}$/.test(values.folder)) {
+        errors.folder =
+          "El nombre del juego no puede contener espacios ni signos salvo el guión bajo.";
+      }
     }
-
     if (!values.description) {
       errors.description = "Debes ingresar una descripción del juego";
     } else if (values.description.length > 300) {
       errors.description = "No puedes ingresar mas de 300 caracteres";
     }
-
+    console.log(errors);
     return errors;
   };
 
   // Event Handler for submit form
   const submitHandler = async (values, { resetForm }) => {
+    console.log("submiting form");
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("description", values.description);
@@ -144,7 +129,9 @@ function GameForm() {
     if (file) {
       formData.append("image", file);
     } else {
-      console.log("no Files");
+      if (!id) {
+        throw new Error("El archivo es requerido");
+      }
     }
     try {
       let result;
@@ -158,21 +145,45 @@ function GameForm() {
         });
       }
       if (result) {
-        // ir a pagina de agregado;
+        setSuccess(result);
         resetForm();
         setLoadingGames(true);
         navigate("/admin");
       }
     } catch (err) {
       console.log(err);
+      // Error al enviar formulario pagina de error
     }
   };
 
+  // UseEffects
+
+  // If id changes or exists, load game data
+  useEffect(() => {
+    if (id) {
+      getGame(id);
+    } else {
+      setInitValues({
+        name: "",
+        description: "",
+        imageUrl: false,
+        devices: [],
+        audiencies: "",
+        comingSoon: true
+      });
+      setIsLoading(false);
+    }
+  }, [id]);
+
   return (
     <div className={classes.container}>
-      <h2>Panel Juego</h2>
       {isLoading ? (
         <p>Loading</p>
+      ) : success ? (
+        <SuccessMessage
+          gameName={success.name || "Game"}
+          coverGame={success.cover || defaultImage}
+        />
       ) : (
         <Formik initialValues={initValues} onSubmit={submitHandler} validate={onValidate}>
           {({ values, errors }) => (
@@ -264,7 +275,7 @@ function GameForm() {
                     <div className={classes.group_form}>
                       <label htmlFor="imageGame">
                         <img
-                          src={thumbnail ? thumbnail : defaultImage}
+                          src={thumbnail || defaultImage}
                           className={thumbnail ? null : classes.default}
                           alt="imágen del juego"
                         />
@@ -297,12 +308,7 @@ function GameForm() {
 
                 <div className={classes.form_next}>
                   <div className={classes.group_form}>
-                    <Field
-                      type="checkbox"
-                      name="comingSoon"
-                      id="comingSoon"
-                      // checked={values.comingSoon === "true" ? true : false}
-                    />
+                    <Field type="checkbox" name="comingSoon" id="comingSoon" />
                     <label htmlFor="comingSoon" className={classes.checkbox_label}>
                       Este juego saldrá próximamente
                     </label>
