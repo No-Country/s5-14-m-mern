@@ -1,6 +1,6 @@
 import classes from "./adminPannel.module.sass";
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import useServices from "../../services/useServices";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 
@@ -9,6 +9,7 @@ function AdminPannel() {
   const [loadingGames, setLoadingGames] = useState(true);
   const [loading, setLoading] = useState(true);
   const gameList = useServices().games;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function gamesLoad() {
@@ -21,6 +22,7 @@ function AdminPannel() {
         console.log(err);
         setLoading(false);
         setLoadingGames(false);
+        navigate("/404");
       }
     }
 

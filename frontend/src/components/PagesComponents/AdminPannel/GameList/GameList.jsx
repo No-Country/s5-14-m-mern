@@ -16,7 +16,6 @@ function GameList() {
 
   return (
     <div className={classes.listgames}>
-      <h2>Panel de Administrador</h2>
       <Link
         to="/admin/game-manage"
         className={`${classes.addGameButton} ${classes.border_gradient_radius}`}>

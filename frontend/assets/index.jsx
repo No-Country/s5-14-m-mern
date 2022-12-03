@@ -9,3 +9,4 @@ export { default as keyboard } from "./Icons/keyboard.svg";
 export { default as defaultImage } from "./Icons/defaultImage.svg";
 export { default as gamepad } from "./Icons/gamepad.svg";
 export { default as mouse } from "./Icons/mouse.svg";
+export { default as info } from "./Icons/info.svg";
