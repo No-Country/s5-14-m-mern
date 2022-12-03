@@ -1,5 +1,4 @@
 // utils
-import { FRIENDS } from "../utils/friendsList";
 import { CHAT_SETIONS } from "../utils/chatSetions";
 
 // styles
@@ -23,8 +22,6 @@ import HeaderDesktop from "../HeaderDesktop";
 
 function MessageUser() {
   const currentUser = useSelector(state => state.message.currentUser);
-
-  console.log(currentUser);
 
   const USER_OPTION = {
     SEND_MESSAGE: "Enviar mensaje",

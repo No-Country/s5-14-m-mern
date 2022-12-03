@@ -31,5 +31,6 @@ export default function SearchFriends({ handledSearch, placeholder }) {
 }
 
 SearchFriends.propTypes = {
-  handledSearch: PropTypes.func
+  handledSearch: PropTypes.func,
+  placeholder: PropTypes.string
 };
