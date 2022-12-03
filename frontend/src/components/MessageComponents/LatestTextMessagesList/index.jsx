@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setPage, setCurrentUser } from "../../../redux/slices/messages/messagesSlice";
+import {
+  setFirstSectionOfPage,
+  setCurrentUser
+} from "../../../redux/slices/messages/messagesSlice";
 
 // styles
 import styles from "./latestTextMessageList.module.sass";
@@ -22,7 +25,7 @@ export default function LastestTextMessageList({ messageList }) {
     if (!isTablet) {
       navigate(`/messages/options`);
     }
-    dispatch(setPage(CHAT_SETIONS.userOptions));
+    dispatch(setFirstSectionOfPage(CHAT_SETIONS.userOptions));
     dispatch(setCurrentUser(id));
   };
 

@@ -1,13 +1,23 @@
-// style
+// hooks
 import { useNavigate } from "react-router-dom";
-import styles from "./chat.module.sass";
-import message from "../../../../assets/Icons/Message.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { CHAT_SETIONS } from "../utils/chatSetions";
 import { useMediaQuery } from "react-responsive";
-import { setPage } from "../../../redux/slices/messages/messagesSlice";
+import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
 
-export default function ChatWraper() {
+// hocs
+import messagesResponsive from "../../../hocs/messageResponsive";
+
+// components
+import message from "../../../../assets/Icons/Message.svg";
+import HeaderDesktop from "../HeaderDesktop";
+
+// utils
+import { CHAT_SETIONS } from "../utils/chatSetions";
+
+// style
+import styles from "./chat.module.sass";
+
+function ChatWraper() {
   const currentUser = useSelector(state => state.message.currentUserId);
 
   const isTablet = useMediaQuery({
@@ -20,23 +30,24 @@ export default function ChatWraper() {
     if (!isTablet) {
       navigate("/messages/defaultMessages");
     }
-    dispatch(setPage(CHAT_SETIONS.predefinedMessages));
+    dispatch(setThirdSectionOfPage(CHAT_SETIONS.predefinedMessages));
   };
 
-  const title = "selecciona un amigo para chatear";
+  const title = "Selecciona un amigo para chatear";
+  const selectMessage = "Selecciona un mensaje";
   return (
     <div className={styles.container}>
-      <div className={styles.title}>
-        <p>{title}</p>
-      </div>
+      <HeaderDesktop showUserImage={false} showArrow={false} isTitleCenter={true} title={title} />
       <div className={styles.messageContainer}>
         {!currentUser && <img src={message} alt="Mensaje" />}
       </div>
       {currentUser && (
         <button className={styles.selectMessage} onClick={handledPage}>
-          Selecciona Mensaje
+          {selectMessage}
         </button>
       )}
     </div>
   );
 }
+
+export default messagesResponsive(ChatWraper);

@@ -8,35 +8,30 @@ import user from "../assets/friend-1.svg";
 // styles
 import styles from "./header.module.sass";
 
-// hooks
-import { useNavigate } from "react-router-dom";
-
-export default function HeaderMobile({
-  title,
+export default function HeaderDesktop({
   userImage = user,
   showArrow = true,
   showUserImage = true,
-  isTitleCenter = false
+  isTitleCenter = false,
+  handledPage,
+  title = ""
 }) {
-  const navigate = useNavigate();
   return (
     <div className={styles.container}>
-      {showArrow && (
-        <img className={styles.arrow} src={arrow} alt="arrow" onClick={() => navigate(-1)} />
-      )}
+      {showArrow && <img className={styles.arrow} src={arrow} alt="arrow" onClick={handledPage} />}
       <div className={`${styles.title} ${isTitleCenter ? styles.center : styles.left}`}>
         {showUserImage && <img className={styles.friend} src={userImage} alt="Image friend" />}
         <p>{title}</p>
       </div>
-      <img className={styles.user} src={userImage} alt="user" />
     </div>
   );
 }
 
-HeaderMobile.propTypes = {
+HeaderDesktop.propTypes = {
   title: PropTypes.string,
   userImage: PropTypes.string,
   showArrow: PropTypes.bool,
   showUserImage: PropTypes.bool,
-  isTitleCenter: PropTypes.bool
+  isTitleCenter: PropTypes.bool,
+  handledPage: PropTypes.func
 };

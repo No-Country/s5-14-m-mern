@@ -1,0 +1,32 @@
+.container {
+  width: 100%;
+  height: 100%;
+}
+.container .link {
+  text-decoration: none;
+  color: white;
+}
+.container .link .friend {
+  display: flex;
+  align-items: center;
+  border-width: 0.1px 0px 0px 0px;
+  border-color: white;
+  border-style: solid;
+}
+.container .link .friend .FriendImage {
+  width: 50px;
+  height: 50px;
+}
+.container .link .friend .messageWraper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.container .link .friend .messageWraper .message {
+  color: rgba(255, 255, 255, 0.5019607843);
+  text-decoration: none;
+}
+.container .link .friend .messageWraper .name {
+  text-decoration: none;
+  color: #fff;
+}/*# sourceMappingURL=latestTextMessageList.module.css.map */

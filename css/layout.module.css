@@ -1,0 +1,56 @@
+/* Breakpoints */
+/* Break Points */
+.layout {
+  display: flex;
+  color: #fff;
+  background: linear-gradient(180deg, #0C0E18 0%, #292759 100%);
+  min-height: 100vh;
+}
+
+.layout_content {
+  width: 100vw;
+  position: relative;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .layout_content {
+    width: calc(100vw - 113px);
+  }
+}
+
+.outlet {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  min-height: 100vh;
+  display: flex;
+  flex-grow: 1;
+}
+@media screen and (min-width: 768px) {
+  .outlet {
+    margin-bottom: 10px;
+  }
+}
+
+.navD {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .navD {
+    background: #000;
+    display: inline;
+  }
+}
+
+.navM {
+  background: #000;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+@media screen and (min-width: 768px) {
+  .navM {
+    display: none;
+  }
+}/*# sourceMappingURL=layout.module.css.map */

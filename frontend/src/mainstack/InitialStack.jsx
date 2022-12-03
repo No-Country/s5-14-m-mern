@@ -40,6 +40,10 @@ function InitalStack() {
             <Route exact path="/account" element={<Account />} />
             <Route exact path="/signup/success" element={<SuccesRegister />} />
             <Route exact path="/signup/failed" element={<FailedRegister />} />
+            <Route path="/messages/options" element={<MessageUser />} />
+            <Route path="/messages/chat" element={<ChatWraper />} />
+            <Route path="/messages/defaultMessages" element={<DefaultMessages />} />
+            <Route path="/messages/challenge" element={<ChallengeMessage />} />
             <Route path="/messages/:userId" element={<MessageUser />} />
             <Route path="/messages/chat" element={<ChatWraper />} />
             <Route path="/messages/defaultMessages" element={<DefaultMessages />} />
