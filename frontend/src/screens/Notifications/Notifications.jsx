@@ -7,9 +7,11 @@ import Card from "../../components/PagesComponents/Card/Card";
 import noSigned from "../../../assets/Icons/noSignNotif.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Notifications = () => {
-  const [isLogged] = useState(true);
+  const { userLogged } = useSelector(state => state.auth);
+  const [isLogged] = useState(userLogged);
 
   return (
     <div className={style.notif_content}>
