@@ -7,6 +7,8 @@ import { userLogin } from "../../redux/slices/auth/authAction";
 import { getUserLogged } from "../../redux/slices/user/userAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import sign from "../../../assets/sesion/login.png";
+import arrow from "../../../assets/Icons/arrow.svg";
 
 import styles from "../LogIn/login.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -65,74 +67,68 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <Link to={"../"}>
-        <i
-          className="bi bi-arrow-left"
-          style={{
-            color: "#fff",
-            position: "absolute",
-            top: "5%",
-            left: "10%",
-            fontSize: "25px",
-            cursor: "pointer"
-          }}></i>
+        <img className={styles.arrow} src={arrow} alt="" />
       </Link>
-      <img className={styles.imagen} src="../../../assets/logo/logo.png" />
-      <p className={styles.description}>Inicia sesión para ingresar a tu cuenta</p>
-      <Formik
-        initialValues={{
-          email: "",
-          password: ""
-        }}
-        validationSchema={LoginSchema}
-        onSubmit={submitHandler}>
-        {({ errors, touched }) => (
-          <Form className={styles.form}>
-            <Field className={styles.formfield} name="email" placeholder="Email" />
-            {errors.email && touched.email ? (
-              <div className={styles.formerrors}>{errors.email}</div>
-            ) : null}
-            <div className={styles.containercontraseña}>
-              <Field
-                className={styles.formfieldcontraseña}
-                name="password"
-                placeholder="Contraseña"
-                type={!mostrarContraseña ? "password" : "text"}
-              />
-              <i
-                onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill"
-                style={{
-                  position: "absolute",
-                  marginTop: "12px",
-                  right: "10%",
-                  fontSize: "18px"
-                }}></i>
-            </div>
-            {errors.password && touched.password ? (
-              <div className={styles.formerrors}>{errors.password}</div>
-            ) : null}
-            <button ref={buttonRef} className={styles.formbutton} type="submit">
-              Enviar
-            </button>
-            <div id="noexiste"></div>
-          </Form>
-        )}
-      </Formik>
-      <Link className={styles.crearcuenta} to={"../signup"}>
-        No tienes Cuenta? Registrate
-      </Link>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+      <img className={styles.img_desk} src={sign} alt="" />
+      <div className={styles.formu}>
+        <img className={styles.imagen} src="../../../assets/logo/logo.png" />
+        <p className={styles.description}>Inicia sesión para ingresar a tu cuenta</p>
+        <Formik
+          initialValues={{
+            email: "",
+            password: ""
+          }}
+          validationSchema={LoginSchema}
+          onSubmit={submitHandler}>
+          {({ errors, touched }) => (
+            <Form className={styles.form}>
+              <Field className={styles.formfield} name="email" placeholder="Email" />
+              {errors.email && touched.email ? (
+                <div className={styles.formerrors}>{errors.email}</div>
+              ) : null}
+              <div className={styles.containercontraseña}>
+                <Field
+                  className={styles.formfieldcontraseña}
+                  name="password"
+                  placeholder="Contraseña"
+                  type={!mostrarContraseña ? "password" : "text"}
+                />
+                <i
+                  onClick={() => setMostrarContraseña(!mostrarContraseña)}
+                  className="bi bi-eye-fill"
+                  style={{
+                    position: "absolute",
+                    marginTop: "12px",
+                    right: "10%",
+                    fontSize: "18px"
+                  }}></i>
+              </div>
+              {errors.password && touched.password ? (
+                <div className={styles.formerrors}>{errors.password}</div>
+              ) : null}
+              <button ref={buttonRef} className={styles.formbutton} type="submit">
+                Enviar
+              </button>
+              <div id="noexiste"></div>
+            </Form>
+          )}
+        </Formik>
+        <Link className={styles.crearcuenta} to={"../signup"}>
+          No tienes Cuenta? Registrate
+        </Link>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+      </div>
     </div>
   );
 };

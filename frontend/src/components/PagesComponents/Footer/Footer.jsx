@@ -25,7 +25,10 @@ export const Footer = () => {
         <img src={faq} />
       </div>
 
-      <p className={style.copyM}>Copyright Ludens@ 2022. All rights reserved.</p>
+      <p className={style.copyM}>
+        Copyright Ludens@ 2022. <br />
+        All rights reserved.
+      </p>
     </div>
   );
 };
