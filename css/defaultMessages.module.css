@@ -1,0 +1,102 @@
+/* Breakpoints */
+/* Break Points */
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #262553;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 350px;
+    height: 820px;
+    border-left: 1px solid #fff;
+  }
+}
+.container .message {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+.container .message::-webkit-scrollbar:vertical {
+  width: 0px;
+}
+.container .message::-webkit-scrollbar {
+  -webkit-appearance: none;
+          appearance: none;
+}
+.container .message .greeting {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+}
+.container .message .greeting aside {
+  background: transparent;
+  border: none;
+  color: #000;
+  border-width: 0px !important;
+  z-index: 0;
+}
+.container .message .greeting aside div:nth-child(1) {
+  display: flex;
+}
+.container .message .greeting aside div:nth-child(2)::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+.container .message .greeting .title {
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+}
+.container .message .greeting .greetingButton {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0 15px;
+  border-radius: 20px;
+  background: #329B00;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+  margin: 8px 0;
+}
+.container .message .greeting .greetingButton:hover {
+  background: #297704;
+}
+.container .message .greeting .dailygButton {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0 15px;
+  border-radius: 20px;
+  background: #2088E9;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+  margin: 8px 0;
+}
+.container .message .greeting .dailygButton:hover {
+  background: #0559A6;
+}
+.container .message .greeting .challengeButton {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 15px;
+  border-radius: 20px;
+  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  cursor: pointer;
+  margin: 8px 0;
+}
+.container .message .greeting .challengeButton:hover {
+  background: linear-gradient(255.54deg, #F9A811 31.32%, #B97900 91.81%);
+}/*# sourceMappingURL=defaultMessages.module.css.map */

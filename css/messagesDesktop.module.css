@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .chatSections {
+  display: flex;
+  border-radius: 15px;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+}/*# sourceMappingURL=messagesDesktop.module.css.map */

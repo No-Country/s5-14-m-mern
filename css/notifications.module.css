@@ -3,6 +3,11 @@
 .notif_content {
   width: 90vw;
   margin: 10px auto;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .card1 {
@@ -64,7 +69,6 @@
 }
 .btn1:hover {
   background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
-  border: none;
   color: #000;
 }
 @media screen and (min-width: 768px) {
@@ -89,7 +93,6 @@
 }
 .btn2:hover {
   background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
-  border: none;
   color: #000;
 }
 @media screen and (min-width: 768px) {
@@ -164,4 +167,40 @@
   .card2 .desk h4 {
     margin: auto;
   }
+}
+
+.not_logged {
+  margin: auto;
+}
+.not_logged img {
+  height: 160px;
+  margin-bottom: 20px;
+  margin-left: 25px;
+}
+@media screen and (min-width: 992px) {
+  .not_logged img {
+    height: 200px;
+    margin-left: 30px;
+  }
+}
+.not_logged h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.not_logged button {
+  text-decoration: none;
+  padding: 7px;
+  width: 166px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #F2CF8D;
+  border: 2px solid #F2CF8D;
+  font-weight: 500;
+  font-size: 16px;
+  width: 270px;
+}
+.not_logged button:hover {
+  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  color: #000;
 }/*# sourceMappingURL=notifications.module.css.map */

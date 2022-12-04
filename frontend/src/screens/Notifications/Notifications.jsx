@@ -1,23 +1,57 @@
 import style from "./notifications.module.sass";
-import avatar from "../../../assets/AccountAvatars/avatar4.png";
-import chess from "../../../assets/Imagescards/chess.svg";
-import english from "../../../assets/Imagescards/english.svg";
-import logoM from "../../../assets/Icons/logoHeaderM.svg";
-import Card from "../../components/PagesComponents/Card/Card";
+// import avatar from "../../../assets/AccountAvatars/avatar4.png";
+// import chess from "../../../assets/Imagescards/chess.svg";
+// import english from "../../../assets/Imagescards/english.svg";
+// import logoM from "../../../assets/Icons/logoHeaderM.svg";
+// import Card from "../../components/PagesComponents/Card/Card";
 import noSigned from "../../../assets/Icons/noSignNotif.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useServices from "../../services/useServices";
+import FriendNotification from "../../components/NotificationsComponents/friendNotification";
 
 const Notifications = () => {
   const { userLogged } = useSelector(state => state.auth);
+  const [myNotifications, setMyNotifications] = useState();
+
+  const { notifications } = useServices();
+
   const [isLogged] = useState(userLogged);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await notifications.getNotifications();
+      setMyNotifications(data.notifications);
+    })();
+  }, []);
 
   return (
     <div className={style.notif_content}>
       {/* Logueado */}
-      {isLogged && (
-        <div>
+      {isLogged ? (
+        myNotifications ? (
+          myNotifications.map(not => <FriendNotification key={not._id} data={not} />)
+        ) : (
+          <p>Sin notificaciones</p>
+        )
+      ) : (
+        <div className={style.not_logged}>
+          <img src={noSigned} alt="" />
+          <h3>Inicia sesión para ver las notificaciones</h3>
+          <Link to="/login">
+            <button>Iniciar sesión</button>
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Notifications;
+
+{
+  /* <div>
           <div className={style.card1}>
             <h1>Desafío de amigo</h1>
             <div className={style.desk}>
@@ -48,20 +82,5 @@ const Notifications = () => {
             </div>
             <button className={style.btn1}>Ir al juego</button>
           </div>
-        </div>
-      )}
-      {/* No logueado */}
-      {!isLogged && (
-        <div className={style.not_logged}>
-          <img src={noSigned} alt="" />
-          <h3>Inicia sesión para ver las notificaciones</h3>
-          <Link to="/login">
-            <button>Iniciar sesión</button>
-          </Link>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Notifications;
+        </div> */
+}

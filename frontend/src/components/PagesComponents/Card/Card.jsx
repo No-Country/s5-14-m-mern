@@ -27,7 +27,7 @@ const Card = ({
         className={`${style.card} ${size === "small" ? style.card_small : null}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}>
-        <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
+        <Link to={path} state={{ gameId, name, stars, description, minAge, path, folder }}>
           <img src={cover} alt={name} />
         </Link>
         <h5>{name}</h5>

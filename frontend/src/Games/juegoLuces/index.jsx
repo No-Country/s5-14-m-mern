@@ -1,8 +1,9 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 import Modal from "./Modal/Modal";
 import style from "./tablero.module.sass";
+import PropTypes from "prop-types";
 
 const initialState = [
   [false, false, false],
@@ -28,7 +29,7 @@ const setBoard = () => {
   return board;
 };
 
-const LightGame = ({ gameId }) => {
+const LightGame = ({ setScores, gameId }) => {
   const [lights, setLights] = useState(initialState);
   const [play, setPlay] = useState(false);
   const [score, setScore] = useState("0");
@@ -65,9 +66,12 @@ const LightGame = ({ gameId }) => {
   const finishGame = async () => {
     setPlay(false);
     const gameScore = 3600 - Math.floor(time / 1000);
-    const newScore = gameScore > 1 ? gameScore.toString() : "1";
+    const newScore = gameScore > 1 ? gameScore.toString() : 1;
     setScore(newScore);
-    if (userLogged) await scores.createInGame(gameId, { score: newScore });
+    if (userLogged) {
+      await scores.createInGame(gameId, { score: newScore });
+      setScores(newScore);
+    }
   };
 
   const startGame = () => {
@@ -122,6 +126,11 @@ const LightGame = ({ gameId }) => {
       </div>
     </div>
   );
+};
+
+LightGame.propTypes = {
+  setScores: PropTypes.func,
+  gameId: PropTypes.string
 };
 
 export default LightGame;

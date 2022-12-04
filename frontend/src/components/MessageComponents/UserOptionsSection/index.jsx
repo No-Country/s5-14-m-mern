@@ -15,13 +15,17 @@ import { useNavigate } from "react-router-dom";
 import {
   setFirstSectionOfPage,
   setThirdSectionOfPage,
-  setSelectUser
+  setSelectUser,
+  resetCurrentUser
 } from "../../../redux/slices/messages/messagesSlice";
 
 // components
 import HeaderDesktop from "../HeaderDesktop";
+import avatarI from "../../../../assets/AccountAvatars/avatar0.png";
+import { deleteFriend, inviteFriend } from "../../../redux/slices/user/userAction";
 
 function UserOptionsSection() {
+  const { userInfo } = useSelector(state => state.user);
   const currentUser = useSelector(state => state.message.currentUser);
 
   const isTablet = useMediaQuery({
@@ -35,11 +39,21 @@ function UserOptionsSection() {
     dispatch(setSelectUser(true));
   };
 
-  const toBack = () => dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
-
+  const toBack = () => {
+    dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
+    dispatch(resetCurrentUser());
+  };
   const handledChallengePage = () => {
     if (!isTablet) navigate("/messages/challenge");
     dispatch(setThirdSectionOfPage(CHAT_SETIONS.predefinedMessagesWithChallenge));
+  };
+
+  const handleDeleteFriend = () => {
+    dispatch(deleteFriend(currentUser._id));
+  };
+
+  const handleInviteFriend = () => {
+    dispatch(inviteFriend(currentUser._id));
   };
 
   const title = "Amigo";
@@ -58,13 +72,19 @@ function UserOptionsSection() {
         </div>
         <div className={styles.optionsWraper}>
           <div className={styles.friendImage}>
-            <img src={currentUser?.image} alt={currentUser?.name} />
+            <img src={currentUser?.avatar || avatarI} alt={currentUser?.name} />
           </div>
-          <div className={styles.friendsOptions}>
-            <button onClick={handledSendMessage}>{USER_OPTIONS.SEND_MESSAGE}</button>
-            <button onClick={handledChallengePage}>{USER_OPTIONS.TO_CHALLENGE}</button>
-            <button>{USER_OPTIONS.DELETE_FRIEND}</button>
-          </div>
+          {currentUser && userInfo.friends.includes(currentUser._id) ? (
+            <div className={styles.friendsOptions}>
+              <button onClick={handledSendMessage}>{USER_OPTIONS.SEND_MESSAGE}</button>
+              <button onClick={handledChallengePage}>{USER_OPTIONS.TO_CHALLENGE}</button>
+              <button onClick={handleDeleteFriend}>{USER_OPTIONS.DELETE_FRIEND}</button>
+            </div>
+          ) : (
+            <div className={styles.friendsOptions}>
+              <button onClick={handleInviteFriend}>{USER_OPTIONS.ADD_FRIEND}</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
