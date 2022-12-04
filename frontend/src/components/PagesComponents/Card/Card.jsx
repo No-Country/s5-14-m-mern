@@ -4,7 +4,7 @@ import "keen-slider/keen-slider.min.css";
 import style from "./card.module.sass";
 import Rate from "../Stars/Stars";
 import hoverIm from "../../../../assets/Icons/hover.svg";
-import imgDefault from "../../../../assets/Imagescards/cardDefault.svg";
+// import imgDefault from "../../../../assets/Imagescards/cardDefault.svg";
 import { Link } from "react-router-dom";
 
 const Card = ({

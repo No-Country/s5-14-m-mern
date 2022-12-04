@@ -6,12 +6,12 @@ import Rate from "../../components/PagesComponents/Stars/Stars";
 import style from "./allGames.module.sass";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
+import { todopublico, plus3, plus7, mouse, gamepad, keyboard, touch } from "../../../assets";
 
 const AllGames = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [state, setState] = useState({});
-  const [rating, setRating] = useState(); // Esto no se usa o está pendiente ?
   const { id } = useParams();
   const { userLogged } = useSelector(state => state.auth);
   const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
@@ -27,7 +27,10 @@ const AllGames = () => {
 
   return (
     <div className={style.games_content}>
-      <h2>{state.name}</h2>
+      <div className={style.name}>
+        <h2>{state.name}</h2>
+        <Rate change={false} stars={state.stars} />
+      </div>
       <div className={style.desktop}>
         <div className={style.screen_games}>
           <Suspense fallback={<SpinnerLoad />}>
@@ -39,13 +42,13 @@ const AllGames = () => {
             <h3>Descripción:</h3>
             <p>{state.description}</p>
             <div className={style.d_flex}>
-              <span className={style.circle}>+{state.minAge}</span>
-              <span className={style.circle}>
-                <i className="bi bi-mouse2"></i>
-              </span>
-              <span className={style.circle}>
-                <i className="bi bi-hand-index-thumb"></i>
-              </span>
+              {state.minAge === "tp" && <img src={todopublico} alt="" />}
+              {state.minAge === "+3" && <img src={plus3} alt="" />}
+              {state.minAge === "+7" && <img src={plus7} alt="" />}
+              <img src={mouse} />
+              <img src={gamepad} />
+              <img src={keyboard} />
+              <img src={touch} />
             </div>
           </div>
           <div className={style.ranking}>

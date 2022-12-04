@@ -5,7 +5,7 @@ import logoM from "../../../../assets/Icons/logoHeaderM.svg";
 import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import avatar from "../../../../assets/AccountAvatars/avatar2.png";
 // Como obtener datos de redux
 import { useSelector, useDispatch } from "react-redux"; // Importar use Selector
@@ -13,6 +13,7 @@ import { logout } from "../../../redux/slices/auth";
 import { resetUser } from "../../../redux/slices/user";
 import { getUserLogged } from "../../../redux/slices/user/userAction";
 import { changeFilter } from "../../../redux/slices/filter";
+import Titles from "./Titles";
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false);
@@ -24,7 +25,6 @@ const Header = () => {
   // Auth solo tiene si esta logueado o no: en userLogged tiene el id, el rol, y en userToken tiene el token.
 
   const { filter } = useSelector(state => state.filter);
-  const [isAdmin] = useState(true);
 
   const inputM = () => {
     setSearchM(!searchM);
@@ -36,9 +36,6 @@ const Header = () => {
   };
 
   const handleMenu = () => setUserMenu(!userMenu);
-  const handleSign = () => setIsLogged(!isLogged);
-
-  const { pathname, state } = useLocation();
 
   useEffect(() => {
     if (!userInfo && userLogged) {
@@ -50,16 +47,18 @@ const Header = () => {
     dispatch(changeFilter(e.target.value));
   };
 
+  const { home, headerTitle } = Titles();
+
   return (
     <div className={style.header_content}>
-      {pathname === "/" && !searchM && <img className={style.logoHM} src={logo} />}
-      {pathname === "/" && searchM && <img className={style.mob} src={arrow} onClick={inputM} />}
-      {pathname === "/" && searchM && <img className={style.logoHM} src={logoM} />}
-      {pathname === "/" && searchM && (
+      {home && !searchM && <img className={style.logoHM} src={logo} />}
+      {home && searchM && <img className={style.mob} src={arrow} onClick={inputM} />}
+      {home && searchM && <img className={style.logoHM} src={logoM} />}
+      {home && searchM && (
         <input className={style.inputM} type="text" value={filter} onChange={handleChange} />
       )}
       <img className={style.logoH} src={logo} />
-      {pathname === "/" && (
+      {home && (
         <input
           className={style.inputD}
           type="text"
@@ -68,18 +67,13 @@ const Header = () => {
           onChange={handleChange}
         />
       )}
-      {pathname !== "/" && (
+      {!home && (
         <Link to="/" className={style.mob}>
           <img src={arrow} />
         </Link>
       )}
-      {pathname !== "/" && <h2 className={style.title}>{state?.headerTitle || "LudenS"}</h2>}
-      {/* {pathname === "/favourites" && <h2 className={style.title}>Favoritos</h2>} */}
-      {/* {pathname === "/notifications" && <h2 className={style.title}>Notificaciones</h2>} */}
-      {/* {pathname === "/messages" && <h2 className={style.title}>Mensajes</h2>} */}
-      {/* {pathname === "/account" && <h2 className={style.title}>Perfíl</h2>} */}
-      {/* {pathname.substring(0, 6) === "/games" && <h2 className={style.title}>Juegos</h2>} */}
-      {pathname === "/" && !searchM && <img className={style.mob} src={search} onClick={inputM} />}
+      {!home && <h2 className={style.title}>{headerTitle}</h2>}
+      {home && !searchM && <img className={style.mob} src={search} onClick={inputM} />}
       {!userLogged && (
         <Link to="/login" className={style.mob}>
           <img src={user} />

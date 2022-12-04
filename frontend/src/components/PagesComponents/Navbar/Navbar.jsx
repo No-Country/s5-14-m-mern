@@ -16,21 +16,21 @@ export const Navbar = () => {
         </NavLink>
       </div>
       <div className={style.nav}>
-        <NavLink to="/favourites" state={{ headerTitle: "Favoritos" }}>
+        <NavLink to="/favourites">
           {({ isActive }) => (
             <img className={`${style.img} ${isActive ? style.favsAc : style.favs}`} />
           )}
         </NavLink>
       </div>
       <div className={style.nav}>
-        <NavLink to="/messages" state={{ headerTitle: "Mensajes" }}>
+        <NavLink to="/messages">
           {({ isActive }) => (
             <img className={`${style.img} ${isActive ? style.messagesAc : style.messages}`} />
           )}
         </NavLink>
       </div>
       <div className={style.nav}>
-        <NavLink to="/notifications" state={{ headerTitle: "Notificaciones" }}>
+        <NavLink to="/notifications">
           {({ isActive }) => (
             <img className={`${style.img} ${isActive ? style.notifAc : style.notif}`} />
           )}
