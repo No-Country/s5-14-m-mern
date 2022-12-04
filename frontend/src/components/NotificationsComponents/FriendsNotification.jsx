@@ -1,8 +1,10 @@
+import React from "react";
 import PropTypes from "prop-types";
 import style from "./friendsNotification.module.sass";
 import avatarI from "../../../assets/AccountAvatars/avatar0.png";
 
-const FriendNotification = ({ data }) => {
+const FriendsNotification = ({ data }) => {
+  console.log("asdasdas");
   return (
     <div className={style.card1}>
       <h1>{data.title}</h1>
@@ -16,8 +18,8 @@ const FriendNotification = ({ data }) => {
   );
 };
 
-FriendNotification.propTypes = {
+FriendsNotification.propTypes = {
   data: PropTypes.object
 };
 
-export default FriendNotification;
+export default FriendsNotification;
