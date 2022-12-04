@@ -1,5 +1,6 @@
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
+import { USER_OPTIONS } from "../utils/userOptions";
 
 // styles
 import styles from "./messagerUser.module.sass";
@@ -20,14 +21,9 @@ import {
 // components
 import HeaderDesktop from "../HeaderDesktop";
 
-function MessageUser() {
+function UserOptionsSection() {
   const currentUser = useSelector(state => state.message.currentUser);
 
-  const USER_OPTION = {
-    SEND_MESSAGE: "Enviar mensaje",
-    TO_CHALLENGE: "Desafiar",
-    DELETE_FRIEND: "Dejar de ser amigos"
-  };
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
   });
@@ -40,6 +36,7 @@ function MessageUser() {
   };
 
   const toBack = () => dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
+
   const handledChallengePage = () => {
     if (!isTablet) navigate("/messages/challenge");
     dispatch(setThirdSectionOfPage(CHAT_SETIONS.predefinedMessagesWithChallenge));
@@ -64,9 +61,9 @@ function MessageUser() {
             <img src={currentUser?.image} alt={currentUser?.name} />
           </div>
           <div className={styles.friendsOptions}>
-            <button onClick={handledSendMessage}>{USER_OPTION.SEND_MESSAGE}</button>
-            <button onClick={handledChallengePage}>{USER_OPTION.TO_CHALLENGE}</button>
-            <button>{USER_OPTION.DELETE_FRIEND}</button>
+            <button onClick={handledSendMessage}>{USER_OPTIONS.SEND_MESSAGE}</button>
+            <button onClick={handledChallengePage}>{USER_OPTIONS.TO_CHALLENGE}</button>
+            <button>{USER_OPTIONS.DELETE_FRIEND}</button>
           </div>
         </div>
       </div>
@@ -74,4 +71,4 @@ function MessageUser() {
   );
 }
 
-export default messagesResponsive(MessageUser);
+export default messagesResponsive(UserOptionsSection);

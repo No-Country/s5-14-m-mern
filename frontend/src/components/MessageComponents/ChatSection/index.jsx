@@ -18,7 +18,7 @@ import { CHAT_SETIONS } from "../utils/chatSetions";
 // style
 import styles from "./chat.module.sass";
 
-function ChatWraper() {
+function ChatSection() {
   const currentUser = useSelector(state => state.message.currentUser);
   const selectUser = useSelector(state => state.message.selectUser);
 
@@ -56,4 +56,4 @@ function ChatWraper() {
   );
 }
 
-export default messagesResponsive(ChatWraper);
+export default messagesResponsive(ChatSection);

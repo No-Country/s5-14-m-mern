@@ -5,26 +5,26 @@ import { useSelector } from "react-redux";
 import { CHAT_SETIONS } from "../utils/chatSetions";
 
 // components
-import MessageUser from "../MessangerUser";
-import DefaultMessages from "../DefaultMessages";
-import ChallengeMessage from "../ChallengeMessage";
-import SearchWraper from "../SearchWraper/index";
-import ChatWraper from "../ChatWraper/index";
+import UserOptionsSection from "../UserOptionsSection";
+import PredefinedMessagesSection from "../PredefinedMessagesSection";
+import ChallengesSection from "../ChallengesSection";
+import FindFriendsSection from "../FindFriendsSection/index";
+import ChatSection from "../ChatSection/index";
 
 // styles
 import styles from "./messagesDesktop.module.sass";
 
-export default function MessagesDesktop() {
+export default function DesktopMessagePage() {
   const firstSectionOfPage = useSelector(state => state.message.firstSectionOfPage);
   const secondSectionOfPage = useSelector(state => state.message.secondSectionOfPage);
   const thirdSectionOfPage = useSelector(state => state.message.thirdSectionOfPage);
 
   const SECTIONS = {
-    [CHAT_SETIONS.chat]: ChatWraper,
-    [CHAT_SETIONS.predefinedMessages]: DefaultMessages,
-    [CHAT_SETIONS.predefinedMessagesWithChallenge]: ChallengeMessage,
-    [CHAT_SETIONS.searchFriends]: SearchWraper,
-    [CHAT_SETIONS.userOptions]: MessageUser
+    [CHAT_SETIONS.chat]: ChatSection,
+    [CHAT_SETIONS.predefinedMessages]: PredefinedMessagesSection,
+    [CHAT_SETIONS.predefinedMessagesWithChallenge]: ChallengesSection,
+    [CHAT_SETIONS.searchFriends]: FindFriendsSection,
+    [CHAT_SETIONS.userOptions]: UserOptionsSection
   };
 
   const FirstSection = SECTIONS[firstSectionOfPage];

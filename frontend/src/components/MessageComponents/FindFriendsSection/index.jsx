@@ -1,7 +1,7 @@
 // components
 import FriendsList from "../FriendsList";
-import SearchFriends from "../SearchFriends";
-import LastestTextMessageList from "../LatestTextMessagesList";
+import SearchInput from "../SearchInput";
+import ListOfLastMessages from "../ListOfLastMessages";
 import HeaderDesktop from "../HeaderDesktop";
 
 // hooks
@@ -13,7 +13,7 @@ import { FRIENDS } from "../utils/friendsList";
 // styles
 import styles from "./searchWraper.module.sass";
 
-export default function SearchWraper() {
+export default function FindFriendsSection() {
   const [friend, setFriend] = useState(FRIENDS);
 
   const handlesSearchFriend = key => {
@@ -28,8 +28,8 @@ export default function SearchWraper() {
     <div className={styles.container}>
       <HeaderDesktop showUserImage={false} showArrow={false} isTitleCenter={true} title="Amigos" />
       <FriendsList friendsList={FRIENDS} />
-      <SearchFriends handledSearch={handlesSearchFriend} placeholder="Buscar jugadores" />
-      <LastestTextMessageList messageList={friend} />
+      <SearchInput handledSearch={handlesSearchFriend} placeholder="Buscar jugadores" />
+      <ListOfLastMessages messageList={friend} />
     </div>
   );
 }
