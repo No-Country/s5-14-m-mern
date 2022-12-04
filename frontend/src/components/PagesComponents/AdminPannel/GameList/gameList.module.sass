@@ -3,9 +3,15 @@
 
 .listgames
   width: 100%
+  margin: 0 auto
+  @include mq(medium)
+    width: 80vw
+  @media screen and (min-width:1600px)
+    width: 70vw
+  @media screen and (min-width:1900px)
+    width: 60vw
   &_list
     display: table
-    background: $dark-gray
     border-radius: 20px
     font-size: 18px
     margin-top: 1em
@@ -13,14 +19,18 @@
     border-collapse: separate
     padding-bottom: 4em
     width: 100%
+    @include mq(medium)
+      background: $dark-gray
 
 
   &_header
-    display: table-row
+    display: none
     text-align: center
     border: 1px solid #fff
     -moz-border-radius:20px
     -webkit-border-radius:20px
+    @include mq(medium)
+      display: table-row
 
     div
       display: table-cell
@@ -36,6 +46,14 @@
         border-top-right-radius: 20px
         border-bottom-right-radius: 20px
 
+    .description
+      display: none
+      @include mq(xlarge)
+        display: table-cell
+    .devices
+      display: none
+      @include mq(large)
+        display: table-cell
 
 .addGameButton 
   display: flex

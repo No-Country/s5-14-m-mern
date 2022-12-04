@@ -1,7 +1,16 @@
 import classes from "./gameItem.module.sass";
 import { Link } from "react-router-dom";
 // icon import
-import { plus3, plus7, mouse, todopublico, keyboard, trash, edit } from "../../../../../assets";
+import {
+  plus3,
+  plus7,
+  mouse,
+  touch,
+  todopublico,
+  keyboard,
+  trash,
+  edit
+} from "../../../../../assets";
 
 import PropTypes from "prop-types";
 
@@ -26,18 +35,18 @@ function GameItem({ id, path, name, description, tags, onDelete }) {
   };
 
   const handleDelete = () => {
-    //TODO: CONFIRMATION
+    // TODO: CONFIRMATION
     onDelete(id);
   };
 
   return (
     <div className={classes.row_table}>
-      <div>
+      <div className={classes.cover}>
         <img src={path} alt={name} />
       </div>
-      <div>{name}</div>
+      <div className={classes.name}>{name}</div>
       <div className={classes.description}>{description}</div>
-      <div>
+      <div className={classes.devices}>
         {tags.map((icon, index) => {
           const iconImage = tagIcon(icon);
           return <img key={index} src={iconImage} alt={icon} />;

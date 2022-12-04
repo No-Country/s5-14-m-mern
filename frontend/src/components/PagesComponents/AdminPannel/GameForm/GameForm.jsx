@@ -33,6 +33,7 @@ function GameForm() {
   // Get the games list
   const getGame = gameId => {
     if (id) {
+      console.log(games);
       try {
         const result = games.getById(gameId);
         console.log(result);
@@ -145,7 +146,8 @@ function GameForm() {
         });
       }
       if (result) {
-        setSuccess(result);
+        setSuccess(result.data.game);
+        console.log(result);
         resetForm();
         setLoadingGames(true);
         navigate("/admin");

@@ -45,88 +45,6 @@ const SignUp = () => {
   return (
     <div className={styles.container}>
       <Link to={"../"}>
-<<<<<<< HEAD
-        <i
-          className="bi bi-arrow-left"
-          style={{
-            color: "#fff",
-            position: "absolute",
-            top: "5%",
-            left: "10%",
-            fontSize: "25px",
-            cursor: "pointer"
-          }}
-        ></i>
-      </Link>
-      <img className={styles.img} src="../../../assets/logo/logo.png" />
-      <p className={styles.description}>¡Crea tu cuenta y desafia a tus amigos!</p>
-      <Formik
-        initialValues={{
-          username: "",
-          email: "",
-          password: ""
-        }}
-        validationSchema={SignupSchema}
-        onSubmit={values => {
-          dispatch(
-            registerUser({
-              username: values.username,
-              email: values.email,
-              password: values.password
-            })
-          );
-        }}
-      >
-        {({ errors, touched }) => (
-          <Form className={styles.form}>
-            <Field className={styles.formfield} name="username" placeholder="Nombre de usuario" />
-            {errors.username && touched.username ? (
-              <div className={styles.formerrors}>{errors.username}</div>
-            ) : null}
-            <Field className={styles.formfield} name="email" placeholder="E-mail" />
-            {errors.email && touched.email ? (
-              <div className={styles.formerrors}>{errors.email}</div>
-            ) : null}
-            <div className={styles.containerfield}>
-              <Field
-                className={styles.formfieldcontraseña}
-                name="password"
-                placeholder="Contraseña"
-                type={!mostrarContraseña ? "password" : "text"}
-              />
-              <i
-                onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill"
-                style={{
-                  position: "absolute",
-                  marginTop: "12px",
-                  right: "10%",
-                  fontSize: "18px"
-                }}
-              ></i>
-            </div>
-            {errors.password && touched.password ? (
-              <div className={styles.formerrors}>{errors.password}</div>
-            ) : null}
-            <div className={styles.containerfield}>
-              <Field
-                className={styles.formfieldcontraseña}
-                name="passwordConfirmacion"
-                placeholder="Confirmar Contraseña"
-                type={!mostrarContraseña ? "password" : "text"}
-              />
-              <i
-                onClick={() => setMostrarContraseña(!mostrarContraseña)}
-                className="bi bi-eye-fill"
-                style={{
-                  position: "absolute",
-                  marginTop: "12px",
-                  right: "10%",
-                  fontSize: "18px"
-                }}
-              ></i>
-            </div>
-=======
         <img className={styles.arrow} src={arrow} alt="" />
       </Link>
       <img className={styles.img_desk} src={signup} alt="" />
@@ -196,7 +114,6 @@ const SignUp = () => {
                     fontSize: "18px"
                   }}></i>
               </div>
->>>>>>> fee394dbdc9b1434ab9e09d03ddfe8e8aefb1c3a
 
               {errors.passwordConfirmacion && touched.passwordConfirmacion ? (
                 <div className={styles.formerrors}>{errors.passwordConfirmacion}</div>

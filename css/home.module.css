@@ -20,6 +20,14 @@
     width: 60vw;
   }
 }
+.home img {
+  height: 35px;
+  margin-left: 8px;
+}
+.home h2 {
+  font-size: 20px;
+  line-height: 35px;
+}
 
 .cards {
   margin: 20px 0;
@@ -34,4 +42,9 @@
 
 .spinner {
   max-height: calc(100vh - 269px);
+}
+
+.d_flex {
+  display: flex;
+  justify-content: center;
 }/*# sourceMappingURL=home.module.css.map */

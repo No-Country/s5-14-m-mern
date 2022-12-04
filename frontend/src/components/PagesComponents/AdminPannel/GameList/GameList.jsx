@@ -1,8 +1,7 @@
 import classes from "./gameList.module.sass";
 import GameItem from "../GameItems/GameItem";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import Cross from "../../../../../assets/Icons/cross.svg";
-import { Link } from "react-router-dom";
 
 function GameList() {
   const [games, setLoadingGames] = useOutletContext();
@@ -18,8 +17,7 @@ function GameList() {
     <div className={classes.listgames}>
       <Link
         to="/admin/game-manage"
-        className={`${classes.addGameButton} ${classes.border_gradient_radius}`}
-      >
+        className={`${classes.addGameButton} ${classes.border_gradient_radius}`}>
         <span>Agregar Juego</span>
         <span>
           <img src={Cross} />
@@ -29,8 +27,8 @@ function GameList() {
         <div className={classes.listgames_header}>
           <div>Imágen</div>
           <div>Nombre del Juego</div>
-          <div>Descripción</div>
-          <div>Apto para</div>
+          <div className={classes.description}>Descripción</div>
+          <div className={classes.devices}>Apto para</div>
           <div>Editar</div>
         </div>
         {games.map(({ _id, cover, name, description, audiencies, devices }, index) => {
