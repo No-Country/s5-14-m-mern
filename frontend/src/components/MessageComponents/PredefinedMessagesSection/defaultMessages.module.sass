@@ -31,15 +31,34 @@
             aside
                 background: transparent
                 border: none
-                color: #000
                 border-width: 0px !important
                 z-index: 0
+                font-family: $main-font !important
                 div
                     &:nth-child(1)
                         display: flex
+                        div
+                            &:nth-child(2)
+                                button
+                                    filter: brightness(1.5)
                     &:nth-child(2)
                         &::-webkit-scrollbar
                             -webkit-appearance: none
+                    ul
+                        li
+                            div
+                                &:nth-child(1)
+                                    border-radius: 20px
+                                    font-family: $main-font
+
+            input
+                border-radius: 20px
+                background: #000
+                border: 0px
+                outline: none
+                &:focus,
+                &:active
+                    border: 0px
             .title
                 font-size: 16px
                 font-weight: 700

@@ -3,15 +3,15 @@ import style from "./home.module.sass";
 import { useKeenSlider } from "keen-slider/react";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Arrow from "../../components/PagesComponents/Slider/Arrow";
 import Card from "../../components/PagesComponents/Card/Card";
 import useServices from "../../services/useServices";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import { useNavigate } from "react-router-dom";
+import medal from "../../../assets/Icons/medalstar.svg";
+// import clock from "../../../assets/Icons/clock.svg";
+import magicstar from "../../../assets/Icons/magic-star.svg";
 
 const Home = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loaded, setLoaded] = useState(false);
   const [recommended, setRecommended] = useState();
   const [gamelist, setGamelist] = useState([]);
   const [filteredGames, setFilteredGames] = useState([]);
@@ -20,7 +20,7 @@ const Home = () => {
   const { filter } = useSelector(state => state.filter);
   const navigate = useNavigate();
 
-  const [sliderRef, instanceRef] = useKeenSlider({
+  const [sliderRef] = useKeenSlider({
     breakpoints: {
       "(min-width: 550px)": { slides: { perView: 3, spacing: 5 } },
       "(min-width: 1410px)": { slides: { perView: 4, spacing: 5 } }
@@ -63,9 +63,10 @@ const Home = () => {
 
   return (
     <div className={style.home}>
-      <h2>
-        Recomendados <i className="bi bi-award"></i>
-      </h2>
+      <div className={style.d_flex}>
+        <h2>Recomendados</h2>
+        <img src={medal} />
+      </div>
       {isGameListLoading ? (
         <SpinnerLoad className={style.spinner} />
       ) : (
@@ -88,21 +89,11 @@ const Home = () => {
                 )
               )}
             </div>
-            {loaded && instanceRef.current && (
-              <>
-                <Arrow
-                  left
-                  onClick={e => e.stopPropagation() || instanceRef.current?.prev()}
-                  disabled={currentSlide === 0}
-                />
-                <Arrow
-                  onClick={e => e.stopPropagation() || instanceRef.current?.next()}
-                  disabled={currentSlide === instanceRef.current.track.details.slides.length - 1}
-                />
-              </>
-            )}
           </div>
-          <h2>Juegos</h2>
+          <div className={style.d_flex}>
+            <h2>Juegos</h2>
+            <img src={magicstar} />
+          </div>
           <div className={style.cards_small}>
             {filteredGames.map(
               ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (

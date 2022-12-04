@@ -12,13 +12,13 @@ import messagesResponsive from "../../../hocs/messageResponsive";
 
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
+import { GREETING } from "../utils/greeting";
 
 // styles
 import styles from "./defaultMessages.module.sass";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
 
-function DefaultMessages() {
-  const GREETING = ["¡Hola!", "¿Cómo estás?", "¡Buenas tardes!", "¡Buend día!", "Buenas Noches"];
+function PredefinedMessagesSection() {
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
   });
@@ -77,6 +77,10 @@ function DefaultMessages() {
               {
                 name: "Smiles & Emotions",
                 category: Categories.SMILEYS_PEOPLE
+              },
+              {
+                name: "Animals & Nature",
+                category: Categories.ANIMALS_NATURE
               }
             ]}
             emojiStyle={EmojiStyle.TWITTER}
@@ -87,4 +91,4 @@ function DefaultMessages() {
   );
 }
 
-export default messagesResponsive(DefaultMessages);
+export default messagesResponsive(PredefinedMessagesSection);

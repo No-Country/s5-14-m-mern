@@ -7,7 +7,7 @@ import { useState } from "react";
 import messagesResponsive from "../../../hocs/messageResponsive";
 
 // components
-import SearchFriends from "../SearchFriends/index";
+import SearchInput from "../SearchInput/index";
 import GameList from "../GameList";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
 
@@ -18,7 +18,7 @@ import { GAME_LIST } from "../utils/gameList";
 // styles
 import styles from "./challenge.module.sass";
 
-function ChallengeMessage() {
+function ChallengesSection() {
   const [game, setGame] = useState(GAME_LIST);
   const SELECT_CHALLENGE = "Elige el juego con cual quieres desafiar";
   const RECOMMENDATIONS = "Recomendaciones:";
@@ -41,7 +41,7 @@ function ChallengeMessage() {
       <div className={styles.message}>
         <DefaultMessagesHeader title={TITLE} className={styles.header} handledPage={toBack} />
         <p className={styles.title}>{SELECT_CHALLENGE}</p>
-        <SearchFriends placeholder="Buscar juego" handledSearch={handledSearchGame} />
+        <SearchInput placeholder="Buscar juego" handledSearch={handledSearchGame} />
         <p className={styles.title}>{RECOMMENDATIONS}</p>
         <GameList gameList={game} />
       </div>
@@ -49,4 +49,4 @@ function ChallengeMessage() {
   );
 }
 
-export default messagesResponsive(ChallengeMessage);
+export default messagesResponsive(ChallengesSection);

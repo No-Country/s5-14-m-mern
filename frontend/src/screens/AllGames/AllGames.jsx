@@ -1,4 +1,4 @@
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 import { useState, lazy, Suspense, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -6,8 +6,8 @@ import Rate from "../../components/PagesComponents/Stars/Stars";
 import style from "./allGames.module.sass";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
-import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
+import { todopublico, plus3, plus7, mouse, gamepad, keyboard, touch } from "../../../assets";
 
 const AllGames = () => {
   const navigate = useNavigate();
@@ -27,9 +27,10 @@ const AllGames = () => {
         console.log(data.scores);
         setState({ gameId, name, description, minAge, stars, score: data.scores });
       })();
+    }
+  }, []);
 
   const [state, setState] = useState({});
-  const [rating, setRating] = useState(); // Esto no se usa o está pendiente ?
   const { id } = useParams();
   const { userLogged } = useSelector(state => state.auth);
   const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
@@ -38,7 +39,6 @@ const AllGames = () => {
     if (location.state) {
       const { gameId, name, description, minAge, stars } = location.state;
       setState({ gameId, name, description, minAge, stars });
->>>>>>> c494576cc37c825a5ae30e4759d0d019f1672e41
     } else {
       navigate("/");
     }
@@ -48,11 +48,14 @@ const AllGames = () => {
     <div className={style.games_content}>
       {state && (
         <>
-          <h2>{state.name}</h2>
+          <div className={style.name}>
+            <h2>{state.name}</h2>
+            <Rate change={false} stars={state.stars} />
+          </div>
           <div className={style.desktop}>
             <div className={style.screen_games}>
               <Suspense fallback={<SpinnerLoad />}>
-                <MyGame gameId={state.gameId} />
+                <MyGame />
               </Suspense>
             </div>
             <div>
@@ -60,38 +63,15 @@ const AllGames = () => {
                 <h3>Descripción:</h3>
                 <p>{state.description}</p>
                 <div className={style.d_flex}>
-                  <span className={style.circle}>+{state.minAge}</span>
-                  <span className={style.circle}>
-                    <i className="bi bi-mouse2"></i>
-                  </span>
-                  <span className={style.circle}>
-                    <i className="bi bi-hand-index-thumb"></i>
-                  </span>
+                  {state.minAge === "tp" && <img src={todopublico} alt="" />}
+                  {state.minAge === "+3" && <img src={plus3} alt="" />}
+                  {state.minAge === "+7" && <img src={plus7} alt="" />}
+                  <img src={mouse} />
+                  <img src={gamepad} />
+                  <img src={keyboard} />
+                  <img src={touch} />
                 </div>
               </div>
-              <div className={style.ranking}>
-                <h4>Nombre</h4>
-                <h4>Puntuación</h4>
-                <p>Pedro</p>
-                <p>1234</p>
-                <p>Juan</p>
-                <p>1234</p>
-                <p>Ana</p>
-                <p>1234</p>
-                <p>Marcelo</p>
-                <p>1234</p>
-                <p>Carla</p>
-                <p>1234</p>
-              </div>
-              {userLogged && (
-                <>
-                  <FavoriteButton favoriteId={state.gameId} />
-                  <div className={style.qualify}>
-                    <h4>Califica el juego</h4>
-                    <Rate change={true} gameId={state.gameId} />
-                  </div>
-                </>
-              )}
             </div>
           </div>
         </>

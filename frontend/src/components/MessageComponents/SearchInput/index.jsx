@@ -7,7 +7,7 @@ import magnifyingGlass from "../../../../assets/Icons/search.svg";
 // styles
 import styles from "./search.module.sass";
 
-export default function SearchFriends({ handledSearch, placeholder }) {
+export default function SearchInput({ handledSearch, placeholder }) {
   return (
     <div className={styles.containerSearchFriends}>
       <div className={styles.containerInput}>
@@ -30,7 +30,7 @@ export default function SearchFriends({ handledSearch, placeholder }) {
   );
 }
 
-SearchFriends.propTypes = {
+SearchInput.propTypes = {
   handledSearch: PropTypes.func,
   placeholder: PropTypes.string
 };
