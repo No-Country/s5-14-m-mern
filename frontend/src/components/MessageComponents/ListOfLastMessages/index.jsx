@@ -16,7 +16,7 @@ import styles from "./latestTextMessageList.module.sass";
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
 
-export default function LastestTextMessageList({ messageList }) {
+export default function ListOfLastMessages({ messageList }) {
   const isTablet = useMediaQuery({ query: "(min-width: 778px)" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export default function LastestTextMessageList({ messageList }) {
   );
 }
 
-LastestTextMessageList.propTypes = {
+ListOfLastMessages.propTypes = {
   messageList: PropTypes.array,
   handledMessage: PropTypes.func
 };
