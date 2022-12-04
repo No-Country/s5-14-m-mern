@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import RequireAuth from "../Routing/RequireAuth.jsx";
-import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx";
-import ChatWraper from "../components/MessageComponents/ChatWraper/index.jsx";
-import DefaultMessages from "../components/MessageComponents/DefaultMessages/index.jsx";
-import ChallengeMessage from "../components/MessageComponents/ChallengeMessage/index.jsx";
+import UserOptionsSection from "../components/MessageComponents/UserOptionsSection/index.jsx";
+import ChatSection from "../components/MessageComponents/ChatSection/index.jsx";
+import PredefinedMessagesSection from "../components/MessageComponents/PredefinedMessagesSection/index.jsx";
+import ChallengesSection from "../components/MessageComponents/ChallengesSection/index.jsx";
 import PageNotFound from "../screens/NotFound/PageNotFound.jsx";
 import GameForm from "../components/PagesComponents/AdminPannel/GameForm/GameForm.jsx";
 import GameList from "../components/PagesComponents/AdminPannel/GameList/GameList.jsx";
@@ -40,14 +40,10 @@ function InitalStack() {
             <Route exact path="/account" element={<Account />} />
             <Route exact path="/signup/success" element={<SuccesRegister />} />
             <Route exact path="/signup/failed" element={<FailedRegister />} />
-            <Route path="/messages/options" element={<MessageUser />} />
-            <Route path="/messages/chat" element={<ChatWraper />} />
-            <Route path="/messages/defaultMessages" element={<DefaultMessages />} />
-            <Route path="/messages/challenge" element={<ChallengeMessage />} />
-            <Route path="/messages/:userId" element={<MessageUser />} />
-            <Route path="/messages/chat" element={<ChatWraper />} />
-            <Route path="/messages/defaultMessages" element={<DefaultMessages />} />
-            <Route path="/messages/challenge" element={<ChallengeMessage />} />
+            <Route path="/messages/options" element={<UserOptionsSection />} />
+            <Route path="/messages/chat" element={<ChatSection />} />
+            <Route path="/messages/defaultMessages" element={<PredefinedMessagesSection />} />
+            <Route path="/messages/challenge" element={<ChallengesSection />} />
           </Route>
           {/* PROTECTED ROUTES ONLY ADMIN */}
           <Route element={<RequireAuth allowedRole="admin" />}>

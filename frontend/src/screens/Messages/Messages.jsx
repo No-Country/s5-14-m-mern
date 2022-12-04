@@ -2,8 +2,8 @@
 import { useMediaQuery } from "react-responsive";
 
 // components
-import MessagesMobile from "../../components/MessageComponents/MessagesMobile";
-import MessagesDesktop from "../../components/MessageComponents/MessagesDesktop";
+import MobileMessagePage from "../../components/MessageComponents/MobileMessagePage";
+import DesktopMessagePage from "../../components/MessageComponents/DesktopMessagePage";
 
 // styles
 import classes from "./messages.module.sass";
@@ -23,7 +23,7 @@ const Messages = () => {
   return (
     <div className={classes.messages_content}>
       {/* Logueado */}
-      {isLogged && (isTablet ? <MessagesDesktop /> : <MessagesMobile />)}
+      {isLogged && (isTablet ? <DesktopMessagePage /> : <MobileMessagePage />)}
       {/* No logueado */}
       {!isLogged && (
         <div className={classes.not_logged}>
