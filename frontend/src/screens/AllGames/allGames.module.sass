@@ -9,9 +9,12 @@
     @include mq(large)
         width: 820px
     @include mq(xlarge)
-        width: 1200px
-    h2
-        margin: 5px auto
+        width: 1230px
+        background: #00000050
+        padding: 20px
+        margin-top: 25px
+        border-radius: 20px
+        max-height: 750px
 
 .screen_games
     height: 72vh
@@ -44,6 +47,8 @@
 
 .d_flex
     justify-content: left
+    img
+        margin: 10px 5px
 
 .ranking
     display: flex
@@ -71,3 +76,12 @@
     @include mq(xlarge)
         width: 1200px
         display: flex
+
+.name
+    display: flex
+    justify-content: center
+    line-height: 30px
+    margin: 15px
+    h2
+        margin-right: 20px
+        font-size: 20px
