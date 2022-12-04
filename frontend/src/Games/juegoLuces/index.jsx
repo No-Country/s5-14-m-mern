@@ -29,7 +29,7 @@ const setBoard = () => {
   return board;
 };
 
-const LightGame = ({ gameId, changeScore }) => {
+const LightGame = ({ setScores, gameId }) => {
   const [lights, setLights] = useState(initialState);
   const [play, setPlay] = useState(false);
   const [score, setScore] = useState("0");
@@ -66,11 +66,11 @@ const LightGame = ({ gameId, changeScore }) => {
   const finishGame = async () => {
     setPlay(false);
     const gameScore = 3600 - Math.floor(time / 1000);
-    const newScore = gameScore > 1 ? gameScore.toString() : "1";
+    const newScore = gameScore > 1 ? gameScore.toString() : 1;
     setScore(newScore);
     if (userLogged) {
-      await scores.createInGame(gameId(), { score: newScore });
-      changeScore(newScore);
+      await scores.createInGame(gameId, { score: newScore });
+      setScores(newScore);
     }
   };
 
@@ -129,8 +129,8 @@ const LightGame = ({ gameId, changeScore }) => {
 };
 
 LightGame.propTypes = {
-  gameId: PropTypes.string,
-  cambiarScore: PropTypes.func
+  setScores: PropTypes.func,
+  gameId: PropTypes.string
 };
 
 export default LightGame;

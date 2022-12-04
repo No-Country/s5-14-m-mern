@@ -11,7 +11,6 @@ import useServices from "../../services/useServices";
 const AllGames = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [state, setState] = useState();
   const { id } = useParams();
   const { scores } = useServices();
@@ -24,6 +23,7 @@ const AllGames = () => {
     if (location.state) {
       (async () => {
         const { gameId, name, description, minAge, stars } = location.state;
+        // eslint-disable-next-line testing-library/no-await-sync-query
         const { data } = await scores.getByGame(gameId);
         setState({ gameId, name, description, minAge, stars, scores: data.scores });
       })();
@@ -32,13 +32,28 @@ const AllGames = () => {
     }
   }, []);
 
-  console.log("first");
-  const changeScore = useCallback(score => {
-    console.log(score);
-    console.log(userInfo.username);
-
-    setState({ ...state, scores: [] });
-  });
+  console.log("me renderizo");
+  const setScores = useCallback(
+    score => {
+      let newScores = state.scores.filter(score => score.username !== userInfo.username);
+      if (newScores.length === state.scores.length)
+        newScores.push({ username: userInfo.username, name: state.name, score });
+      else {
+        newScores = state.scores.map(elem =>
+          elem.username !== userInfo.username
+            ? elem
+            : elem.score > score
+            ? elem
+            : { username: elem.username, name: elem.name, score }
+        );
+      }
+      const sortedScores = newScores.sort((p1, p2) =>
+        p1.score < p2.score ? 1 : p1.score > p2.score ? -1 : 0
+      );
+      setState({ ...state, scores: sortedScores });
+    },
+    [userInfo, state]
+  );
 
   return (
     <div className={style.games_content}>
@@ -48,7 +63,7 @@ const AllGames = () => {
           <div className={style.desktop}>
             <div className={style.screen_games}>
               <Suspense fallback={<SpinnerLoad />}>
-                <MyGame gameId={() => state.gameId} changeScore={changeScore} />
+                <MyGame setScores={setScores} gameId={state.gameId} />
               </Suspense>
             </div>
             <div>

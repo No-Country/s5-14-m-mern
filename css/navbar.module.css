@@ -33,9 +33,10 @@
 }
 @media screen and (min-width: 768px) {
   .logo {
-    display: inline;
+    display: flex;
     height: 65px;
     width: 65px;
+    margin: 20px auto;
   }
 }
 

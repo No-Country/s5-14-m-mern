@@ -1,5 +1,13 @@
+/* Breakpoints */
+/* Break Points */
 .star_icon {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: white;
   margin: 3px;
+  font-size: 12px;
+}
+@media screen and (min-width: 768px) {
+  .star_icon {
+    font-size: 16px;
+  }
 }/*# sourceMappingURL=stars.module.css.map */
