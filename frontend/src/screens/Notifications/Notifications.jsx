@@ -7,31 +7,55 @@ import style from "./notifications.module.sass";
 import noSigned from "../../../assets/Icons/noSignNotif.svg";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useServices from "../../services/useServices";
-import FriendNotification from "../../components/NotificationsComponents/friendNotification";
+import FriendsNotification from "../../components/NotificationsComponents/FriendsNotification";
+import { getUserLogged } from "../../redux/slices/user/userAction";
 
 const Notifications = () => {
-  const { userLogged } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   const [myNotifications, setMyNotifications] = useState();
 
-  const { notifications } = useServices();
-
-  const [isLogged] = useState(userLogged);
+  const { userLogged } = useSelector(state => state.auth);
+  const { notifications, friends } = useServices();
 
   useEffect(() => {
-    (async () => {
-      const { data } = await notifications.getNotifications();
-      setMyNotifications(data.notifications);
-    })();
+    if (userLogged) {
+      (async () => {
+        const { data } = await notifications.getNotifications();
+        setMyNotifications(data.notifications);
+      })();
+    }
   }, []);
+
+  const acceptInvitation = async notificationId => {
+    const { data } = await friends.getFriendRequest(notificationId);
+    await friends.acceptInvitation(data.emmiterId);
+    const newNotifications = await notifications.deleteNotification(notificationId);
+    setMyNotifications(newNotifications.data);
+    dispatch(getUserLogged(userLogged.id));
+  };
+
+  const refuseInvitation = async notificationId => {
+    const { data } = await friends.getFriendRequest(notificationId);
+    await friends.refuseInvitation(data.emmiterId);
+    const newNotifications = await notifications.deleteNotification(notificationId);
+    setMyNotifications(newNotifications.data);
+  };
 
   return (
     <div className={style.notif_content}>
       {/* Logueado */}
-      {isLogged ? (
+      {userLogged ? (
         myNotifications ? (
-          myNotifications.map(not => <FriendNotification key={not._id} data={not} />)
+          myNotifications.map(not => (
+            <FriendsNotification
+              key={not._id}
+              data={not}
+              accept={acceptInvitation}
+              refuse={refuseInvitation}
+            />
+          ))
         ) : (
           <p>Sin notificaciones</p>
         )

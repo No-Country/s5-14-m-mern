@@ -49,7 +49,8 @@ export const getUserLogged = createAsyncThunk(
         avatar: response.data.avatar,
         admin: response.data.admin,
         favorites: response.data.favorites,
-        friends: response.data.friends
+        friends: response.data.friends,
+        friendRequests: response.data.friendRequests
       };
       return userData;
     } catch (error) {

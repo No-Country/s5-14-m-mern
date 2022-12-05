@@ -27,9 +27,10 @@ export default function FindFriendsSection() {
       if (userInfo) {
         const friends = [];
         const otherUsers = [];
-        data.users.forEach(elem =>
-          userInfo.friends.includes(elem._id) ? friends.push(elem) : otherUsers.push(elem)
-        );
+        data.users.forEach(elem => {
+          if (elem._id !== userInfo.id)
+            userInfo.friends.includes(elem._id) ? friends.push(elem) : otherUsers.push(elem);
+        });
         // console.log(friendsArray);
         setAllUsers([...friends, ...otherUsers]);
       }

@@ -14,7 +14,8 @@ const useServices = () => {
     reviews: BASE_URL + "/api/reviews",
     friends: BASE_URL + "/api/friends",
     favorites: BASE_URL + "/api/favorites",
-    notification: BASE_URL + "/api/notifications"
+    notification: BASE_URL + "/api/notifications",
+    chat: BASE_URL + "/api/chat"
   };
 
   // For public  routes
@@ -86,19 +87,32 @@ const useServices = () => {
 
   // NOTIFICATIONS
   const notifications = {
-    getNotifications: () => apiProtected().get(`${routeUrl.notification}`)
+    getNotifications: () => apiProtected().get(`${routeUrl.notification}`),
+    deleteNotification: notificationId =>
+      apiProtected().delete(`${routeUrl.notification}/${notificationId}`)
   };
 
   // FRIENDS
   const friends = {
     inviteFriend: friendId => apiProtected().post(`${routeUrl.friends}/invite/${friendId}`),
-    deleteFriend: friendId => apiProtected().delete(`${routeUrl.friends}/delete/${friendId}`)
+    acceptInvitation: friendId =>
+      apiProtected().post(`${routeUrl.friends}/accept/${friendId}`, { accept: true }),
+    refuseInvitation: friendId =>
+      apiProtected().post(`${routeUrl.friends}/refuse/${friendId}`, { accept: false }),
+    deleteFriend: friendId => apiProtected().delete(`${routeUrl.friends}/delete/${friendId}`),
+    getFriendRequest: friendRequestId =>
+      apiProtected().get(`${routeUrl.friends}/friendRequest/${friendRequestId}`)
   };
 
   // FAVOURITES
   const favorites = {
     getFavorites: () => apiProtected().get(`${routeUrl.favorites}/`),
     addRemoveFavorite: gameId => apiProtected().post(`${routeUrl.favorites}/${gameId}`)
+  };
+
+  // CHAT
+  const chat = {
+    getPhrases: () => apiProtected().get(`${routeUrl.chat}/phrases`)
   };
 
   return {
@@ -109,7 +123,8 @@ const useServices = () => {
     images,
     favorites,
     friends,
-    notifications
+    notifications,
+    chat
   };
 };
 export default useServices;

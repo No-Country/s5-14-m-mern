@@ -3,23 +3,35 @@ import PropTypes from "prop-types";
 import style from "./friendsNotification.module.sass";
 import avatarI from "../../../assets/AccountAvatars/avatar0.png";
 
-const FriendsNotification = ({ data }) => {
-  console.log("asdasdas");
+const FriendsNotification = ({ data, accept, refuse }) => {
   return (
     <div className={style.card1}>
       <h1>{data.title}</h1>
-      <h2>{data.message}</h2>
-      <div className={style.desk}>
+      <div className={style.info}>
+        <h2>
+          <strong>{`${data.message.split("quiere")[0]}`}</strong>{" "}
+          {`quiere ${data.message.split("quiere")[1]}`}
+        </h2>
+
         <img src={data.avatar || avatarI} alt="" />
+
+        <div className={style.buttons}>
+          <button className={style.btn1} onClick={() => accept(data._id)}>
+            Aceptar
+          </button>
+          <button className={style.btn2} onClick={() => refuse(data._id)}>
+            Rechazar
+          </button>
+        </div>
       </div>
-      <button className={style.btn1}>Aceptar</button>
-      <button className={style.btn2}>Rechazar</button>
     </div>
   );
 };
 
 FriendsNotification.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  accept: PropTypes.func,
+  refuse: PropTypes.func
 };
 
 export default FriendsNotification;

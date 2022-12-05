@@ -21,6 +21,7 @@ import avatarI from "../../../../assets/AccountAvatars/avatar0.png";
 
 export default function FriendsList({ friendsList }) {
   const dispatch = useDispatch();
+
   const [sliderRef] = useKeenSlider({
     slides: { perView: 3, spacing: 8 }
   });
@@ -39,17 +40,15 @@ export default function FriendsList({ friendsList }) {
   return (
     <div className={styles.container}>
       <div ref={sliderRef} className="keen-slider">
-        {friendsList.map(({ avatar, username, _id, ...props }) => {
-          return (
-            <div
-              className={`keen-slider__slide ${styles.slide}`}
-              key={_id}
-              onClick={() => handledPage({ avatar, username, _id, props })}>
-              <img src={avatar || avatarI} alt="friends" />
-              <p>{username}</p>
-            </div>
-          );
-        })}
+        {friendsList.map(({ avatar, username, _id, ...props }) => (
+          <div
+            className={`keen-slider__slide ${styles.slide}`}
+            key={_id}
+            onClick={() => handledPage({ avatar, username, _id, props })}>
+            <img src={avatar || avatarI} alt="friends" />
+            <p>{username}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

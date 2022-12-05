@@ -39,7 +39,6 @@ const Favourites = () => {
   const { userInfo } = useSelector(state => state.user);
 
   useEffect(() => {
-    console.log("first");
     if (userLogged) {
       (async () => {
         const { data } = await favorites.getFavorites();
