@@ -1,21 +1,50 @@
 /* Breakpoints */
 /* Break Points */
+.listgames {
+  width: 100%;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .listgames {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .listgames {
+    width: 70vw;
+  }
+}
+@media screen and (min-width: 1900px) {
+  .listgames {
+    width: 60vw;
+  }
+}
 .listgames_list {
   display: table;
-  background: #323232;
   border-radius: 20px;
   font-size: 18px;
   margin-top: 1em;
   border-spacing: 0;
   border-collapse: separate;
   padding-bottom: 4em;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .listgames_list {
+    background: #323232;
+  }
 }
 .listgames_header {
-  display: table-row;
+  display: none;
   text-align: center;
   border: 1px solid #fff;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
+}
+@media screen and (min-width: 768px) {
+  .listgames_header {
+    display: table-row;
+  }
 }
 .listgames_header div {
   display: table-cell;
@@ -30,6 +59,22 @@
 .listgames_header div:last-child {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+.listgames_header .description {
+  display: none;
+}
+@media screen and (min-width: 1440px) {
+  .listgames_header .description {
+    display: table-cell;
+  }
+}
+.listgames_header .devices {
+  display: none;
+}
+@media screen and (min-width: 992px) {
+  .listgames_header .devices {
+    display: table-cell;
+  }
 }
 
 .addGameButton {

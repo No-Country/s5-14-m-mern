@@ -1,1 +1,12 @@
-{"version":3,"sources":["../frontend/src/styles/variables.sass","../frontend/src/components/MessageComponents/DefaultMessageHeader/defaultMessageHeader.module.sass","../frontend/src/styles/stylecomponents.sass","defaultMessageHeader.module.css"],"names":[],"mappings":"AAuBA,gBAAA;AAIA,iBAAA;ACxBA;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;EACA,gBAAA;EACA,WAAA;EACA,YAAA;EACA,gCAAA;EC+BF,sEAAA;ED7BE,YAAA;EACA,kBAAA;AEAJ;AHmBE;EC9BF;IAaQ,kBAAA;IACA,aAAA;IACA,aAAA;EEEN;AACF;AFFI;EACI,YAAA;EACA,WAAA;EACA,kBAAA;EACA,aAAA;EACA,UAAA;EACA,UAAA;EACA,eAAA;AEIR;AHGE;ECdE;IASQ,cAAA;EEMV;AACF;AFNI;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,YAAA;AEQR","file":"defaultMessageHeader.module.css"}
+{
+  "version": 3,
+  "sources": [
+    "../frontend/src/styles/variables.sass",
+    "../frontend/src/components/MessageComponents/DefaultMessageHeader/defaultMessageHeader.module.sass",
+    "../frontend/src/styles/stylecomponents.sass",
+    "defaultMessageHeader.module.css"
+  ],
+  "names": [],
+  "mappings": "AAuBA,gBAAA;AAIA,iBAAA;ACxBA;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;EACA,gBAAA;EACA,YAAA;EACA,YAAA;EACA,gCAAA;EC+BF,sEAAA;ED7BE,YAAA;EACA,kBAAA;AEAJ;AHmBE;EC9BF;IAaQ,kBAAA;IACA,aAAA;IACA,aAAA;IACA,WAAA;EEEN;AACF;AFFI;EACI,YAAA;EACA,WAAA;EACA,kBAAA;EACA,aAAA;EACA,UAAA;EACA,UAAA;EACA,eAAA;AEIR;AHEE;ECbE;IASQ,cAAA;EEMV;AACF;AFNI;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,YAAA;AEQR",
+  "file": "defaultMessageHeader.module.css"
+}

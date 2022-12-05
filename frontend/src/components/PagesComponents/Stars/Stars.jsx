@@ -54,7 +54,8 @@ const Rate = ({ count, color, change, stars, gameId }) => {
           style={{ color: getColor(idx) }}
           onClick={() => change && handleChange(idx)}
           onMouseEnter={() => change && setHoverRating(idx)}
-          onMouseLeave={() => change && setHoverRating(0)}></i>
+          onMouseLeave={() => change && setHoverRating(0)}
+        ></i>
       ));
   }, [count, stars, hoverRating, userReview]);
 

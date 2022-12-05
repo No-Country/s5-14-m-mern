@@ -1,31 +1,11 @@
 /* Breakpoints */
 /* Break Points */
-.container {
-  font-family: "Monsterrat", sans-serif;
+.errors {
+  padding-left: 0.5em;
 }
-.container h2 {
-  margin: 1em;
-  font-size: 24px;
-}
-.container input[type=radio] {
-  margin-right: 1em;
-}
-.container input[type=checkbox] {
-  margin-right: 1em;
-}
-.container p {
-  font-size: 12px;
-  padding: 1em 0;
-}
-.container p.group_form_section {
+
+.section_title {
   font-size: 14px;
-}
-.container_form {
-  background: #323232;
-  border-radius: 20px;
-  padding: 30px;
-  font-size: 14px;
-  text-align: left;
 }
 
 .group_form {
@@ -34,31 +14,8 @@
   align-items: center;
 }
 
-.group_form_name {
-  grid-area: "NameArea";
-}
-.group_form_name input {
-  padding: 8px 16px;
-  background: #000;
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  color: #fff;
-  width: 378px;
-  font-size: 16px;
-}
-
-.group_form_checkbox label,
-.group_form_radio label {
-  display: flex;
-  align-items: center;
-}
-.group_form_checkbox label img,
-.group_form_radio label img {
+input[type=radio] {
   margin-right: 1em;
-}
-.group_form_checkbox input,
-.group_form_radio input {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -74,13 +31,84 @@
   transition-duration: 300ms;
   transition-timing-function: ease-out;
 }
-.group_form_checkbox input:checked,
-.group_form_radio input:checked {
+input[type=radio]:checked {
   background-color: rgba(0, 0, 0, 0.5);
   border-color: rgba(0, 0, 0, 0.5);
 }
 
-.group_form_images label {
+input[type=checkbox] {
+  margin-right: 1em;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+  width: 16.5px;
+  height: 16.5px;
+  appearance: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4.5px;
+  transition-property: border-color, background-color;
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+}
+input[type=checkbox]:checked {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+p {
+  font-size: 12px;
+  padding: 1em 0;
+}
+
+.container {
+  font-family: "Monsterrat", sans-serif;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  background: #323232;
+  border-radius: 20px;
+  padding: 30px;
+  font-size: 14px;
+  text-align: left;
+}
+.form_wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 60px;
+}
+.form_name {
+  grid-area: "NameArea";
+}
+.form_name .group_form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: left;
+}
+.form_name input {
+  padding: 8px 16px;
+  background: #000;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 378px;
+  font-size: 16px;
+}
+.form_checkbox label, .form_radio label {
+  display: flex;
+  align-items: center;
+}
+.form_checkbox img, .form_radio img {
+  margin-right: 1em;
+}
+.form_images label {
   width: 196px;
   height: 196px;
   border-radius: 20px;
@@ -90,7 +118,7 @@
   align-items: center;
   cursor: pointer;
 }
-.group_form_images label img {
+.form_images img {
   height: 100%;
   width: 100%;
   border-radius: 20px;
@@ -99,15 +127,14 @@
   -o-object-position: center;
      object-position: center;
 }
-.group_form_images label img.default {
+.form_images img.default {
   width: 106px;
   height: 78.5px;
 }
-
-.group_form_description {
+.form_description {
   width: 100%;
 }
-.group_form_description textarea {
+.form_description textarea {
   width: 100%;
   resize: none;
   height: 150px;
@@ -118,51 +145,48 @@
   outline: none;
   color: #fff;
 }
-
-.group_form_next input {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  cursor: pointer;
-  background-color: #fff;
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
-  width: 16.5px;
-  height: 16.5px;
-  appearance: none;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
-  border-radius: 4.5px;
-  transition-property: border-color, background-color;
-  transition-duration: 300ms;
-  transition-timing-function: ease-out;
+.form_folder {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 500ms ease-in-out;
 }
-.group_form_next input:checked {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-color: rgba(0, 0, 0, 0.5);
-}
-
-.wrapper {
+.form_folder .group_form {
   display: flex;
-  flex-flow: row nowrap;
-  gap: 60px;
+  flex-flow: column nowrap;
+  justify-content: left;
+  align-items: flex-start;
 }
-
-.footer {
+.form_folder.open {
+  max-height: 1000px;
+  transition: max-height 1s ease-in-out;
+}
+.form_folder input {
+  padding: 8px 16px;
+  background: #000;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  color: #fff;
+  width: 378px;
+  font-size: 16px;
+}
+.form_footer {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 1em;
 }
-.footer button {
+.form_footer button {
   min-width: 132px;
   height: 40px;
   border-radius: 20px;
   background: transparent;
 }
-.footer button.cancel {
+.form_footer button.cancel {
   border: 1px solid #FFFFFF;
   color: #FFFFFF;
 }
-.footer button.submit {
+.form_footer button.submit {
   border: 1px solid #F2CF8D;
   color: #F2CF8D;
 }/*# sourceMappingURL=gameForm.module.css.map */

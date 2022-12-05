@@ -13,11 +13,13 @@
 }
 @media screen and (min-width: 1440px) {
   .games_content {
-    width: 1200px;
+    width: 1230px;
+    background: rgba(0, 0, 0, 0.3137254902);
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 20px;
+    max-height: 750px;
   }
-}
-.games_content h2 {
-  margin: 5px auto;
 }
 
 .screen_games {
@@ -64,6 +66,9 @@
 .d_flex {
   justify-content: left;
 }
+.d_flex img {
+  margin: 10px 5px;
+}
 
 .ranking {
   display: flex;
@@ -99,4 +104,15 @@
     width: 1200px;
     display: flex;
   }
+}
+
+.name {
+  display: flex;
+  justify-content: center;
+  line-height: 30px;
+  margin: 15px;
+}
+.name h2 {
+  margin-right: 20px;
+  font-size: 20px;
 }/*# sourceMappingURL=allGames.module.css.map */

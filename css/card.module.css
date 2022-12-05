@@ -97,14 +97,14 @@
   .card_small {
     width: 210px;
     height: 140px;
-    margin: 20px auto 0;
+    margin: 20px auto 2px;
   }
 }
 @media screen and (min-width: 992px) {
   .card_small {
     height: 180px;
     width: 260px;
-    margin: 30px auto;
+    margin: 30px auto 2px;
   }
 }
 .card_small img {
@@ -132,5 +132,15 @@
     height: 100px;
     -o-object-fit: contain;
        object-fit: contain;
+  }
+}
+
+.show_stars {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .show_stars {
+    display: inline;
+    text-align: left;
   }
 }/*# sourceMappingURL=card.module.css.map */

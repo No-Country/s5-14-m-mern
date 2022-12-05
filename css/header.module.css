@@ -46,6 +46,14 @@
     display: none;
   }
 }
+.header_content .spacer {
+  width: 120px;
+}
+@media screen and (min-width: 768px) {
+  .header_content .spacer {
+    display: none;
+  }
+}
 .header_content input {
   padding: 8px 16px;
   background: #000 url("../../../../assets/Icons/search.svg") no-repeat 140px;

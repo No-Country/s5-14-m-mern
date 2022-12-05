@@ -6,8 +6,8 @@
   cursor: pointer;
   font-size: 14px;
   -ms-flex-item-align: end;
-      -ms-grid-row-align: end;
-      align-self: end;
+  -ms-grid-row-align: end;
+  align-self: end;
   font-weight: 400;
   border-radius: 24px;
   position: absolute;

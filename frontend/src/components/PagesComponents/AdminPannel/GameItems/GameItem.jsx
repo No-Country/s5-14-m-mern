@@ -1,5 +1,6 @@
 import classes from "./gameItem.module.sass";
 import { Link } from "react-router-dom";
+
 // icon import
 import {
   plus3,
@@ -41,12 +42,12 @@ function GameItem({ id, path, name, description, tags, onDelete }) {
 
   return (
     <div className={classes.row_table}>
-      <div>
+      <div className={classes.cover}>
         <img src={path} alt={name} />
       </div>
-      <div>{name}</div>
+      <div className={classes.name}>{name}</div>
       <div className={classes.description}>{description}</div>
-      <div>
+      <div className={classes.devices}>
         {tags.map((icon, index) => {
           const iconImage = tagIcon(icon);
           return <img key={index} src={iconImage} alt={icon} />;

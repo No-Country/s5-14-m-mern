@@ -1,21 +1,32 @@
 import classes from "./gameList.module.sass";
 import GameItem from "../GameItems/GameItem";
-import { useOutletContext, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cross from "../../../../../assets/Icons/cross.svg";
+import SpinnerLoad from "../../SpinnerLoad/SpinnerLoad.jsx";
+import useServices from "../../../../services/useServices";
+import useGames from "../hooks/useGames";
 
 function GameList() {
-  const [games, setLoadingGames] = useOutletContext();
+  const { games, loadGames, setLoadGames } = useGames();
+  const { games: gameList } = useServices();
 
-  const onDelete = id => {
-    const newGames = [...games];
-    newGames.splice(id, 1);
-    // eliminar game en la base de datos
-    setLoadingGames(true);
+  const onDelete = async id => {
+    // eslint-disable-next-line no-use-before-define
+    const confirmDelete = confirm("Esta a punto de borrar este juego");
+    if (confirmDelete) {
+      const newGames = [...games];
+      newGames.splice(id, 1);
+      try {
+        await gameList.remove(id);
+        setLoadGames(true);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (
     <div className={classes.listgames}>
-      <h2>Panel de Administrador</h2>
       <Link
         to="/admin/game-manage"
         className={`${classes.addGameButton} ${classes.border_gradient_radius}`}>
@@ -28,23 +39,29 @@ function GameList() {
         <div className={classes.listgames_header}>
           <div>Imágen</div>
           <div>Nombre del Juego</div>
-          <div>Descripción</div>
-          <div>Apto para</div>
+          <div className={classes.description}>Descripción</div>
+          <div className={classes.devices}>Apto para</div>
           <div>Editar</div>
         </div>
-        {games.map(({ _id, cover, name, description, audiencies, devices }, index) => {
-          return (
-            <GameItem
-              key={index}
-              id={_id}
-              path={cover.path}
-              name={name}
-              description={description}
-              tags={[audiencies, ...devices]}
-              onDelete={onDelete}
-            />
-          );
-        })}
+        {loadGames ? (
+          <SpinnerLoad />
+        ) : !games ? (
+          <p>No hay juegos</p>
+        ) : (
+          games.map(({ _id, cover, name, description, audiencies, devices }, index) => {
+            return (
+              <GameItem
+                key={index}
+                id={_id}
+                path={cover.path}
+                name={name}
+                description={description}
+                tags={[audiencies, ...devices]}
+                onDelete={onDelete}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );
