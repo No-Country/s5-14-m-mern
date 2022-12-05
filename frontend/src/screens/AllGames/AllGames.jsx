@@ -22,10 +22,10 @@ const AllGames = () => {
   useEffect(() => {
     if (location.state) {
       (async () => {
-        const { gameId, name, description, minAge, stars } = location.state;
+        const { gameId, name, description, minAge, stars, devices } = location.state;
         // eslint-disable-next-line testing-library/no-await-sync-query
         const { data } = await scores.getByGame(gameId);
-        setState({ gameId, name, description, minAge, stars, scores: data.scores });
+        setState({ gameId, name, description, minAge, stars, scores: data.scores, devices });
       })();
     }
   }, []);
@@ -76,10 +76,17 @@ const AllGames = () => {
                   {state.minAge === "tp" && <img src={todopublico} alt="" />}
                   {state.minAge === "+3" && <img src={plus3} alt="" />}
                   {state.minAge === "+7" && <img src={plus7} alt="" />}
-                  <img src={mouse} />
-                  <img src={gamepad} />
-                  <img src={keyboard} />
-                  <img src={touch} />
+                  {state.devices.map(d =>
+                    d === "mouse" ? (
+                      <img src={mouse} />
+                    ) : d === "gamepad" ? (
+                      <img src={gamepad} />
+                    ) : d === "keyboard" ? (
+                      <img src={keyboard} />
+                    ) : d === "touch" ? (
+                      <img src={touch} />
+                    ) : null
+                  )}
                 </div>
               </div>
               <div className={style.ranking}>

@@ -42,6 +42,23 @@ const SignUp = () => {
     }
   }, [userLogged, successAuth]);
 
+  const submit = values => {
+    console.log(values);
+    try {
+      dispatch(
+        registerUser({
+          username: values.username,
+          email: values.email,
+          password: values.password
+        })
+      );
+      navigate("/signup/success");
+    } catch (error) {
+      navigate("ERROR");
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Link to={"../"}>
@@ -58,15 +75,7 @@ const SignUp = () => {
             password: ""
           }}
           validationSchema={SignupSchema}
-          onSubmit={values => {
-            dispatch(
-              registerUser({
-                username: values.username,
-                email: values.email,
-                password: values.password
-              })
-            );
-          }}>
+          onSubmit={submit}>
           {({ errors, touched }) => (
             <Form className={styles.form}>
               <Field className={styles.formfield} name="username" placeholder="Nombre de usuario" />
