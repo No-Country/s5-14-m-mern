@@ -1,15 +1,16 @@
 import classes from "./gameItem.module.sass";
 import { Link } from "react-router-dom";
+
 // icon import
 import {
   plus3,
   plus7,
   mouse,
-  touch,
-  todopublico,
   keyboard,
   trash,
-  edit
+  edit,
+  todopublico,
+  touch
 } from "../../../../../assets";
 
 import PropTypes from "prop-types";

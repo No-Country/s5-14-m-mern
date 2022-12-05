@@ -39,7 +39,7 @@ const Favourites = () => {
         {isLogged &&
           favs.map(({ imageUrl, name, stars }, i) => (
             <div key={i} className={style.fav_card}>
-              <Card cover={imageUrl} name={name} stars={stars} size="small" />
+              <Card onlyShow={true} cover={imageUrl} name={name} stars={stars} size="small" />
               <div className={style.side}>
                 <div className={style.d_flex}>
                   {like && <img src={likes} onClick={handleLike} />}
