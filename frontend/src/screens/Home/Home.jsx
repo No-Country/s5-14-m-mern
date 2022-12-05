@@ -45,8 +45,11 @@ const data = [
   },
   {
     imageUrl: "../../../assets/ImagesCards/bloques.svg",
-    name: "bloques",
-    stars: 4
+    name: "Adivina el número",
+    description: "Tienes que adivinar el número correspondiente para que la operación matemática dé el resultado deseado",
+    minAge:6,
+    stars: 4,
+    path:"/games/guessvalue"
   }
 ];
 
