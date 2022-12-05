@@ -51,7 +51,7 @@ const Favourites = () => {
     <div className={style.fav_content}>
       {/* Logueado */}
       <div>
-        {userLogged &&
+        {userLogged ? (
           myFavorites.map(
             ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
               <div key={i} className={style.fav_card}>
@@ -78,18 +78,17 @@ const Favourites = () => {
                 </div>
               </div>
             )
-          )}
+          )
+        ) : (
+          <div className={style.not_logged}>
+            <img src={noSigned} alt="" />
+            <h3>Inicia sesión para ver tus favoritos</h3>
+            <Link to="/login">
+              <button>Iniciar sesión</button>
+            </Link>
+          </div>
+        )}
       </div>
-      {/* No logueado */}
-      {!userLogged && (
-        <div className={style.not_logged}>
-          <img src={noSigned} alt="" />
-          <h3>Inicia sesión para ver tus favoritos</h3>
-          <Link to="/login">
-            <button>Iniciar sesión</button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 };

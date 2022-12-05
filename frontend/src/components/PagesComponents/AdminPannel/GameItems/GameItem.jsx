@@ -1,7 +1,16 @@
 import classes from "./gameItem.module.sass";
 import { Link } from "react-router-dom";
 // icon import
-import { plus3, plus7, mouse, keyboard, trash, edit } from "../../../../../assets";
+import {
+  plus3,
+  plus7,
+  mouse,
+  keyboard,
+  trash,
+  edit,
+  todopublico,
+  touch
+} from "../../../../../assets";
 
 import PropTypes from "prop-types";
 
@@ -9,7 +18,7 @@ function GameItem({ id, path, name, description, tags, onDelete }) {
   const tagIcon = icon => {
     switch (icon) {
       case "tp":
-        return tp;
+        return todopublico;
       case "+3":
         return plus3;
       case "+7":
@@ -26,7 +35,7 @@ function GameItem({ id, path, name, description, tags, onDelete }) {
   };
 
   const handleDelete = () => {
-    //TODO: CONFIRMATION
+    // TODO: CONFIRMATION
     onDelete(id);
   };
 
