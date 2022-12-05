@@ -1,8 +1,7 @@
 import classes from "./gameList.module.sass";
 import GameItem from "../GameItems/GameItem";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import Cross from "../../../../../assets/Icons/cross.svg";
-import { Link } from "react-router-dom";
 
 function GameList() {
   const [games, setLoadingGames] = useOutletContext();
