@@ -21,7 +21,7 @@
   }
   .container::-webkit-scrollbar {
     -webkit-appearance: none;
-            appearance: none;
+    appearance: none;
   }
 }
 .container .header {
@@ -31,4 +31,4 @@
   font-weight: 500;
   font-size: 16px;
   margin: 16px 0px;
-}/*# sourceMappingURL=challenge.module.css.map */
+} /*# sourceMappingURL=challenge.module.css.map */

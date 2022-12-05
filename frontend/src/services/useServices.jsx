@@ -14,7 +14,9 @@ const useServices = () => {
     images: BASE_URL + "/api/images",
     reviews: BASE_URL + "/api/reviews",
     friends: BASE_URL + "/api/friends",
-    favorites: BASE_URL + "/api/favorites"
+    favorites: BASE_URL + "/api/favorites",
+    notification: BASE_URL + "/api/notifications",
+    chat: BASE_URL + "/api/chat"
   };
 
   // For public  routes
@@ -48,17 +50,18 @@ const useServices = () => {
 
   // USERS API CALLS
   const users = {
-    getAll: () => api.get(`${routeUrl.users}/`),
-    getAdmins: () => api.get(`${routeUrl.users}/admin`),
-    getById: userId => api.get(`${routeUrl.users}/${userId}`),
-    modify: (userId, data) => apiProtected.put(`${routeUrl.users}/${userId}`, data),
-    remove: userId => apiProtected.delete(`${routeUrl.users}/${userId}`),
+    getAll: () => api().get(`${routeUrl.users}/`),
+    getAdmins: () => api().get(`${routeUrl.users}/admin`),
+    getById: userId => api().get(`${routeUrl.users}/${userId}`),
+    modify: (userId, data) => apiProtected().put(`${routeUrl.users}/${userId}`, data),
+    remove: userId => apiProtected().delete(`${routeUrl.users}/${userId}`),
     privateData: userId => apiProtected().get(`${routeUrl.users}/${userId}/private`)
   };
 
   // GAMES API CALLS
   const games = {
     getAll: () => api().get(`${routeUrl.games}/`),
+
     create: (data, headerConfig) =>
       apiProtected().post(`${routeUrl.games}/`, data, headerConfig || null),
     getById: gameId => api().get(`${routeUrl.games}/${gameId}`),
@@ -72,7 +75,7 @@ const useServices = () => {
   // SCORES API CALLS
   const scores = {
     getByGame: gameId => api().get(`${routeUrl.scores}/${gameId}`),
-    createInGame: (gameId, data) => api().post(`${routeUrl.scores}/${gameId}`, data)
+    createInGame: (gameId, data) => apiProtected().post(`${routeUrl.scores}/${gameId}`, data)
   };
 
   // IMAGES API CALLS
@@ -83,16 +86,34 @@ const useServices = () => {
     remove: id => apiProtected().delete(`${routeUrl.images}/${id}`)
   };
 
-  // REVIEWS
-  // TODO: add, modify, remove
+  // NOTIFICATIONS
+  const notifications = {
+    getNotifications: () => apiProtected().get(`${routeUrl.notification}`),
+    deleteNotification: notificationId =>
+      apiProtected().delete(`${routeUrl.notification}/${notificationId}`)
+  };
 
   // FRIENDS
-  // TODO: add, remove
+  const friends = {
+    inviteFriend: friendId => apiProtected().post(`${routeUrl.friends}/invite/${friendId}`),
+    acceptInvitation: friendId =>
+      apiProtected().post(`${routeUrl.friends}/accept/${friendId}`, { accept: true }),
+    refuseInvitation: friendId =>
+      apiProtected().post(`${routeUrl.friends}/refuse/${friendId}`, { accept: false }),
+    deleteFriend: friendId => apiProtected().delete(`${routeUrl.friends}/delete/${friendId}`),
+    getFriendRequest: friendRequestId =>
+      apiProtected().get(`${routeUrl.friends}/friendRequest/${friendRequestId}`)
+  };
 
   // FAVOURITES
   const favorites = {
     getFavorites: () => apiProtected().get(`${routeUrl.favorites}/`),
     addRemoveFavorite: gameId => apiProtected().post(`${routeUrl.favorites}/${gameId}`)
+  };
+
+  // CHAT
+  const chat = {
+    getPhrases: () => apiProtected().get(`${routeUrl.chat}/phrases`)
   };
 
   return {
@@ -101,7 +122,10 @@ const useServices = () => {
     games,
     scores,
     images,
-    favorites
+    favorites,
+    friends,
+    notifications,
+    chat
   };
 };
 export default useServices;

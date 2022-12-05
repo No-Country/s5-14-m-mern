@@ -1,1 +1,10 @@
-{"version":3,"sources":["../frontend/src/components/MessageComponents/DesktopMessagePage/messagesDesktop.module.sass","messagesDesktop.module.css"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;ACCJ;ADAI;EACI,aAAA;EACA,mBAAA;EACA,gBAAA;EACA,WAAA;EACA,YAAA;ACER","file":"messagesDesktop.module.css"}
+{
+  "version": 3,
+  "sources": [
+    "../frontend/src/components/MessageComponents/DesktopMessagePage/messagesDesktop.module.sass",
+    "messagesDesktop.module.css"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;ACCJ;ADAI;EACI,aAAA;EACA,mBAAA;EACA,gBAAA;EACA,WAAA;EACA,YAAA;ACER",
+  "file": "messagesDesktop.module.css"
+}

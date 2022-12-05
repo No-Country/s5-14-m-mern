@@ -33,10 +33,10 @@ const Rate = ({ count, color, change, stars, gameId }) => {
 
   const handleChange = async amount => {
     const formData = new FormData();
-
     formData.append("review", amount);
+
     try {
-      await games.setReview(gameId, formData);
+      await games.setReview(gameId, { review: amount });
       setUserReview(amount);
     } catch (error) {
       console.log(error);

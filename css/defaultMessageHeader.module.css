@@ -9,7 +9,7 @@
   width: 100vw;
   height: 55px;
   border-radius: 0px 0px 20px 20px;
-  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  background: linear-gradient(255.54deg, #f2cf8d 31.32%, #d3a856 91.81%);
   color: white;
   position: relative;
 }
@@ -43,4 +43,4 @@
   left: 0;
   right: 0;
   margin: auto;
-}/*# sourceMappingURL=defaultMessageHeader.module.css.map */
+} /*# sourceMappingURL=defaultMessageHeader.module.css.map */

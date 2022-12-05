@@ -59,22 +59,22 @@
   width: 166px;
   border-radius: 20px;
   background-color: transparent;
-  color: #F2CF8D;
-  border: 2px solid #F2CF8D;
+  color: #f2cf8d;
+  border: 2px solid #f2cf8d;
   font-weight: 500;
   font-size: 16px;
-  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  background: linear-gradient(255.54deg, #f2cf8d 31.32%, #d3a856 91.81%);
   width: 240px;
   color: #000;
   border: none;
   cursor: pointer;
 }
 .btn:hover {
-  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  background: linear-gradient(255.54deg, #f2cf8d 31.32%, #d3a856 91.81%);
   color: #000;
 }
 .btn:hover {
-  background: linear-gradient(255.54deg, #F9A811 31.32%, #B97900 91.81%);
+  background: linear-gradient(255.54deg, #f9a811 31.32%, #b97900 91.81%);
 }
 
 .d_flex_button {
@@ -109,13 +109,13 @@
   width: 166px;
   border-radius: 20px;
   background-color: transparent;
-  color: #F2CF8D;
-  border: 2px solid #F2CF8D;
+  color: #f2cf8d;
+  border: 2px solid #f2cf8d;
   font-weight: 500;
   font-size: 16px;
   width: 270px;
 }
 .not_logged button:hover {
-  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  background: linear-gradient(255.54deg, #f2cf8d 31.32%, #d3a856 91.81%);
   color: #000;
-}/*# sourceMappingURL=favourites.module.css.map */
+} /*# sourceMappingURL=favourites.module.css.map */
