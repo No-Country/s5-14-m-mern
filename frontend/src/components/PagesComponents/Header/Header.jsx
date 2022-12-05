@@ -5,7 +5,7 @@ import logoM from "../../../../assets/Icons/logoHeaderM.svg";
 import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import avatar from "../../../../assets/AccountAvatars/avatar2.png";
 // Como obtener datos de redux
 import { useSelector, useDispatch } from "react-redux"; // Importar use Selector
@@ -25,6 +25,7 @@ const Header = () => {
   // Auth solo tiene si esta logueado o no: en userLogged tiene el id, el rol, y en userToken tiene el token.
 
   const { filter } = useSelector(state => state.filter);
+  const location = useLocation();
 
   const inputM = () => {
     setSearchM(!searchM);
@@ -36,6 +37,10 @@ const Header = () => {
   };
 
   const handleMenu = () => setUserMenu(!userMenu);
+
+  useEffect(() => {
+    setUserMenu(false);
+  }, [location]);
 
   useEffect(() => {
     if (!userInfo && userLogged) {
@@ -51,7 +56,12 @@ const Header = () => {
 
   return (
     <div className={style.header_content}>
-      {home && !searchM && <img className={style.logoHM} src={logo} />}
+      {home && !searchM && (
+        <>
+          <div className={style.spacer}></div>
+          <img className={style.logoHM} src={logo} />
+        </>
+      )}
       {home && searchM && <img className={style.mob} src={arrow} onClick={inputM} />}
       {home && searchM && <img className={style.logoHM} src={logoM} />}
       {home && searchM && (

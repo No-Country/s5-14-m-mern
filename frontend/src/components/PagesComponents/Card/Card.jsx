@@ -17,6 +17,7 @@ const Card = ({
   path,
   folder,
   size,
+  onlyShow = false,
   comingSoon
 }) => {
   const [hover, setHover] = useState(false);
@@ -25,8 +26,8 @@ const Card = ({
     <div className={size !== "small" ? "keen-slider__slide" : null}>
       <div
         className={`${style.card} ${size === "small" ? style.card_small : null}`}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}>
+        onMouseEnter={!onlyShow ? () => setHover(true) : undefined}
+        onMouseLeave={!onlyShow ? () => setHover(false) : undefined}>
         <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
           <img src={cover} alt={name} />
         </Link>
@@ -43,6 +44,11 @@ const Card = ({
       <span className={style.display_mob}>
         <Rate change={false} stars={stars} />
       </span>
+      {onlyShow && !comingSoon && (
+        <span className={style.show_stars}>
+          <Rate change={false} stars={stars} />
+        </span>
+      )}
     </div>
   );
 };
@@ -57,7 +63,8 @@ Card.propTypes = {
   path: PropTypes.string,
   folder: PropTypes.string,
   size: PropTypes.string,
-  comingSoon: PropTypes.bool
+  comingSoon: PropTypes.bool,
+  onlyShow: PropTypes.bool
 };
 
 export default Card;

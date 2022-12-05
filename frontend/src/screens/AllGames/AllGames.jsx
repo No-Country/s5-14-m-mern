@@ -20,6 +20,7 @@ const AllGames = () => {
     if (location.state) {
       const { gameId, name, description, minAge, stars } = location.state;
       setState({ gameId, name, description, minAge, stars });
+      console.log(location.state);
     } else {
       navigate("/");
     }
