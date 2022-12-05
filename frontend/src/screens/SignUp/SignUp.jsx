@@ -32,31 +32,26 @@ const SignUp = () => {
   useEffect(() => {
     if (successAuth) {
       console.log("Registrado ");
-      navigate("/login");
+      // navigate("/login");
+      navigate("/signup/success");
     }
     if (userLogged && userInfo) {
       navigate("/");
     }
     if (errorAuth) {
       console.log(errorAuth);
+      alert("ERROR");
     }
   }, [userLogged, successAuth]);
 
   const submit = values => {
-    console.log(values);
-    try {
-      dispatch(
-        registerUser({
-          username: values.username,
-          email: values.email,
-          password: values.password
-        })
-      );
-      navigate("/signup/success");
-    } catch (error) {
-      navigate("ERROR");
-      console.log(error);
-    }
+    dispatch(
+      registerUser({
+        username: values.username,
+        email: values.email,
+        password: values.password
+      })
+    );
   };
 
   return (
