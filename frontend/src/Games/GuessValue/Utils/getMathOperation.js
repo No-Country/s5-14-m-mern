@@ -1,51 +1,59 @@
 
-export const getMathOperation = (difficulty = 2, quantityOfValues) => {
-    const easyMaxVal = 10;
-    const mediumMaxVal = 501;
-    const hardMaxVal = 1001;
+const OPERATORS = ['+', "-", "x", "÷"];
+const OPMAP = {
+    "+": (n1, n2, n3 = 0) => n1 + n2 + n3,
+    "-": (n1, n2, n3 = 0) => n1 - n2 - n3,
+    "*": (n1, n2, n3 = 1) => n1 * n2 * n3,
+    "÷": (n1, n2, n3 = 1) => n1 / n2 / n3,
+}
+const generateValues = (difficulty) => {
     switch (difficulty) {
+        case 1:
+            return Math.floor(Math.random() * 100);
         case 2:
-            return getAllValues(quantityOfValues, difficulty, easyMaxVal);
-        case 3:
-            return getAllValues(quantityOfValues, difficulty, mediumMaxVal);
-        case 4:
-            return getAllValues(quantityOfValues, difficulty, hardMaxVal);
+            return Math.floor(Math.random() * 1000);
         default:
-            break;
+            return Math.floor(Math.random() * 10);
+    }
+}
+const createOperation = (quantity = 2, difficulty = 0) => {
+    const operator = OPERATORS[Math.floor(Math.random() * (difficulty + 1))];
+    const firstValue = generateValues(difficulty);
+    const secondValue = generateValues(difficulty);
+    let values = [firstValue, secondValue].sort((a, b) => a > b ? -1 : a < b ? 1 : 0);
+    let finalValue;
+    if (quantity == 2) {
+        finalValue = OPMAP[operator](values[0], values[1]);
+        return [operator, ...values, finalValue];
+    }
+    const thirdValue = generateValues(difficulty);
+    values.push(thirdValue);
+    values = values.sort((a, b) => a > b ? -1 : a < b ? 1 : 0);
+    finalValue = OPMAP[operator](values[0], values[1], values[2]);
+
+    return [operator, ...values, finalValue];
+
+}
+
+const processOperation = (mathOp) => {
+    const mathOpToModify = [...mathOp];
+    const operator = mathOpToModify.shift();
+    const finalValue = mathOpToModify.pop();
+    const valueToHide = mathOpToModify[Math.floor(Math.random() * mathOpToModify.length)];
+    if (mathOpToModify.length == 2) {
+        const mappedMathOp = mathOpToModify.map(value => value == valueToHide ? "hidden" : value);
+        const newMathOp = [...mappedMathOp.slice(0, 1), operator, ...mappedMathOp.slice(-1), "=", finalValue];
+        return { hiddenValue: valueToHide, values: newMathOp };
+    } else {
+        const mappedMathOp = mathOpToModify.map(value => value == valueToHide ? "hidden" : value);
+        const newMathOp = [...mappedMathOp.slice(0, 1), operator, ...mappedMathOp.slice(1, 2), operator, ...mappedMathOp.slice(2, 3), "=", finalValue];
+        return { hiddenValue: valueToHide, values: newMathOp };
     }
 }
 
-const getAllValues = (quantityOfValues = 2, difficulty = 2, maxVal) => {
-    const operatorsMap = {
-        'x': (n1, n2, n3 = 1) => n1 * n2 * n3,
-        '÷': (n1, n2, n3 = 1) => n1 / n2 / n3,
-        '+': (n1, n2, n3 = 0) => n1 + n2 + n3,
-        '-': (n1, n2, n3 = 0) => n1 - n2 - n3
-    }
-    let values = getRandomNumbersArray(quantityOfValues, 1, maxVal);
-    let operator = getRandomOperator(difficulty);
-    let finalVal = operatorsMap[operator](...values);
-    return [...values, operator, Math.floor(finalVal)];
+const analizeOperation = (inputValue, hiddenValue) => {
+    return Number(inputValue) == Number(hiddenValue) ? true : false;
 }
 
 
-const getRandomOperator = (limit) => {
-    const operators = ["+", "-", "x", "÷"];
-    return operators[getRandomNumber(0, limit)];
-}
-
-const getRandomNumbersArray = (quantityOfValues = 2, minLimit, MaxLimit) => {
-    let vals = [];
-    while (quantityOfValues) {
-        quantityOfValues--;
-        vals.push(getRandomNumber(minLimit, MaxLimit));
-    }
-    if (vals.length > 1) {
-        vals = vals.sort((a, b) => a > b ? -1 : a < b ? 1 : 0);
-    }
-    return vals;
-}
-
-const getRandomNumber = (minLimit, MaxLimit) => {
-    return Math.floor(Math.random() * (MaxLimit - minLimit) + minLimit);
-}
+export { createOperation, processOperation, analizeOperation }
