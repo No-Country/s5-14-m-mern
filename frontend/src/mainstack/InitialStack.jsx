@@ -38,8 +38,7 @@ function InitalStack() {
           {/* PROTECTED ROUTES */}
           <Route element={<RequireAuth allowedRole="user" />}>
             <Route exact path="/account" element={<Account />} />
-            <Route exact path="/signup/success" element={<SuccesRegister />} />
-            <Route exact path="/signup/failed" element={<FailedRegister />} />
+
             <Route path="/messages/options" element={<UserOptionsSection />} />
             <Route path="/messages/chat" element={<ChatSection />} />
             <Route path="/messages/defaultMessages" element={<PredefinedMessagesSection />} />
@@ -57,6 +56,8 @@ function InitalStack() {
         {/* ROUTES WITHOUT LAYOUT */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route exact path="/signup/success" element={<SuccesRegister />} />
+        <Route exact path="/signup/failed" element={<FailedRegister />} />
       </Routes>
     </BrowserRouter>
   );

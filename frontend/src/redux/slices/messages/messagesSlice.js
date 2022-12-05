@@ -8,7 +8,7 @@ const messagesSlide = createSlice({
     firstSectionOfPage: CHAT_SETIONS.searchFriends,
     secondSectionOfPage: CHAT_SETIONS.chat,
     thirdSectionOfPage: null,
-    currentUser: {},
+    currentUser: null,
     currentMessage: ""
   },
   reducers: {
@@ -29,6 +29,9 @@ const messagesSlide = createSlice({
     },
     setCurrentMessage: (state, action) => {
       state.currentMessage = action.payload;
+    },
+    resetCurrentUser: state => {
+      state.currentUser = null;
     }
   }
 });
@@ -39,6 +42,8 @@ export const {
   setFirstSectionOfPage,
   setSecondSectionOfPage,
   setThirdSectionOfPage,
-  setCurrentUser
+  setCurrentUser,
+  resetCurrentUser
 } = messagesSlide.actions;
+
 export default messagesSlide.reducer;

@@ -31,12 +31,12 @@ const FavoriteButton = ({ favoriteId }) => {
       {!isFavorite ? (
         <>
           <img src={fav} alt="" onClick={handleClick} />
-          <p>Agregar a tu lista de favoritos</p>
+          <p>Agregar a favoritos</p>
         </>
       ) : (
         <>
           <img src={like} alt="" onClick={handleClick} />
-          <p>Presiona para dejar de seguir</p>
+          <p>Eliminar de favoritos</p>
         </>
       )}
     </div>

@@ -116,7 +116,6 @@
   }
   .header_content .login1:hover {
     background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
-    border: none;
     color: #000;
   }
 }
@@ -155,12 +154,18 @@
   line-height: 30px;
   cursor: pointer;
 }
+@media screen and (min-width: 768px) {
+  .user_container .user {
+    height: 50px;
+    line-height: 50px;
+  }
+}
 .user_container .user i {
   margin-right: 5px;
 }
 .user_container .menu {
   width: 200px;
-  height: 140px;
+  height: auto;
   position: absolute;
   top: 45px;
   right: 0;
@@ -178,6 +183,7 @@
 .user_container .menu p {
   color: #fff;
   margin: 20px auto;
+  cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   .user_container .menu {

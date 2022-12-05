@@ -2,7 +2,7 @@ import "keen-slider/keen-slider.min.css";
 import style from "./home.module.sass";
 import { useKeenSlider } from "keen-slider/react";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../../components/PagesComponents/Card/Card";
 import useServices from "../../services/useServices";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
@@ -11,11 +11,11 @@ import medal from "../../../assets/Icons/medalstar.svg";
 // import clock from "../../../assets/Icons/clock.svg";
 import magicstar from "../../../assets/Icons/magic-star.svg";
 import arrow from "../../../assets/Icons/arrow.svg";
-import { resetFilter } from "../../redux/slices/filter";
+import { clearFilter } from "../../redux/slices/filter";
 
 const Home = () => {
   const [recommended, setRecommended] = useState();
-  const [gamelist, setGamelist] = useState();
+  const [gamelist, setGamelist] = useState([]);
   const [filteredGames, setFilteredGames] = useState();
   // const [firsts4Games, setFirsts4Games] = useState();
   // const [lasts4Games, setLasts4Games] = useState();
@@ -37,12 +37,12 @@ const Home = () => {
     async function gamesLoad() {
       try {
         const { data } = await games.getAll();
-        const sorted = data.games.sort((a, b) => b.stars - a.stars).slice(0, 4);
-        setGamelist(data.games);
+        const sorted = data.games.sort((a, b) => b.stars - a.stars);
         // const first4 = data.games.splice(0, 4);
         // const lasts4 = data.games.splice(data.games.length - 4, data.games.length);
-        setFilteredGames(data.games);
-        setRecommended(sorted);
+        setGamelist(data.games);
+        setRecommended(sorted.slice(0, 4));
+        setFilteredGames(sorted.slice(4));
         // setFirsts4Games(first4);
         // setLasts4Games(lasts4);
         setIsGameListLoading(false);
@@ -60,11 +60,13 @@ const Home = () => {
         gamelist.filter(game => game.name.toLowerCase().includes(filter.toLowerCase()))
       );
     } else {
-      setFilteredGames(gamelist);
+      setFilteredGames(gamelist.sort((a, b) => b.stars - a.stars).slice(4));
     }
   }, [filter]);
 
-  const clearFilter = () => dispatch(resetFilter());
+  const resetFilter = () => {
+    dispatch(clearFilter());
+  };
 
   return (
     <div className={style.home}>
@@ -82,7 +84,17 @@ const Home = () => {
                 <div ref={sliderRef} className="keen-slider">
                   {recommended.map(
                     (
-                      { _id, cover, name, stars, description, audiencies, comingSoon, folder },
+                      {
+                        _id,
+                        cover,
+                        name,
+                        stars,
+                        description,
+                        audiencies,
+                        comingSoon,
+                        folder,
+                        devices
+                      },
                       i
                     ) => (
                       <Card
@@ -95,6 +107,7 @@ const Home = () => {
                         minAge={audiencies}
                         path={`/games/${folder}`}
                         comingSoon={comingSoon}
+                        devices={devices}
                       />
                     )
                   )}
@@ -105,8 +118,21 @@ const Home = () => {
                 <img src={magicstar} />
               </div>
               <div className={style.cards_small}>
-                {gamelist.map(
-                  ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
+                {filteredGames.map(
+                  (
+                    {
+                      _id,
+                      cover,
+                      name,
+                      stars,
+                      description,
+                      audiencies,
+                      comingSoon,
+                      folder,
+                      devices
+                    },
+                    i
+                  ) => (
                     <Card
                       key={i}
                       gameId={_id}
@@ -118,6 +144,7 @@ const Home = () => {
                       path={`/games/${folder}`}
                       comingSoon={comingSoon}
                       size="small"
+                      devices={devices}
                     />
                   )
                 )}
@@ -125,8 +152,8 @@ const Home = () => {
               {/* <div className={`${style.d_flex} ${style.prox}`}>
                 <h2>Proximamente</h2>
                 <img src={clock} />
-              </div>
-               <div className={style.cards_small}>
+              </div> */}
+              {/* <div className={style.cards_small}>
                 {lasts4Games.map(
                   ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
                     <Card
@@ -150,7 +177,7 @@ const Home = () => {
           {filter && (
             <>
               <div className={style.d_flex2}>
-                <img onClick={clearFilter} src={arrow} alt="" />
+                <img onClick={resetFilter} src={arrow} alt="" />
                 <h2>Resultado</h2>
               </div>
               <div>
