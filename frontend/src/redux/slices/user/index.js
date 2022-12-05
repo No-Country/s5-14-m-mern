@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserLogged, modifyUserInfo, deleteUser, ChangePasswordUser } from "./userAction";
+import {
+  getUserLogged,
+  modifyUserInfo,
+  deleteUser,
+  ChangePasswordUser,
+  deleteFriend
+} from "./userAction";
 
 const initialState = {
   loading: false,
@@ -83,6 +89,23 @@ const userSlice = createSlice({
       state.error = null;
     },
     [ChangePasswordUser.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      state.success = false;
+    },
+    // Delete Friend
+    [deleteFriend.pending]: state => {
+      state.loading = true;
+      state.error = null;
+      state.success = false;
+    },
+    [deleteFriend.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.success = true;
+      state.error = null;
+      state.userInfo.friends = payload;
+    },
+    [deleteFriend.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
       state.success = false;

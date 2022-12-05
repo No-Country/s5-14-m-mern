@@ -12,8 +12,9 @@ function AdminPannel() {
 
   useEffect(() => {
     async function gamesLoad() {
+      const controller = new AbortController();
       try {
-        const result = await gameList.getAll();
+        const result = await gameList.getAll(controller);
         setGames(result.data.games);
         setLoading(false);
         setLoadingGames(false);
@@ -23,8 +24,11 @@ function AdminPannel() {
         setLoadingGames(false);
       }
     }
-
     gamesLoad();
+
+    return () => {
+      controller.abort();
+    };
   }, [loadingGames]);
 
   return (

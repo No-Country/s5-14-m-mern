@@ -17,9 +17,11 @@ import { useMediaQuery } from "react-responsive";
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
 import { useNavigate } from "react-router-dom";
+import avatarI from "../../../../assets/AccountAvatars/avatar0.svg";
 
 export default function FriendsList({ friendsList }) {
   const dispatch = useDispatch();
+
   const [sliderRef] = useKeenSlider({
     slides: { perView: 3, spacing: 8 }
   });
@@ -38,17 +40,15 @@ export default function FriendsList({ friendsList }) {
   return (
     <div className={styles.container}>
       <div ref={sliderRef} className="keen-slider">
-        {friendsList.map(({ image, name, userId, ...props }) => {
-          return (
-            <div
-              className={`keen-slider__slide ${styles.slide}`}
-              key={userId}
-              onClick={() => handledPage({ image, name, userId, ...props })}>
-              <img src={image} alt="friends" />
-              <p>{name}</p>
-            </div>
-          );
-        })}
+        {friendsList.map(({ avatar, username, _id, ...props }) => (
+          <div
+            className={`keen-slider__slide ${styles.slide}`}
+            key={_id}
+            onClick={() => handledPage({ avatar, username, _id, props })}>
+            <img src={avatar || avatarI} alt="friends" />
+            <p>{username}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

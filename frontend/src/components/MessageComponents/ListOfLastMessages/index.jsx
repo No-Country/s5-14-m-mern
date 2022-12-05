@@ -31,11 +31,11 @@ export default function ListOfLastMessages({ messageList }) {
 
   return (
     <div className={styles.container}>
-      {messageList.map(({ image, name, message, showMessage, userId, ...props }) => {
+      {messageList.map(({ image, name, message, showMessage, userId, ...props }, i) => {
         return (
           <div
             className={styles.link}
-            key={image}
+            key={i}
             onClick={() => handledPage({ image, name, message, showMessage, userId, ...props })}>
             <div className={styles.friend}>
               <img className={styles.FriendImage} src={image} alt="friends" />

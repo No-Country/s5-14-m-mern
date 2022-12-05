@@ -32,15 +32,27 @@ const SignUp = () => {
   useEffect(() => {
     if (successAuth) {
       console.log("Registrado ");
-      navigate("/login");
+      // navigate("/login");
+      navigate("/signup/success");
     }
     if (userLogged && userInfo) {
       navigate("/");
     }
     if (errorAuth) {
       console.log(errorAuth);
+      alert("ERROR");
     }
   }, [userLogged, successAuth]);
+
+  const submit = values => {
+    dispatch(
+      registerUser({
+        username: values.username,
+        email: values.email,
+        password: values.password
+      })
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -58,15 +70,7 @@ const SignUp = () => {
             password: ""
           }}
           validationSchema={SignupSchema}
-          onSubmit={values => {
-            dispatch(
-              registerUser({
-                username: values.username,
-                email: values.email,
-                password: values.password
-              })
-            );
-          }}>
+          onSubmit={submit}>
           {({ errors, touched }) => (
             <Form className={styles.form}>
               <Field className={styles.formfield} name="username" placeholder="Nombre de usuario" />
