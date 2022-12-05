@@ -1,1 +1,11 @@
-{"version":3,"sources":["../frontend/src/styles/variables.sass","../frontend/src/components/MessageComponents/ChallengesSection/challenge.module.sass","challenge.module.css"],"names":[],"mappings":"AAuBA,gBAAA;AAIA,iBAAA;ACzBA;EACI,aAAA;EACA,WAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,mBDGkB;AEFtB;AFwBE;EC/BF;IAQQ,YAAA;IACA,aAAA;IACA,kBAAA;IACA,uBAAA;IACA,2BAAA;ECGN;EDDU;IACI,UAAA;ECGd;EDFM;IACI,wBAAA;YAAA,gBAAA;ECIV;AACF;ADJI;EACI,uBAAA;ACMR;ADLI;EACI,gBAAA;EACA,eAAA;EACA,gBAAA;ACOR","file":"challenge.module.css"}
+{
+  "version": 3,
+  "sources": [
+    "../frontend/src/styles/variables.sass",
+    "../frontend/src/components/MessageComponents/ChallengesSection/challenge.module.sass",
+    "challenge.module.css"
+  ],
+  "names": [],
+  "mappings": "AAuBA,gBAAA;AAIA,iBAAA;ACzBA;EACI,aAAA;EACA,WAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,mBDGkB;AEFtB;AFwBE;EC/BF;IAQQ,YAAA;IACA,aAAA;IACA,kBAAA;IACA,uBAAA;IACA,2BAAA;ECGN;EDDU;IACI,UAAA;ECGd;EDFM;IACI,wBAAA;YAAA,gBAAA;ECIV;AACF;ADJI;EACI,uBAAA;ACMR;ADLI;EACI,gBAAA;EACA,eAAA;EACA,gBAAA;ACOR",
+  "file": "challenge.module.css"
+}

@@ -1,6 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
+import { useSelector } from "react-redux";
+import useServices from "../../services/useServices";
 import Modal from "./Modal/Modal";
 import style from "./tablero.module.sass";
+import PropTypes from "prop-types";
+
+const initialState = [
+  [false, false, false],
+  [true, false, true],
+  [true, true, true],
+  [true, true, true],
+  [true, true, true]
+];
 
 const setBoard = () => {
   const board = [
@@ -18,28 +29,29 @@ const setBoard = () => {
   return board;
 };
 
-const LightGame = () => {
-  const [lights, setLights] = useState(setBoard());
+const LightGame = ({ setScores, gameId }) => {
+  const [lights, setLights] = useState(initialState);
   const [play, setPlay] = useState(false);
   const [score, setScore] = useState("0");
-  const [isActive, setIsActive] = useState(false);
   const [time, setTime] = useState(0);
+  const { scores } = useServices();
+  const { userLogged } = useSelector(state => state.auth);
 
   useEffect(() => {
-    setTimeout(() => {
-      const win = !lights.map(row => row.every(e => e === true)).includes(false);
-      if (win) {
-        const gameScore = 3600 - Math.floor(time / 1000);
-        setIsActive(false);
-        setScore(gameScore > 1 ? gameScore.toString() : "1");
-        setPlay(false);
-      }
-    }, 200);
+    if (play) {
+      setTimeout(() => {
+        const win = !lights.map(row => row.every(e => e === true)).includes(false);
+        if (win) {
+          finishGame();
+          setLights(setBoard());
+        }
+      }, 200);
+    }
   }, [lights]);
 
   useEffect(() => {
     let interval = null;
-    if (isActive === true) {
+    if (play === true) {
       interval = setInterval(() => {
         setTime(time => time + 10);
       }, 10);
@@ -49,15 +61,24 @@ const LightGame = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [isActive]);
+  }, [play]);
+
+  const finishGame = async () => {
+    setPlay(false);
+    const gameScore = 3600 - Math.floor(time / 1000);
+    const newScore = gameScore > 1 ? gameScore.toString() : 1;
+    setScore(newScore);
+    if (userLogged) {
+      await scores.createInGame(gameId, { score: newScore });
+      setScores(newScore);
+    }
+  };
 
   const startGame = () => {
     if (score === "0") {
       setPlay(true);
-      setIsActive(true);
     } else {
       setTime(0);
-      setIsActive(true);
       setLights(setBoard());
       setScore("0");
       setPlay(true);
@@ -101,10 +122,15 @@ const LightGame = () => {
             )}
           </>
         )}
-        <Modal play={play} startGame={startGame} score={score} />
+        {!play && <Modal play={play} startGame={startGame} score={score} />}
       </div>
     </div>
   );
+};
+
+LightGame.propTypes = {
+  setScores: PropTypes.func,
+  gameId: PropTypes.string
 };
 
 export default LightGame;

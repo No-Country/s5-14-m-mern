@@ -18,7 +18,8 @@ const Card = ({
   folder,
   size,
   onlyShow = false,
-  comingSoon
+  comingSoon,
+  devices
 }) => {
   const [hover, setHover] = useState(false);
 
@@ -26,6 +27,10 @@ const Card = ({
     <div className={size !== "small" ? "keen-slider__slide" : null}>
       <div
         className={`${style.card} ${size === "small" ? style.card_small : null}`}
+        // onMouseEnter={() => setHover(true)}
+        // onMouseLeave={() => setHover(false)}>
+        // <Link to={path} state={{ gameId, name, stars, description, minAge, path, folder }}>
+
         onMouseEnter={!onlyShow ? () => setHover(true) : undefined}
         onMouseLeave={!onlyShow ? () => setHover(false) : undefined}>
         <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
@@ -35,7 +40,9 @@ const Card = ({
         {hover && (
           <div className={style.is_hover}>
             <Rate change={false} stars={stars} />
-            <Link to={path} state={{ gameId, name, stars, description, minAge, path, folder }}>
+            <Link
+              to={path}
+              state={{ gameId, name, stars, description, minAge, path, folder, devices }}>
               <img src={hoverIm} alt="" />
             </Link>
           </div>

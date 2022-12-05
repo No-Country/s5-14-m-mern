@@ -10,16 +10,25 @@ import classes from "./messages.module.sass";
 
 // no logueado
 import noSigned from "../../../assets/Icons/noSignMessages.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { CHAT_SETIONS } from "../../components/MessageComponents/utils/chatSetions";
+import { setFirstSectionOfPage } from "../../redux/slices/messages/messagesSlice";
 
 const Messages = () => {
   const { userLogged } = useSelector(state => state.auth);
   const [isLogged] = useState(userLogged);
+  const dispatch = useDispatch();
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
   });
+
+  useEffect(() => {
+    return () => dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
+  }, []);
+
   return (
     <div className={classes.messages_content}>
       {/* Logueado */}

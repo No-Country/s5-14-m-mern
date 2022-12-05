@@ -3,6 +3,38 @@ import useServices from "../../../services/useServices";
 
 const { auth } = useServices();
 const { users } = useServices();
+const { friends } = useServices();
+
+export const inviteFriend = createAsyncThunk(
+  "userSlice/inviteFriend",
+  async (friendId, { rejectWithValue }) => {
+    try {
+      await friends.inviteFriend(friendId);
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const deleteFriend = createAsyncThunk(
+  "userSlice/deleteFriend",
+  async (friendId, { rejectWithValue }) => {
+    try {
+      const { data } = await friends.deleteFriend(friendId);
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
 
 // GET USER LOGGED
 export const getUserLogged = createAsyncThunk(
@@ -17,7 +49,8 @@ export const getUserLogged = createAsyncThunk(
         avatar: response.data.avatar,
         admin: response.data.admin,
         favorites: response.data.favorites,
-        friends: response.data.friends
+        friends: response.data.friends,
+        friendRequests: response.data.friendRequests
       };
       return userData;
     } catch (error) {

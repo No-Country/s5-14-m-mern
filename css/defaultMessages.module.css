@@ -24,7 +24,7 @@
 }
 .container .message::-webkit-scrollbar {
   -webkit-appearance: none;
-          appearance: none;
+  appearance: none;
 }
 .container .message .greeting {
   display: flex;
@@ -60,7 +60,8 @@
   border: 0px;
   outline: none;
 }
-.container .message .greeting input:focus, .container .message .greeting input:active {
+.container .message .greeting input:focus,
+.container .message .greeting input:active {
   border: 0px;
 }
 .container .message .greeting .title {
@@ -74,7 +75,7 @@
   width: max-content;
   padding: 0 15px;
   border-radius: 20px;
-  background: #329B00;
+  background: #329b00;
   display: flex;
   align-items: center;
   height: 40px;
@@ -90,7 +91,7 @@
   width: max-content;
   padding: 0 15px;
   border-radius: 20px;
-  background: #2088E9;
+  background: #2088e9;
   display: flex;
   align-items: center;
   height: 40px;
@@ -98,7 +99,7 @@
   margin: 8px 0;
 }
 .container .message .greeting .dailygButton:hover {
-  background: #0559A6;
+  background: #0559a6;
 }
 .container .message .greeting .challengeButton {
   width: -webkit-max-content;
@@ -109,10 +110,10 @@
   height: 40px;
   padding: 0 15px;
   border-radius: 20px;
-  background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%);
+  background: linear-gradient(255.54deg, #f2cf8d 31.32%, #d3a856 91.81%);
   cursor: pointer;
   margin: 8px 0;
 }
 .container .message .greeting .challengeButton:hover {
-  background: linear-gradient(255.54deg, #F9A811 31.32%, #B97900 91.81%);
-}/*# sourceMappingURL=defaultMessages.module.css.map */
+  background: linear-gradient(255.54deg, #f9a811 31.32%, #b97900 91.81%);
+} /*# sourceMappingURL=defaultMessages.module.css.map */

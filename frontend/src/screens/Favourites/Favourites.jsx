@@ -1,71 +1,105 @@
 import Card from "../../components/PagesComponents/Card/Card";
 import style from "./favourites.module.sass";
-import likes from "../../../assets/Icons/favFill.svg";
-import likent from "../../../assets/Icons/favM.svg";
+// import likes from "../../../assets/Icons/favFill.svg";
+// import likent from "../../../assets/Icons/favM.svg";
 import friend from "../../../assets/Icons/profile2user.svg";
 import noSigned from "../../../assets/Icons/noSignFav.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useServices from "../../services/useServices";
+import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
 
-const favs = [
-  {
-    imageUrl: "../../../assets/ImagesCards/chess.svg",
-    name: "Aprende ajedrez",
-    stars: 4
-  },
-  {
-    imageUrl: "../../../assets/ImagesCards/color.svg",
-    name: "Colorea",
-    stars: 4
-  },
-  {
-    imageUrl: "../../../assets/ImagesCards/draw.svg",
-    name: "Dibuja",
-    stars: 4
-  }
-];
+// const favs = [
+//   {
+//     imageUrl: "../../../assets/ImagesCards/chess.svg",
+//     name: "Aprende ajedrez",
+//     stars: 4
+//   },
+//   {
+//     imageUrl: "../../../assets/ImagesCards/color.svg",
+//     name: "Colorea",
+//     stars: 4
+//   },
+//   {
+//     imageUrl: "../../../assets/ImagesCards/draw.svg",
+//     name: "Dibuja",
+//     stars: 4
+//   }
+// ];
 
 const Favourites = () => {
-  const [like, setLike] = useState(true);
+  // const [like, setLike] = useState(true);
+  // const [isLogged] = useState(userLogged);
+  const [myFavorites, setMyFavorites] = useState([]);
   const { userLogged } = useSelector(state => state.auth);
-  const [isLogged] = useState(userLogged);
-  const handleLike = () => setLike(!like);
+  // const handleLike = () => setLike(!like);
+
+  const { favorites } = useServices();
+  const { userInfo } = useSelector(state => state.user);
+
+  useEffect(() => {
+    if (userLogged) {
+      (async () => {
+        const { data } = await favorites.getFavorites();
+        setMyFavorites(data);
+      })();
+    }
+  }, [userInfo]);
 
   return (
     <div className={style.fav_content}>
       {/* Logueado */}
       <div>
-        {isLogged &&
-          favs.map(({ imageUrl, name, stars }, i) => (
-            <div key={i} className={style.fav_card}>
-              <Card onlyShow={true} cover={imageUrl} name={name} stars={stars} size="small" />
-              <div className={style.side}>
-                <div className={style.d_flex}>
-                  {like && <img src={likes} onClick={handleLike} />}
-                  {!like && <img src={likent} onClick={handleLike} />}
-                  <p>Eliminar de favoritos</p>
-                </div>
-                <button className={style.btn}>
-                  <div className={style.d_flex_button}>
-                    <img src={friend} />
-                    <p>¡Desafiar a un amigo!</p>
+        {userLogged ? (
+          myFavorites[0] ? (
+            myFavorites.map(
+              (
+                { _id, cover, name, stars, description, audiencies, comingSoon, folder, devices },
+                i
+              ) => (
+                <div key={i} className={style.fav_card}>
+                  <Card
+                    key={i}
+                    gameId={_id}
+                    name={name}
+                    cover={cover.path}
+                    stars={stars}
+                    description={description}
+                    minAge={audiencies}
+                    path={`/games/${folder}`}
+                    comingSoon={comingSoon}
+                    size="small"
+                    devices={devices}
+                  />
+                  <div className={style.side}>
+                    <FavoriteButton favoriteId={_id} />
+                    <button className={style.btn}>
+                      <div className={style.d_flex_button}>
+                        <img src={friend} />
+                        <p>¡Desafiar a un amigo!</p>
+                      </div>
+                    </button>
                   </div>
-                </button>
-              </div>
+                </div>
+              )
+            )
+          ) : (
+            <div className={style.not_logged}>
+              <img src={noSigned} alt="" />
+              <h3>No tienes juegos favoritos</h3>
             </div>
-          ))}
+          )
+        ) : (
+          <div className={style.not_logged}>
+            <img src={noSigned} alt="" />
+            <h3>Inicia sesión para ver tus favoritos</h3>
+            <Link to="/login">
+              <button>Iniciar sesión</button>
+            </Link>
+          </div>
+        )}
       </div>
-      {/* No logueado */}
-      {!isLogged && (
-        <div className={style.not_logged}>
-          <img src={noSigned} alt="" />
-          <h3>Inicia sesión para ver tus favoritos</h3>
-          <Link to="/login">
-            <button>Iniciar sesión</button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 };
