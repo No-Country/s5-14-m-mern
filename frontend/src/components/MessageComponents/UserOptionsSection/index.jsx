@@ -21,7 +21,7 @@ import {
 
 // components
 import HeaderDesktop from "../HeaderDesktop";
-import avatarI from "../../../../assets/AccountAvatars/avatar0.png";
+import avatarI from "../../../../assets/AccountAvatars/avatar0.svg";
 import { deleteFriend, inviteFriend } from "../../../redux/slices/user/userAction";
 
 function UserOptionsSection() {

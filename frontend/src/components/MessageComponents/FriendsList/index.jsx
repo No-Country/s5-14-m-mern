@@ -17,7 +17,7 @@ import { useMediaQuery } from "react-responsive";
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
 import { useNavigate } from "react-router-dom";
-import avatarI from "../../../../assets/AccountAvatars/avatar0.png";
+import avatarI from "../../../../assets/AccountAvatars/avatar0.svg";
 
 export default function FriendsList({ friendsList }) {
   const dispatch = useDispatch();
