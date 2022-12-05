@@ -2,8 +2,8 @@ import axios from "axios";
 import { getToken } from "./localStorage.jsx";
 
 const useServices = () => {
-  const BASE_URL = "http://localhost:8000";
-  // const BASE_URL = "https://ludensapi.vercel.app";
+  // const BASE_URL = "http://localhost:8000";
+  const BASE_URL = "https://ludensapi.vercel.app";
 
   const routeUrl = {
     auth: BASE_URL + "/api/auth",

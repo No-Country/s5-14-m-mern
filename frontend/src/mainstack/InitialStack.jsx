@@ -21,7 +21,7 @@ import {
   Favourites
 } from "../screens";
 import SuccesRegister from "../screens/SignUp/SuccessRegister/SuccesRegister.jsx";
-import FailedRegister from "../screens/SignUp/FailedRegister/FailedRegister.jsx";
+import Status500 from "../screens/Status500/Status500.jsx";
 
 function InitalStack() {
   return (
@@ -57,7 +57,7 @@ function InitalStack() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route exact path="/signup/success" element={<SuccesRegister />} />
-        <Route exact path="/signup/failed" element={<FailedRegister />} />
+        <Route exact path="/500" element={<Status500 />} />
       </Routes>
     </BrowserRouter>
   );
