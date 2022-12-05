@@ -1,42 +1,56 @@
-import { useState, useEffect } from "react"
-import { getMathOperation } from "./Utils/getMathOperation";
-
+import { useState } from "react"
+import { Link } from "react-router-dom";
+import { useDifficultySel } from "./components/useDifficultySel";
+import { createOperation, processOperation, analizeOperation } from "./Utils/getMathOperation";
+import styles from './guessValue.module.sass'
 const GuessValue = () => {
-    const [difficulty, setDifficulty] = useState(0);
-    const [quantityOfValues, setQuantityOfValues] = useState(0);
-    const [showMain, setShowMain] = useState(false);
-    const [success, setSuccess] = useState(0);
-    const [failures, setFailures] = useState(0);
-
-    function handleSubmit(e) {
+    let [success, setSuccess] = useState(0);
+    const [showFinal, setShowFinal] = useState(false);
+    let { quantityOfValues, setQuantityOfValues, setShowMain, difficulty, showMain, render } = useDifficultySel();
+    const { hiddenValue, values } = processOperation(createOperation(quantityOfValues, difficulty));
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setDifficulty(e.target[0].value);
-        setQuantityOfValues(e.target[1].value);
-        getMathOperation(difficulty, quantityOfValues);
-        setShowMain(true);
+        let inputValue = e.target[0].value;
+        const validatedInput = analizeOperation(inputValue, hiddenValue);
+        if (validatedInput) {
+            setSuccess(success + 1);
+            e.target[0].value = '';
+        } else {
+            setShowMain(false);
+            setShowFinal(true);
+        }
+    }
+    const handlePlayAgain = () => {
+        setQuantityOfValues(0);
+        setShowFinal(false);
     }
     return (
-        <div style={{ width: "100%", height: "100%",justifyContent:"center", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(180deg, #0C0E18 0%, #292759 100%)" }}>
-            {!difficulty && !showMain &&
-                (<form onSubmit={handleSubmit} style={{ display: "flex", gap: "1em", flexDirection: "column" }}>
-                    <h2>Elige la dificultad en la que deseas jugar</h2>
-                    <select>
-                        <option value="2">Fácil</option>
-                        <option value="3">Medio</option>
-                        <option value="4">Difícil</option>
-                    </select>
-                    <h2>Elige la cantidad de valores que quieres usar</h2>
-                    <select>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                    <button style={{alignSelf:"center"}} type="submit">Confirmar</button>
+        <div style={{ width: "100%", height: "100%", justifyContent: "center", display: "flex", flexDirection: "column", alignItems: "center", background: "linear-gradient(180deg, #0C0E18 0%, #292759 100%)" }}>
+            {!quantityOfValues && !showMain &&
+                render
+            }{showMain && !showFinal &&
+                <form className={styles.formBox} onSubmit={handleSubmit}>
+                    <div className={styles.divBox}>
+                        {values.map((item, index) => {
+                            if (item == "hidden") {
+                                return (<input className={styles.inputBox} key={index} type="text" />)
+                            }
+                            return ` ${item} `
+                        })}
+                    </div>
+                    <button className={styles.buttonBox} type='submit'>Validar</button>
                 </form>
-                )
-            }{showMain &&
-                <form>
-                    <input type="text" placeholder="Número" /><h2>{ }</h2>
-                </form>}
+            }{showFinal &&
+                <div className={styles.newDivBox}>
+                    <h2>Se ha acabado el juego y lograste <span className={styles.successBox}>{success}</span> Aciertos</h2>
+                    <div style={{ display: "flex", alignSelf: "center", gap: "1em" }}>
+                        <button className={styles.newButtonBox} onClick={handlePlayAgain}>Volver a Jugar</button>
+                        <Link to="/">
+                            <button className={styles.newButtonBox}>Ir al menú principal</button></Link>
+                    </div>
+                </div>
+            }
+
         </div >
     )
 }
