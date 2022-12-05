@@ -37,15 +37,31 @@
 .container .message .greeting aside {
   background: transparent;
   border: none;
-  color: #000;
   border-width: 0px !important;
   z-index: 0;
+  font-family: "Monsterrat", sans-serif !important;
 }
 .container .message .greeting aside div:nth-child(1) {
   display: flex;
 }
+.container .message .greeting aside div:nth-child(1) div:nth-child(2) button {
+  filter: brightness(1.5);
+}
 .container .message .greeting aside div:nth-child(2)::-webkit-scrollbar {
   -webkit-appearance: none;
+}
+.container .message .greeting aside div ul li div:nth-child(1) {
+  border-radius: 20px;
+  font-family: "Monsterrat", sans-serif;
+}
+.container .message .greeting input {
+  border-radius: 20px;
+  background: #000;
+  border: 0px;
+  outline: none;
+}
+.container .message .greeting input:focus, .container .message .greeting input:active {
+  border: 0px;
 }
 .container .message .greeting .title {
   font-size: 16px;

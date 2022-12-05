@@ -21,7 +21,7 @@
   .fav_card {
     display: flex;
     width: 530px;
-    height: 200px;
+    height: 215px;
     justify-content: space-around;
     padding: 10px;
   }
@@ -29,7 +29,7 @@
 @media screen and (min-width: 992px) {
   .fav_card {
     width: 600px;
-    height: 250px;
+    height: 270px;
   }
 }
 
