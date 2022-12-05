@@ -2,26 +2,28 @@ import "keen-slider/keen-slider.min.css";
 import style from "./home.module.sass";
 import { useKeenSlider } from "keen-slider/react";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Card from "../../components/PagesComponents/Card/Card";
 import useServices from "../../services/useServices";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import { useNavigate } from "react-router-dom";
 import medal from "../../../assets/Icons/medalstar.svg";
-import clock from "../../../assets/Icons/clock.svg";
+// import clock from "../../../assets/Icons/clock.svg";
 import magicstar from "../../../assets/Icons/magic-star.svg";
 import arrow from "../../../assets/Icons/arrow.svg";
+import { resetFilter } from "../../redux/slices/filter";
 
 const Home = () => {
   const [recommended, setRecommended] = useState();
   const [gamelist, setGamelist] = useState();
   const [filteredGames, setFilteredGames] = useState();
-  const [firsts4Games, setFirsts4Games] = useState();
-  const [lasts4Games, setLasts4Games] = useState();
+  // const [firsts4Games, setFirsts4Games] = useState();
+  // const [lasts4Games, setLasts4Games] = useState();
   const [isGameListLoading, setIsGameListLoading] = useState(true);
   const { games } = useServices();
   const { filter } = useSelector(state => state.filter);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [sliderRef] = useKeenSlider({
     breakpoints: {
@@ -35,14 +37,14 @@ const Home = () => {
     async function gamesLoad() {
       try {
         const { data } = await games.getAll();
-        const sorted = data.games.sort((a, b) => b.stars - a.stars).splice(0, 4);
-        const first4 = data.games.splice(0, 4);
-        const lasts4 = data.games.splice(data.games.length - 4, data.games.length);
+        const sorted = data.games.sort((a, b) => b.stars - a.stars).slice(0, 4);
         setGamelist(data.games);
+        // const first4 = data.games.splice(0, 4);
+        // const lasts4 = data.games.splice(data.games.length - 4, data.games.length);
         setFilteredGames(data.games);
         setRecommended(sorted);
-        setFirsts4Games(first4);
-        setLasts4Games(lasts4);
+        // setFirsts4Games(first4);
+        // setLasts4Games(lasts4);
         setIsGameListLoading(false);
       } catch (err) {
         setIsGameListLoading(false);
@@ -62,7 +64,7 @@ const Home = () => {
     }
   }, [filter]);
 
-  const resetFilter = () => {};
+  const clearFilter = () => dispatch(resetFilter());
 
   return (
     <div className={style.home}>
@@ -103,7 +105,7 @@ const Home = () => {
                 <img src={magicstar} />
               </div>
               <div className={style.cards_small}>
-                {firsts4Games.map(
+                {gamelist.map(
                   ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
                     <Card
                       key={i}
@@ -120,11 +122,11 @@ const Home = () => {
                   )
                 )}
               </div>
-              <div className={`${style.d_flex} ${style.prox}`}>
+              {/* <div className={`${style.d_flex} ${style.prox}`}>
                 <h2>Proximamente</h2>
                 <img src={clock} />
               </div>
-              <div className={style.cards_small}>
+               <div className={style.cards_small}>
                 {lasts4Games.map(
                   ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
                     <Card
@@ -142,13 +144,13 @@ const Home = () => {
                     />
                   )
                 )}
-              </div>
+              </div> */}
             </>
           )}
           {filter && (
             <>
               <div className={style.d_flex2}>
-                <img onClick={resetFilter} src={arrow} alt="" />
+                <img onClick={clearFilter} src={arrow} alt="" />
                 <h2>Resultado</h2>
               </div>
               <div>
