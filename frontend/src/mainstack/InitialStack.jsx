@@ -1,46 +1,60 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "../screens/Home/Home.jsx";
-import Games from "../screens/AllGames/AllGames.jsx";
-import Favorites from "../screens/Favourites/Favourites.jsx";
-import Account from "../screens/Account/Account.jsx";
-import SignUp from "../screens/SignUp/SignUp.jsx";
-import Login from "../screens/LogIn/LogIn.jsx";
-import TriviaPage from "../Games/Trivia/index.jsx";
-import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
-import Notifications from "../screens/Notifications/Notifications.jsx";
-import Messages from "../screens/Messages/Messages.jsx";
-import Layout from "../screens/Layout/Layout.jsx";
-import AdivinaPalabra from "../Games/AdivinaPalabra/AdivinaPalabra.jsx";
-import Rompecabezas from "../Games/Rompecabezas/Rompecabezas.jsx";
-import GuessValue from "../Games/GuessValue/GuessValue.jsx";
-import MessageUser from "../components/MessageComponents/MessangerUser/index.jsx";
-// import { PPTApp } from "../Games/piedraPapelTijeras/PPTApp.jsx";
+import RequireAuth from "../Routing/RequireAuth.jsx";
+import UserOptionsSection from "../components/MessageComponents/UserOptionsSection/index.jsx";
+import ChatSection from "../components/MessageComponents/ChatSection/index.jsx";
+import PredefinedMessagesSection from "../components/MessageComponents/PredefinedMessagesSection/index.jsx";
+import ChallengesSection from "../components/MessageComponents/ChallengesSection/index.jsx";
+import PageNotFound from "../screens/NotFound/PageNotFound.jsx";
+import GameForm from "../components/PagesComponents/AdminPannel/GameForm/GameForm.jsx";
+import GameList from "../components/PagesComponents/AdminPannel/GameList/GameList.jsx";
+import {
+  Home,
+  Games,
+  Account,
+  SignUp,
+  Login,
+  AdminPannel,
+  Notifications,
+  Messages,
+  Layout,
+  Favourites
+} from "../screens";
+import SuccesRegister from "../screens/SignUp/SuccessRegister/SuccesRegister.jsx";
+import FailedRegister from "../screens/SignUp/FailedRegister/FailedRegister.jsx";
 
 function InitalStack() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* LAYOUT ROUTES */}
         <Route element={<Layout />}>
           <Route exact path="/" element={<Home />} />
-          <Route path="/favourites" element={<Favorites />} />
+          <Route path="/games/:id" element={<Games />} />
+          <Route path="/favourites" element={<Favourites />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/messages" element={<Messages />} />
-          <Route path="/messages/:userId" element={<MessageUser />} />
-
-          <Route path="/games/*" element={<Games />}>
-            <Route path="ppt" element={<PPTApp />} />
-            <Route path="adivinapalabra" element={<AdivinaPalabra />} />
-            <Route path="trivia" element={<TriviaPage />} />
-            <Route path="puzzle" element={<Rompecabezas />} />
-            <Route path="guessvalue" element={<GuessValue />} />
-            {/* cargar juegos */}
+          <Route path="/*" element={<PageNotFound />} />
+          {/* PROTECTED ROUTES */}
+          <Route element={<RequireAuth allowedRole="user" />}>
+            <Route exact path="/account" element={<Account />} />
+            <Route exact path="/signup/success" element={<SuccesRegister />} />
+            <Route exact path="/signup/failed" element={<FailedRegister />} />
+            <Route path="/messages/options" element={<UserOptionsSection />} />
+            <Route path="/messages/chat" element={<ChatSection />} />
+            <Route path="/messages/defaultMessages" element={<PredefinedMessagesSection />} />
+            <Route path="/messages/challenge" element={<ChallengesSection />} />
+          </Route>
+          {/* PROTECTED ROUTES ONLY ADMIN */}
+          <Route element={<RequireAuth allowedRole="admin" />}>
+            <Route path="/admin" element={<AdminPannel />}>
+              <Route index element={<GameList />} />
+              <Route path="game-manage" element={<GameForm />} />
+              <Route path="game-manage/:id" element={<GameForm />} />
+            </Route>
           </Route>
         </Route>
-        <Route path="/games" element={<Games />} />
-        <Route path="/favourites" element={<Favorites />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/test" element={<AdivinaPalabra />} />
+        {/* ROUTES WITHOUT LAYOUT */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>

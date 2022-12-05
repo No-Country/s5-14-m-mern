@@ -1,80 +1,111 @@
+@use "../../../styles/variables" as *
+@use "../../../styles/stylecomponents" as *
+    
 .header_content
-    position: absolute
-    width: 100vw
+    width: 100%
     height: 70px
     text-align: center
-    background: #323232
+    background: $dark-gray
     border-radius: 0px 0px 20px 20px 
-    top: 0
-    left: 50%
-    transform: translateX(-50%)
     padding: 10px
     display: flex
     justify-content: space-around
-    @media screen and (min-width:800px)
+    @include mq (medium)
         width: 80vw
         height: 109px
+        margin: 0 auto
     @media screen and (min-width:1600px)
         width: 70vw
     @media screen and (min-width:1900px)
         width: 60vw
     .logoH 
         display: none
-        @media screen and (min-width:800px)
+        @include mq (medium)
             display: inline
             height: 50px
+            margin: auto
     .logoHM
         margin: auto
         height: 40px
-        @media screen and (min-width:800px)
+        @include mq (medium)
+            display: none
+    .spacer
+        width: 120px
+        @include mq (medium)
             display: none
     input
-        background: #000 url('../../../../assets/Icons/search.svg') no-repeat 140px
+        @include inputBlackRounded(#000 url('../../../../assets/Icons/search.svg') no-repeat 140px)
         height: 40px
         width: 180px
-        border-radius: 20px
-        border: none
         margin: auto
         font-weight: 600
         font-size: 14px
-        padding: 0 20px
-        color: #fff
-        @media screen and (min-width:800px)
+        @include mq (medium)
+            @include inputBlackRounded(#000 url('../../../../assets/Icons/search.svg') no-repeat 210px)
             width: 250px
-            background: #000 url('../../../../assets/Icons/search.svg') no-repeat 210px
-        @media screen and (min-width:1050px)
+        @include mq (large)
+            @include inputBlackRounded(#000 url('../../../../assets/Icons/search.svg') no-repeat 360px)
             width: 400px
-            background: #000 url('../../../../assets/Icons/search.svg') no-repeat 360px
     .inputD
         display: none
-        @media screen and (min-width:800px)
+        @include mq (medium)
             display: inline        
     .inputM
         display: inline
-        @media screen and (min-width:800px)
+        @include mq (medium)
             display: none        
     .login1
         display: none
-        @media screen and (min-width:800px)
-            text-decoration: none
-            padding: 7px
-            display: inline
-            width: 166px
-            border-radius: 20px
+        @include mq (medium)            
+            display: inline            
             margin: auto
-            background-color: transparent
-            color: #F2CF8D
-            border: 2px solid #F2CF8D
-            font-weight: 500
-            font-size: 16px
+            @include buttonTransparent()         
     .mob
         height: 25px
         width: 25px
         margin: auto 15px
         cursor: pointer
-        @media screen and (min-width:800px)
+        @include mq (medium)
             display: none
         img
             height: 25px
             width: 25px
             margin: auto 
+    .title
+        margin: auto
+
+.user_container
+    position: relative
+    margin: auto 10px
+    @include mq (medium) 
+        margin: auto
+    .user
+        height: 30px
+        display: flex
+        line-height: 30px
+        cursor: pointer
+        @include mq (medium)
+            height: 50px
+            line-height: 50px
+        i
+            margin-right: 5px
+    .menu
+        width: 200px
+        height: auto
+        position: absolute
+        top: 45px
+        right: 0
+        z-index: 10
+        background: $dark-gray
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)
+        border-radius: 0px 0px 20px 20px
+        li
+            list-style: none
+        a
+            text-decoration: none
+        p
+            color: #fff
+            margin: 20px auto
+            cursor: pointer
+        @include mq (medium)
+            top: 60px

@@ -1,49 +1,50 @@
+@use "../../../styles/variables" as *
+    
 .footer_content
-    position: absolute
-    bottom: 0
-    width: 100vw
-    background: #323232
+    width: 100%
     text-align: center
-    border-radius: 20px 20px 0px 0px
-    padding-bottom: 70px
-    @media screen and (min-width:800px)
-        width: 70vw
-        height: 160px
-        left: 50%
-        transform: translateX(-50%)
-        padding: 15px
+    padding: 15px 0
+    display: flex
+    flex-direction: column
+    @include mq (large)
+        flex-direction: row
+        justify-content: space-around
+        border-radius: 20px 20px 0px 0px
+        padding: 10px 0
+        background: $dark-gray
+        width: 80vw
+        height: 52px
+        margin: 20px auto 0
+        padding: 0
         padding-bottom: 0
+        max-width: 1250px
 
-.footer
-    margin: 15px 0 10px 20px
-    display: grid
-    text-align: start
-    grid-template-columns: 3fr 2fr   
-    @media screen and (min-width:800px)
-        grid-template-columns: 2fr 3fr 2fr 2fr
-        margin: 5px
-    p
-        font-size: 12px
-        margin-bottom: 7px
-        margin-left: 5px
-    h3
-        margin-top: 5px
-        font-size: 14px
-        margin-bottom: 8px
-        @media screen and (min-width:800px)
-            margin-top: 0
-
-.logoF
-    width: 80px
+.d_flex
     margin: auto
-    @media screen and (min-width:800px)
-        grid-row-end: 2
+    display: flex
+    cursor: pointer
+    h3
+        font-size: 13px
+        line-height: 52px
+        font-weight: 600
+    img
+        height: 25px
+        margin: auto 0 auto 5px
 
-.copyR
-    color: #F2CF8D
-    font-size: 12px
 
-.term
-    @media screen and (min-width:800px)
-        grid-row-end: 2
-        grid-column-end: 3
+.copyM
+    color: $accent-color
+    font-size: 16px
+    margin: 15px
+    @include mq(large)
+        display: none
+
+.copyD
+    display: none
+    @include mq(large)
+        display: inline
+        color: $accent-color
+        font-size: 13px
+        margin: auto
+        line-height: 52px
+

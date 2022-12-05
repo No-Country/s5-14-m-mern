@@ -1,33 +1,34 @@
 import style from "./footer.module.sass";
-import logo from "../../../../assets/Icons/logoFooter.svg";
+import term from "../../../../assets/Icons/fterm.svg";
+import team from "../../../../assets/Icons/fteam.svg";
+import help from "../../../../assets/Icons/fhelp.svg";
+import faq from "../../../../assets/Icons/ffaq.svg";
 
 export const Footer = () => {
   return (
     <div className={style.footer_content}>
-      <div className={style.footer}>
-        <div>
-          <h3>Ayuda</h3>
-          <p>Preguntas frecuentes</p>
-          <p>Soporte</p>
-          <p>Licencia</p>
-        </div>
-        <div>
-          <h3>Sobre nosotros</h3>
-          <p>Equipo</p>
-          <p>Redes sociales</p>
-          <p>Novedades</p>
-          <p>Blog</p>
-        </div>
-        <div className={style.term}>
-          <h3> Términos y condiciones</h3>
-          <p> Política de privacidad</p>
-          <p> Política de cookies</p>
-          <p> Notificaciones de Copyright</p>
-          <p> Configuración de cookies</p>
-        </div>
-        <img className={style.logoF} src={logo} />
+      <p className={style.copyD}>Copyright Ludens@ 2022. All rights reserved.</p>
+      <div className={style.d_flex}>
+        <h3>Términos</h3>
+        <img src={term} alt="" />
       </div>
-      <p className={style.copyR}>Copyright Ludens@ 2022. All rights reserved.</p>
+      <div className={style.d_flex}>
+        <h3>Nuestro equipo</h3>
+        <img src={team} alt="" />
+      </div>
+      <div className={style.d_flex}>
+        <h3>Ayuda</h3>
+        <img src={help} alt="" />
+      </div>
+      <div className={style.d_flex}>
+        <h3>Preguntas frecuentes</h3>
+        <img src={faq} />
+      </div>
+
+      <p className={style.copyM}>
+        Copyright Ludens@ 2022. <br />
+        All rights reserved.
+      </p>
     </div>
   );
 };

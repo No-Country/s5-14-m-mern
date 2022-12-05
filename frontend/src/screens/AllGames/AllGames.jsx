@@ -1,34 +1,55 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Rate from "../../components/PagesComponents/Stars/Stars";
-import fav from "../../../assets/Icons/favM.svg";
 import style from "./allGames.module.sass";
-import { Outlet, useLocation } from "react-router-dom";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
+import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
+import { todopublico, plus3, plus7, mouse, gamepad, keyboard, touch } from "../../../assets";
 
 const AllGames = () => {
+  const navigate = useNavigate();
   const location = useLocation();
-  const { name, description, minAge, stars } = location.state;
-  const [rating, setRating] = useState(stars);
+  const [state, setState] = useState({});
+  const { id } = useParams();
+  const { userLogged } = useSelector(state => state.auth);
+  const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
+
+  useEffect(() => {
+    if (location.state) {
+      const { gameId, name, description, minAge, stars } = location.state;
+      setState({ gameId, name, description, minAge, stars });
+      console.log(location.state);
+    } else {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className={style.games_content}>
-      <h2>{name}</h2>
+      <div className={style.name}>
+        <h2>{state.name}</h2>
+        <Rate change={false} stars={state.stars} />
+      </div>
       <div className={style.desktop}>
         <div className={style.screen_games}>
-          <Outlet />
+          <Suspense fallback={<SpinnerLoad />}>
+            <MyGame />
+          </Suspense>
         </div>
         <div>
           <div className={style.text_start}>
             <h3>Descripción:</h3>
-            <p>{description}</p>
+            <p>{state.description}</p>
             <div className={style.d_flex}>
-              <span className={style.circle}>+{minAge}</span>
-              <span className={style.circle}>
-                <i className="bi bi-mouse2"></i>
-              </span>
-              <span className={style.circle}>
-                <i className="bi bi-hand-index-thumb"></i>
-              </span>
+              {state.minAge === "tp" && <img src={todopublico} alt="" />}
+              {state.minAge === "+3" && <img src={plus3} alt="" />}
+              {state.minAge === "+7" && <img src={plus7} alt="" />}
+              <img src={mouse} />
+              <img src={gamepad} />
+              <img src={keyboard} />
+              <img src={touch} />
             </div>
           </div>
           <div className={style.ranking}>
@@ -45,14 +66,15 @@ const AllGames = () => {
             <p>Carla</p>
             <p>1234</p>
           </div>
-          <div className={style.favorites}>
-            <img src={fav} alt="" />
-            <p>Agregar a tu lista de favoritos</p>
-          </div>
-          <div className={style.qualify}>
-            <h4>Califica el juego</h4>
-            <Rate rating={rating} onRating={rate => setRating(rate)} />
-          </div>
+          {userLogged && (
+            <>
+              <FavoriteButton favoriteId={state.gameId} />
+              <div className={style.qualify}>
+                <h4>Califica el juego</h4>
+                <Rate change={true} gameId={state.gameId} />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -60,10 +82,12 @@ const AllGames = () => {
 };
 
 AllGames.propTypes = {
+  _id: PropTypes.string,
   name: PropTypes.string,
   description: PropTypes.string,
   minAge: PropTypes.number,
-  stars: PropTypes.number
+  stars: PropTypes.number,
+  folder: PropTypes.string
 };
 
 export default AllGames;

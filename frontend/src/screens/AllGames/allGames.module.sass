@@ -1,14 +1,20 @@
+@use "../../styles/variables.sass" as *
+@use "../../styles/stylecomponents.sass" as *
+
 .games_content
     justify-content: center
     text-align: center
     width: 90%
     margin: 0 auto
-    @media screen and (min-width:1000px)
+    @include mq(large)
         width: 820px
-    @media screen and (min-width:1400px)
-        width: 1200px
-    h2
-        margin: 5px auto
+    @include mq(xlarge)
+        width: 1230px
+        background: #00000050
+        padding: 20px
+        margin-top: 25px
+        border-radius: 20px
+        max-height: 750px
 
 .screen_games
     height: 72vh
@@ -17,16 +23,16 @@
     margin: 10px auto
     background-color: #D9D9D9
     overflow: hidden
-    @media screen and (min-width:800px)
+    @include mq (medium)
         height: 85vh
         max-height: 600px
-    @media screen and (min-width:1000px)
+    @include mq (large)
         width: 820px
 
 .circle
     width: 34px
     height: 34px
-    background: linear-gradient(255.54deg, #F9A811 31.32%, #B97900 91.81%)
+    @include darkYellowGradient()
     border-radius: 28px
     margin: 10px
     text-align: center
@@ -36,11 +42,13 @@
 .text_start
     margin: 10px
     text-align: start
-    @media screen and (min-width:1400px)
+    @include mq(xlarge)
         width: 340px
 
 .d_flex
     justify-content: left
+    img
+        margin: 10px 5px
 
 .ranking
     display: flex
@@ -49,25 +57,14 @@
     padding: 11px 0px
     margin: 0 auto
     height: 211px  
-    background: linear-gradient(255.54deg, #F2CF8D 31.32%, #D3A856 91.81%)
+    @include lightYellowGradient()
     border-radius: 20px
-    @media screen and (min-width:1400px)
+    @include mq(xlarge)
         width: 340px
     h4, p
         width: 50%
         font-weight: bold
 
-.favorites
-    display: flex
-    justify-content: left
-    margin: 10px
-    img
-        height: 25px
-        margin: 0
-        cursor: pointer
-    p
-        line-height: 25px
-        
 .qualify
     display: flex
     justify-content: left
@@ -76,6 +73,15 @@
         margin-right: 20px
 
 .desktop
-    @media screen and (min-width:1400px)
+    @include mq(xlarge)
         width: 1200px
         display: flex
+
+.name
+    display: flex
+    justify-content: center
+    line-height: 30px
+    margin: 15px
+    h2
+        margin-right: 20px
+        font-size: 20px
