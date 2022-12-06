@@ -14,6 +14,8 @@ import { resetUser } from "../../../redux/slices/user";
 import { getUserLogged } from "../../../redux/slices/user/userAction";
 import { changeFilter } from "../../../redux/slices/filter";
 import Titles from "./Titles";
+import arrowD from "../../../../assets/Icons/arrowMenuD.svg";
+import arrowU from "../../../../assets/Icons/arrowMenuU.svg";
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false);
@@ -97,9 +99,9 @@ const Header = () => {
       {userLogged && (
         <div className={style.user_container} onClick={handleMenu}>
           <div className={style.user}>
-            {!userMenu && <i className="bi bi-caret-down-fill"></i>}
-            {userMenu && <i className="bi bi-caret-up-fill"></i>}
-            <img src={userInfo.avatar?.path || avatar} />
+            {!userMenu && <img className={style.arrow} src={arrowD} />}
+            {userMenu && <img className={style.arrow} src={arrowU} />}
+            <img src={userInfo.avatar || avatar} />
           </div>
           {userMenu && (
             <ul className={style.menu}>
