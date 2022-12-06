@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import style from "./account.module.sass";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import userServices from "../../services/useServices.jsx";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
+import edit from "../../../assets/Icons/edit2.svg";
+import avatarDef from "../../../assets/AccountAvatars/avatar0.svg";
+import { getUserLogged } from "../../redux/slices/user/userAction";
+import arrowD from "../../../assets/Icons/arrowMenuD.svg";
+import arrowU from "../../../assets/Icons/arrowMenuU.svg";
 
 const avatars = [
   "../../../assets/AccountAvatars/avatar0.svg",
@@ -18,32 +24,46 @@ const avatars = [
 const Account = () => {
   const { users } = userServices();
   const { userInfo } = useSelector(state => state.user);
+  const inputRef = useRef();
+  const { userLogged } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
   const [estado, setEstado] = useState(
     JSON.parse(localStorage.getItem("EstadoPorDefecto")) || "Disponible"
   );
   const [stateMenu, setStateMenu] = useState(false);
-  const [avatar, setAvatar] = useState(userInfo.avatar);
-  const [username, setUsername] = useState(userInfo.userName);
+  const [avatar, setAvatar] = useState("");
+  const [username, setUsername] = useState("");
   const [onEdit, setOnEdit] = useState(false);
 
-  const disp = () => setEstado("Disponible");
-  const aus = () => setEstado("Ausente");
-  const noM = () => setEstado("No Molestar");
+  const disp = () => {
+    setEstado("Disponible");
+    handleMenu();
+  };
+  const aus = () => {
+    setEstado("Ausente");
+    handleMenu();
+  };
+  const noM = () => {
+    setEstado("No Molestar");
+    handleMenu();
+  };
   const handleMenu = () => setStateMenu(!stateMenu);
   const handleAvatar = ava => setAvatar(ava);
 
   const handleChange = e => {
-    setUsername(e.target.name);
+    e.preventDefault();
+    setUsername(e.target.value);
   };
+
   const handleEdit = e => {
     e.preventDefault();
     if (onEdit) {
       setOnEdit(false);
     } else {
       setOnEdit(true);
+      inputRef.current.select();
     }
-    console.log(onEdit);
   };
 
   const handleSubmit = async e => {
@@ -51,67 +71,79 @@ const Account = () => {
     // guardar en el localstorage el estado disponible o no
     localStorage.setItem("EstadoPorDefecto", JSON.stringify(estado));
     try {
-      const result = await users.modify(userInfo._id, { avatar, username });
+      const result = await users.modify(userInfo.id, { avatar, username });
       console.log(result);
+      dispatch(getUserLogged(userLogged.id));
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    setAvatar(userInfo.avatar);
+    setUsername(userInfo.username);
+    console.log(userInfo);
+  }, [userInfo]);
+
   return (
     <div className={style.container}>
-      <form onSubmit={handleSubmit}>
-        <div className={style.account}>
-          <img className={style.mainAvatar} src={avatar} alt="" />
-          <div className={style.user}>
-            <input
-              type="text"
-              name="name"
-              value={username}
-              onChange={handleChange}
-              readOnly={!onEdit}
-            />
-            <h3>{username}</h3>
-            <button onClick={handleEdit}>
-              <i className="bi bi-pencil"></i>
+      {userInfo ? (
+        <form onSubmit={handleSubmit}>
+          <div className={style.account}>
+            <img className={style.mainAvatar} src={avatar || avatarDef} alt="" />
+            <div className={style.user}>
+              <input
+                className={style.input}
+                ref={inputRef}
+                type="text"
+                name="name"
+                value={username}
+                onChange={handleChange}
+                readOnly={!onEdit}
+              />
+              <button className={style.btn_edit} onClick={handleEdit}>
+                <img src={edit} alt="" />
+              </button>
+            </div>
+            <div className={style.state}>
+              {estado === "Disponible" && <div className={style.disp}></div>}
+              {estado === "Ausente" && <div className={style.aus}></div>}
+              {estado === "No Molestar" && <div className={style.noM}></div>}
+              <p>{estado}</p>
+              {!stateMenu && <img onClick={handleMenu} src={arrowD} />}
+              {stateMenu && <img onClick={handleMenu} src={arrowU} />}
+              {stateMenu && (
+                // SELECTOR + OPTIONS
+                <div className={style.menu}>
+                  <div onClick={disp} className={style.flex}>
+                    <div className={style.disp}></div>
+                    <p>Disponinle</p>
+                  </div>
+                  <div onClick={aus} className={style.flex}>
+                    <div className={style.aus}></div>
+                    <p>Ausente</p>
+                  </div>
+                  <div onClick={noM} className={style.flex}>
+                    <div className={style.noM}></div>
+                    <p>No Molestar</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className={style.avatars}>
+              {avatars.map((ava, i) => (
+                <img key={i} src={ava} onClick={() => handleAvatar(ava)} />
+              ))}
+            </div>
+            <button className={style.btn}>Cambiar contraseña</button>
+            <button className={style.btn} type="submit">
+              Guardar
             </button>
           </div>
-          <div className={style.state}>
-            {estado === "Disponible" && <img className={style.disp} />}
-            {estado === "Ausente" && <img className={style.aus} />}
-            {estado === "No Molestar" && <img className={style.noM} />}
-            <p>{estado}</p>
-            {!stateMenu && <i onClick={handleMenu} className="bi bi-caret-down-fill"></i>}
-            {stateMenu && <i onClick={handleMenu} className="bi bi-caret-up-fill"></i>}
-            {stateMenu && (
-              // SELECTOR + OPTIONS
-              <div className={style.menu}>
-                <div onClick={disp} className={style.flex}>
-                  <img className={style.disp} />
-                  <p>Disponinle</p>
-                </div>
-                <div onClick={aus} className={style.flex}>
-                  <img className={style.aus} />
-                  <p>Ausente</p>
-                </div>
-                <div onClick={noM} className={style.flex}>
-                  <img className={style.noM} />
-                  <p>No Molestar</p>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className={style.avatars}>
-            {avatars.map((ava, i) => (
-              <img key={i} src={ava} onClick={() => handleAvatar(ava)} />
-            ))}
-          </div>
-          <button className={style.btn}>Cambiar contraseña</button>
-          <button className={style.btn} type="submit">
-            Guardar
-          </button>
-        </div>
-      </form>
+        </form>
+      ) : (
+        <SpinnerLoad className={style.spinner} />
+      )}
     </div>
   );
 };
