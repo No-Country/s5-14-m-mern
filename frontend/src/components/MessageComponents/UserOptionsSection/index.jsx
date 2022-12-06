@@ -14,6 +14,7 @@ import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import {
   setFirstSectionOfPage,
+  setSecondSectionOfPage,
   setThirdSectionOfPage,
   setSelectUser,
   resetCurrentUser
@@ -37,6 +38,7 @@ function UserOptionsSection() {
   const handledSendMessage = () => {
     if (!isTablet) navigate("/messages/chat");
     dispatch(setSelectUser(true));
+    dispatch(setSecondSectionOfPage("chat"));
   };
 
   const toBack = () => {
@@ -44,6 +46,7 @@ function UserOptionsSection() {
     dispatch(resetCurrentUser());
     dispatch(setSelectUser(false));
     dispatch(setThirdSectionOfPage(false));
+    dispatch(setSecondSectionOfPage(null));
   };
   const handledChallengePage = () => {
     if (!isTablet) navigate("/messages/challenge");

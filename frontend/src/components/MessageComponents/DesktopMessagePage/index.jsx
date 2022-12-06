@@ -19,7 +19,7 @@ export default function DesktopMessagePage() {
   const secondSectionOfPage = useSelector(state => state.message.secondSectionOfPage);
   const thirdSectionOfPage = useSelector(state => state.message.thirdSectionOfPage);
 
-  const { currentUser } = useSelector(state => state.message);
+  // const { currentUser } = useSelector(state => state.message);
 
   const SECTIONS = {
     [CHAT_SETIONS.chat]: ChatSection,
@@ -37,7 +37,7 @@ export default function DesktopMessagePage() {
     <div className={styles.container}>
       <div className={styles.chatSections}>
         <FirstSection />
-        {currentUser && <SecondSection />}
+        {secondSectionOfPage && <SecondSection />}
         {/* <SecondSection /> */}
         {ThirdSection && <ThirdSection />}
       </div>

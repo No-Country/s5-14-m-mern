@@ -23,11 +23,13 @@ import styles from "./defaultMessages.module.sass";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
 import { useEffect, useState } from "react";
 
+import socket from "../../../services/socket";
+
 function PredefinedMessagesSection() {
   const { chat } = useServices();
   const [phrases, setPhrases] = useState();
 
-  const { currentUser, currentChat } = useSelector(state => state.message);
+  const { currentChat } = useSelector(state => state.message);
 
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
@@ -53,8 +55,8 @@ function PredefinedMessagesSection() {
 
   const selectedMessage = async phrase => {
     const { data } = await chat.setChathistory(currentChat._id, { message: phrase });
-    console.log(data);
     dispatch(setChatHistory(data));
+    socket.emit("sendMessage", { id: currentChat._id, message: phrase }, currentChat.room);
   };
 
   return (
@@ -73,16 +75,14 @@ function PredefinedMessagesSection() {
             </div>
             <div className={styles.greeting}>
               <p className={styles.title}>Saludos y despedidas</p>
-              {phrases.saludos.map(phrase => {
-                return (
-                  <div
-                    onClick={() => selectedMessage(phrase.phrase)}
-                    className={styles.greetingButton}
-                    key={phrase._id}>
-                    {phrase.phrase}
-                  </div>
-                );
-              })}
+              {phrases.saludos.map(phrase => (
+                <div
+                  onClick={() => selectedMessage(phrase.phrase)}
+                  className={styles.greetingButton}
+                  key={phrase._id}>
+                  {phrase.phrase}
+                </div>
+              ))}
             </div>
             <div className={styles.greeting}>
               <p className={styles.title}>Cotidianas</p>
