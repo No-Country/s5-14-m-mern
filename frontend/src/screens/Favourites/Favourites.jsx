@@ -31,7 +31,7 @@ import FavoriteButton from "../../components/PagesComponents/FavoriteButton/Favo
 const Favourites = () => {
   // const [like, setLike] = useState(true);
   // const [isLogged] = useState(userLogged);
-  const [myFavorites, setMyFavorites] = useState([]);
+  const [myFavorites, setMyFavorites] = useState();
   const { userLogged } = useSelector(state => state.auth);
   // const handleLike = () => setLike(!like);
 
@@ -52,7 +52,7 @@ const Favourites = () => {
       {/* Logueado */}
       <div>
         {userLogged ? (
-          myFavorites[0] ? (
+          !myFavorites ? null : myFavorites.length > 0 ? (
             myFavorites.map(
               (
                 { _id, cover, name, stars, description, audiencies, comingSoon, folder, devices },

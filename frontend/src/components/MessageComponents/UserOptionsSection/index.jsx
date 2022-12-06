@@ -42,6 +42,8 @@ function UserOptionsSection() {
   const toBack = () => {
     dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
     dispatch(resetCurrentUser());
+    dispatch(setSelectUser(false));
+    dispatch(setThirdSectionOfPage(false));
   };
   const handledChallengePage = () => {
     if (!isTablet) navigate("/messages/challenge");

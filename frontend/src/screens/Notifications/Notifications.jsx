@@ -44,7 +44,7 @@ import { getUserLogged } from "../../redux/slices/user/userAction";
 
 const Notifications = () => {
   const dispatch = useDispatch();
-  const [myNotifications, setMyNotifications] = useState([]);
+  const [myNotifications, setMyNotifications] = useState();
 
   const { userLogged } = useSelector(state => state.auth);
   const { notifications, friends } = useServices();
@@ -78,7 +78,7 @@ const Notifications = () => {
       {/* Logueado */}
 
       {userLogged ? (
-        myNotifications[0] ? (
+        !myNotifications ? null : myNotifications.length > 0 ? (
           myNotifications.map(not => (
             <FriendsNotification
               key={not._id}
