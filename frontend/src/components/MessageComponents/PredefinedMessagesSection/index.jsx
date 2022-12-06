@@ -3,9 +3,12 @@ import EmojiPicker, { Theme, EmojiStyle, Categories } from "emoji-picker-react";
 
 // hooks
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
+import {
+  setThirdSectionOfPage,
+  setChatHistory
+} from "../../../redux/slices/messages/messagesSlice";
 
 // hocs
 import messagesResponsive from "../../../hocs/messageResponsive";
@@ -23,6 +26,8 @@ import { useEffect, useState } from "react";
 function PredefinedMessagesSection() {
   const { chat } = useServices();
   const [phrases, setPhrases] = useState();
+
+  const { currentUser, currentChat } = useSelector(state => state.message);
 
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
@@ -46,6 +51,12 @@ function PredefinedMessagesSection() {
 
   const toBack = () => dispatch(setThirdSectionOfPage(null));
 
+  const selectedMessage = async phrase => {
+    const { data } = await chat.setChathistory(currentChat._id, { message: phrase });
+    console.log(data);
+    dispatch(setChatHistory(data));
+  };
+
   return (
     <div className={styles.container}>
       {!phrases ? (
@@ -64,7 +75,10 @@ function PredefinedMessagesSection() {
               <p className={styles.title}>Saludos y despedidas</p>
               {phrases.saludos.map(phrase => {
                 return (
-                  <div className={styles.greetingButton} key={phrase._id}>
+                  <div
+                    onClick={() => selectedMessage(phrase.phrase)}
+                    className={styles.greetingButton}
+                    key={phrase._id}>
                     {phrase.phrase}
                   </div>
                 );
@@ -73,7 +87,10 @@ function PredefinedMessagesSection() {
             <div className={styles.greeting}>
               <p className={styles.title}>Cotidianas</p>
               {phrases.cotidianas.map(phrase => (
-                <div className={styles.dailygButton} key={phrase._id}>
+                <div
+                  onClick={() => selectedMessage(phrase.phrase)}
+                  className={styles.dailygButton}
+                  key={phrase._id}>
                   {phrase.phrase}
                 </div>
               ))}
