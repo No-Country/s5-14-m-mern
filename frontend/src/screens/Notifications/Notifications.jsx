@@ -53,6 +53,7 @@ const Notifications = () => {
     if (userLogged) {
       (async () => {
         const { data } = await notifications.getNotifications();
+        console.log("result", data);
         setMyNotifications(data.notifications);
       })();
     }

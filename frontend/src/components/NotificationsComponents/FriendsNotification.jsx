@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import style from "./friendsNotification.module.sass";
 import avatarI from "../../../assets/AccountAvatars/avatar0.png";
