@@ -1,1 +1,0 @@
-{"version":3,"sources":["../frontend/src/components/PagesComponents/ErrorValidation/errorValidation.module.sass","errorValidation.module.css"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,0BAAA;EACA,mBAAA;EACA,cAAA;EACA,gBAAA;EACA,WAAA;ACCJ;ADCI;EACI,mBAAA;EACA,kBAAA;EACA,YAAA;EACA,YAAA;EACA,WAAA;ACCR;ADAI;EACI,iBAAA;EACA,qCAAA;EACA,cAAA;ACER","file":"errorValidation.module.css"}
