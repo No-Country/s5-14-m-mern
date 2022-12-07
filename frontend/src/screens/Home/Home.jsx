@@ -37,6 +37,7 @@ const Home = () => {
     async function gamesLoad() {
       try {
         const { data } = await games.getAll();
+        console.log(data);
         const sorted = data.games.sort((a, b) => b.stars - a.stars);
         // const first4 = data.games.splice(0, 4);
         // const lasts4 = data.games.splice(data.games.length - 4, data.games.length);

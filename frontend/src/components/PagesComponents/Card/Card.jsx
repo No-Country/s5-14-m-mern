@@ -75,7 +75,8 @@ Card.propTypes = {
   folder: PropTypes.string,
   size: PropTypes.string,
   comingSoon: PropTypes.bool,
-  onlyShow: PropTypes.bool
+  onlyShow: PropTypes.bool,
+  devices: PropTypes.array
 };
 
 export default Card;
