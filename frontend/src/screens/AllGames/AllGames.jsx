@@ -108,12 +108,18 @@ const AllGames = () => {
                   <h4>Nombre</h4>
                   <h4>Puntuación</h4>
                 </div>
-                {state.scores.map((score, i) => (
-                  <div key={i}>
-                    <p>{score.username}</p>
-                    <p>{score.score}</p>
+                {state.scores.lenght > 0 ? (
+                  state.scores.map((score, i) => (
+                    <div key={i}>
+                      <p>{score.username}</p>
+                      <p>{score.score}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className={style.noranking}>
+                    Aún no hay puntajes en este juego, juéga y sé el primero de la lista!
                   </div>
-                ))}
+                )}
               </div>
               {userLogged && (
                 <>
