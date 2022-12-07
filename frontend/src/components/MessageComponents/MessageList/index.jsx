@@ -11,13 +11,13 @@ export default function MessageList() {
 
   return (
     <div className={styles.container}>
-      {currentChat?.messages.map(({ id, message }, index) => (
+      {currentChat?.messages.map(({ id, message, icon }, index) => (
         <div
           key={index}
           className={`${styles.text} ${
             id !== userLogged.id ? styles.ownMessage : styles.defaultMessage
           }`}>
-          <p>{message}</p>
+          <p className={icon ? styles.icon : styles.text}>{message}</p>
         </div>
       ))}
     </div>

@@ -54,7 +54,17 @@ function PredefinedMessagesSection() {
   const toBack = () => dispatch(setThirdSectionOfPage(null));
 
   const selectedMessage = async phrase => {
-    const { data } = await chat.setChathistory(currentChat._id, { message: phrase });
+    console.log(phrase);
+    console.log(typeof phrase);
+    const { data } = await chat.setChathistory(
+      currentChat._id,
+      typeof phrase === "string"
+        ? {
+            message: phrase,
+            icon: false
+          }
+        : { message: phrase.emoji, icon: true }
+    );
     dispatch(setChatHistory(data));
     socket.emit("sendMessage", { id: currentChat._id, message: phrase }, currentChat.room);
   };
@@ -98,6 +108,7 @@ function PredefinedMessagesSection() {
             <div className={styles.greeting}>
               <p className={styles.title}>Emoticones</p>
               <EmojiPicker
+                onEmojiClick={selectedMessage}
                 theme={Theme.DARK}
                 height={500}
                 width={310}
