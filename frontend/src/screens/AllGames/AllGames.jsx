@@ -1,36 +1,50 @@
-import PropTypes from "prop-types";
-import { useState, lazy, Suspense, useEffect, useCallback } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Rate from "../../components/PagesComponents/Stars/Stars";
+// Styles and Images
 import style from "./allGames.module.sass";
-import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
-import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
-import useServices from "../../services/useServices";
 import { todopublico, plus3, plus7, mouse, gamepad, keyboard, touch } from "../../../assets";
 
+// React Libraries
+import PropTypes from "prop-types";
+import { useState, lazy, Suspense, useEffect, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+// Components
+import Rate from "../../components/PagesComponents/Stars/Stars";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
+import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
+
+// Services
+import useServices from "../../services/useServices";
+
 const AllGames = () => {
-  const location = useLocation();
-  const [state, setState] = useState();
+  // Getting params of game Id to load game data
   const { id } = useParams();
-  const { scores } = useServices();
+  // Getting services
+  const { games, scores } = useServices();
+  // Constants
+  const [state, setState] = useState(false);
+  // Getting Redux states
   const { userLogged } = useSelector(state => state.auth);
   const { userInfo } = useSelector(state => state.user);
-
-  const MyGame = lazy(() => import(`../../Games/${id}/index.jsx`)); // Lazy Load of Games
+  // Lazy loading of the game based on the id and folder of the game
+  const MyGame = lazy(() => import(`../../Games/${state.folder}/index.jsx`)); // Lazy Load of Games
 
   useEffect(() => {
-    if (location.state) {
-      (async () => {
-        const { gameId, name, description, minAge, stars, devices } = location.state;
+    // Load game and scores. Saving data on state
+    (async () => {
+      try {
         // eslint-disable-next-line testing-library/no-await-sync-query
-        const { data } = await scores.getByGame(gameId);
-        setState({ gameId, name, description, minAge, stars, scores: data.scores, devices });
-      })();
-    }
+        const resultGame = await games.getById(id);
+        // eslint-disable-next-line testing-library/no-await-sync-query
+        const resultScore = await scores.getByGame(id);
+        setState({ ...resultGame.data.game, scores: resultScore.data.scores });
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }, []);
 
-  console.log("me renderizo");
+  // Update scores
   const setScores = useCallback(
     score => {
       let newScores = state.scores.filter(score => score.username !== userInfo.username);
@@ -65,7 +79,7 @@ const AllGames = () => {
             <div className={style.screen_games}>
               <Suspense fallback={<SpinnerLoad />}>
                 <MyGame />
-                <MyGame setScores={setScores} gameId={state.gameId} />
+                <MyGame setScores={setScores} gameId={state._id} />
               </Suspense>
             </div>
             <div>
@@ -103,10 +117,10 @@ const AllGames = () => {
               </div>
               {userLogged && (
                 <>
-                  <FavoriteButton favoriteId={state.gameId} />
+                  <FavoriteButton favoriteId={state._id} />
                   <div className={style.qualify}>
                     <h4>Califica el juego</h4>
-                    <Rate change={true} gameId={state.gameId} />
+                    <Rate change={true} gameId={state._id} />
                   </div>
                 </>
               )}
