@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import {
-  setThirdSectionOfPage,
-  setChatHistory,
-  editChatHistory
+  setThirdSectionOfPage
+  // setChatHistory
+  // editChatHistory
 } from "../../../redux/slices/messages/messagesSlice";
-import socket from "../../../services/socket";
+// import socket from "../../../services/socket";
+import Pusher from "pusher-js";
 
 // hocs
 import messagesResponsive from "../../../hocs/messageResponsive";
@@ -23,40 +24,50 @@ import { CHAT_SETIONS } from "../utils/chatSetions";
 // style
 import styles from "./chat.module.sass";
 import { useEffect } from "react";
-import useServices from "../../../services/useServices";
+// import useServices from "../../../services/useServices";
 
 function ChatSection() {
-  const currentUser = useSelector(state => state.message.currentUser);
+  // const currentUser = useSelector(state => state.message.currentUser);
   const selectUser = useSelector(state => state.message.selectUser);
   const { currentChat } = useSelector(state => state.message);
-  const { chat } = useServices();
+  // const { chat } = useServices();
 
   useEffect(() => {
-    socket.emit("joinRoom", currentChat.room, message => {
-      console.log("Unido a la sala " + message);
+    const pusher = new Pusher(import.meta.env.VITE_key, {
+      cluster: import.meta.env.VITE_cluster,
+      encrypted: true
     });
+    // RECIBIR
+    const channel = pusher.subscribe(currentChat.room);
+    channel.bind("message", message => {
+      console.log(message);
+    });
+    // socket.emit("joinRoom", currentChat.room, message => {
+    //   console.log("Unido a la sala " + message);
+    // });
 
-    console.log("ME CONECTOOOOOOOOOOOOOO");
+    // console.log("ME CONECTOOOOOOOOOOOOOO");
 
-    return () => {
-      socket.emit("leaveRoom", currentChat.room, message => {
-        console.log("Dejo la sala " + message);
-      });
-    };
+    // return () => {
+    //   socket.emit("leaveRoom", currentChat.room, message => {
+    //     console.log("Dejo la sala " + message);
+    //   });
+    // };
+
+    // SE ENVIA POR ROUTA
   }, []);
 
   console.log("Me renderizo");
 
   useEffect(() => {
-    socket.on("receiveMessage", async message => {
-      const { data } = await chat.getChathistory(currentUser._id);
-      console.log(data);
-      dispatch(setChatHistory(data));
-    });
-
-    return () => {
-      socket.off("receiveMessage");
-    };
+    // socket.on("receiveMessage", async message => {
+    //   const { data } = await chat.getChathistory(currentUser._id);
+    //   console.log(data);
+    //   dispatch(setChatHistory(data));
+    // });
+    // return () => {
+    //   socket.off("receiveMessage");
+    // };
   }, []);
 
   const isTablet = useMediaQuery({

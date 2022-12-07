@@ -23,7 +23,7 @@ import styles from "./defaultMessages.module.sass";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
 import { useEffect, useState } from "react";
 
-import socket from "../../../services/socket";
+// import socket from "../../../services/socket";
 
 function PredefinedMessagesSection() {
   const { chat } = useServices();
@@ -66,7 +66,7 @@ function PredefinedMessagesSection() {
         : { message: phrase.emoji, icon: true }
     );
     dispatch(setChatHistory(data));
-    socket.emit("sendMessage", { id: currentChat._id, message: phrase }, currentChat.room);
+    // socket.emit("sendMessage", { id: currentChat._id, message: phrase }, currentChat.room);
   };
 
   return (
