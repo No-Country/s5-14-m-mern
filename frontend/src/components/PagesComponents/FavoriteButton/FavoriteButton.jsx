@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./favoriteButton.module.sass";
 
 import like from "../../../../assets/Icons/favFill.svg";
@@ -6,17 +6,21 @@ import fav from "../../../../assets/Icons/favM.svg";
 import { getUserLogged } from "../../../redux/slices/user/userAction";
 import useServices from "../../../services/useServices";
 import { useDispatch, useSelector } from "react-redux";
+import SpinnerLoad2 from "../SpinnerLoad/SpinnerLoad2";
 
 const FavoriteButton = ({ favoriteId }) => {
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const { favorites } = useServices();
   const { userLogged } = useSelector(state => state.auth);
   const { userInfo } = useSelector(state => state.user);
 
   const handleClick = async () => {
+    setIsFavoriteLoading(true);
     await favorites.addRemoveFavorite(favoriteId);
     dispatch(getUserLogged(userLogged.id));
+    setIsFavoriteLoading(false);
   };
 
   useEffect(() => {
@@ -30,13 +34,25 @@ const FavoriteButton = ({ favoriteId }) => {
     <div className={style.d_flex}>
       {!isFavorite ? (
         <>
-          <img src={fav} alt="" onClick={handleClick} />
-          <p>Agregar a favoritos</p>
+          {isFavoriteLoading ? (
+            <SpinnerLoad2 className={style.spinner} />
+          ) : (
+            <>
+              <img src={fav} alt="" onClick={handleClick} />
+              <p>Agregar a favoritos</p>
+            </>
+          )}
         </>
       ) : (
         <>
-          <img src={like} alt="" onClick={handleClick} />
-          <p>Eliminar de favoritos</p>
+          {isFavoriteLoading ? (
+            <SpinnerLoad2 className={style.spinner} />
+          ) : (
+            <>
+              <img src={like} alt="" onClick={handleClick} />
+              <p>Eliminar de favoritos</p>
+            </>
+          )}
         </>
       )}
     </div>

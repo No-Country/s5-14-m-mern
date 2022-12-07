@@ -12,6 +12,7 @@ import {
 
 // styles
 import styles from "./latestTextMessageList.module.sass";
+import avatarI from "../../../../assets/AccountAvatars/avatar0.svg";
 
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
@@ -31,18 +32,20 @@ export default function ListOfLastMessages({ messageList }) {
 
   return (
     <div className={styles.container}>
-      {messageList.map(({ image, name, message, showMessage, userId, ...props }, i) => {
+      {messageList.map(({ avatar, username, message, showMessage, userId, ...props }, i) => {
         return (
           <div
             className={styles.link}
             key={i}
-            onClick={() => handledPage({ image, name, message, showMessage, userId, ...props })}>
+            onClick={() =>
+              handledPage({ avatar, username, message, showMessage, userId, ...props })
+            }>
             <div className={styles.friend}>
-              <img className={styles.FriendImage} src={image} alt="friends" />
+              <img className={styles.FriendImage} src={avatar || avatarI} alt="friends" />
               {showMessage && <div className={styles.showMessage} />}
 
               <div className={styles.messageWraper}>
-                <p className={styles.name}>{name}</p>
+                <p className={styles.name}>{username}</p>
                 <p className={styles.message}>{message}</p>
               </div>
             </div>
