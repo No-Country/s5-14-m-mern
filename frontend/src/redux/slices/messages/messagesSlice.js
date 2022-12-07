@@ -6,10 +6,11 @@ const messagesSlide = createSlice({
   initialState: {
     selectUser: false,
     firstSectionOfPage: CHAT_SETIONS.searchFriends,
-    secondSectionOfPage: CHAT_SETIONS.chat,
+    secondSectionOfPage: null,
     thirdSectionOfPage: null,
     currentUser: null,
-    currentMessage: ""
+    currentMessage: "",
+    currentChat: []
   },
   reducers: {
     setSelectUser: (state, action) => {
@@ -32,7 +33,17 @@ const messagesSlide = createSlice({
     },
     resetCurrentUser: state => {
       state.currentUser = null;
+      state.currentChat = [];
+    },
+    setChatHistory: (state, action) => {
+      state.currentChat = action.payload;
     }
+    // editChatHistory: (state, action) => {
+    //   state.currentChat.messages = [...state.currentChat.messages, action.payload];
+    // }
+    // resetChatHistory: state => {
+    //   state.currentChat = [];
+    // }
   }
 });
 
@@ -43,7 +54,10 @@ export const {
   setSecondSectionOfPage,
   setThirdSectionOfPage,
   setCurrentUser,
-  resetCurrentUser
+  resetCurrentUser,
+  setChatHistory,
+  editChatHistory
+  // resetChatHistory
 } = messagesSlide.actions;
 
 export default messagesSlide.reducer;

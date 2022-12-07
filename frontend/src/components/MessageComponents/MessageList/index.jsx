@@ -1,29 +1,31 @@
 // libraries
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 // styles
 import styles from "./messageList.module.sass";
 
-export default function MessageList({ messajeList = [], ownId }) {
+export default function MessageList() {
+  const { userLogged } = useSelector(state => state.auth);
+  const { currentChat } = useSelector(state => state.message);
+
   return (
     <div className={styles.container}>
-      {messajeList.map(({ text, sendId }, index) => {
-        return (
-          <div
-            key={index}
-            className={`${styles.text} ${
-              sendId === ownId ? styles.ownMessage : styles.defaultMessage
-            }`}
-          >
-            <p>{text}</p>
-          </div>
-        );
-      })}
+      {currentChat?.messages.map(({ id, message, icon }, index) => (
+        <div
+          key={index}
+          className={`${styles.text} ${
+            id !== userLogged.id ? styles.ownMessage : styles.defaultMessage
+          }`}>
+          <p className={icon ? styles.icon : styles.text}>{message}</p>
+        </div>
+      ))}
     </div>
   );
 }
 
 MessageList.propTypes = {
   messajeList: PropTypes.array,
-  ownId: PropTypes.string
+  ownId: PropTypes.string,
+  chat: PropTypes.array
 };
