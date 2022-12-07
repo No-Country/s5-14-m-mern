@@ -31,11 +31,15 @@ const Card = ({
         // onMouseLeave={() => setHover(false)}>
         // <Link to={path} state={{ gameId, name, stars, description, minAge, path, folder }}>
 
-        onMouseEnter={!onlyShow ? () => setHover(true) : undefined}
-        onMouseLeave={!onlyShow ? () => setHover(false) : undefined}>
-        <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
-          <img src={cover} alt={name} />
-        </Link>
+        onMouseEnter={!onlyShow && !comingSoon ? () => setHover(true) : undefined}
+        onMouseLeave={!onlyShow && !comingSoon ? () => setHover(false) : undefined}>
+        {!comingSoon ? (
+          <Link to={path} state={{ name, stars, description, minAge, path, folder }}>
+            <img src={cover} alt={name} />
+          </Link>
+        ) : (
+          <img className={style.imgComing} src={cover} alt={name} />
+        )}
         <h5>{name}</h5>
         {hover && (
           <div className={style.is_hover}>
