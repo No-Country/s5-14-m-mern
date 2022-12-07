@@ -3,9 +3,12 @@ import EmojiPicker, { Theme, EmojiStyle, Categories } from "emoji-picker-react";
 
 // hooks
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
+import {
+  setThirdSectionOfPage,
+  setChatHistory
+} from "../../../redux/slices/messages/messagesSlice";
 
 // hocs
 import messagesResponsive from "../../../hocs/messageResponsive";
@@ -20,9 +23,13 @@ import styles from "./defaultMessages.module.sass";
 import DefaultMessagesHeader from "../DefaultMessageHeader";
 import { useEffect, useState } from "react";
 
+import socket from "../../../services/socket";
+
 function PredefinedMessagesSection() {
   const { chat } = useServices();
   const [phrases, setPhrases] = useState();
+
+  const { currentChat } = useSelector(state => state.message);
 
   const isTablet = useMediaQuery({
     query: "(min-width: 778px)"
@@ -46,6 +53,22 @@ function PredefinedMessagesSection() {
 
   const toBack = () => dispatch(setThirdSectionOfPage(null));
 
+  const selectedMessage = async phrase => {
+    console.log(phrase);
+    console.log(typeof phrase);
+    const { data } = await chat.setChathistory(
+      currentChat._id,
+      typeof phrase === "string"
+        ? {
+            message: phrase,
+            icon: false
+          }
+        : { message: phrase.emoji, icon: true }
+    );
+    dispatch(setChatHistory(data));
+    socket.emit("sendMessage", { id: currentChat._id, message: phrase }, currentChat.room);
+  };
+
   return (
     <div className={styles.container}>
       {!phrases ? (
@@ -62,18 +85,22 @@ function PredefinedMessagesSection() {
             </div>
             <div className={styles.greeting}>
               <p className={styles.title}>Saludos y despedidas</p>
-              {phrases.saludos.map(phrase => {
-                return (
-                  <div className={styles.greetingButton} key={phrase._id}>
-                    {phrase.phrase}
-                  </div>
-                );
-              })}
+              {phrases.saludos.map(phrase => (
+                <div
+                  onClick={() => selectedMessage(phrase.phrase)}
+                  className={styles.greetingButton}
+                  key={phrase._id}>
+                  {phrase.phrase}
+                </div>
+              ))}
             </div>
             <div className={styles.greeting}>
               <p className={styles.title}>Cotidianas</p>
               {phrases.cotidianas.map(phrase => (
-                <div className={styles.dailygButton} key={phrase._id}>
+                <div
+                  onClick={() => selectedMessage(phrase.phrase)}
+                  className={styles.dailygButton}
+                  key={phrase._id}>
                   {phrase.phrase}
                 </div>
               ))}
@@ -81,6 +108,7 @@ function PredefinedMessagesSection() {
             <div className={styles.greeting}>
               <p className={styles.title}>Emoticones</p>
               <EmojiPicker
+                onEmojiClick={selectedMessage}
                 theme={Theme.DARK}
                 height={500}
                 width={310}

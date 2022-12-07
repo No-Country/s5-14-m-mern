@@ -1,7 +1,5 @@
 import Card from "../../components/PagesComponents/Card/Card";
 import style from "./favourites.module.sass";
-// import likes from "../../../assets/Icons/favFill.svg";
-// import likent from "../../../assets/Icons/favM.svg";
 import friend from "../../../assets/Icons/profile2user.svg";
 import noSigned from "../../../assets/Icons/noSignFav.svg";
 import { useEffect, useState } from "react";
@@ -10,23 +8,6 @@ import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 import FavoriteButton from "../../components/PagesComponents/FavoriteButton/FavoriteButton";
 import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
-// const favs = [
-//   {
-//     imageUrl: "../../../assets/ImagesCards/chess.svg",
-//     name: "Aprende ajedrez",
-//     stars: 4
-//   },
-//   {
-//     imageUrl: "../../../assets/ImagesCards/color.svg",
-//     name: "Colorea",
-//     stars: 4
-//   },
-//   {
-//     imageUrl: "../../../assets/ImagesCards/draw.svg",
-//     name: "Dibuja",
-//     stars: 4
-//   }
-// ];
 
 const Favourites = () => {
   // const [like, setLike] = useState(true);

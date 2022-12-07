@@ -7,10 +7,11 @@ import PropTypes from "prop-types";
 import { useKeenSlider } from "keen-slider/react";
 
 // hooks
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setFirstSectionOfPage,
-  setCurrentUser
+  setCurrentUser,
+  setChatHistory
 } from "../../../redux/slices/messages/messagesSlice";
 import { useMediaQuery } from "react-responsive";
 
@@ -18,6 +19,7 @@ import { useMediaQuery } from "react-responsive";
 import { CHAT_SETIONS } from "../utils/chatSetions";
 import { useNavigate } from "react-router-dom";
 import avatarI from "../../../../assets/AccountAvatars/avatar0.svg";
+import useServices from "../../../services/useServices";
 
 export default function FriendsList({ friendsList }) {
   const dispatch = useDispatch();
@@ -30,12 +32,19 @@ export default function FriendsList({ friendsList }) {
   });
   const navigate = useNavigate();
 
-  const handledPage = data => {
+  const { userInfo } = useSelector(state => state.user);
+  const { chat } = useServices();
+
+  const handledPage = async user => {
     if (!isTablet) {
       navigate("/messages/options");
     }
-    dispatch(setCurrentUser(data));
+    dispatch(setCurrentUser(user));
     dispatch(setFirstSectionOfPage(CHAT_SETIONS.userOptions));
+    if (userInfo.friends.includes(user._id)) {
+      const { data } = await chat.getChathistory(user._id);
+      dispatch(setChatHistory(data));
+    }
   };
   return (
     <div className={styles.container}>

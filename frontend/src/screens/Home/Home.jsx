@@ -2,23 +2,20 @@ import "keen-slider/keen-slider.min.css";
 import style from "./home.module.sass";
 import { useKeenSlider } from "keen-slider/react";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Card from "../../components/PagesComponents/Card/Card";
-import useServices from "../../services/useServices";
-import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearFilter } from "../../redux/slices/filter";
+import useServices from "../../services/useServices";
+import Card from "../../components/PagesComponents/Card/Card";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 import medal from "../../../assets/Icons/medalstar.svg";
-// import clock from "../../../assets/Icons/clock.svg";
 import magicstar from "../../../assets/Icons/magic-star.svg";
 import arrow from "../../../assets/Icons/arrow.svg";
-import { clearFilter } from "../../redux/slices/filter";
 
 const Home = () => {
   const [recommended, setRecommended] = useState();
   const [gamelist, setGamelist] = useState([]);
   const [filteredGames, setFilteredGames] = useState();
-  // const [firsts4Games, setFirsts4Games] = useState();
-  // const [lasts4Games, setLasts4Games] = useState();
   const [isGameListLoading, setIsGameListLoading] = useState(true);
   const { games } = useServices();
   const { filter } = useSelector(state => state.filter);
@@ -37,14 +34,11 @@ const Home = () => {
     async function gamesLoad() {
       try {
         const { data } = await games.getAll();
+        console.log("data", data);
         const sorted = data.games.sort((a, b) => b.stars - a.stars);
-        // const first4 = data.games.splice(0, 4);
-        // const lasts4 = data.games.splice(data.games.length - 4, data.games.length);
         setGamelist(data.games);
         setRecommended(sorted.slice(0, 4));
         setFilteredGames(sorted.slice(4));
-        // setFirsts4Games(first4);
-        // setLasts4Games(lasts4);
         setIsGameListLoading(false);
       } catch (err) {
         setIsGameListLoading(false);
@@ -105,7 +99,7 @@ const Home = () => {
                         stars={stars}
                         description={description}
                         minAge={audiencies}
-                        path={`/games/${folder}`}
+                        path={`/games/${_id}`}
                         comingSoon={comingSoon}
                         devices={devices}
                       />
@@ -120,17 +114,7 @@ const Home = () => {
               <div className={style.cards_small}>
                 {filteredGames.map(
                   (
-                    {
-                      _id,
-                      cover,
-                      name,
-                      stars,
-                      description,
-                      audiencies,
-                      comingSoon,
-                      folder,
-                      devices
-                    },
+                    { _id, cover, name, stars, description, audiencies, comingSoon, devices },
                     i
                   ) => (
                     <Card
@@ -141,7 +125,7 @@ const Home = () => {
                       stars={stars}
                       description={description}
                       minAge={audiencies}
-                      path={`/games/${folder}`}
+                      path={`/games/${_id}`}
                       comingSoon={comingSoon}
                       size="small"
                       devices={devices}
@@ -149,29 +133,6 @@ const Home = () => {
                   )
                 )}
               </div>
-              {/* <div className={`${style.d_flex} ${style.prox}`}>
-                <h2>Proximamente</h2>
-                <img src={clock} />
-              </div> */}
-              {/* <div className={style.cards_small}>
-                {lasts4Games.map(
-                  ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
-                    <Card
-                      key={i}
-                      gameId={_id}
-                      name={name}
-                      cover={cover.path}
-                      stars={stars}
-                      description={description}
-                      minAge={audiencies}
-                      path={`/games/${folder}`}
-                      comingSoon={true}
-                      size="small"
-                      onlyShow={true}
-                    />
-                  )
-                )}
-              </div> */}
             </>
           )}
           {filter && (
@@ -182,7 +143,7 @@ const Home = () => {
               </div>
               <div>
                 {filteredGames.map(
-                  ({ _id, cover, name, stars, description, audiencies, comingSoon, folder }, i) => (
+                  ({ _id, cover, name, stars, description, audiencies, folder }, i) => (
                     <div key={i} className={style.cards_search}>
                       <Card
                         gameId={_id}
@@ -191,7 +152,8 @@ const Home = () => {
                         stars={stars}
                         description={description}
                         minAge={audiencies}
-                        path={`/games/${folder}`}
+                        folder={folder}
+                        path={`/games/${_id}`}
                         size="small"
                       />
                       <div className={style.desc}>

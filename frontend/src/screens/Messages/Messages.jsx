@@ -15,7 +15,12 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { CHAT_SETIONS } from "../../components/MessageComponents/utils/chatSetions";
-import { setFirstSectionOfPage } from "../../redux/slices/messages/messagesSlice";
+import {
+  setFirstSectionOfPage,
+  resetCurrentUser,
+  setSelectUser,
+  setThirdSectionOfPage
+} from "../../redux/slices/messages/messagesSlice";
 
 const Messages = () => {
   const { userLogged } = useSelector(state => state.auth);
@@ -26,7 +31,12 @@ const Messages = () => {
   });
 
   useEffect(() => {
-    return () => dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
+    return () => {
+      dispatch(setFirstSectionOfPage(CHAT_SETIONS.searchFriends));
+      dispatch(setThirdSectionOfPage(null));
+      dispatch(resetCurrentUser());
+      dispatch(setSelectUser(false));
+    };
   }, []);
 
   return (
