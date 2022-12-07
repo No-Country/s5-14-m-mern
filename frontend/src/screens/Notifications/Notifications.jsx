@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 import FriendsNotification from "../../components/NotificationsComponents/FriendsNotification";
 import { getUserLogged } from "../../redux/slices/user/userAction";
+import SpinnerLoad from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad";
 
 // import { useSelector } from "react-redux";
 // import NotificationCard from "../../components/PagesComponents/NotificationCard/NotificationCard";
@@ -44,7 +45,8 @@ import { getUserLogged } from "../../redux/slices/user/userAction";
 
 const Notifications = () => {
   const dispatch = useDispatch();
-  const [myNotifications, setMyNotifications] = useState();
+  const [myNotifications, setMyNotifications] = useState([]);
+  const [isNotificationsLoading, setIsNotificationsLoading] = useState(true);
 
   const { userLogged } = useSelector(state => state.auth);
   const { notifications, friends } = useServices();
@@ -55,7 +57,10 @@ const Notifications = () => {
         const { data } = await notifications.getNotifications();
         console.log("result", data);
         setMyNotifications(data.notifications);
+        setIsNotificationsLoading(false);
       })();
+    } else {
+      setIsNotificationsLoading(false);
     }
   }, []);
 
@@ -77,31 +82,36 @@ const Notifications = () => {
   return (
     <div className={style.notif_content}>
       {/* Logueado */}
-
-      {userLogged ? (
-        !myNotifications ? null : myNotifications.length > 0 ? (
-          myNotifications.map(not => (
-            <FriendsNotification
-              key={not._id}
-              data={not}
-              accept={acceptInvitation}
-              refuse={refuseInvitation}
-            />
-          ))
-        ) : (
-          <div className={style.not_logged}>
-            <img src={noSigned} alt="" />
-            <h3>No hay notificaciones</h3>
-          </div>
-        )
+      {isNotificationsLoading ? (
+        <SpinnerLoad className={style.spinner} />
       ) : (
-        <div className={style.not_logged}>
-          <img src={noSigned} alt="" />
-          <h3>Inicia sesión para ver las notificaciones</h3>
-          <Link to="/login">
-            <button>Iniciar sesión</button>
-          </Link>
-        </div>
+        <>
+          {userLogged ? (
+            myNotifications[0] ? (
+              myNotifications.map(not => (
+                <FriendsNotification
+                  key={not._id}
+                  data={not}
+                  accept={acceptInvitation}
+                  refuse={refuseInvitation}
+                />
+              ))
+            ) : (
+              <div className={style.not_logged}>
+                <img src={noSigned} alt="" />
+                <h3>No hay notificaciones</h3>
+              </div>
+            )
+          ) : (
+            <div className={style.not_logged}>
+              <img src={noSigned} alt="" />
+              <h3>Inicia sesión para ver las notificaciones</h3>
+              <Link to="/login">
+                <button>Iniciar sesión</button>
+              </Link>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
