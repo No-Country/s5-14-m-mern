@@ -3,8 +3,9 @@ import { getToken } from "./localStorage";
 // production:  const socket = io(process.env.VITE_API_URL);
 // DEV
 
+const BASE_URL = import.meta.env.VITE_API_URL;
 const token = getToken();
-const socket = io(import.meta.env.VITE_API_URL, {
+const socket = io(BASE_URL, {
   query: { token },
   transports: ["websocket"]
 });
