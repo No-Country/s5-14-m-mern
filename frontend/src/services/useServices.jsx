@@ -115,7 +115,7 @@ const useServices = () => {
     getChathistory: userId => apiProtected().get(`${routeUrl.chat}/${userId}`),
     setChathistory: (chatId, data) => apiProtected().post(`${routeUrl.chat}/${chatId}`, data),
     socketSend: (currentChannel, data) =>
-      apiProtected().post(`http://localhost:8000/api/message?channel=${currentChannel}`, data)
+      apiProtected().post(`${BASE_URL}/api/message?channel=${currentChannel}`, data)
   };
   return {
     auth,
