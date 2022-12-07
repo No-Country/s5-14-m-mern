@@ -18,4 +18,7 @@ export const getUserLogged = () => {
 export const addLocal = data => localStorage.setItem("userToken", JSON.stringify(data));
 
 // Remove credentials from local storage
-export const removeLocal = () => localStorage.removeItem("userToken");
+export const removeLocal = () => {
+  localStorage.removeItem("userToken");
+  localStorage.removeItem("EstadoPorDefecto");
+};
