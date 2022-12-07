@@ -4,7 +4,7 @@ import { getToken } from "./localStorage";
 // DEV
 
 const token = getToken();
-const socket = io("http://localhost:8000", {
+const socket = io(import.meta.env.VITE_API_URL, {
   query: { token },
   transports: ["websocket"]
 });
