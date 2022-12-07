@@ -92,13 +92,13 @@ const AllGames = () => {
                   {state.minAge === "+7" && <img src={plus7} alt="" />}
                   {state.devices.map(d =>
                     d === "mouse" ? (
-                      <img src={mouse} />
+                      <img key={d} src={mouse} />
                     ) : d === "gamepad" ? (
-                      <img src={gamepad} />
+                      <img key={d} src={gamepad} />
                     ) : d === "keyboard" ? (
-                      <img src={keyboard} />
+                      <img key={d} src={keyboard} />
                     ) : d === "touch" ? (
-                      <img src={touch} />
+                      <img key={d} src={touch} />
                     ) : null
                   )}
                 </div>

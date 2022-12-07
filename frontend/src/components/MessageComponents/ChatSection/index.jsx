@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import {
   setThirdSectionOfPage,
-  setChatHistory,
-  editChatHistory
+  setChatHistory
+  //  editChatHistory
 } from "../../../redux/slices/messages/messagesSlice";
 import socket from "../../../services/socket";
 

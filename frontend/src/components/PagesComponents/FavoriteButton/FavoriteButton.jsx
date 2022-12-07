@@ -21,7 +21,6 @@ const FavoriteButton = ({ favoriteId }) => {
     setLoading(true);
     await favorites.addRemoveFavorite(favoriteId);
     dispatch(getUserLogged(userLogged.id));
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -29,6 +28,7 @@ const FavoriteButton = ({ favoriteId }) => {
       if (userInfo.favorites.includes(favoriteId)) setIsFavorite(true);
       else setIsFavorite(false);
     }
+    setLoading(false);
   }, [userInfo, favoriteId]);
 
   return (
