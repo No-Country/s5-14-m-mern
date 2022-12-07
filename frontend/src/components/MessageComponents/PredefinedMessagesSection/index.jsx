@@ -5,10 +5,7 @@ import EmojiPicker, { Theme, EmojiStyle, Categories } from "emoji-picker-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import {
-  setThirdSectionOfPage,
-  setChatHistory
-} from "../../../redux/slices/messages/messagesSlice";
+import { setThirdSectionOfPage } from "../../../redux/slices/messages/messagesSlice";
 
 // hocs
 import messagesResponsive from "../../../hocs/messageResponsive";
@@ -54,9 +51,7 @@ function PredefinedMessagesSection() {
   const toBack = () => dispatch(setThirdSectionOfPage(null));
 
   const selectedMessage = async phrase => {
-    console.log(phrase);
-    console.log(typeof phrase);
-    const { data } = await chat.setChathistory(
+    await chat.setChathistory(
       currentChat._id,
       typeof phrase === "string"
         ? {
@@ -65,7 +60,7 @@ function PredefinedMessagesSection() {
           }
         : { message: phrase.emoji, icon: true }
     );
-    dispatch(setChatHistory(data));
+    await chat.socketSend(currentChat.room, { id: currentChat._id, message: phrase });
     // socket.emit("sendMessage", { id: currentChat._id, message: phrase }, currentChat.room);
   };
 

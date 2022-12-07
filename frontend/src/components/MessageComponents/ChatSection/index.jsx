@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import {
-  setThirdSectionOfPage
-  // setChatHistory
+  setThirdSectionOfPage,
+  setChatHistory
   // editChatHistory
 } from "../../../redux/slices/messages/messagesSlice";
 // import socket from "../../../services/socket";
@@ -24,13 +24,22 @@ import { CHAT_SETIONS } from "../utils/chatSetions";
 // style
 import styles from "./chat.module.sass";
 import { useEffect } from "react";
+import useServices from "../../../services/useServices";
 // import useServices from "../../../services/useServices";
+// import { edit, editChatHistory } from "../../../redux/slices/messages/messagesSlice";
 
 function ChatSection() {
   // const currentUser = useSelector(state => state.message.currentUser);
+  const { userInfo } = useSelector(state => state.user);
   const selectUser = useSelector(state => state.message.selectUser);
-  const { currentChat } = useSelector(state => state.message);
-  // const { chat } = useServices();
+  const { currentChat, currentUser } = useSelector(state => state.message);
+  const { chat } = useServices();
+
+  const isTablet = useMediaQuery({
+    query: "(min-width: 778px)"
+  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const pusher = new Pusher(import.meta.env.VITE_key, {
@@ -39,9 +48,16 @@ function ChatSection() {
     });
     // RECIBIR
     const channel = pusher.subscribe(currentChat.room);
-    channel.bind("message", message => {
-      console.log(message);
+
+    channel.bind("message", async () => {
+      const { data } = await chat.getChathistory(currentUser._id);
+      dispatch(setChatHistory(data));
     });
+
+    return () => {
+      pusher.unsubscribe(currentChat.room);
+    };
+
     // socket.emit("joinRoom", currentChat.room, message => {
     //   console.log("Unido a la sala " + message);
     // });
@@ -57,7 +73,7 @@ function ChatSection() {
     // SE ENVIA POR ROUTA
   }, []);
 
-  console.log("Me renderizo");
+  // console.log("Me renderizo");
 
   useEffect(() => {
     // socket.on("receiveMessage", async message => {
@@ -69,12 +85,6 @@ function ChatSection() {
     //   socket.off("receiveMessage");
     // };
   }, []);
-
-  const isTablet = useMediaQuery({
-    query: "(min-width: 778px)"
-  });
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handledPage = () => {
     if (!isTablet) {
