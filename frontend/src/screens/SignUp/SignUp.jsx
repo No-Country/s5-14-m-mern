@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -9,6 +9,7 @@ import arrow from "../../../assets/Icons/arrow.svg";
 
 import styles from "./signup.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import SpinnerLoad2 from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad2";
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()
@@ -28,6 +29,8 @@ const SignUp = () => {
   const { userInfo } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const [mostrarContraseña, setMostrarContraseña] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const buttonRef = useRef();
 
   useEffect(() => {
     if (successAuth) {
@@ -39,12 +42,16 @@ const SignUp = () => {
       navigate("/");
     }
     if (errorAuth) {
+      setDisabled(false);
+      buttonRef.current.disabled = false;
       console.log(errorAuth);
       alert("ERROR");
     }
   }, [userLogged, successAuth]);
 
   const submit = values => {
+    setDisabled(true);
+    buttonRef.current.disabled = true;
     dispatch(
       registerUser({
         username: values.username,
@@ -122,8 +129,8 @@ const SignUp = () => {
               {errors.passwordConfirmacion && touched.passwordConfirmacion ? (
                 <div className={styles.formerrors}>{errors.passwordConfirmacion}</div>
               ) : null}
-              <button className={styles.formbutton} type="submit">
-                Crear Cuenta
+              <button ref={buttonRef} className={styles.formbutton} type="submit">
+                {disabled ? <SpinnerLoad2 className={styles.spinner} /> : <p>Crear cuenta</p>}
               </button>
             </Form>
           )}

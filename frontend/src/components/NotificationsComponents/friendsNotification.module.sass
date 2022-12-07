@@ -6,13 +6,14 @@
     background: $dark-gray
     border-radius: 20px
     overflow: hidden
-    width: 350px
-    height: 380px 
+    width: 90%
+    max-width: 450px
+    height: 380px
     display: flex
     flex-direction: column
     justify-content: flex-start
     @include mq(medium)
-        width: 550px
+        max-width: 550px
         height: 265px
     h1
             height: 70px
@@ -25,6 +26,7 @@
         flex-direction: column
         justify-content: space-around
         align-items: center 
+        margin: 0 15px 10px
         img
             height: 65px
             width: 65px

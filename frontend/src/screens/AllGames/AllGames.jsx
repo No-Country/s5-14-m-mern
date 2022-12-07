@@ -69,7 +69,7 @@ const AllGames = () => {
 
   return (
     <div className={style.games_content}>
-      {state && (
+      {state ? (
         <>
           <div className={style.name}>
             <h2>{state.name}</h2>
@@ -127,6 +127,8 @@ const AllGames = () => {
             </div>
           </div>
         </>
+      ) : (
+        <SpinnerLoad className={style.spinner} />
       )}
     </div>
   );
