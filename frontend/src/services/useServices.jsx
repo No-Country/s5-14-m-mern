@@ -14,7 +14,8 @@ const useServices = () => {
     friends: BASE_URL + "/api/friends",
     favorites: BASE_URL + "/api/favorites",
     notification: BASE_URL + "/api/notifications",
-    chat: BASE_URL + "/api/chat"
+    chat: BASE_URL + "/api/chat",
+    message: BASE_URL + "/api/message"
   };
 
   // For public  routes
@@ -115,7 +116,7 @@ const useServices = () => {
     getChathistory: userId => apiProtected().get(`${routeUrl.chat}/${userId}`),
     setChathistory: (chatId, data) => apiProtected().post(`${routeUrl.chat}/${chatId}`, data),
     socketSend: (currentChannel, data) =>
-      apiProtected().post(`${BASE_URL}/api/message?channel=${currentChannel}`, data)
+      apiProtected().post(`${routeUrl.message}?channel=${currentChannel}`, data)
   };
   return {
     auth,
