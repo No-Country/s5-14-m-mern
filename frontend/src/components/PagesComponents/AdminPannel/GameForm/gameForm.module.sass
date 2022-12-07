@@ -13,24 +13,24 @@
   display: flex
   align-items: center
 
-input[type="radio"]
-  margin-right: 1em
-  @include checkandradiobuttons()
-
-input[type="checkbox"]
-  margin-right: 1em
-  @include checkandradiobuttons()
-
-p 
-  font-size: 12px
-  padding: 1em 0
-
 .container
   font-family: $main-font
   display: flex
   flex-grow: 1
   justify-content: center
   align-items: center
+  input[type="radio"]
+    margin-right: 1em
+    @include checkandradiobuttons()
+
+  input[type="checkbox"]
+    margin-right: 1em
+    @include checkandradiobuttons()
+
+  p 
+    font-size: 12px
+    padding: 1em 0
+
 
 .form
   background: $dark-gray

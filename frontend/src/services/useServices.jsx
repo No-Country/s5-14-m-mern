@@ -111,7 +111,9 @@ const useServices = () => {
 
   // CHAT
   const chat = {
-    getPhrases: () => apiProtected().get(`${routeUrl.chat}/phrases`)
+    getPhrases: () => apiProtected().get(`${routeUrl.chat}/phrases`),
+    getChathistory: userId => apiProtected().get(`${routeUrl.chat}/${userId}`),
+    setChathistory: (chatId, data) => apiProtected().post(`${routeUrl.chat}/${chatId}`, data)
   };
 
   return {
