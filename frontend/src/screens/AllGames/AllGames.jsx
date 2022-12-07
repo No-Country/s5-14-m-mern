@@ -69,7 +69,7 @@ const AllGames = () => {
 
   return (
     <div className={style.games_content}>
-      {state && (
+      {state ? (
         <>
           <div className={style.name}>
             <h2>{state.name}</h2>
@@ -92,13 +92,13 @@ const AllGames = () => {
                   {state.minAge === "+7" && <img src={plus7} alt="" />}
                   {state.devices.map(d =>
                     d === "mouse" ? (
-                      <img src={mouse} />
+                      <img key={d} src={mouse} />
                     ) : d === "gamepad" ? (
-                      <img src={gamepad} />
+                      <img key={d} src={gamepad} />
                     ) : d === "keyboard" ? (
-                      <img src={keyboard} />
+                      <img key={d} src={keyboard} />
                     ) : d === "touch" ? (
-                      <img src={touch} />
+                      <img key={d} src={touch} />
                     ) : null
                   )}
                 </div>
@@ -108,12 +108,18 @@ const AllGames = () => {
                   <h4>Nombre</h4>
                   <h4>Puntuación</h4>
                 </div>
-                {state.scores.map((score, i) => (
-                  <div key={i}>
-                    <p>{score.username}</p>
-                    <p>{score.score}</p>
+                {state.scores.lenght > 0 ? (
+                  state.scores.map((score, i) => (
+                    <div key={i}>
+                      <p>{score.username}</p>
+                      <p>{score.score}</p>
+                    </div>
+                  ))
+                ) : (
+                  <div className={style.noranking}>
+                    Aún no hay puntajes en este juego, juéga y sé el primero de la lista!
                   </div>
-                ))}
+                )}
               </div>
               {userLogged && (
                 <>
@@ -127,6 +133,8 @@ const AllGames = () => {
             </div>
           </div>
         </>
+      ) : (
+        <SpinnerLoad className={style.spinner} />
       )}
     </div>
   );

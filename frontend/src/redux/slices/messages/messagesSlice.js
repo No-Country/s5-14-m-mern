@@ -37,6 +37,9 @@ const messagesSlide = createSlice({
     },
     setChatHistory: (state, action) => {
       state.currentChat = action.payload;
+    },
+    editChatHistory: (state, action) => {
+      state.currentChat = [...state.currentChat, action.payload];
     }
     // editChatHistory: (state, action) => {
     //   state.currentChat.messages = [...state.currentChat.messages, action.payload];
@@ -56,7 +59,8 @@ export const {
   setCurrentUser,
   resetCurrentUser,
   setChatHistory,
-  editChatHistory
+  editChatHistory,
+  setChannel
   // resetChatHistory
 } = messagesSlide.actions;
 

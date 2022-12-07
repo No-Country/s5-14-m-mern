@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 
 const Card = ({ gameId, cover, name, stars, path, size, onlyShow = false, comingSoon }) => {
   const [hover, setHover] = useState(false);
-  console.log("id:", gameId);
 
   return (
     <div className={size !== "small" ? "keen-slider__slide" : null}>

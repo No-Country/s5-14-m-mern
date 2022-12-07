@@ -12,6 +12,7 @@ import arrow from "../../../assets/Icons/arrow.svg";
 
 import styles from "../LogIn/login.module.sass";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import SpinnerLoad2 from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad2";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Email invalido").required("Email requerido"),
@@ -29,6 +30,8 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     if (userToken) {
@@ -53,14 +56,16 @@ const Login = () => {
         progress: undefined,
         theme: "dark"
       });
-
       setTimeout(() => {
+        setDisabled(false);
         buttonRef.current.disabled = false;
       }, 3000);
     }
   }, [successAuth, userToken, errorAuth]);
 
   const submitHandler = values => {
+    setDisabled(true);
+    buttonRef.current.disabled = true;
     dispatch(userLogin({ email: values.email, password: values.password }));
   };
 
@@ -107,7 +112,7 @@ const Login = () => {
                 <div className={styles.formerrors}>{errors.password}</div>
               ) : null}
               <button ref={buttonRef} className={styles.formbutton} type="submit">
-                Enviar
+                {disabled ? <SpinnerLoad2 className={styles.spinner} /> : <p>Enviar</p>}
               </button>
               <div id="noexiste"></div>
             </Form>

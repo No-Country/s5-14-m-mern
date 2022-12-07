@@ -10,17 +10,18 @@ import { getUserLogged } from "../../redux/slices/user/userAction";
 import arrowD from "../../../assets/Icons/arrowMenuD.svg";
 import arrowU from "../../../assets/Icons/arrowMenuU.svg";
 import { ToastContainer, toast } from "react-toastify";
+import SpinnerLoad2 from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad2";
 
 const avatars = [
-  "../../../assets/AccountAvatars/avatar0.svg",
-  "../../../assets/AccountAvatars/avatar1.svg",
-  "../../../assets/AccountAvatars/avatar2.svg",
-  "../../../assets/AccountAvatars/avatar3.svg",
-  "../../../assets/AccountAvatars/avatar4.svg",
-  "../../../assets/AccountAvatars/avatar5.svg",
-  "../../../assets/AccountAvatars/avatar6.svg",
-  "../../../assets/AccountAvatars/avatar7.svg",
-  "../../../assets/AccountAvatars/avatar8.svg"
+  "/assets/AccountAvatars/avatar0.svg",
+  "/assets/AccountAvatars/avatar1.svg",
+  "/assets/AccountAvatars/avatar2.svg",
+  "/assets/AccountAvatars/avatar3.svg",
+  "/assets/AccountAvatars/avatar4.svg",
+  "/assets/AccountAvatars/avatar5.svg",
+  "/assets/AccountAvatars/avatar6.svg",
+  "/assets/AccountAvatars/avatar7.svg",
+  "/assets/AccountAvatars/avatar8.svg"
 ];
 
 const Account = () => {
@@ -38,16 +39,18 @@ const Account = () => {
   const [username, setUsername] = useState("");
   const [onEdit, setOnEdit] = useState(false);
   const [editPass, setEditPass] = useState(false);
-  const [actualPass, setActualPass] = useState("");
+  // const [actualPass, setActualPass] = useState("");
   const [pass1, setPass1] = useState("");
   const [pass2, setPass2] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
-  const [seePassAc, setSeePassAc] = useState(false);
+  // const [seePassAc, setSeePassAc] = useState(false);
   const [seePass1, setSeePass1] = useState(false);
   const [seePass2, setSeePass2] = useState(false);
   const [errorLength, setErrorLength] = useState(false);
   const [error2, setError2] = useState(false);
 
+  const buttonRef1 = useRef();
   const buttonRef = useRef();
 
   const disp = () => {
@@ -86,11 +89,27 @@ const Account = () => {
     // guardar en el localstorage el estado disponible o no
     localStorage.setItem("EstadoPorDefecto", JSON.stringify(estado));
     try {
+      buttonRef1.current.disabled = true;
+      setDisabled(true);
       const result = await users.modify(userInfo.id, { avatar, username });
       console.log(result);
+      buttonRef1.current.disabled = false;
+      setDisabled(false);
       dispatch(getUserLogged(userLogged.id));
+      toast.success("Cambio exitoso", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark"
+      });
     } catch (err) {
       console.log(err);
+      buttonRef1.current.disabled = false;
+      setDisabled(false);
     }
   };
   const handleSubmitPassword = async e => {
@@ -101,9 +120,12 @@ const Account = () => {
         setError2(false);
         try {
           buttonRef.current.disabled = true;
+          setDisabled(true);
           const result = await auth.changePassword(userInfo.id, { password: pass1 });
           console.log(result);
           buttonRef.current.disabled = false;
+          setDisabled(false);
+          setEditPass(false);
           toast.success("Cambio de contraseña exitoso", {
             position: "top-center",
             autoClose: 2000,
@@ -116,6 +138,7 @@ const Account = () => {
           });
         } catch (err) {
           buttonRef.current.disabled = false;
+          setDisabled(false);
           console.log(err);
         }
       } else setError2(true);
@@ -132,68 +155,81 @@ const Account = () => {
     <div className={style.container}>
       {userInfo ? (
         !editPass ? (
-          <form onSubmit={handleSubmit}>
-            <div className={style.account}>
-              <img className={style.mainAvatar} src={avatar || avatarDef} alt="" />
-              <div className={style.user}>
-                <input
-                  className={style.input}
-                  ref={inputRef}
-                  type="text"
-                  name="name"
-                  value={username}
-                  onChange={handleChange}
-                  readOnly={!onEdit}
-                />
-                <button className={style.btn_edit} onClick={handleEdit}>
-                  <img src={edit} alt="" />
+          <>
+            <form onSubmit={handleSubmit}>
+              <div className={style.account}>
+                <img className={style.mainAvatar} src={avatar || avatarDef} alt="" />
+                <div className={style.user}>
+                  <input
+                    className={style.input}
+                    ref={inputRef}
+                    type="text"
+                    name="name"
+                    value={username}
+                    onChange={handleChange}
+                    readOnly={!onEdit}
+                  />
+                  <button className={style.btn_edit} onClick={handleEdit}>
+                    <img src={edit} alt="" />
+                  </button>
+                </div>
+                <div className={style.state}>
+                  {estado === "Disponible" && <div className={style.disp}></div>}
+                  {estado === "Ausente" && <div className={style.aus}></div>}
+                  {estado === "No Molestar" && <div className={style.noM}></div>}
+                  <p>{estado}</p>
+                  {!stateMenu && <img onClick={handleMenu} src={arrowD} />}
+                  {stateMenu && <img onClick={handleMenu} src={arrowU} />}
+                  {stateMenu && (
+                    <div className={style.menu}>
+                      <div onClick={disp} className={style.flex}>
+                        <div className={style.disp}></div>
+                        <p>Disponinle</p>
+                      </div>
+                      <div onClick={aus} className={style.flex}>
+                        <div className={style.aus}></div>
+                        <p>Ausente</p>
+                      </div>
+                      <div onClick={noM} className={style.flex}>
+                        <div className={style.noM}></div>
+                        <p>No Molestar</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className={style.avatars}>
+                  {avatars.map((ava, i) => (
+                    <img key={i} src={ava} onClick={() => handleAvatar(ava)} />
+                  ))}
+                </div>
+                <button className={style.btn} onClick={handlePassword}>
+                  Cambiar contraseña
+                </button>
+                <button ref={buttonRef1} className={style.btn} type="submit">
+                  {disabled ? <SpinnerLoad2 className={style.spinner} /> : <p>Guardar</p>}
                 </button>
               </div>
-              <div className={style.state}>
-                {estado === "Disponible" && <div className={style.disp}></div>}
-                {estado === "Ausente" && <div className={style.aus}></div>}
-                {estado === "No Molestar" && <div className={style.noM}></div>}
-                <p>{estado}</p>
-                {!stateMenu && <img onClick={handleMenu} src={arrowD} />}
-                {stateMenu && <img onClick={handleMenu} src={arrowU} />}
-                {stateMenu && (
-                  // SELECTOR + OPTIONS
-                  <div className={style.menu}>
-                    <div onClick={disp} className={style.flex}>
-                      <div className={style.disp}></div>
-                      <p>Disponinle</p>
-                    </div>
-                    <div onClick={aus} className={style.flex}>
-                      <div className={style.aus}></div>
-                      <p>Ausente</p>
-                    </div>
-                    <div onClick={noM} className={style.flex}>
-                      <div className={style.noM}></div>
-                      <p>No Molestar</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className={style.avatars}>
-                {avatars.map((ava, i) => (
-                  <img key={i} src={ava} onClick={() => handleAvatar(ava)} />
-                ))}
-              </div>
-              <button className={style.btn} onClick={handlePassword}>
-                Cambiar contraseña
-              </button>
-              <button className={style.btn} type="submit">
-                Guardar
-              </button>
-            </div>
-          </form>
+            </form>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+          </>
         ) : (
           <>
             <form className={style.form_pass} onSubmit={handleSubmitPassword}>
               <img className={style.mainAvatar} src={avatar || avatarDef} alt="" />
               <h3>{username}</h3>
               <div className={style.container_form}>
-                <div className={style.input_eye}>
+                {/* <div className={style.input_eye}>
                   <input
                     name="actual"
                     value={actualPass}
@@ -207,7 +243,7 @@ const Account = () => {
                     className={style.show_pass}
                     src={eye}
                   />
-                </div>
+                </div> */}
                 <div className={style.input_eye}>
                   <input
                     name="pass_1"
@@ -250,7 +286,7 @@ const Account = () => {
                   Volver
                 </button>
                 <button ref={buttonRef} className={style.btn} type="submit">
-                  Guardar
+                  {disabled ? <SpinnerLoad2 className={style.spinner} /> : <p>Guardar</p>}
                 </button>
               </div>
             </form>

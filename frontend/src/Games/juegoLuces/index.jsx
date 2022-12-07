@@ -1,17 +1,9 @@
-import { useEffect, useState, memo } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useServices from "../../services/useServices";
 import Modal from "./Modal/Modal";
 import style from "./tablero.module.sass";
 import PropTypes from "prop-types";
-
-const initialState = [
-  [false, false, false],
-  [true, false, true],
-  [true, true, true],
-  [true, true, true],
-  [true, true, true]
-];
 
 const setBoard = () => {
   const board = [
@@ -30,7 +22,7 @@ const setBoard = () => {
 };
 
 const LightGame = ({ setScores, gameId }) => {
-  const [lights, setLights] = useState(initialState);
+  const [lights, setLights] = useState(setBoard());
   const [play, setPlay] = useState(false);
   const [score, setScore] = useState("0");
   const [time, setTime] = useState(0);
