@@ -6,7 +6,7 @@ import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
 import { Link, useLocation } from "react-router-dom";
-import Avatar from "../Avatar/Avatar.jsx";
+import avatar from "../../../../assets/AccountAvatars/avatar2.svg";
 // Como obtener datos de redux
 import { useSelector, useDispatch } from "react-redux"; // Importar use Selector
 import { logout } from "../../../redux/slices/auth";
@@ -101,7 +101,7 @@ const Header = () => {
           <div className={style.user}>
             {!userMenu && <img className={style.arrow} src={arrowD} />}
             {userMenu && <img className={style.arrow} src={arrowU} />}
-            <Avatar avatar={userInfo.avatar} />
+            <img src={userInfo.avatar || avatar} />
           </div>
           {userMenu && (
             <ul className={style.menu}>

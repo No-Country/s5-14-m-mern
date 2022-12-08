@@ -11,18 +11,17 @@ import arrowD from "../../../assets/Icons/arrowMenuD.svg";
 import arrowU from "../../../assets/Icons/arrowMenuU.svg";
 import { ToastContainer, toast } from "react-toastify";
 import SpinnerLoad2 from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad2";
-import Avatar from "../../components/PagesComponents/Avatar/Avatar";
 
 const avatars = [
-  "avatar0",
-  "avatar1",
-  "avatar2",
-  "avatar3",
-  "avatar4",
-  "avatar5",
-  "avatar6",
-  "avatar7",
-  "avatar8"
+  "/assets/AccountAvatars/avatar0.svg",
+  "/assets/AccountAvatars/avatar1.svg",
+  "/assets/AccountAvatars/avatar2.svg",
+  "/assets/AccountAvatars/avatar3.svg",
+  "/assets/AccountAvatars/avatar4.svg",
+  "/assets/AccountAvatars/avatar5.svg",
+  "/assets/AccountAvatars/avatar6.svg",
+  "/assets/AccountAvatars/avatar7.svg",
+  "/assets/AccountAvatars/avatar8.svg"
 ];
 
 const Account = () => {
@@ -159,7 +158,7 @@ const Account = () => {
           <>
             <form onSubmit={handleSubmit}>
               <div className={style.account}>
-                <Avatar className={style.mainAvatar} avatar={userInfo.avatar} />
+                <img className={style.mainAvatar} src={avatar || avatarDef} alt="" />
                 <div className={style.user}>
                   <input
                     className={style.input}
@@ -200,7 +199,7 @@ const Account = () => {
                 </div>
                 <div className={style.avatars}>
                   {avatars.map((ava, i) => (
-                    <Avatar key={i} avatar={ava} onClick={() => handleAvatar(ava)} />
+                    <img key={i} src={ava} onClick={() => handleAvatar(ava)} />
                   ))}
                 </div>
                 <button className={style.btn} onClick={handlePassword}>
