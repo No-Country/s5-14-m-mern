@@ -6,7 +6,7 @@ import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
 import { Link, useLocation } from "react-router-dom";
-import Avatar from "../Avatar/avatar.jsx";
+import Avatar from "../Avatar/Avatar.jsx";
 // Como obtener datos de redux
 import { useSelector, useDispatch } from "react-redux"; // Importar use Selector
 import { logout } from "../../../redux/slices/auth";
