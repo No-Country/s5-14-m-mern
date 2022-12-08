@@ -46,7 +46,7 @@ function useAdminForm(id, initValues) {
       case !values.name:
         errors.name = "El nombre del juego es obligatorio";
         break;
-      case values.name && !/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name):
+      case values.name && !/^[a-zA-ZÀ-ÿ]([a-zA-ZÀ-ÿ\s,[0-9]){1,40}$/.test(values.name):
         errors.name = "El nombre del juego debe ser de 1 a 40 caracteres";
         break;
       case !values.devices.length:
@@ -61,7 +61,7 @@ function useAdminForm(id, initValues) {
       case !values.comingSoon && !values.folder:
         errors.folder = "La carpeta es obligatoria";
         break;
-      case !values.comingSoon && !/^[a-zA-ZÀ-ÿ_]{1,40}$/.test(values.folder):
+      case !values.comingSoon && !/^[a-zA-ZÀ-ÿ_0-9]{1,40}$/.test(values.folder):
         errors.folder =
           "El nombre del juego no puede contener espacios ni signos salvo el guión bajo.";
         break;
