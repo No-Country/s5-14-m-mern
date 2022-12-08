@@ -34,7 +34,6 @@ const Home = () => {
     async function gamesLoad() {
       try {
         const { data } = await games.getAll();
-        console.log("data", data);
         const sorted = data.games.sort((a, b) => b.stars - a.stars);
         setGamelist(data.games);
         setRecommended(sorted.slice(0, 4));
