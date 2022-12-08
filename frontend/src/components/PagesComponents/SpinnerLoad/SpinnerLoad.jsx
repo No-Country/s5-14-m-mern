@@ -1,4 +1,5 @@
 import classes from "./SpinnerLoad.module.sass";
+import PropTypes from "prop-types";
 
 export default function SpinnerLoad({ className }) {
   return (
@@ -12,3 +13,7 @@ export default function SpinnerLoad({ className }) {
     </div>
   );
 }
+
+SpinnerLoad.propTypes = {
+  className: PropTypes.string
+};

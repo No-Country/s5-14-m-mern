@@ -10,7 +10,6 @@ export { default as defaultImage } from "./Icons/defaultImage.svg";
 export { default as gamepad } from "./Icons/gamepad.svg";
 export { default as mouse } from "./Icons/mouse.svg";
 export { default as info } from "./Icons/info.svg";
-
 export { default as avatar0 } from "./AccountAvatars/avatar0.svg";
 export { default as avatar1 } from "./AccountAvatars/avatar1.svg";
 export { default as avatar2 } from "./AccountAvatars/avatar2.svg";

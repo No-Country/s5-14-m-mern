@@ -4,7 +4,7 @@ import { getToken } from "./localStorage.jsx";
 const useServices = () => {
   // const BASE_URL = import.meta.env.VITE_API_URL;
   // const BASE_URL = "http://localhost:8000";
-  const BASE_URL = "https://ludensapi.vercel.app";
+  const BASE_URL = "https://ludens-ihty4twr5-nocountry-ludens.vercel.app";
 
   const routeUrl = {
     auth: BASE_URL + "/api/auth",
@@ -115,9 +115,10 @@ const useServices = () => {
   const chat = {
     getPhrases: () => apiProtected().get(`${routeUrl.chat}/phrases`),
     getChathistory: userId => apiProtected().get(`${routeUrl.chat}/${userId}`),
-    setChathistory: (chatId, data) => apiProtected().post(`${routeUrl.chat}/${chatId}`, data)
+    setChathistory: (chatId, data) => apiProtected().post(`${routeUrl.chat}/${chatId}`, data),
+    socketSend: (currentChannel, data) =>
+      apiProtected().post(`http://localhost:8000/api/message?channel=${currentChannel}`, data)
   };
-
   return {
     auth,
     users,

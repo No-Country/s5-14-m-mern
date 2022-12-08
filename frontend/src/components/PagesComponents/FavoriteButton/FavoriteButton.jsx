@@ -6,21 +6,21 @@ import fav from "../../../../assets/Icons/favM.svg";
 import { getUserLogged } from "../../../redux/slices/user/userAction";
 import useServices from "../../../services/useServices";
 import { useDispatch, useSelector } from "react-redux";
-import SpinnerLoad2 from "../SpinnerLoad/SpinnerLoad2";
+import PropTypes from "prop-types";
+import SpinnerLoad from "../SpinnerLoad/SpinnerLoad.jsx";
 
 const FavoriteButton = ({ favoriteId }) => {
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const { favorites } = useServices();
   const { userLogged } = useSelector(state => state.auth);
   const { userInfo } = useSelector(state => state.user);
+  const [isLoading, setLoading] = useState(false);
 
   const handleClick = async () => {
-    setIsFavoriteLoading(true);
+    setLoading(true);
     await favorites.addRemoveFavorite(favoriteId);
     dispatch(getUserLogged(userLogged.id));
-    setIsFavoriteLoading(false);
   };
 
   useEffect(() => {
@@ -28,35 +28,25 @@ const FavoriteButton = ({ favoriteId }) => {
       if (userInfo.favorites.includes(favoriteId)) setIsFavorite(true);
       else setIsFavorite(false);
     }
+    setLoading(false);
   }, [userInfo, favoriteId]);
 
   return (
     <div className={style.d_flex}>
-      {!isFavorite ? (
-        <>
-          {isFavoriteLoading ? (
-            <SpinnerLoad2 className={style.spinner} />
-          ) : (
-            <>
-              <img src={fav} alt="" onClick={handleClick} />
-              <p>Agregar a favoritos</p>
-            </>
-          )}
-        </>
+      {isLoading ? (
+        <SpinnerLoad className={style.spinner} />
+      ) : !isFavorite ? (
+        <img src={fav} alt="Corazón Vacio" onClick={handleClick} />
       ) : (
-        <>
-          {isFavoriteLoading ? (
-            <SpinnerLoad2 className={style.spinner} />
-          ) : (
-            <>
-              <img src={like} alt="" onClick={handleClick} />
-              <p>Eliminar de favoritos</p>
-            </>
-          )}
-        </>
+        <img src={like} alt="Corazón lleno" onClick={handleClick} />
       )}
+      <p>{!isFavorite ? "Agregar a Favoritos" : "Eliminar de Favoritos"} </p>
     </div>
   );
 };
 
 export default FavoriteButton;
+
+FavoriteButton.propTypes = {
+  favoriteId: PropTypes.number
+};

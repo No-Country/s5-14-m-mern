@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import style from "./friendsNotification.module.sass";
-import avatarI from "../../../assets/AccountAvatars/avatar0.png";
+// import avatarI from "../../../assets/AccountAvatars/avatar0.png";
 
 const FriendsNotification = ({ data, accept, refuse }) => {
   return (
