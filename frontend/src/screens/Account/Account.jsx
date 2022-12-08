@@ -11,7 +11,7 @@ import arrowD from "../../../assets/Icons/arrowMenuD.svg";
 import arrowU from "../../../assets/Icons/arrowMenuU.svg";
 import { ToastContainer, toast } from "react-toastify";
 import SpinnerLoad2 from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad2";
-import getUserImage from "../../hocs/getUserImage";
+import Avatar from "../../components/PagesComponents/Avatar/Avatar";
 
 const avatars = [
   "avatar0",
@@ -159,11 +159,7 @@ const Account = () => {
           <>
             <form onSubmit={handleSubmit}>
               <div className={style.account}>
-                <img
-                  className={style.mainAvatar}
-                  src={getUserImage(userInfo.avatar) || getUserImage("avatar0")}
-                  alt=""
-                />
+                <Avatar className={style.mainAvatar} avatar={userInfo.avatar} />
                 <div className={style.user}>
                   <input
                     className={style.input}
@@ -204,7 +200,7 @@ const Account = () => {
                 </div>
                 <div className={style.avatars}>
                   {avatars.map((ava, i) => (
-                    <img key={i} src={getUserImage(ava)} onClick={() => handleAvatar(ava)} />
+                    <Avatar key={i} avatar={ava} onClick={() => handleAvatar(ava)} />
                   ))}
                 </div>
                 <button className={style.btn} onClick={handlePassword}>
