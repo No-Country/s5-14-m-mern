@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/assets/AccountAvatars/*", "destination": "/assets/AccountAvatars/" },
     {
       "source": "/((?!api/.*).*)",
       "destination": "/index.html"
