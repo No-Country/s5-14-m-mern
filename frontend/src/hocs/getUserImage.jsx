@@ -37,6 +37,8 @@ function getUserImage(avatar) {
       return avatar8;
     case "avatarElegido":
       return avatarElegido;
+    default:
+      return avatar0;
   }
 }
 
