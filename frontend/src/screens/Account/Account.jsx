@@ -159,7 +159,11 @@ const Account = () => {
           <>
             <form onSubmit={handleSubmit}>
               <div className={style.account}>
-                <img className={style.mainAvatar} src={avatar || avatarDef} alt="" />
+                <img
+                  className={style.mainAvatar}
+                  src={getUserImage(userInfo.avatar) || getUserImage("avatar0")}
+                  alt=""
+                />
                 <div className={style.user}>
                   <input
                     className={style.input}
