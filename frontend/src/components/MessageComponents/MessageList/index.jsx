@@ -4,18 +4,13 @@ import PropTypes from "prop-types";
 // styles
 import styles from "./messageList.module.sass";
 
-import { useSelector, useDispatch } from "react-redux";
-import Pusher from "pusher-js";
-import { useEffect } from "react";
-import { setChannel } from "../../../redux/slices/messages/messagesSlice";
-import useServices from "../../../services/useServices";
-
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 export default function MessageList() {
   const { userLogged } = useSelector(state => state.auth);
   const { currentChat } = useSelector(state => state.message);
-  const { chat } = useServices();
-
-  // useEffect(() => {
+  const [messages, setMessages] = useState();
+  const [loading, setLoading] = useState(true);
   // socket.emit("joinRoom", currentChat.room, message => {
   //   console.log("Unido a la sala " + message);
   // });
@@ -30,17 +25,25 @@ export default function MessageList() {
 
   // }, []);
 
+  useEffect(() => {
+    if (currentChat.message) {
+      setMessages(currentChat.messages);
+      setLoading(false);
+    }
+  }, [currentChat]);
+
   return (
     <div className={styles.container}>
-      {currentChat?.messages.map(({ id, message, icon }, index) => (
-        <div
-          key={index}
-          className={`${styles.text} ${
-            id !== userLogged.id ? styles.ownMessage : styles.defaultMessage
-          }`}>
-          <p className={icon ? styles.icon : styles.text}>{message}</p>
-        </div>
-      ))}
+      {!loading &&
+        messages.map(({ id, message, icon }, index) => (
+          <div
+            key={index}
+            className={`${styles.text} ${
+              id !== userLogged.id ? styles.ownMessage : styles.defaultMessage
+            }`}>
+            <p className={icon ? styles.icon : styles.text}>{message}</p>
+          </div>
+        ))}
     </div>
   );
 }
