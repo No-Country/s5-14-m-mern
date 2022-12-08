@@ -11,17 +11,18 @@ import arrowD from "../../../assets/Icons/arrowMenuD.svg";
 import arrowU from "../../../assets/Icons/arrowMenuU.svg";
 import { ToastContainer, toast } from "react-toastify";
 import SpinnerLoad2 from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad2";
+import getUserImage from "../../hocs/getUserImage";
 
 const avatars = [
-  "/assets/AccountAvatars/avatar0.svg",
-  "/assets/AccountAvatars/avatar1.svg",
-  "/assets/AccountAvatars/avatar2.svg",
-  "/assets/AccountAvatars/avatar3.svg",
-  "/assets/AccountAvatars/avatar4.svg",
-  "/assets/AccountAvatars/avatar5.svg",
-  "/assets/AccountAvatars/avatar6.svg",
-  "/assets/AccountAvatars/avatar7.svg",
-  "/assets/AccountAvatars/avatar8.svg"
+  "avatar0",
+  "avatar1",
+  "avatar2",
+  "avatar3",
+  "avatar4",
+  "avatar5",
+  "avatar6",
+  "avatar7",
+  "avatar8"
 ];
 
 const Account = () => {
@@ -199,7 +200,7 @@ const Account = () => {
                 </div>
                 <div className={style.avatars}>
                   {avatars.map((ava, i) => (
-                    <img key={i} src={ava} onClick={() => handleAvatar(ava)} />
+                    <img key={i} src={getUserImage(ava)} onClick={() => handleAvatar(ava)} />
                   ))}
                 </div>
                 <button className={style.btn} onClick={handlePassword}>
