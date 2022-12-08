@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import style from "./friendsNotification.module.sass";
-// import avatarI from "../../../assets/AccountAvatars/avatar0.png";
+import avatarI from "../../../assets/AccountAvatars/avatar0.svg";
 
 const FriendsNotification = ({ data, accept, refuse }) => {
   return (
@@ -11,9 +11,7 @@ const FriendsNotification = ({ data, accept, refuse }) => {
           <strong>{`${data.message.split("quiere")[0]}`}</strong>{" "}
           {`quiere ${data.message.split("quiere")[1]}`}
         </h2>
-
-        <img src={data.avatar || avatarI} alt="" />
-
+        <img src={data.avatar || avatarI} />
         <div className={style.buttons}>
           <button className={style.btn1} onClick={() => accept(data._id)}>
             Aceptar

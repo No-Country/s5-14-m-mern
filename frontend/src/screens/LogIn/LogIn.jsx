@@ -76,7 +76,10 @@ const Login = () => {
       </Link>
       <img className={styles.img_desk} src={sign} alt="" />
       <div className={styles.formu}>
-        <img className={styles.imagen} src="../../../assets/logo/logo.png" />
+        <img
+          className={styles.imagen}
+          src="https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522393/logo_dqkgai.png"
+        />
         <p className={styles.description}>Inicia sesión para ingresar a tu cuenta</p>
         <Formik
           initialValues={{

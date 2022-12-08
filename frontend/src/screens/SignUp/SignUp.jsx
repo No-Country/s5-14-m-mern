@@ -68,7 +68,10 @@ const SignUp = () => {
       </Link>
       <img className={styles.img_desk} src={signup} alt="" />
       <div className={styles.formu}>
-        <img className={styles.img} src="../../../assets/logo/logo.png" />
+        <img
+          className={styles.img}
+          src="https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522393/logo_dqkgai.png"
+        />
         <p className={styles.description}>¡Crea tu cuenta y desafia a tus amigos!</p>
         <Formik
           initialValues={{
