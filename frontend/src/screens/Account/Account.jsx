@@ -11,18 +11,17 @@ import arrowD from "../../../assets/Icons/arrowMenuD.svg";
 import arrowU from "../../../assets/Icons/arrowMenuU.svg";
 import { ToastContainer, toast } from "react-toastify";
 import SpinnerLoad2 from "../../components/PagesComponents/SpinnerLoad/SpinnerLoad2";
-import Avatars from "../../components/PagesComponents/Avatars/Avatars";
 
 const avatars = [
-  "avatar0",
-  "avatar1",
-  "avatar2",
-  "avatar3",
-  "avatar4",
-  "avatar5",
-  "avatar6",
-  "avatar7",
-  "avatar8"
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522154/avatar0_jroqso.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522184/avatar1_xjl2my.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522152/avatar2_qvlhmi.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522152/avatar3_xnzjfw.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522152/avatar4_fbqzxi.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522152/avatar5_wdswra.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522152/avatar6_ilw3eg.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522152/avatar7_sutnbh.svg",
+  "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670522186/avatar8_tzjhkz.svg"
 ];
 
 const Account = () => {
@@ -200,7 +199,7 @@ const Account = () => {
                 </div>
                 <div className={style.avatars}>
                   {avatars.map((ava, i) => (
-                    <Avatars key={i} avatar={ava} onClick={() => handleAvatar(ava)} />
+                    <img key={i} src={ava} onClick={() => handleAvatar(ava)} />
                   ))}
                 </div>
                 <button className={style.btn} onClick={handlePassword}>

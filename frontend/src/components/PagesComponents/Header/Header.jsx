@@ -15,6 +15,7 @@ import { changeFilter } from "../../../redux/slices/filter";
 import Titles from "./Titles";
 import arrowD from "../../../../assets/Icons/arrowMenuD.svg";
 import arrowU from "../../../../assets/Icons/arrowMenuU.svg";
+import avatar from "../../../../assets/AccountAvatars/avatar0.svg";
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false);
