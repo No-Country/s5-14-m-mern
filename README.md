@@ -1,5 +1,5 @@
 <h1 align = "center"> LUDENS </h1>
-<p align = "center"> <img src = "https://i85.servimg.com/u/f85/19/88/52/56/logolu10.png" /> </p>
+<p align = "center"> <img src = "https://res.cloudinary.com/ddg3a37dp/image/upload/v1670579410/llogo_gd6skt.gif" /></p>
 <p align = "center"> Ludens es un sitio web de juegos educativos para niños. En nuestra palataforma aprendes jugando con tus amigos con un sistema de mensajes predefinido, apostando por la seguridad. Desafía a tus amigos, comparte tu ranking, agrega a favoritos y mucho mas.</p>
 
 
