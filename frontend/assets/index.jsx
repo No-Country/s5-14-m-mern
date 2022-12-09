@@ -19,4 +19,3 @@ export { default as avatar5 } from "./AccountAvatars/avatar5.svg";
 export { default as avatar6 } from "./AccountAvatars/avatar6.svg";
 export { default as avatar7 } from "./AccountAvatars/avatar6.svg";
 export { default as avatar8 } from "./AccountAvatars/avatar6.svg";
-export { default as avatarElegido } from "./AccountAvatars/avatarElegido.png";

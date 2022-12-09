@@ -6,7 +6,6 @@ import search from "../../../../assets/Icons/search.svg";
 import user from "../../../../assets/Icons/usersquare.svg";
 import arrow from "../../../../assets/Icons/arrow.svg";
 import { Link, useLocation } from "react-router-dom";
-import avatar from "../../../../assets/AccountAvatars/avatar2.svg";
 // Como obtener datos de redux
 import { useSelector, useDispatch } from "react-redux"; // Importar use Selector
 import { logout } from "../../../redux/slices/auth";
@@ -16,6 +15,7 @@ import { changeFilter } from "../../../redux/slices/filter";
 import Titles from "./Titles";
 import arrowD from "../../../../assets/Icons/arrowMenuD.svg";
 import arrowU from "../../../../assets/Icons/arrowMenuU.svg";
+import avatar from "../../../../assets/AccountAvatars/avatar0.svg";
 
 const Header = () => {
   const [searchM, setSearchM] = useState(false);

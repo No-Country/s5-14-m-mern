@@ -18,7 +18,7 @@ import { useMediaQuery } from "react-responsive";
 // utils
 import { CHAT_SETIONS } from "../utils/chatSetions";
 import { useNavigate } from "react-router-dom";
-import Avatar from "../../PagesComponents/Avatar/Avatar";
+import avatarI from "../../../../assets/AccountAvatars/avatar0.svg";
 import useServices from "../../../services/useServices";
 
 export default function FriendsList({ friendsList }) {
@@ -54,7 +54,7 @@ export default function FriendsList({ friendsList }) {
             className={`keen-slider__slide ${styles.slide}`}
             key={_id}
             onClick={() => handledPage({ avatar, username, _id, props })}>
-            <Avatar avatar={avatar} />
+            <img src={avatar || avatarI} alt="friends" />
             <p>{username}</p>
           </div>
         ))}
