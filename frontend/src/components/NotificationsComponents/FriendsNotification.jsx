@@ -11,7 +11,7 @@ const FriendsNotification = ({ data, accept, refuse }) => {
           <strong>{`${data.message.split("quiere")[0]}`}</strong>{" "}
           {`quiere ${data.message.split("quiere")[1]}`}
         </h2>
-        <img src={data.avatar || avatarI} />
+        <img src={data.imagePath || avatarI} />
         <div className={style.buttons}>
           <button className={style.btn1} onClick={() => accept(data._id)}>
             Aceptar
