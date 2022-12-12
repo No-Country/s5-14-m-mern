@@ -132,7 +132,7 @@ Puedes encontrar nuestra WEB en el siguiente link: [https://ludens-two.vercel.ap
 
 ### Maria Bracho Villanueva 
 
-### Emanuel Capo 
+### Emanuel Capo [Linkedin](https://www.linkedin.com/in/emanuel-capo) | [GitHub](https://github.com/Emanuel-Capo)
 
 ### Juan Carracedo 
 
